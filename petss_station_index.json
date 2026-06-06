@@ -1,0 +1,1057 @@
+{
+  "issuedUtc": "2026-04-01T18:00:00Z",
+  "sourceUrl": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.20260401/petss.t18z.mean.stormtide.east.txt",
+  "count": 210,
+  "stations": [
+    {
+      "stationId": "8410140",
+      "stationName": "EASTPORT, ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8411060",
+      "stationName": "CUTLER, ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8413320",
+      "stationName": "BAR HARBOR, ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418150",
+      "stationName": "PORTLAND, ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8419317",
+      "stationName": "WELLS, ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8423898",
+      "stationName": "PORTSMOUTH, NH",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8441841",
+      "stationName": "ATL.COA. GLOUCESTER, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8443970",
+      "stationName": "BOSTON, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8445138",
+      "stationName": "SCITUATE, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447712",
+      "stationName": "NEW BEDFORD HUR BAR, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447180",
+      "stationName": "SANDWICH, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447270",
+      "stationName": "BUZZARDS BAY, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447386",
+      "stationName": "FALL RIVER, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447435",
+      "stationName": "CHATHAM, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8449130",
+      "stationName": "NANTUCKET, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447930",
+      "stationName": "WOODS HOLE, MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8454000",
+      "stationName": "PROVIDENCE, RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8452944",
+      "stationName": "COMICUT LIGHT, RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8454049",
+      "stationName": "QUONSET POINT, RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8452660",
+      "stationName": "NEWPORT, RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8459681",
+      "stationName": "BLOCK ISLAND, RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8461490",
+      "stationName": "NEW LONDON, CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8465705",
+      "stationName": "NEW HAVEN, CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8467150",
+      "stationName": "BRIDGEPORT, CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8469198",
+      "stationName": "STAMFORD, CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8511671",
+      "stationName": "ORIENT HARBOR ORIEN, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8510560",
+      "stationName": "MONTAUK, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8518919",
+      "stationName": "HUDSON RIVER PIER, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8514594",
+      "stationName": "FLAX POND OLD FIELD, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8514560",
+      "stationName": "PORT JEFFERSON, NY",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8516614",
+      "stationName": "W.POND GLEN COVE, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8516945",
+      "stationName": "KINGS POINT, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8516990",
+      "stationName": "WILLETS POINT, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8518750",
+      "stationName": "BATTERY, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8519483",
+      "stationName": "BERGEN POINT, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8516411",
+      "stationName": "HUDSON BAY FREEPORT, NY",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8516402",
+      "stationName": "REYNOLDS CHANNEL PL, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8516881",
+      "stationName": "E.ROCKAWAY IN., NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8516925",
+      "stationName": "JAMAICA BAY INWOOD, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8517394",
+      "stationName": "ROCKAWAY INL. FLOYD, NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8530743",
+      "stationName": "NEWARK, NJ",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8531592",
+      "stationName": "KEANSBURG, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8531680",
+      "stationName": "SANDY HOOK, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8531804",
+      "stationName": "SEA BRIGHT, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8532337",
+      "stationName": "BELMAR, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8632591",
+      "stationName": "MANASQUAN, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8539094",
+      "stationName": "BURLINGTON, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8532786",
+      "stationName": "MANTALOKING, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8538886",
+      "stationName": "TACONY PALMYRA BR, NJ",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8533541",
+      "stationName": "WARETOWN, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8533615",
+      "stationName": "BARNEGAT LIGHT, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8533935",
+      "stationName": "SHIP BOTTOM, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534319",
+      "stationName": "TUCKERTON, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534540",
+      "stationName": "ABSECON, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534638",
+      "stationName": "ATLANTIC CITY MARIN, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8537374",
+      "stationName": "GREENWICH, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534720",
+      "stationName": "ATLANTIC CITY, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8537121",
+      "stationName": "SHIP JOHN SHOAL, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534975",
+      "stationName": "OCEAN CITY, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8536889",
+      "stationName": "BIVALVE, NJ",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8535221",
+      "stationName": "SEA ISLE CITY, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8535419",
+      "stationName": "AVALON, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8535581",
+      "stationName": "STONE HARBOR, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8536110",
+      "stationName": "CAPE MAY, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8535901",
+      "stationName": "CAPE MAY HARBOR, NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8548989",
+      "stationName": "NEWBOLD, PA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8545240",
+      "stationName": "PHILADELPHIA, PA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8540433",
+      "stationName": "MARCUS HOOK, PA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8551762",
+      "stationName": "DELAWARE CITY, DE",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8551910",
+      "stationName": "REEDY POINT, DE",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8557380",
+      "stationName": "LEWES, DE",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8574070",
+      "stationName": "HAVRE DE GRACE, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8573927",
+      "stationName": "CHESAPEAKE CITY, MD",
+      "valueCount": 412
+    },
+    {
+      "stationId": "8574680",
+      "stationName": "BALTIMORE, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8573364",
+      "stationName": "TOLCHESTER BEACH, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8575512",
+      "stationName": "ANNAPOLIS, MD",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8576363",
+      "stationName": "CHESAPEAKE BEACH, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8571892",
+      "stationName": "CAMBRIDGE, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8570283",
+      "stationName": "OCEAN CITY, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8577330",
+      "stationName": "SOLOMONS, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8578465",
+      "stationName": "COLTON POINT, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8571421",
+      "stationName": "BISHOPS HEAD, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8578240",
+      "stationName": "PINEY POINT, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8578002",
+      "stationName": "POINT LOOKOUT, MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8593909",
+      "stationName": "KENILWORTH AQUATIC, DC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8594900",
+      "stationName": "WASHINGTON, DC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8634214",
+      "stationName": "ALEXANDRIA, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8634689",
+      "stationName": "QUANTICO, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8634858",
+      "stationName": "AQUIA CREEK, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8635027",
+      "stationName": "NCDV2DAHLGREN, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8635150",
+      "stationName": "COLONIAL BEACH, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8635750",
+      "stationName": "LEWISETTA, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8636580",
+      "stationName": "WNDMILL POINT, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8631044",
+      "stationName": "WACHAPREAGUE, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8637689",
+      "stationName": "Yorktown USCG, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8632200",
+      "stationName": "KIPTOPEKE BEACH, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638863",
+      "stationName": "CHESAPEAKE Bay Br, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638610",
+      "stationName": "SEWELLS POINT, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8639348",
+      "stationName": "PORTSMOUTH, VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8651370",
+      "stationName": "DUCK PIER, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8652587",
+      "stationName": "OREGON INLET MAR, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8654400",
+      "stationName": "CAPE HATTERAS, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8654467",
+      "stationName": "USCG STATION HATT, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8656483",
+      "stationName": "BEAUFORT, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8656502",
+      "stationName": "MOREHEAD CITY, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8658120",
+      "stationName": "WILMINGTON, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8658163",
+      "stationName": "WRIGHTSVILLE BCH, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8659084",
+      "stationName": "SOUTHPORT, NC",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8659897",
+      "stationName": "SUNSET BEACH, NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8661070",
+      "stationName": "SPRINGMAID PIER, SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8662245",
+      "stationName": "OYSTER LANDING, SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8665530",
+      "stationName": "CHARLESTON, SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8670870",
+      "stationName": "FT PULASKI, GA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720030",
+      "stationName": "FERNANDINA, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720218",
+      "stationName": "MAYPORT, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720219",
+      "stationName": "DAMES POINT, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720226",
+      "stationName": "SOUTHBANK RIVER JA, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720357",
+      "stationName": "I-295 BRDGE JACK, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720503",
+      "stationName": "RED BAY POINT, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8720625",
+      "stationName": "RACY POINT, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8721604",
+      "stationName": "TRIDEN PIER, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8722670",
+      "stationName": "LAKE WORTH PIER, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8723214",
+      "stationName": "VIRGINIA KEY, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8722956",
+      "stationName": "Port Everglades, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8590111",
+      "stationName": "Bellevue-DC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8555889",
+      "stationName": "Brandywine-Shoal-Light-",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8555388",
+      "stationName": "Murderkill-River-ENTR-D",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447241",
+      "stationName": "Sesuit-Harbor-MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8446121",
+      "stationName": "Provincetown-MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8440889",
+      "stationName": "Riverside-Merrimack-MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8417134",
+      "stationName": "Gardiner-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8533055",
+      "stationName": "Coates-Point-NJ",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8534836",
+      "stationName": "Longport-Risely-Channel",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8531232",
+      "stationName": "S-Amboy-Raritan-River-N",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8512735",
+      "stationName": "S-Jamesport-NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8513388",
+      "stationName": "Moriches-MorichesBay-NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8514322",
+      "stationName": "Patchogue-River-NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8515421",
+      "stationName": "Babylon-NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8546252",
+      "stationName": "Bridesburg-PA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8458694",
+      "stationName": "Watch-Hill-Point-RI",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8662793",
+      "stationName": "N-Santee-Bridge-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8662549",
+      "stationName": "S-Island-Winyah-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8661991",
+      "stationName": "Hagley-Waccamaw-River-S",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8661703",
+      "stationName": "Sandy-Island-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8660166",
+      "stationName": "Nixon-Crossroads-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638901",
+      "stationName": "CBBT-Chesapeake-Channel",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638288",
+      "stationName": "Old-Point-Comfort-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638339",
+      "stationName": "Western-Branch-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8637712",
+      "stationName": "Jamestown-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8637444",
+      "stationName": "Browns-Bay-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8633777",
+      "stationName": "Saxis-Starling-Creek-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8632869",
+      "stationName": "Gaskins-PT-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8638409",
+      "stationName": "Holidays-Points-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8630440",
+      "stationName": "Wallops-Island-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8632837",
+      "stationName": "Rappahannock-Light-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8463701",
+      "stationName": "Clinton-Harbor-CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8550714",
+      "stationName": "Willlmington-DE",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8558690",
+      "stationName": "Indian-River-Inlet-DE",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8675245",
+      "stationName": "Meridian-Darien-GA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8675365",
+      "stationName": "Sapelo-Island-GA",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8579381",
+      "stationName": "Indian-Head-MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8577188",
+      "stationName": "Cove-Point-MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8579997",
+      "stationName": "Bladensburg-MD",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8579135",
+      "stationName": "Benedict-MD",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8414672",
+      "stationName": "Castine-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8411696",
+      "stationName": "Roque-Bluffs-ME",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8412581",
+      "stationName": "Milbridge-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8410834",
+      "stationName": "Calais-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8414612",
+      "stationName": "Bangor-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418606",
+      "stationName": "Camp-Ellis-Saco-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8417227",
+      "stationName": "Bath-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8415490",
+      "stationName": "Rockland-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8416921",
+      "stationName": "Wiscasset-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418031",
+      "stationName": "Portland-Hd-Light-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8419399",
+      "stationName": "Cape-Neddick-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8414721",
+      "stationName": "Fort-Point-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8654792",
+      "stationName": "Ocracoke-NC",
+      "valueCount": 927
+    },
+    {
+      "stationId": "8652437",
+      "stationName": "Wanchese-NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8653215",
+      "stationName": "Rodanthe-NC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8657419",
+      "stationName": "N-Topsail-Beach-NC",
+      "valueCount": 515
+    },
+    {
+      "stationId": "8429489",
+      "stationName": "Hampton-NH",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8530278",
+      "stationName": "HACKENSACK-RIVER-NJ",
+      "valueCount": 309
+    },
+    {
+      "stationId": "8512451",
+      "stationName": "Shinnecock-Bay-NY",
+      "valueCount": 309
+    },
+    {
+      "stationId": "8518091",
+      "stationName": "Mamaroneck-Harbor-NY",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8512668",
+      "stationName": "Mattictuck-Inlet-NY",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8662931",
+      "stationName": "Pee-Dee-Georgetown-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8662799",
+      "stationName": "McClellanville-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8667999",
+      "stationName": "Beaufort-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8667425",
+      "stationName": "Edisto-Beach-SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8635485",
+      "stationName": "Coles-Neck-VA",
+      "valueCount": 515
+    },
+    {
+      "stationId": "8579629",
+      "stationName": "Mount-Vernon-VA",
+      "valueCount": 206
+    },
+    {
+      "stationId": "8633532",
+      "stationName": "Tangier-Island-VA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8462925",
+      "stationName": "ESSEX-CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8462752",
+      "stationName": "Old-Saybrook-CT",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8443662",
+      "stationName": "Amelia-MA",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8447742",
+      "stationName": "Popponesset-MA",
+      "valueCount": 309
+    },
+    {
+      "stationId": "8419870",
+      "stationName": "Island-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418911",
+      "stationName": "Kennebunkport-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418828",
+      "stationName": "Biddeford-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8418445",
+      "stationName": "Pine-Point-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8417177",
+      "stationName": "Hunniwell-point-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8416731",
+      "stationName": "Walpole-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8415709",
+      "stationName": "Thomaston-ME",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8414888",
+      "stationName": "Pulpit-Harbor-ME",
+      "valueCount": 515
+    },
+    {
+      "stationId": "8652232",
+      "stationName": "SHALLOWBAG BAY, NC",
+      "valueCount": 1236
+    },
+    {
+      "stationId": "8668918",
+      "stationName": "SKULL CREEK HILTON, SC",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8571091",
+      "stationName": "CRISFIELD, MD",
+      "valueCount": 2163
+    },
+    {
+      "stationId": "8667062",
+      "stationName": "KIAWAH RIVER, SC",
+      "valueCount": 721
+    },
+    {
+      "stationId": "8722213",
+      "stationName": "Binney Dock, FL",
+      "valueCount": 103
+    },
+    {
+      "stationId": "8721147",
+      "stationName": "PonceDe Leon Inlet, FL",
+      "valueCount": 206
+    }
+  ]
+}

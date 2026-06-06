@@ -1,0 +1,350 @@
+name: Update location forecast
+
+on:
+  schedule:
+    - cron: "12 4,5,10,11,16,17,22,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-forecast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Build forecast.json from PETSS mean, 10th, and 90th percentile guidance
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import io
+          import json
+          import os
+          import re
+          import tarfile
+          import urllib.request
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          NUMERIC_RE = re.compile(r"[-+]?(?:\d+\.\d+|\d+|\.\d+)(?:[Ee][-+]?\d+)?")
+          STATION_RE = re.compile(r"\b\d{7}\b")
+
+          def round_tenth(value):
+              return round(float(value) * 10.0) / 10.0
+
+          def clamp_stage(stage):
+              return max(MIN_LAYER_STAGE, min(MAX_LAYER_STAGE, stage))
+
+          def fetch_bytes(url):
+              req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+              with urllib.request.urlopen(req, timeout=180) as resp:
+                  return resp.read()
+
+          def fetch_text(url):
+              return fetch_bytes(url).decode("utf-8", errors="replace")
+
+          def fetch_tar_texts(url):
+              raw = fetch_bytes(url)
+              out = []
+              with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tf:
+                  for member in tf.getmembers():
+                      name = member.name.lower()
+                      if not member.isfile() or not (name.endswith(".txt") or name.endswith(".csv")):
+                          continue
+                      extracted = tf.extractfile(member)
+                      if extracted is not None:
+                          out.append((member.name, extracted.read().decode("utf-8", errors="replace")))
+              return out
+
+          def is_plausible_raw_value(value):
+              return RAW_VALUE_MIN <= value <= RAW_VALUE_MAX
+
+          def values_from_cells(cells):
+              vals = []
+              for cell in cells:
+                  for token in NUMERIC_RE.findall(str(cell)):
+                      try:
+                          value = float(token)
+                      except Exception:
+                          continue
+                      if value == float(STATION_ID):
+                          continue
+                      if 1900 <= value <= 2100 and value.is_integer():
+                          continue
+                      if is_plausible_raw_value(value):
+                          vals.append(value)
+              return vals
+
+          def candidate_rows(text):
+              rows = []
+              for delimiter in [",", "\t", ";"]:
+                  try:
+                      reader = csv.reader(io.StringIO(text), delimiter=delimiter)
+                      for row in reader:
+                          cells = [str(cell).strip() for cell in row if str(cell).strip()]
+                          if cells and STATION_ID in " ".join(cells):
+                              rows.append(cells)
+                  except Exception:
+                      pass
+              for line in text.splitlines():
+                  if STATION_ID in line:
+                      rows.append(re.split(r"\s+", line.strip()))
+              return rows
+
+          def parse_station_raw_values(text):
+              best = []
+              for cells in candidate_rows(text):
+                  joined = " ".join(cells)
+                  ids = STATION_RE.findall(joined)
+                  if ids and STATION_ID not in ids:
+                      continue
+                  vals = values_from_cells(cells)
+                  if len(vals) > len(best):
+                      best = vals
+              lines = text.splitlines()
+              for idx, line in enumerate(lines):
+                  if STATION_ID not in line:
+                      continue
+                  block = [line]
+                  for j in range(idx + 1, min(len(lines), idx + 30)):
+                      ids = STATION_RE.findall(lines[j])
+                      if ids and STATION_ID not in ids:
+                          break
+                      block.append(lines[j])
+                  vals = values_from_cells(["\n".join(block)])
+                  if len(vals) > len(best):
+                      best = vals
+              return best[:MAX_RAW_VALUES]
+
+          def member_matches_product(member_name, product_key):
+              name = member_name.lower()
+              token = PRODUCTS[product_key]["product"]
+              return token in name and "stormtide" in name and "east" in name
+
+          def validate_raw_values(values, product_key, source):
+              if len(values) < MIN_RAW_VALUES:
+                  raise ValueError(f"{product_key} has {len(values)} values from {source}")
+              scaled = [float(v) * PETSS_RAW_SCALE for v in values]
+              if not scaled:
+                  raise ValueError(f"{product_key} has no scaled values from {source}")
+              if min(scaled) < SCALED_NAVD88_MIN or max(scaled) > SCALED_NAVD88_MAX:
+                  raise ValueError(f"{product_key} scaled range {min(scaled)} to {max(scaled)} from {source}")
+              if len(set(round(v, 1) for v in scaled[:MIN_RAW_VALUES])) < MIN_DISTINCT_VALUES:
+                  raise ValueError(f"{product_key} values are not varied enough from {source}")
+              return scaled
+
+          def cycle_candidates(now_utc):
+              candidates = []
+              for days_back in range(DAYS_BACK_TO_TRY):
+                  day = now_utc.date() - timedelta(days=days_back)
+                  day_token = day.strftime("%Y%m%d")
+                  for cycle in CYCLES_NEWEST_FIRST:
+                      cycle_utc = datetime.strptime(day_token + cycle, "%Y%m%d%H").replace(tzinfo=timezone.utc)
+                      if cycle_utc > now_utc - timedelta(hours=1):
+                          continue
+                      base = f"https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.{day_token}"
+                      candidates.append({
+                          "cycleUtc": cycle_utc,
+                          "dayToken": day_token,
+                          "cycle": cycle,
+                          "base": base,
+                          "txtUrls": {
+                              key: f"{base}/petss.t{cycle}z.{cfg['product']}.stormtide.east.txt"
+                              for key, cfg in PRODUCTS.items()
+                          },
+                          "tarUrl": f"{base}/petss.t{cycle}z.csv.tar.gz"
+                      })
+              return candidates
+
+          def try_product_text(cycle, product_key):
+              url = cycle["txtUrls"][product_key]
+              text = fetch_text(url)
+              values = parse_station_raw_values(text)
+              scaled = validate_raw_values(values, product_key, url)
+              return {
+                  "rawValues": values,
+                  "scaledValues": scaled,
+                  "sourceUrl": url,
+                  "sourceMember": None,
+                  "cycleUtc": cycle["cycleUtc"]
+              }
+
+          def try_cycle_text(cycle):
+              out = {}
+              for product_key in PRODUCTS:
+                  out[product_key] = try_product_text(cycle, product_key)
+              return out
+
+          def try_cycle_tar(cycle):
+              texts = fetch_tar_texts(cycle["tarUrl"])
+              out = {}
+              for product_key in PRODUCTS:
+                  best = None
+                  for member_name, text in texts:
+                      if not member_matches_product(member_name, product_key):
+                          continue
+                      values = parse_station_raw_values(text)
+                      if best is None or len(values) > len(best["rawValues"]):
+                          best = {"memberName": member_name, "rawValues": values}
+                  if best is None:
+                      raise ValueError(f"missing {product_key} in {cycle['tarUrl']}")
+                  scaled = validate_raw_values(best["rawValues"], product_key, f"{cycle['tarUrl']}#{best['memberName']}")
+                  out[product_key] = {
+                      "rawValues": best["rawValues"],
+                      "scaledValues": scaled,
+                      "sourceUrl": cycle["tarUrl"],
+                      "sourceMember": best["memberName"],
+                      "cycleUtc": cycle["cycleUtc"]
+                  }
+              return out
+
+          def find_latest_complete_cycle(now_utc):
+              errors = []
+              for cycle in cycle_candidates(now_utc):
+                  try:
+                      products = try_cycle_text(cycle)
+                  except Exception as exc:
+                      errors.append(f"{cycle['dayToken']} {cycle['cycle']} txt: {type(exc).__name__}: {exc}")
+                  else:
+                      return cycle, products
+                  try:
+                      products = try_cycle_tar(cycle)
+                  except Exception as exc:
+                      errors.append(f"{cycle['dayToken']} {cycle['cycle']} tar: {type(exc).__name__}: {exc}")
+                  else:
+                      return cycle, products
+              raise RuntimeError("Could not find a complete PETSS cycle for mean, e90, and e10.\n" + "\n".join(errors[-40:]))
+
+          def build_hours(values, cycle_utc, now_utc):
+              all_points = [(cycle_utc + timedelta(hours=i), float(navd88), float(values[i] / PETSS_RAW_SCALE)) for i, navd88 in enumerate(values)]
+              future_points = [(dt, navd88, raw) for dt, navd88, raw in all_points if dt >= now_utc]
+              if len(future_points) < MAX_HOURS:
+                  raise RuntimeError(f"PETSS cycle has only {len(future_points)} future hours; need {MAX_HOURS}.")
+              hours = []
+              for hour_index, (dt_utc, navd88_raw_ft, raw_petss_value) in enumerate(future_points[:MAX_HOURS]):
+                  navd88_ft = round_tenth(navd88_raw_ft)
+                  mllw_ft = round(navd88_ft - NAVD88_OFFSET_FROM_MLLW, 2)
+                  matched_ft = round_tenth(clamp_stage(navd88_ft))
+                  hours.append({
+                      "hourIndex": hour_index,
+                      "timeUtc": dt_utc.isoformat().replace("+00:00", "Z"),
+                      "rawPetssValue": raw_petss_value,
+                      "rawPetssScale": PETSS_RAW_SCALE,
+                      "sourceStageFt": navd88_ft,
+                      "sourceDatum": PETSS_SOURCE_DATUM,
+                      "navd88StageFt": navd88_ft,
+                      "mllwStageFt": mllw_ft,
+                      "matchedStageKey": f"{matched_ft:.1f}",
+                      "wasClamped": matched_ft != navd88_ft
+                  })
+              return hours
+
+          def build_payload(now_utc):
+              cycle, petss_products = find_latest_complete_cycle(now_utc)
+              forecasts = {}
+              products_meta = {}
+              for product_key, petss in petss_products.items():
+                  cfg = PRODUCTS[product_key]
+                  hours = build_hours(petss["scaledValues"], cycle["cycleUtc"], now_utc)
+                  products_meta[product_key] = {
+                      "label": cfg["label"],
+                      "percentile": cfg["percentile"],
+                      "product": cfg["product"],
+                      "sourceUrl": petss["sourceUrl"],
+                      "sourceMember": petss["sourceMember"],
+                      "petssCycleUtc": cycle["cycleUtc"].isoformat().replace("+00:00", "Z"),
+                      "rawPetssValueCount": len(petss["rawValues"]),
+                      "rawPetssMin": min(petss["rawValues"]),
+                      "rawPetssMax": max(petss["rawValues"]),
+                      "scaledNavd88Min": min(petss["scaledValues"]),
+                      "scaledNavd88Max": max(petss["scaledValues"])
+                  }
+                  forecasts[product_key] = {
+                      "label": cfg["label"],
+                      "percentile": cfg["percentile"],
+                      "product": cfg["product"],
+                      "hours": hours
+                  }
+              return {
+                  "stationId": STATION_ID,
+                  "stationName": STATION_NAME,
+                  "issuedUtc": now_utc.isoformat().replace("+00:00", "Z"),
+                  "petssCycleUtc": cycle["cycleUtc"].isoformat().replace("+00:00", "Z"),
+                  "sourceUrl": products_meta["mean"]["sourceUrl"],
+                  "sourceMember": products_meta["mean"]["sourceMember"],
+                  "sourceType": "PETSS_mean_e90_e10_stormtide_east_hourly_tenths_ft_NAVD88_complete_cycle",
+                  "sourceDatum": PETSS_SOURCE_DATUM,
+                  "mapDatum": "NAVD88",
+                  "rawPetssScale": PETSS_RAW_SCALE,
+                  "navd88OffsetFromMllwFt": NAVD88_OFFSET_FROM_MLLW,
+                  "thresholdsMLLW": THRESHOLDS_MLLW,
+                  "thresholdsNAVD88": THRESHOLDS_NAVD88,
+                  "layerStageRangeNAVD88": {"min": MIN_LAYER_STAGE, "max": MAX_LAYER_STAGE, "increment": 0.1},
+                  "forecastOptions": {key: {"label": cfg["label"], "percentile": cfg["percentile"], "product": cfg["product"]} for key, cfg in PRODUCTS.items()},
+                  "products": products_meta,
+                  "forecasts": forecasts,
+                  "rawPetssValueCount": products_meta["mean"]["rawPetssValueCount"],
+                  "hours": forecasts["mean"]["hours"]
+              }, products_meta
+
+          def main():
+              now_utc = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+              if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and now_utc.astimezone(LOCAL_ZONE).hour not in {0, 6, 12, 18}:
+                  print("Not a local forecast update hour.")
+                  return
+              payload, products_meta = build_payload(now_utc)
+              OUT_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+              print("Wrote", OUT_PATH)
+              for key in ["lowEnd", "mean", "highEnd"]:
+                  meta = products_meta[key]
+                  print(f"{key}: {meta['sourceUrl']} member={meta['sourceMember']} raw={meta['rawPetssValueCount']} navd88=({meta['scaledNavd88Min']}, {meta['scaledNavd88Max']})")
+
+          STATION_ID = "8534836"
+          STATION_NAME = "MARGATE, NJ"
+          LOCAL_ZONE = ZoneInfo("America/New_York")
+          USER_AGENT = "Ventnor-City-floodmapper/1.0"
+          NAVD88_OFFSET_FROM_MLLW = -2.39
+          PETSS_RAW_SCALE = 0.1
+          PETSS_SOURCE_DATUM = "NAVD88"
+          THRESHOLDS_MLLW = {"minorLow": 5.6, "moderateLow": 6.6, "majorLow": 7.6}
+          THRESHOLDS_NAVD88 = {
+              "minorLow": round(THRESHOLDS_MLLW["minorLow"] + NAVD88_OFFSET_FROM_MLLW, 2),
+              "moderateLow": round(THRESHOLDS_MLLW["moderateLow"] + NAVD88_OFFSET_FROM_MLLW, 2),
+              "majorLow": round(THRESHOLDS_MLLW["majorLow"] + NAVD88_OFFSET_FROM_MLLW, 2)
+          }
+          MIN_LAYER_STAGE = -2.0
+          MAX_LAYER_STAGE = 14.0
+          MAX_HOURS = 72
+          MIN_RAW_VALUES = 72
+          MAX_RAW_VALUES = 120
+          MIN_DISTINCT_VALUES = 6
+          RAW_VALUE_MIN = -150.0
+          RAW_VALUE_MAX = 250.0
+          SCALED_NAVD88_MIN = -15.0
+          SCALED_NAVD88_MAX = 25.0
+          OUT_PATH = Path("forecast.json")
+          CYCLES_NEWEST_FIRST = ("18", "12", "06", "00")
+          DAYS_BACK_TO_TRY = 5
+          PRODUCTS = {
+              "mean": {"label": "Mean", "percentile": "Mean", "product": "mean"},
+              "lowEnd": {"label": "Low End", "percentile": "90% exceedance / lower guidance", "product": "e90"},
+              "highEnd": {"label": "High End", "percentile": "10% exceedance / upper guidance", "product": "e10"}
+          }
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Commit updated forecast
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add forecast.json
+          git diff --staged --quiet || git commit -m "Update forecast"
+          git push

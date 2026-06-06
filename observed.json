@@ -1,0 +1,32 @@
+{
+  "site": "01411330",
+  "parameterCd": "72279",
+  "datum": "NAVD88",
+  "timeZone": "America/New_York",
+  "method": "hourly_max_all_history_then_daily_append",
+  "lastProcessedISO": "2026-06-04T12:31:17Z",
+  "archiveStartDate": "2007-10-01",
+  "archiveEndDate": "2026-06-04",
+  "navd88OffsetFromMllwFt": -2.39,
+  "thresholdsMLLW": {
+    "minorLow": 5.6,
+    "moderateLow": 6.6,
+    "majorLow": 7.6
+  },
+  "thresholdsNAVD88": {
+    "minorLow": 3.21,
+    "moderateLow": 4.21,
+    "majorLow": 5.21
+  },
+  "sourceType": "USGS_NWIS_instantaneous_values_hourly_max",
+  "sourceUrlTemplate": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01411355&parameterCd=72279&startDT=YYYY-MM-DD&endDT=YYYY-MM-DD&siteStatus=all",
+  "days": [
+    {
+      "date": "",
+      "classification": "",
+      "peakNAVD88": "",
+      "peakMLLW": "",
+      "hours": []
+    }
+  ]
+}

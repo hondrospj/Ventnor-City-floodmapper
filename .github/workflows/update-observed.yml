@@ -1,0 +1,248 @@
+name: Update Ventnor City observed
+
+on:
+  schedule:
+    - cron: "7 4,5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-observed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Build or update observed.json from USGS observed water level
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import math
+          import os
+          import urllib.parse
+          import urllib.request
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          def fetch_json(url):
+              req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+              with urllib.request.urlopen(req, timeout=180) as resp:
+                  return json.loads(resp.read().decode("utf-8"))
+
+          def usgs_iv_url(start_dt, end_dt):
+              params = {
+                  "format": "json",
+                  "sites": SITE,
+                  "parameterCd": PARAMETER_CD,
+                  "startDT": start_dt,
+                  "endDT": end_dt,
+                  "siteStatus": "all"
+              }
+              return "https://waterservices.usgs.gov/nwis/iv/?" + urllib.parse.urlencode(params)
+
+          def parse_usgs_datetime(value):
+              return datetime.fromisoformat(str(value).replace("Z", "+00:00")).astimezone(timezone.utc)
+
+          def round_hundredth(value):
+              return round(float(value) + 1e-9, 2)
+
+          def local_hour_start(dt_utc):
+              local = dt_utc.astimezone(LOCAL_ZONE).replace(minute=0, second=0, microsecond=0)
+              return local
+
+          def local_hour_key(dt_utc):
+              local = local_hour_start(dt_utc)
+              return local.date().isoformat(), local.hour
+
+          def local_iso(dt_utc):
+              local = local_hour_start(dt_utc)
+              return local.strftime("%Y-%m-%dT%H:00")
+
+          def utc_hour_iso_from_local(date_str, hour_index):
+              local = datetime.strptime(f"{date_str}T{hour_index:02d}:00", "%Y-%m-%dT%H:%M").replace(tzinfo=LOCAL_ZONE)
+              return local.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+          def classify_peak(peak):
+              if peak is None or not math.isfinite(peak):
+                  return "none"
+              if peak >= THRESHOLDS_NAVD88["majorLow"]:
+                  return "major"
+              if peak >= THRESHOLDS_NAVD88["moderateLow"]:
+                  return "moderate"
+              if peak >= THRESHOLDS_NAVD88["minorLow"]:
+                  return "minor"
+              return "none"
+
+          def fetch_hourly_max(start_dt, end_dt):
+              url = usgs_iv_url(start_dt.isoformat().replace("+00:00", "Z"), end_dt.isoformat().replace("+00:00", "Z"))
+              data = fetch_json(url)
+              hourly = {}
+              for series in data.get("value", {}).get("timeSeries", []):
+                  for bucket in series.get("values", []):
+                      for item in bucket.get("value", []):
+                          try:
+                              stage = round_hundredth(item.get("value"))
+                              dt_utc = parse_usgs_datetime(item.get("dateTime"))
+                          except Exception:
+                              continue
+                          key = local_hour_key(dt_utc)
+                          old = hourly.get(key)
+                          if old is None or stage > old["navd88StageFt"]:
+                              hourly[key] = {
+                                  "hourIndex": key[1],
+                                  "timeUtc": dt_utc.replace(minute=0, second=0, microsecond=0).isoformat().replace("+00:00", "Z"),
+                                  "timeLocal": local_iso(dt_utc),
+                                  "timeEST": local_iso(dt_utc),
+                                  "displayTimeEST": local_iso(dt_utc),
+                                  "navd88StageFt": stage,
+                                  "mllwStageFt": round(stage - NAVD88_OFFSET_FROM_MLLW, 2)
+                              }
+              return hourly, url
+
+          def day_record(date_str, hourly_records):
+              hours = [hourly_records[(date_str, h)] for h in range(24) if (date_str, h) in hourly_records]
+              if not hours:
+                  return None
+              peak = round_hundredth(max(h["navd88StageFt"] for h in hours))
+              return {
+                  "date": date_str,
+                  "classification": classify_peak(peak),
+                  "peakNAVD88": peak,
+                  "peakMLLW": round(peak - NAVD88_OFFSET_FROM_MLLW, 2),
+                  "hours": hours
+              }
+
+          def empty_payload(now_utc, archive_end):
+              return {
+                  "site": SITE,
+                  "parameterCd": PARAMETER_CD,
+                  "datum": DATUM,
+                  "timeZone": LOCAL_TIME_ZONE,
+                  "method": "hourly_max_operational_record_incremental_v2",
+                  "lastProcessedISO": now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+                  "archiveStartDate": ARCHIVE_START_DATE,
+                  "archiveEndDate": archive_end,
+                  "navd88OffsetFromMllwFt": NAVD88_OFFSET_FROM_MLLW,
+                  "thresholdsMLLW": THRESHOLDS_MLLW,
+                  "thresholdsNAVD88": THRESHOLDS_NAVD88,
+                  "sourceType": "USGS_NWIS_instantaneous_values_hourly_max",
+                  "sourceUrlTemplate": SOURCE_URL_TEMPLATE,
+                  "days": []
+              }
+
+          def build_full_archive(now_utc):
+              archive_start = datetime.strptime(ARCHIVE_START_DATE, "%Y-%m-%d").date()
+              archive_end = now_utc.astimezone(LOCAL_ZONE).date()
+              hourly = {}
+              cur = archive_start
+              while cur <= archive_end:
+                  end = min(cur + timedelta(days=CHUNK_DAYS - 1), archive_end)
+                  start_utc = datetime.combine(cur, datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc)
+                  end_utc = (datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc) - timedelta(seconds=1))
+                  chunk, _ = fetch_hourly_max(start_utc, end_utc)
+                  hourly.update(chunk)
+                  cur = end + timedelta(days=1)
+              days = []
+              cur = archive_start
+              while cur <= archive_end:
+                  rec = day_record(cur.isoformat(), hourly)
+                  if rec:
+                      days.append(rec)
+                  cur += timedelta(days=1)
+              payload = empty_payload(now_utc, archive_end.isoformat())
+              payload["days"] = days
+              payload["fullArchiveBuiltISO"] = now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+              return payload
+
+          def load_existing():
+              if not OUT_PATH.exists():
+                  return None
+              try:
+                  payload = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+              except Exception:
+                  return None
+              if not isinstance(payload, dict):
+                  return None
+              days = payload.get("days")
+              if not isinstance(days, list) or not days:
+                  return None
+              if not payload.get("fullArchiveBuiltISO"):
+                  return None
+              return payload
+
+          def merge_recent(payload, now_utc):
+              start_utc = now_utc - timedelta(hours=24)
+              hourly, _ = fetch_hourly_max(start_utc, now_utc)
+              day_map = {str(day.get("date")): day for day in payload.get("days", []) if isinstance(day, dict) and day.get("date")}
+              for date_str in sorted({key[0] for key in hourly.keys()}):
+                  existing = day_map.get(date_str)
+                  combined = {}
+                  if existing and isinstance(existing.get("hours"), list):
+                      for hour in existing["hours"]:
+                          try:
+                              hour_index = int(hour.get("hourIndex"))
+                          except Exception:
+                              continue
+                          if 0 <= hour_index <= 23:
+                              combined[(date_str, hour_index)] = hour
+                  for key, value in hourly.items():
+                      if key[0] == date_str:
+                          combined[key] = value
+                  rec = day_record(date_str, combined)
+                  if rec:
+                      day_map[date_str] = rec
+              days = [day_map[key] for key in sorted(day_map.keys())]
+              payload.update(empty_payload(now_utc, days[-1]["date"] if days else now_utc.astimezone(LOCAL_ZONE).date().isoformat()))
+              payload["days"] = days
+              payload["fullArchiveBuiltISO"] = payload.get("fullArchiveBuiltISO") or now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+              payload["lastIncrementalUpdateISO"] = now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+              return payload
+
+          def main():
+              now_utc = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+              if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and now_utc.astimezone(LOCAL_ZONE).hour != 0:
+                  print("Not midnight in local time; no observed update needed.")
+                  return
+              payload = load_existing()
+              if payload is None:
+                  payload = build_full_archive(now_utc)
+              else:
+                  payload = merge_recent(payload, now_utc)
+              if not payload.get("days"):
+                  raise RuntimeError("No observed days were found.")
+              OUT_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+              print("Wrote", OUT_PATH)
+              print("Days:", len(payload["days"]))
+              print("Archive:", payload["archiveStartDate"], "to", payload["archiveEndDate"])
+
+          SITE = "01411330"
+          PARAMETER_CD = "72279"
+          DATUM = "NAVD88"
+          LOCAL_TIME_ZONE = "America/New_York"
+          LOCAL_ZONE = ZoneInfo(LOCAL_TIME_ZONE)
+          USER_AGENT = "Ventnor-City-floodmapper/1.0"
+          NAVD88_OFFSET_FROM_MLLW = -2.39
+          THRESHOLDS_MLLW = {"minorLow": 5.6, "moderateLow": 6.6, "majorLow": 7.6}
+          THRESHOLDS_NAVD88 = {"minorLow": 3.21, "moderateLow": 4.21, "majorLow": 5.21}
+          ARCHIVE_START_DATE = "2007-10-01"
+          OUT_PATH = Path("observed.json")
+          CHUNK_DAYS = 31
+          SOURCE_URL_TEMPLATE = "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01411330&parameterCd=72279&startDT=YYYY-MM-DDTHH:MM:SSZ&endDT=YYYY-MM-DDTHH:MM:SSZ&siteStatus=all"
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Commit updated observed archive
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add observed.json
+          git diff --staged --quiet || git commit -m "Update Ventnor City observed"
+          git push
