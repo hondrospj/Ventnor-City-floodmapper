@@ -21888,5 +21888,101 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
     });
   </script>
 
+
+<!-- PJ_ALL_FLOODMAPPERS_SLIDER_ROW_INSET_FIX_V2_START -->
+<style>
+/* =========================================================
+   PJ ALL-FLOODMAPPERS SLIDER ROW-INSET FIX V2
+   ---------------------------------------------------------
+   This is the same small fix verified on Avalon.
+
+   Root cause:
+   The native range input keeps the thumb center at 0% and
+   100%. At the far right, half the blue thumb can sit outside
+   the dark bottom timeline pill.
+
+   Fix:
+   Move the slider row inward by a fixed safe inset while leaving
+   the range input itself at 100%. This avoids fighting older app
+   CSS/JS that forces #hourSlider width back to 100%.
+
+   This block only affects the bottom timeline slider row.
+   It does not touch town constants, gauges, thresholds, URLs,
+   forecast code, observed code, overlays, or data files.
+   ========================================================= */
+
+:root{
+  --pj-all-slider-row-inset:32px;
+}
+
+#timelineDock .timeline-trackRow{
+  width:calc(100% - (2 * var(--pj-all-slider-row-inset))) !important;
+  max-width:calc(100% - (2 * var(--pj-all-slider-row-inset))) !important;
+  margin-left:var(--pj-all-slider-row-inset) !important;
+  margin-right:var(--pj-all-slider-row-inset) !important;
+  box-sizing:border-box !important;
+  overflow:visible !important;
+}
+
+#timelineDock #hourSlider{
+  width:100% !important;
+  max-width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box !important;
+}
+
+@media (max-width: 900px){
+  :root{ --pj-all-slider-row-inset:22px; }
+}
+
+@media (max-width: 520px){
+  :root{ --pj-all-slider-row-inset:18px; }
+}
+</style>
+<script>
+(function(){
+  "use strict";
+
+  function applyAllFloodmapperSliderRowInset(){
+    try{
+      var dock = document.getElementById("timelineDock");
+      var row = dock && dock.querySelector(".timeline-trackRow");
+      var slider = document.getElementById("hourSlider");
+      if (!dock || !row || !slider) return;
+
+      row.style.setProperty("width", "calc(100% - (2 * var(--pj-all-slider-row-inset)))", "important");
+      row.style.setProperty("max-width", "calc(100% - (2 * var(--pj-all-slider-row-inset)))", "important");
+      row.style.setProperty("margin-left", "var(--pj-all-slider-row-inset)", "important");
+      row.style.setProperty("margin-right", "var(--pj-all-slider-row-inset)", "important");
+      row.style.setProperty("box-sizing", "border-box", "important");
+      row.style.setProperty("overflow", "visible", "important");
+
+      slider.style.setProperty("width", "100%", "important");
+      slider.style.setProperty("max-width", "100%", "important");
+      slider.style.setProperty("margin-left", "0", "important");
+      slider.style.setProperty("margin-right", "0", "important");
+      slider.style.setProperty("box-sizing", "border-box", "important");
+    }catch(e){
+      try{ console.warn("Slider row inset fix skipped:", e); }catch(_e){}
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    applyAllFloodmapperSliderRowInset();
+    setTimeout(applyAllFloodmapperSliderRowInset, 50);
+    setTimeout(applyAllFloodmapperSliderRowInset, 250);
+    setTimeout(applyAllFloodmapperSliderRowInset, 900);
+  });
+  window.addEventListener("load", applyAllFloodmapperSliderRowInset);
+  window.addEventListener("resize", function(){ setTimeout(applyAllFloodmapperSliderRowInset, 40); });
+  window.addEventListener("orientationchange", function(){ setTimeout(applyAllFloodmapperSliderRowInset, 150); });
+  document.addEventListener("input", function(e){
+    if (e && e.target && e.target.id === "hourSlider") applyAllFloodmapperSliderRowInset();
+  }, true);
+})();
+</script>
+<!-- PJ_ALL_FLOODMAPPERS_SLIDER_ROW_INSET_FIX_V2_END -->
+
 </body>
 </html>
