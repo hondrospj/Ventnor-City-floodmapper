@@ -1,0 +1,20 @@
+name: Run observed update
+
+on:
+  push:
+    paths:
+      - .github/workflows/trigger-observed-now.yml
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  run-observed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start observed workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-observed.yml --ref main
