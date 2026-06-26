@@ -2,7 +2,7 @@ name: Update Ventnor City observed
 
 on:
   schedule:
-    - cron: "7 4,5 * * *"
+    - cron: "37 4,5 * * *"
   workflow_dispatch:
 
 permissions:
@@ -11,15 +11,17 @@ permissions:
 jobs:
   update-observed:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Build or update observed.json from USGS observed water level
+      - name: Build observed archives
         shell: bash
         run: |
           python - <<'PY'
+          import copy
           import json
           import math
           import os
@@ -29,57 +31,94 @@ jobs:
           from pathlib import Path
           from zoneinfo import ZoneInfo
 
+          TOWN_NAME = "Ventnor City"
+          IS_SPLIT = False
+          DEFAULT_ZONE_ID = "default"
+          ZONES = [
+            {
+              "id": "default",
+              "zoneName": "Ventnor City",
+              "label": "Ventnor City",
+              "gaugeName": "Margate",
+              "petssGaugeId": "8534836",
+              "usgsGaugeId": "01411330",
+              "noaaGaugeId": "8534720",
+              "observedSource": "usgs",
+              "navd88OffsetFromMllwFt": -2.39,
+              "thresholdsMllw": {
+                "minorLow": 5.6,
+                "moderateLow": 6.6,
+                "majorLow": 7.6
+              },
+              "thresholdsNavd88": {
+                "minorLow": 3.21,
+                "moderateLow": 4.21,
+                "majorLow": 5.21
+              }
+            }
+          ]
+          PARAMETER_CD = "72279"
+          LOCAL_TIME_ZONE = "America/New_York"
+          LOCAL_ZONE = ZoneInfo(LOCAL_TIME_ZONE)
+          ARCHIVE_START_DATE = "2007-10-01"
+          PRIMARY_PATH = Path("observed.json")
+          OVERFLOW_PATH = Path("observedoverflow.json")
+          CHUNK_DAYS = 31
+
           def fetch_json(url):
-              req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+              req = urllib.request.Request(url, headers={"User-Agent": f"{TOWN_NAME}-floodmapper/1.0"})
               with urllib.request.urlopen(req, timeout=180) as resp:
                   return json.loads(resp.read().decode("utf-8"))
-
-          def usgs_iv_url(start_dt, end_dt):
-              params = {
-                  "format": "json",
-                  "sites": SITE,
-                  "parameterCd": PARAMETER_CD,
-                  "startDT": start_dt,
-                  "endDT": end_dt,
-                  "siteStatus": "all"
-              }
-              return "https://waterservices.usgs.gov/nwis/iv/?" + urllib.parse.urlencode(params)
-
-          def parse_usgs_datetime(value):
-              return datetime.fromisoformat(str(value).replace("Z", "+00:00")).astimezone(timezone.utc)
 
           def round_hundredth(value):
               return round(float(value) + 1e-9, 2)
 
-          def local_hour_start(dt_utc):
-              local = dt_utc.astimezone(LOCAL_ZONE).replace(minute=0, second=0, microsecond=0)
-              return local
-
           def local_hour_key(dt_utc):
-              local = local_hour_start(dt_utc)
+              local = dt_utc.astimezone(LOCAL_ZONE).replace(minute=0, second=0, microsecond=0)
               return local.date().isoformat(), local.hour
 
           def local_iso(dt_utc):
-              local = local_hour_start(dt_utc)
+              local = dt_utc.astimezone(LOCAL_ZONE).replace(minute=0, second=0, microsecond=0)
               return local.strftime("%Y-%m-%dT%H:00")
 
-          def utc_hour_iso_from_local(date_str, hour_index):
-              local = datetime.strptime(f"{date_str}T{hour_index:02d}:00", "%Y-%m-%dT%H:%M").replace(tzinfo=LOCAL_ZONE)
-              return local.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-          def classify_peak(peak):
+          def classify_peak(peak, thresholds):
               if peak is None or not math.isfinite(peak):
                   return "none"
-              if peak >= THRESHOLDS_NAVD88["majorLow"]:
+              if peak >= thresholds["majorLow"]:
                   return "major"
-              if peak >= THRESHOLDS_NAVD88["moderateLow"]:
+              if peak >= thresholds["moderateLow"]:
                   return "moderate"
-              if peak >= THRESHOLDS_NAVD88["minorLow"]:
+              if peak >= thresholds["minorLow"]:
                   return "minor"
               return "none"
 
-          def fetch_hourly_max(start_dt, end_dt):
-              url = usgs_iv_url(start_dt.isoformat().replace("+00:00", "Z"), end_dt.isoformat().replace("+00:00", "Z"))
+          def usgs_url(zone, start_dt, end_dt):
+              params = {
+                  "format": "json",
+                  "sites": zone["usgsGaugeId"],
+                  "parameterCd": PARAMETER_CD,
+                  "startDT": start_dt.isoformat().replace("+00:00", "Z"),
+                  "endDT": end_dt.isoformat().replace("+00:00", "Z"),
+                  "siteStatus": "all",
+              }
+              return "https://waterservices.usgs.gov/nwis/iv/?" + urllib.parse.urlencode(params)
+
+          def noaa_url(zone, start_dt, end_dt):
+              params = {
+                  "begin_date": start_dt.strftime("%Y%m%d %H:%M"),
+                  "end_date": end_dt.strftime("%Y%m%d %H:%M"),
+                  "station": zone["noaaGaugeId"],
+                  "product": "water_level",
+                  "datum": "MLLW",
+                  "time_zone": "gmt",
+                  "units": "english",
+                  "format": "json",
+                  "application": "shorelysafe_floodmapper",
+              }
+              return "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" + urllib.parse.urlencode(params)
+
+          def fetch_usgs_hourly(zone, start_dt, end_dt):
+              url = usgs_url(zone, start_dt, end_dt)
               data = fetch_json(url)
               hourly = {}
               for series in data.get("value", {}).get("timeSeries", []):
@@ -87,152 +126,232 @@ jobs:
                       for item in bucket.get("value", []):
                           try:
                               stage = round_hundredth(item.get("value"))
-                              dt_utc = parse_usgs_datetime(item.get("dateTime"))
+                              dt_utc = datetime.fromisoformat(str(item.get("dateTime")).replace("Z", "+00:00")).astimezone(timezone.utc)
                           except Exception:
                               continue
                           key = local_hour_key(dt_utc)
                           old = hourly.get(key)
                           if old is None or stage > old["navd88StageFt"]:
-                              hourly[key] = {
-                                  "hourIndex": key[1],
-                                  "timeUtc": dt_utc.replace(minute=0, second=0, microsecond=0).isoformat().replace("+00:00", "Z"),
-                                  "timeLocal": local_iso(dt_utc),
-                                  "timeEST": local_iso(dt_utc),
-                                  "displayTimeEST": local_iso(dt_utc),
-                                  "navd88StageFt": stage,
-                                  "mllwStageFt": round(stage - NAVD88_OFFSET_FROM_MLLW, 2)
-                              }
+                              hourly[key] = make_hour_record(key, dt_utc, stage, round_hundredth(stage - zone["navd88OffsetFromMllwFt"]))
               return hourly, url
 
-          def day_record(date_str, hourly_records):
+          def fetch_noaa_hourly(zone, start_dt, end_dt):
+              url = noaa_url(zone, start_dt, end_dt)
+              data = fetch_json(url)
+              if data.get("error"):
+                  raise RuntimeError(f"NOAA error for {zone['id']}: {data['error']}")
+              hourly = {}
+              for item in data.get("data", []):
+                  try:
+                      mllw = round_hundredth(item.get("v"))
+                      dt_utc = datetime.strptime(item["t"], "%Y-%m-%d %H:%M").replace(tzinfo=timezone.utc)
+                      stage = round_hundredth(mllw + zone["navd88OffsetFromMllwFt"])
+                  except Exception:
+                      continue
+                  key = local_hour_key(dt_utc)
+                  old = hourly.get(key)
+                  if old is None or stage > old["navd88StageFt"]:
+                      hourly[key] = make_hour_record(key, dt_utc, stage, mllw)
+              return hourly, url
+
+          def make_hour_record(key, dt_utc, navd88, mllw):
+              return {
+                  "hourIndex": key[1],
+                  "timeUtc": dt_utc.replace(minute=0, second=0, microsecond=0).isoformat().replace("+00:00", "Z"),
+                  "timeLocal": local_iso(dt_utc),
+                  "timeEST": local_iso(dt_utc),
+                  "displayTimeEST": local_iso(dt_utc),
+                  "navd88StageFt": navd88,
+                  "mllwStageFt": mllw,
+              }
+
+          def fetch_hourly(zone, start_dt, end_dt):
+              if zone.get("observedSource") == "noaa":
+                  return fetch_noaa_hourly(zone, start_dt, end_dt)
+              return fetch_usgs_hourly(zone, start_dt, end_dt)
+
+          def day_record(zone, date_str, hourly_records):
               hours = [hourly_records[(date_str, h)] for h in range(24) if (date_str, h) in hourly_records]
               if not hours:
                   return None
               peak = round_hundredth(max(h["navd88StageFt"] for h in hours))
               return {
                   "date": date_str,
-                  "classification": classify_peak(peak),
+                  "classification": classify_peak(peak, zone["thresholdsNavd88"]),
                   "peakNAVD88": peak,
-                  "peakMLLW": round(peak - NAVD88_OFFSET_FROM_MLLW, 2),
-                  "hours": hours
+                  "peakMLLW": round_hundredth(peak - zone["navd88OffsetFromMllwFt"]),
+                  "hours": hours,
               }
 
-          def empty_payload(now_utc, archive_end):
+          def empty_zone_payload(zone, now_utc, archive_end):
               return {
-                  "site": SITE,
-                  "parameterCd": PARAMETER_CD,
-                  "datum": DATUM,
+                  "zoneId": zone["id"],
+                  "zoneName": zone["zoneName"],
+                  "gaugeName": zone["gaugeName"],
+                  "site": zone["usgsGaugeId"] or zone["noaaGaugeId"],
+                  "petssGaugeId": zone["petssGaugeId"],
+                  "noaaGaugeId": zone["noaaGaugeId"],
+                  "parameterCd": PARAMETER_CD if zone.get("observedSource") == "usgs" else "",
+                  "datum": "NAVD88",
                   "timeZone": LOCAL_TIME_ZONE,
-                  "method": "hourly_max_operational_record_incremental_v2",
+                  "method": "hourly_max_operational_record_incremental_v3",
                   "lastProcessedISO": now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
                   "archiveStartDate": ARCHIVE_START_DATE,
                   "archiveEndDate": archive_end,
-                  "navd88OffsetFromMllwFt": NAVD88_OFFSET_FROM_MLLW,
-                  "thresholdsMLLW": THRESHOLDS_MLLW,
-                  "thresholdsNAVD88": THRESHOLDS_NAVD88,
-                  "sourceType": "USGS_NWIS_instantaneous_values_hourly_max",
-                  "sourceUrlTemplate": SOURCE_URL_TEMPLATE,
-                  "days": []
+                  "navd88OffsetFromMllwFt": zone["navd88OffsetFromMllwFt"],
+                  "thresholdsMLLW": zone["thresholdsMllw"],
+                  "thresholdsNAVD88": zone["thresholdsNavd88"],
+                  "sourceType": "NOAA_COOPS_water_level_hourly_max_MLLW_converted_to_NAVD88" if zone.get("observedSource") == "noaa" else "USGS_NWIS_instantaneous_values_hourly_max",
+                  "days": [],
               }
 
-          def build_full_archive(now_utc):
+          def build_full_archive(zone, now_utc):
               archive_start = datetime.strptime(ARCHIVE_START_DATE, "%Y-%m-%d").date()
               archive_end = now_utc.astimezone(LOCAL_ZONE).date()
               hourly = {}
               cur = archive_start
+              last_url = ""
               while cur <= archive_end:
                   end = min(cur + timedelta(days=CHUNK_DAYS - 1), archive_end)
                   start_utc = datetime.combine(cur, datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc)
-                  end_utc = (datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc) - timedelta(seconds=1))
-                  chunk, _ = fetch_hourly_max(start_utc, end_utc)
+                  end_utc = datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc) - timedelta(seconds=1)
+                  chunk, last_url = fetch_hourly(zone, start_utc, end_utc)
                   hourly.update(chunk)
                   cur = end + timedelta(days=1)
               days = []
               cur = archive_start
               while cur <= archive_end:
-                  rec = day_record(cur.isoformat(), hourly)
+                  rec = day_record(zone, cur.isoformat(), hourly)
                   if rec:
                       days.append(rec)
                   cur += timedelta(days=1)
-              payload = empty_payload(now_utc, archive_end.isoformat())
+              payload = empty_zone_payload(zone, now_utc, archive_end.isoformat())
               payload["days"] = days
+              payload["sourceUrlTemplate"] = last_url
               payload["fullArchiveBuiltISO"] = now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
               return payload
 
-          def load_existing():
-              if not OUT_PATH.exists():
+          def load_existing_zone(zone):
+              candidates = []
+              for path in [PRIMARY_PATH, OVERFLOW_PATH]:
+                  if not path.exists():
+                      continue
+                  try:
+                      data = json.loads(path.read_text(encoding="utf-8"))
+                  except Exception:
+                      continue
+                  if data.get("zones"):
+                      payload = data.get("zones", {}).get(zone["id"], {}).get("observed")
+                      if payload:
+                          candidates.extend(payload.get("days") or [])
+                  else:
+                      candidates.extend(data.get("days") or [])
+              if not candidates:
                   return None
-              try:
-                  payload = json.loads(OUT_PATH.read_text(encoding="utf-8"))
-              except Exception:
-                  return None
-              if not isinstance(payload, dict):
-                  return None
-              days = payload.get("days")
-              if not isinstance(days, list) or not days:
-                  return None
-              if not payload.get("fullArchiveBuiltISO"):
-                  return None
+              days = sorted(candidates, key=lambda d: str(d.get("date", "")))
+              payload = empty_zone_payload(zone, datetime.now(timezone.utc), days[-1].get("date", ARCHIVE_START_DATE))
+              payload["days"] = days
+              payload["fullArchiveBuiltISO"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
               return payload
 
-          def merge_recent(payload, now_utc):
-              start_utc = now_utc - timedelta(hours=24)
-              hourly, _ = fetch_hourly_max(start_utc, now_utc)
+          def existing_matches_zone(payload, zone):
+              if not payload or not payload.get("days"):
+                  return False
+              return str(payload.get("site", "")) == str(zone["usgsGaugeId"] or zone["noaaGaugeId"])
+
+          def merge_recent(zone, payload, now_utc):
+              start_utc = now_utc - timedelta(hours=48)
+              hourly, last_url = fetch_hourly(zone, start_utc, now_utc)
               day_map = {str(day.get("date")): day for day in payload.get("days", []) if isinstance(day, dict) and day.get("date")}
-              for date_str in sorted({key[0] for key in hourly.keys()}):
-                  existing = day_map.get(date_str)
+              for date_str in sorted({key[0] for key in hourly}):
                   combined = {}
+                  existing = day_map.get(date_str)
                   if existing and isinstance(existing.get("hours"), list):
                       for hour in existing["hours"]:
                           try:
-                              hour_index = int(hour.get("hourIndex"))
+                              h = int(hour.get("hourIndex"))
                           except Exception:
                               continue
-                          if 0 <= hour_index <= 23:
-                              combined[(date_str, hour_index)] = hour
+                          if 0 <= h <= 23:
+                              combined[(date_str, h)] = hour
                   for key, value in hourly.items():
                       if key[0] == date_str:
                           combined[key] = value
-                  rec = day_record(date_str, combined)
+                  rec = day_record(zone, date_str, combined)
                   if rec:
                       day_map[date_str] = rec
               days = [day_map[key] for key in sorted(day_map.keys())]
-              payload.update(empty_payload(now_utc, days[-1]["date"] if days else now_utc.astimezone(LOCAL_ZONE).date().isoformat()))
+              payload.update(empty_zone_payload(zone, now_utc, days[-1]["date"] if days else now_utc.astimezone(LOCAL_ZONE).date().isoformat()))
               payload["days"] = days
-              payload["fullArchiveBuiltISO"] = payload.get("fullArchiveBuiltISO") or now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+              payload["sourceUrlTemplate"] = last_url
               payload["lastIncrementalUpdateISO"] = now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
               return payload
+
+          def zone_payload(zone, now_utc):
+              existing = load_existing_zone(zone)
+              if existing_matches_zone(existing, zone):
+                  return merge_recent(zone, existing, now_utc)
+              return build_full_archive(zone, now_utc)
+
+          def year_split(archive_start, archive_end):
+              years = list(range(archive_start.year, archive_end.year + 1))
+              cut = len(years) // 2
+              overflow_years = set(years[:cut])
+              primary_years = set(years[cut:])
+              return overflow_years, primary_years, min(primary_years)
+
+          def split_days(days, overflow_years, primary_years):
+              overflow = []
+              primary = []
+              for day in days:
+                  try:
+                      year = int(str(day.get("date", ""))[:4])
+                  except Exception:
+                      continue
+                  if year in overflow_years:
+                      overflow.append(day)
+                  elif year in primary_years:
+                      primary.append(day)
+              return overflow, primary
+
+          def with_days(payload, days, part, contains, split_year):
+              out = copy.deepcopy(payload)
+              dates = sorted(str(day.get("date", ""))[:10] for day in days if str(day.get("date", ""))[:10])
+              out["days"] = days
+              if dates:
+                  out["archiveStartDate"] = dates[0]
+                  out["archiveEndDate"] = dates[-1]
+              out["splitPart"] = part
+              out["splitContains"] = contains
+              out["splitYear"] = split_year
+              return out
 
           def main():
               now_utc = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
               if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and now_utc.astimezone(LOCAL_ZONE).hour != 0:
                   print("Not midnight in local time; no observed update needed.")
                   return
-              payload = load_existing()
-              if payload is None:
-                  payload = build_full_archive(now_utc)
-              else:
-                  payload = merge_recent(payload, now_utc)
-              if not payload.get("days"):
-                  raise RuntimeError("No observed days were found.")
-              OUT_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-              print("Wrote", OUT_PATH)
-              print("Days:", len(payload["days"]))
-              print("Archive:", payload["archiveStartDate"], "to", payload["archiveEndDate"])
-
-          SITE = "01411330"
-          PARAMETER_CD = "72279"
-          DATUM = "NAVD88"
-          LOCAL_TIME_ZONE = "America/New_York"
-          LOCAL_ZONE = ZoneInfo(LOCAL_TIME_ZONE)
-          USER_AGENT = "Ventnor-City-floodmapper/1.0"
-          NAVD88_OFFSET_FROM_MLLW = -2.39
-          THRESHOLDS_MLLW = {"minorLow": 5.6, "moderateLow": 6.6, "majorLow": 7.6}
-          THRESHOLDS_NAVD88 = {"minorLow": 3.21, "moderateLow": 4.21, "majorLow": 5.21}
-          ARCHIVE_START_DATE = "2007-10-01"
-          OUT_PATH = Path("observed.json")
-          CHUNK_DAYS = 31
-          SOURCE_URL_TEMPLATE = "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01411330&parameterCd=72279&startDT=YYYY-MM-DDTHH:MM:SSZ&endDT=YYYY-MM-DDTHH:MM:SSZ&siteStatus=all"
+              if not IS_SPLIT:
+                  payload = zone_payload(ZONES[0], now_utc)
+                  payload.pop("zoneId", None)
+                  payload.pop("zoneName", None)
+                  PRIMARY_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+                  print("Wrote", PRIMARY_PATH, "days", len(payload.get("days", [])))
+                  return
+              archive_start = datetime.strptime(ARCHIVE_START_DATE, "%Y-%m-%d").date()
+              archive_end = now_utc.astimezone(LOCAL_ZONE).date()
+              overflow_years, primary_years, split_year = year_split(archive_start, archive_end)
+              primary = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-observed-v1", "lastProcessedISO": now_utc.isoformat().replace("+00:00", "Z"), "splitArchive": {"part": "primary", "contains": f"{min(primary_years)}-{max(primary_years)}", "splitYear": split_year, "companion": str(OVERFLOW_PATH)}, "zones": {}}
+              overflow = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-observed-v1", "lastProcessedISO": now_utc.isoformat().replace("+00:00", "Z"), "splitArchive": {"part": "overflow", "contains": f"{min(overflow_years)}-{max(overflow_years)}", "splitYear": split_year, "companion": str(PRIMARY_PATH)}, "zones": {}}
+              for zone in ZONES:
+                  payload = zone_payload(zone, now_utc)
+                  older, newer = split_days(payload.get("days", []), overflow_years, primary_years)
+                  primary["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "observed": with_days(payload, newer, "primary", "newer-years", split_year)}
+                  overflow["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "observed": with_days(payload, older, "overflow", "older-years", split_year)}
+                  print(zone["id"], "days", len(payload.get("days", [])))
+              PRIMARY_PATH.write_text(json.dumps(primary, indent=2) + "\n", encoding="utf-8")
+              OVERFLOW_PATH.write_text(json.dumps(overflow, indent=2) + "\n", encoding="utf-8")
+              print("Wrote", PRIMARY_PATH, "and", OVERFLOW_PATH)
 
           if __name__ == "__main__":
               main()
@@ -243,6 +362,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add observed.json
+          git add observed.json observedoverflow.json 2>/dev/null || git add observed.json
           git diff --staged --quiet || git commit -m "Update Ventnor City observed"
           git push

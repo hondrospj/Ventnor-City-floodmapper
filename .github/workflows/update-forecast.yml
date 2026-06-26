@@ -1,727 +1,317 @@
-name: Update PETSS Forecast
-run-name: Update PETSS Forecast
+name: Update Ventnor City forecast
 
 on:
-  workflow_dispatch:
   schedule:
-    # Run after normal PETSS cycles. The script also searches recent cycles.
-    - cron: "35 1,7,13,19 * * *"
+    - cron: "17 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
 
-concurrency:
-  group: petss-forecast-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  update:
+  update-forecast:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
-    env:
-      ########################################################################
-      # LOCATION DEPENDENT — SWAP THESE FOR ANOTHER TOWN / GAUGE
-      ########################################################################
-
-      # NOAA / PETSS station used inside the PETSS station CSV tarball.
-      PETSS_STATION_ID: "8534836"
-      # Display/debug label only.
-      PETSS_STATION_NAME: "MARGATE, NJ"
-      # Datum conversion used by the dashboard:
-      # NAVD88 stage = MLLW stage + NAVD88_OFFSET_FROM_MLLW_FT
-      NAVD88_OFFSET_FROM_MLLW_FT: "-2.39"
-      # Flood thresholds in MLLW feet.
-      MINOR_MLLW_FT: "5.6"
-      MODERATE_MLLW_FT: "6.6"
-      MAJOR_MLLW_FT: "7.6"
-      # Raster stack / PNG stage range in NAVD88 feet.
-      LAYER_MIN_NAVD88_FT: "-2.0"
-      LAYER_MAX_NAVD88_FT: "14.0"
-      LAYER_INCREMENT_FT: "0.1"
-      ########################################################################
-      # GENERIC SETTINGS — USUALLY DO NOT CHANGE
-      ########################################################################
-
-      # Number of forecast hours to publish to forecast.json.
-      # This prevents the dashboard from displaying old analysis/observed rows.
-      FORECAST_HOURS: "84"
-      # Root-level dashboard forecast file.
-      FORECAST_OUTPUT_PATH: "forecast.json"
     steps:
-      - name: Checkout
+      - name: Check out repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Build forecast-only PETSS forecast.json
+      - name: Build forecast.json from PETSS station CSV guidance
         shell: bash
         run: |
-          set -euo pipefail
-
-          cat > /tmp/update_petss_forecast.js <<'NODE'
-          const fs = require("fs");
-          const os = require("os");
-          const path = require("path");
-          const https = require("https");
-          const { execFileSync } = require("child_process");
-
-          const CFG = {
-            stid: getEnv("PETSS_STATION_ID", "8535419"),
-            stationName: getEnv("PETSS_STATION_NAME", "AVALON, NJ"),
-            out: getEnv("FORECAST_OUTPUT_PATH", "forecast.json"),
-            tmpOut: `${getEnv("FORECAST_OUTPUT_PATH", "forecast.json")}.tmp`,
-            forecastHours: positiveInt(getEnv("FORECAST_HOURS", "84"), 84),
-            navd88Offset: numberEnv("NAVD88_OFFSET_FROM_MLLW_FT", -2.58),
-            thresholdsMLLW: {
-              minorLow: numberEnv("MINOR_MLLW_FT", 6.0),
-              moderateLow: numberEnv("MODERATE_MLLW_FT", 7.0),
-              majorLow: numberEnv("MAJOR_MLLW_FT", 7.8),
-            },
-            layer: {
-              min: numberEnv("LAYER_MIN_NAVD88_FT", -2.0),
-              max: numberEnv("LAYER_MAX_NAVD88_FT", 14.0),
-              increment: numberEnv("LAYER_INCREMENT_FT", 0.1),
-            },
-          };
-
-          main().catch((err) => {
-            console.error("");
-            console.error("FAILED:", err && err.stack ? err.stack : err);
-            console.error("forecast.json was not updated.");
-            process.exit(1);
-          });
-
-          async function main() {
-            const issuedDate = new Date();
-            const runHourUtc = floorToHour(issuedDate);
-
-            printConfig(runHourUtc);
-
-            const cycles = recentCycles(issuedDate, 4);
-            let chosen = null;
-            let forecast = null;
-            let lastError = null;
-
-            for (const cycle of cycles) {
-              try {
-                const sourceUrl = petssStationCsvUrl(cycle);
-
-                console.log("");
-                console.log(`Trying PETSS cycle ${cycle.ymd} ${cycle.hh}z`);
-                console.log(`Source: ${sourceUrl}`);
-
-                const csv = await extractStationCsvFromTar(sourceUrl, CFG.stid);
-                const parsed = parseStationCsv(csv);
-
-                // PETSS station CSVs may include analysis/spin-up rows before the true
-                // forecast period. Use the later of cycle time and current workflow hour.
-                const forecastStart = new Date(Math.max(Date.parse(cycle.cycleUtc), runHourUtc.getTime()));
-                const aligned = alignAndTrimProducts(parsed, forecastStart, CFG.forecastHours);
-
-                validateProducts(aligned, forecastStart);
-
-                chosen = {
-                  ...cycle,
-                  sourceUrl,
-                  forecastStartUtc: aligned.mean[0].timeUtc,
-                  forecastEndUtc: aligned.mean[aligned.mean.length - 1].timeUtc,
-                };
-                forecast = aligned;
-                break;
-              } catch (err) {
-                lastError = err;
-                console.warn(`Rejected cycle ${cycle.ymd} ${cycle.hh}z: ${err.message}`);
-              }
-            }
-
-            if (!chosen || !forecast) {
-              throw new Error(`No usable PETSS cycle found. Last error: ${lastError ? lastError.message : "unknown"}`);
-            }
-
-            const output = buildOutputJson(chosen, forecast, issuedDate.toISOString());
-            const text = JSON.stringify(output, null, 2) + "\n";
-
-            validateSerializedJson(text);
-
-            fs.writeFileSync(CFG.tmpOut, text);
-            JSON.parse(fs.readFileSync(CFG.tmpOut, "utf8"));
-            fs.renameSync(CFG.tmpOut, CFG.out);
-
-            console.log("");
-            console.log(`Wrote ${CFG.out}`);
-            console.log(`Cycle UTC: ${chosen.cycleUtc}`);
-            console.log(`Forecast start UTC: ${chosen.forecastStartUtc}`);
-            console.log(`Forecast end UTC: ${chosen.forecastEndUtc}`);
-            console.log(`Rows: mean=${forecast.mean.length}, lowEnd/e90=${forecast.lowEnd.length}, highEnd/e10=${forecast.highEnd.length}`);
-          }
-
-          function printConfig(runHourUtc) {
-            console.log("PETSS forecast updater");
-            console.log(`Station: ${CFG.stid} ${CFG.stationName}`);
-            console.log(`Run hour UTC: ${runHourUtc.toISOString()}`);
-            console.log(`Output: ${CFG.out}`);
-            console.log(`Forecast hours: ${CFG.forecastHours}`);
-            console.log("Column mapping: Mean=TWL, Low End/e90=TWL90p, High End/e10=TWL10p");
-          }
-
-          function petssStationCsvUrl(cycle) {
-            return `https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.${cycle.ymd}/petss.t${cycle.hh}z.csv.tar.gz`;
-          }
-
-          function recentCycles(now, daysBack) {
-            const cycles = [];
-            const cycleHours = [18, 12, 6, 0];
-
-            for (let dayOffset = 0; dayOffset <= daysBack; dayOffset++) {
-              const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - dayOffset));
-              const ymd = `${date.getUTCFullYear()}${pad2(date.getUTCMonth() + 1)}${pad2(date.getUTCDate())}`;
-
-              for (const hour of cycleHours) {
-                const cycleDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), hour));
-
-                // Do not try a cycle too far in the future.
-                if (cycleDate.getTime() <= now.getTime() + 30 * 60 * 1000) {
-                  cycles.push({
-                    ymd,
-                    hh: pad2(hour),
-                    cycleUtc: cycleDate.toISOString(),
-                  });
-                }
-              }
-            }
-
-            return cycles;
-          }
-
-          async function extractStationCsvFromTar(url, stationId) {
-            const tmp = path.join(
-              os.tmpdir(),
-              `petss_${process.pid}_${Date.now()}_${Math.random().toString(16).slice(2)}.tar.gz`
-            );
-
-            await download(url, tmp);
-
-            try {
-              const members = execFileSync("tar", ["-tzf", tmp], {
-                encoding: "utf8",
-                maxBuffer: 80 * 1024 * 1024,
-              })
-                .split(/\r?\n/)
-                .map((line) => line.trim())
-                .filter(Boolean);
-
-              const stationCsv = members.find((member) =>
-                new RegExp(`(^|/)${escapeRegex(stationId)}\\.csv$`, "i").test(member)
-              );
-
-              if (!stationCsv) {
-                throw new Error(`station CSV ${stationId}.csv not found in tar`);
-              }
-
-              console.log(`Using tar member: ${stationCsv}`);
-
-              return execFileSync("tar", ["-xOzf", tmp, stationCsv], {
-                encoding: "utf8",
-                maxBuffer: 200 * 1024 * 1024,
-              });
-            } finally {
-              try {
-                fs.unlinkSync(tmp);
-              } catch {}
-            }
-          }
-
-          function parseStationCsv(csv) {
-            const lines = csv.split(/\r?\n/).filter((line) => line.trim());
-            if (lines.length < 2) {
-              throw new Error("station CSV is empty");
-            }
-
-            const headers = splitCsv(lines[0]).map((header) => header.trim());
-            const normalizedHeaders = headers.map((header) => normalizeHeader(header));
-
-            console.log(`CSV headers: ${headers.join(" | ")}`);
-
-            const timeIdx = findRequiredIdx(normalizedHeaders, ["time", "valid", "validtime", "valid_time", "datetime", "date_time", "forecast_time", "src_time", "srctime"], "TIME");
-            const tideIdx = findIdx(normalizedHeaders, ["tide", "tide_ft", "tide_mllw", "tide_mllw_ft"]);
-            const surgeIdx = findIdx(normalizedHeaders, ["surge", "surge_ft", "stormsurge", "storm_surge"]);
-
-            const twlIdx = findRequiredIdx(normalizedHeaders, ["twl", "twl_ft", "twl_mllw", "twl_mllw_ft", "stormtide", "storm_tide", "total_water_level", "water_level"], "TWL");
-            const twl10Idx = findRequiredIdx(normalizedHeaders, ["twl10p", "twl_10p", "twl10", "twl_p10", "p10_twl", "twl_e10", "e10_twl"], "TWL10p");
-            const twl90Idx = findRequiredIdx(normalizedHeaders, ["twl90p", "twl_90p", "twl90", "twl_p90", "p90_twl", "twl_e90", "e90_twl"], "TWL90p");
-
-            const rows = {
-              mean: [],
-              lowEnd: [],
-              highEnd: [],
-            };
-
-            for (let lineIndex = 1; lineIndex < lines.length; lineIndex++) {
-              const columns = splitCsv(lines[lineIndex]);
-              const timeUtc = normalizeTime(columns[timeIdx]);
-              if (!timeUtc) continue;
-
-              const tide = tideIdx >= 0 ? cleanWaterLevel(columns[tideIdx]) : null;
-              const surge = surgeIdx >= 0 ? cleanWaterLevel(columns[surgeIdx]) : null;
-
-              const mean = cleanWaterLevel(columns[twlIdx]);
-              const low = cleanWaterLevel(columns[twl90Idx]);
-              const high = cleanWaterLevel(columns[twl10Idx]);
-
-              if (mean !== null) {
-                rows.mean.push(makeHour(rows.mean.length, timeUtc, mean, tide, surge, "mean", "mean", "Mean", headers[twlIdx]));
-              }
-
-              if (low !== null) {
-                rows.lowEnd.push(makeHour(rows.lowEnd.length, timeUtc, low, null, null, "lowEnd", "e90", "90p / e90", headers[twl90Idx]));
-              }
-
-              if (high !== null) {
-                rows.highEnd.push(makeHour(rows.highEnd.length, timeUtc, high, null, null, "highEnd", "e10", "10p / e10", headers[twl10Idx]));
-              }
-            }
-
-            console.log(`Valid rows after missing-value filtering: mean=${rows.mean.length}, lowEnd=${rows.lowEnd.length}, highEnd=${rows.highEnd.length}`);
-            return rows;
-          }
-
-          function alignAndTrimProducts(parsed, forecastStart, forecastHours) {
-            const startMs = forecastStart.getTime();
-            const endMs = startMs + forecastHours * 3600 * 1000;
-
-            const meanByTime = new Map(parsed.mean.map((row) => [row.timeUtc, row]));
-            const lowByTime = new Map(parsed.lowEnd.map((row) => [row.timeUtc, row]));
-            const highByTime = new Map(parsed.highEnd.map((row) => [row.timeUtc, row]));
-
-            const alignedTimes = [...meanByTime.keys()]
-              .filter((time) => lowByTime.has(time) && highByTime.has(time))
-              .sort((a, b) => Date.parse(a) - Date.parse(b));
-
-            const forecastTimes = alignedTimes
-              .filter((time) => {
-                const ms = Date.parse(time);
-                return ms >= startMs && ms <= endMs;
-              })
-              .slice(0, forecastHours + 1);
-
-            if (forecastTimes.length < 12) {
-              throw new Error(`only ${forecastTimes.length} usable forecast rows at/after ${forecastStart.toISOString()}`);
-            }
-
-            const output = {
-              mean: [],
-              lowEnd: [],
-              highEnd: [],
-            };
-
-            for (const time of forecastTimes) {
-              output.mean.push({ ...meanByTime.get(time), hourIndex: output.mean.length });
-              output.lowEnd.push({ ...lowByTime.get(time), hourIndex: output.lowEnd.length });
-              output.highEnd.push({ ...highByTime.get(time), hourIndex: output.highEnd.length });
-            }
-
-            console.log(`Aligned rows before forecast-only filter: ${alignedTimes.length}`);
-            console.log(`Forecast-only rows kept: ${forecastTimes.length}`);
-            console.log(`Forecast starts at: ${forecastTimes[0]}`);
-            console.log(`Forecast ends at: ${forecastTimes[forecastTimes.length - 1]}`);
-
-            return output;
-          }
-
-          function makeHour(hourIndex, timeUtc, twlMllw, tideMllw, surgeFt, scenario, product, percentile, sourceColumn) {
-            const mllw = round2(twlMllw);
-            const navd88 = round2(twlMllw + CFG.navd88Offset);
-            const matched = stageKey(navd88);
-
-            return {
-              hourIndex,
-              timeUtc,
-              scenario,
-              product,
-              percentile,
-              rawPetssValue: round3(twlMllw),
-              rawPetssScale: 1.0,
-              sourceStageFt: navd88,
-              sourceDatum: "NAVD88",
-              navd88StageFt: navd88,
-              mllwStageFt: mllw,
-              twlMllwFt: mllw,
-              tideMllwFt: Number.isFinite(tideMllw) ? round3(tideMllw) : null,
-              surgeFt: Number.isFinite(surgeFt) ? round3(surgeFt) : null,
-              srcTime: compactUtcTime(timeUtc),
-              twlSource: `PETSS station CSV ${sourceColumn}`,
-              matchedStageKey: matched.key,
-              wasClamped: matched.wasClamped,
-            };
-          }
-
-          function validateProducts(products, forecastStart) {
-            for (const key of ["mean", "lowEnd", "highEnd"]) {
-              const rows = products[key];
-
-              if (!Array.isArray(rows) || rows.length < 12) {
-                throw new Error(`${key} has too few rows`);
-              }
-
-              for (const row of rows) {
-                if (Date.parse(row.timeUtc) < forecastStart.getTime()) {
-                  throw new Error(`${key} contains pre-forecast row ${row.timeUtc}`);
-                }
-
-                for (const field of ["rawPetssValue", "mllwStageFt", "navd88StageFt", "twlMllwFt"]) {
-                  if (!Number.isFinite(row[field]) || Math.abs(row[field]) >= 9000) {
-                    throw new Error(`${key} contains invalid ${field} at ${row.timeUtc}: ${row[field]}`);
-                  }
-                }
-
-                if (row.navd88StageFt < CFG.layer.min - 5 || row.navd88StageFt > CFG.layer.max + 5) {
-                  throw new Error(`${key} has out-of-range NAVD88 stage ${row.navd88StageFt} at ${row.timeUtc}`);
-                }
-              }
-            }
-
-            if (signature(products.lowEnd) === signature(products.mean)) {
-              throw new Error("lowEnd/e90 equals mean; refusing fake uncertainty");
-            }
-
-            if (signature(products.highEnd) === signature(products.mean)) {
-              throw new Error("highEnd/e10 equals mean; refusing fake uncertainty");
-            }
-
-            console.log("Validation passed.");
-          }
-
-          function buildOutputJson(cycle, products, issuedUtc) {
-            const definitions = {
-              mean: {
-                label: "Mean",
-                percentile: "Mean",
-                product: "mean",
-                note: "Direct PETSS station CSV TWL.",
+          python - <<'PY'
+          import csv
+          import io
+          import json
+          import math
+          import re
+          import tarfile
+          import urllib.request
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+
+          TOWN_NAME = "Ventnor City"
+          IS_SPLIT = False
+          DEFAULT_ZONE_ID = "default"
+          ZONES = [
+            {
+              "id": "default",
+              "zoneName": "Ventnor City",
+              "label": "Ventnor City",
+              "gaugeName": "Margate",
+              "petssGaugeId": "8534836",
+              "usgsGaugeId": "01411330",
+              "noaaGaugeId": "8534720",
+              "observedSource": "usgs",
+              "navd88OffsetFromMllwFt": -2.39,
+              "thresholdsMllw": {
+                "minorLow": 5.6,
+                "moderateLow": 6.6,
+                "majorLow": 7.6
               },
-              lowEnd: {
-                label: "Low End",
-                percentile: "90p / e90",
-                product: "e90",
-                note: "Direct PETSS station CSV TWL90p.",
-              },
-              highEnd: {
-                label: "High End",
-                percentile: "10p / e10",
-                product: "e10",
-                note: "Direct PETSS station CSV TWL10p.",
-              },
-            };
-
-            const forecastOptions = {};
-            const productMeta = {};
-            const forecasts = {};
-
-            for (const key of ["mean", "lowEnd", "highEnd"]) {
-              const definition = definitions[key];
-              const hours = products[key];
-
-              forecastOptions[key] = {
-                label: definition.label,
-                percentile: definition.percentile,
-                product: definition.product,
-              };
-
-              productMeta[key] = {
-                label: definition.label,
-                percentile: definition.percentile,
-                product: definition.product,
-                sourceUrl: cycle.sourceUrl,
-                sourceMember: `${CFG.stid}.csv`,
-                petssCycleUtc: cycle.cycleUtc,
-                forecastStartUtc: cycle.forecastStartUtc,
-                forecastEndUtc: cycle.forecastEndUtc,
-                rawRowCount: hours.length,
-                forecastMllwMin: minOf(hours, "mllwStageFt"),
-                forecastMllwMax: maxOf(hours, "mllwStageFt"),
-                forecastNavd88Min: minOf(hours, "navd88StageFt"),
-                forecastNavd88Max: maxOf(hours, "navd88StageFt"),
-                note: definition.note,
-              };
-
-              forecasts[key] = {
-                label: definition.label,
-                percentile: definition.percentile,
-                product: definition.product,
-                hours,
-              };
-            }
-
-            return {
-              stationId: CFG.stid,
-              stationName: CFG.stationName,
-              issuedUtc,
-              petssCycleUtc: cycle.cycleUtc,
-              forecastStartUtc: cycle.forecastStartUtc,
-              forecastEndUtc: cycle.forecastEndUtc,
-              sourceUrl: cycle.sourceUrl,
-              sourceMember: `${CFG.stid}.csv`,
-              sourceType: "NOMADS_PETSS_FORECAST_ONLY_station_csv_TWL_TWL10p_TWL90p",
-              sourceDatum: "MLLW",
-              mapDatum: "NAVD88",
-              rawPetssScale: 1.0,
-              navd88OffsetFromMllwFt: CFG.navd88Offset,
-              twlFormula: "navd88StageFt = twlMllwFt + navd88OffsetFromMllwFt.",
-              thresholdsMLLW: CFG.thresholdsMLLW,
-              thresholdsNAVD88: Object.fromEntries(
-                Object.entries(CFG.thresholdsMLLW).map(([key, value]) => [key, round2(value + CFG.navd88Offset)])
-              ),
-              layerStageRangeNAVD88: CFG.layer,
-              forecastOptions,
-              products: productMeta,
-              forecasts,
-
-              // Backward compatibility for older index.html code that expects root-level hours.
-              hours: forecasts.mean.hours,
-            };
-          }
-
-          function validateSerializedJson(text) {
-            if (/\b9999(?:\.0+)?\b/.test(text)) {
-              throw new Error("refusing to publish forecast.json because it contains 9999 sentinel values");
-            }
-
-            const json = JSON.parse(text);
-
-            for (const key of ["mean", "lowEnd", "highEnd"]) {
-              const rows = json.forecasts?.[key]?.hours;
-              if (!Array.isArray(rows) || rows.length < 12) {
-                throw new Error(`serialized JSON missing usable ${key} rows`);
+              "thresholdsNavd88": {
+                "minorLow": 3.21,
+                "moderateLow": 4.21,
+                "majorLow": 5.21
               }
             }
+          ]
+          OUT_PATH = Path("forecast.json")
+          FORECAST_HOURS = 84
+          MIN_LAYER_STAGE = -2.0
+          MAX_LAYER_STAGE = 14.0
+          LAYER_INCREMENT = 0.1
+          CYCLES_NEWEST_FIRST = (18, 12, 6, 0)
+          DAYS_BACK_TO_TRY = 5
+
+          HEADER_ALIASES = {
+              "time": ["time", "valid", "validtime", "valid_time", "datetime", "date_time", "forecast_time", "src_time", "srctime"],
+              "twl": ["twl", "twl_ft", "twl_mllw", "twl_mllw_ft", "stormtide", "storm_tide", "total_water_level", "water_level"],
+              "twl10": ["twl10p", "twl_10p", "twl10", "twl_p10", "p10_twl", "twl_e10", "e10_twl"],
+              "twl90": ["twl90p", "twl_90p", "twl90", "twl_p90", "p90_twl", "twl_e90", "e90_twl"],
+              "tide": ["tide", "tide_ft", "tide_mllw", "tide_mllw_ft"],
+              "surge": ["surge", "surge_ft", "stormsurge", "storm_surge"],
           }
 
-          function get(url, redirects = 0) {
-            return new Promise((resolve, reject) => {
-              https
-                .get(url, { headers: { "User-Agent": "shorelysafe-petss-updater" } }, (res) => {
-                  if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects < 5) {
-                    res.resume();
-                    resolve(get(new URL(res.headers.location, url).toString(), redirects + 1));
-                    return;
-                  }
+          def fetch_bytes(url):
+              req = urllib.request.Request(url, headers={"User-Agent": f"{TOWN_NAME}-floodmapper/1.0"})
+              with urllib.request.urlopen(req, timeout=180) as resp:
+                  return resp.read()
 
-                  if (res.statusCode !== 200) {
-                    res.resume();
-                    reject(new Error(`HTTP ${res.statusCode} for ${url}`));
-                    return;
-                  }
+          def petss_station_csv_url(cycle):
+              return f"https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.{cycle['ymd']}/petss.t{cycle['hh']:02d}z.csv.tar.gz"
 
-                  const chunks = [];
-                  res.on("data", (chunk) => chunks.push(chunk));
-                  res.on("end", () => resolve(Buffer.concat(chunks)));
-                })
-                .on("error", reject);
-            });
-          }
+          def recent_cycles(now):
+              cycles = []
+              for days_back in range(DAYS_BACK_TO_TRY + 1):
+                  day = datetime(now.year, now.month, now.day, tzinfo=timezone.utc) - timedelta(days=days_back)
+                  ymd = day.strftime("%Y%m%d")
+                  for hour in CYCLES_NEWEST_FIRST:
+                      cycle_dt = day.replace(hour=hour)
+                      if cycle_dt <= now + timedelta(minutes=30):
+                          cycles.append({"ymd": ymd, "hh": hour, "cycleUtc": cycle_dt})
+              return cycles
 
-          async function download(url, file) {
-            const data = await get(url);
-            fs.writeFileSync(file, data);
-          }
+          def extract_station_csv(url, station_id):
+              raw = fetch_bytes(url)
+              with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tf:
+                  members = [m for m in tf.getmembers() if m.isfile()]
+                  pattern = re.compile(rf"(^|/){re.escape(str(station_id))}\.csv$", re.I)
+                  match = next((m for m in members if pattern.search(m.name)), None)
+                  if not match:
+                      raise RuntimeError(f"station CSV {station_id}.csv not found")
+                  extracted = tf.extractfile(match)
+                  if extracted is None:
+                      raise RuntimeError(f"could not extract {match.name}")
+                  return extracted.read().decode("utf-8", errors="replace"), match.name
 
-          function splitCsv(line) {
-            const output = [];
-            let current = "";
-            let inQuotes = false;
+          def norm_header(value):
+              return re.sub(r"[^a-z0-9_]", "", str(value or "").strip().lower().replace(" ", ""))
 
-            for (let i = 0; i < line.length; i++) {
-              const ch = line[i];
+          def find_idx(headers, aliases, required=True):
+              normalized = [norm_header(h) for h in headers]
+              for alias in aliases:
+                  if alias in normalized:
+                      return normalized.index(alias)
+              if required:
+                  raise RuntimeError(f"missing required column from headers: {headers}")
+              return -1
 
-              if (ch === '"') {
-                if (inQuotes && line[i + 1] === '"') {
-                  current += '"';
-                  i++;
-                } else {
-                  inQuotes = !inQuotes;
-                }
-              } else if (ch === "," && !inQuotes) {
-                output.push(current);
-                current = "";
-              } else {
-                current += ch;
+          def normalize_time(value):
+              raw = str(value or "").strip()
+              if re.fullmatch(r"\d{10}", raw):
+                  return datetime(int(raw[:4]), int(raw[4:6]), int(raw[6:8]), int(raw[8:10]), tzinfo=timezone.utc)
+              if re.fullmatch(r"\d{12}", raw):
+                  return datetime(int(raw[:4]), int(raw[4:6]), int(raw[6:8]), int(raw[8:10]), int(raw[10:12]), tzinfo=timezone.utc)
+              text = raw if raw.endswith("Z") or "+" in raw[-6:] else raw + "Z"
+              try:
+                  return datetime.fromisoformat(text.replace("Z", "+00:00")).astimezone(timezone.utc)
+              except Exception:
+                  return None
+
+          def clean_level(value):
+              try:
+                  n = float(str(value).strip())
+              except Exception:
+                  return None
+              if not math.isfinite(n) or abs(n) >= 9000 or n < -50 or n > 50:
+                  return None
+              return n
+
+          def round2(value):
+              return round(float(value) + 1e-9, 2)
+
+          def round3(value):
+              return round(float(value) + 1e-9, 3)
+
+          def stage_key(navd88):
+              clamped = max(MIN_LAYER_STAGE, min(MAX_LAYER_STAGE, navd88))
+              return f"{round(clamped / LAYER_INCREMENT) * LAYER_INCREMENT:.1f}", navd88 < MIN_LAYER_STAGE or navd88 > MAX_LAYER_STAGE
+
+          def parse_station_csv(text, zone):
+              reader = csv.reader(io.StringIO(text))
+              rows = list(reader)
+              if len(rows) < 2:
+                  raise RuntimeError("station CSV was empty")
+              headers = rows[0]
+              time_idx = find_idx(headers, HEADER_ALIASES["time"])
+              twl_idx = find_idx(headers, HEADER_ALIASES["twl"])
+              twl10_idx = find_idx(headers, HEADER_ALIASES["twl10"])
+              twl90_idx = find_idx(headers, HEADER_ALIASES["twl90"])
+              tide_idx = find_idx(headers, HEADER_ALIASES["tide"], required=False)
+              surge_idx = find_idx(headers, HEADER_ALIASES["surge"], required=False)
+              out = {"mean": [], "lowEnd": [], "highEnd": []}
+              for columns in rows[1:]:
+                  if len(columns) <= max(time_idx, twl_idx, twl10_idx, twl90_idx):
+                      continue
+                  dt = normalize_time(columns[time_idx])
+                  if not dt:
+                      continue
+                  time_utc = dt.isoformat().replace("+00:00", "Z")
+                  tide = clean_level(columns[tide_idx]) if tide_idx >= 0 and tide_idx < len(columns) else None
+                  surge = clean_level(columns[surge_idx]) if surge_idx >= 0 and surge_idx < len(columns) else None
+                  for key, idx, label, product, percentile in [
+                      ("mean", twl_idx, "Mean", "mean", "Mean"),
+                      ("lowEnd", twl90_idx, "Low End", "e90", "90p / e90"),
+                      ("highEnd", twl10_idx, "High End", "e10", "10p / e10"),
+                  ]:
+                      mllw = clean_level(columns[idx])
+                      if mllw is None:
+                          continue
+                      navd88 = round2(mllw + zone["navd88OffsetFromMllwFt"])
+                      matched, clamped = stage_key(navd88)
+                      out[key].append({
+                          "timeUtc": time_utc,
+                          "scenario": key,
+                          "product": product,
+                          "percentile": percentile,
+                          "rawPetssValue": round3(mllw),
+                          "rawPetssScale": 1.0,
+                          "sourceStageFt": navd88,
+                          "sourceDatum": "NAVD88",
+                          "navd88StageFt": navd88,
+                          "mllwStageFt": round2(mllw),
+                          "twlMllwFt": round2(mllw),
+                          "tideMllwFt": round3(tide) if tide is not None else None,
+                          "surgeFt": round3(surge) if surge is not None else None,
+                          "matchedStageKey": matched,
+                          "wasClamped": clamped,
+                      })
+              return out
+
+          def align_products(products, forecast_start):
+              by_key = {key: {row["timeUtc"]: row for row in rows} for key, rows in products.items()}
+              common = sorted(set(by_key["mean"]) & set(by_key["lowEnd"]) & set(by_key["highEnd"]))
+              kept = [t for t in common if datetime.fromisoformat(t.replace("Z", "+00:00")) >= forecast_start][: FORECAST_HOURS + 1]
+              if len(kept) < 12:
+                  raise RuntimeError(f"only {len(kept)} usable forecast rows")
+              output = {"mean": [], "lowEnd": [], "highEnd": []}
+              for key in output:
+                  for i, time_utc in enumerate(kept):
+                      row = dict(by_key[key][time_utc])
+                      row["hourIndex"] = i
+                      output[key].append(row)
+              return output
+
+          def thresholds_navd_from_mllw(zone):
+              return {key: round2(value + zone["navd88OffsetFromMllwFt"]) for key, value in zone["thresholdsMllw"].items()}
+
+          def build_zone_forecast(zone, now_utc):
+              last_error = None
+              for cycle in recent_cycles(now_utc):
+                  try:
+                      url = petss_station_csv_url(cycle)
+                      print(f"Trying {zone['id']} {zone['petssGaugeId']} {url}")
+                      text, member = extract_station_csv(url, zone["petssGaugeId"])
+                      parsed = parse_station_csv(text, zone)
+                      start = max(cycle["cycleUtc"], now_utc)
+                      aligned = align_products(parsed, start)
+                      return payload_for_zone(zone, cycle, url, member, aligned, now_utc)
+                  except Exception as exc:
+                      last_error = exc
+                      print(f"Rejected {zone['id']} cycle: {exc}")
+              raise RuntimeError(f"No usable PETSS forecast for {zone['id']} {zone['petssGaugeId']}: {last_error}")
+
+          def payload_for_zone(zone, cycle, source_url, member, products, issued_dt):
+              definitions = {
+                  "mean": ("Mean", "Mean", "mean"),
+                  "lowEnd": ("Low End", "90p / e90", "e90"),
+                  "highEnd": ("High End", "10p / e10", "e10"),
               }
-            }
+              forecasts = {}
+              product_meta = {}
+              options = {}
+              for key, (label, percentile, product) in definitions.items():
+                  hours = products[key]
+                  forecasts[key] = {"label": label, "percentile": percentile, "product": product, "hours": hours}
+                  options[key] = {"label": label, "percentile": percentile, "product": product}
+                  product_meta[key] = {
+                      "label": label,
+                      "percentile": percentile,
+                      "product": product,
+                      "sourceUrl": source_url,
+                      "sourceMember": member,
+                      "petssCycleUtc": cycle["cycleUtc"].isoformat().replace("+00:00", "Z"),
+                      "rawRowCount": len(hours),
+                      "forecastMllwMin": round2(min(h["mllwStageFt"] for h in hours)),
+                      "forecastMllwMax": round2(max(h["mllwStageFt"] for h in hours)),
+                      "forecastNavd88Min": round2(min(h["navd88StageFt"] for h in hours)),
+                      "forecastNavd88Max": round2(max(h["navd88StageFt"] for h in hours)),
+                  }
+              mean_hours = forecasts["mean"]["hours"]
+              return {
+                  "zoneId": zone["id"],
+                  "zoneName": zone["zoneName"],
+                  "gaugeName": zone["gaugeName"],
+                  "stationId": zone["petssGaugeId"],
+                  "stationName": f"{zone['gaugeName'].upper()}, NJ",
+                  "noaaGaugeId": zone["noaaGaugeId"],
+                  "usgsGaugeId": zone["usgsGaugeId"],
+                  "issuedUtc": issued_dt.isoformat().replace("+00:00", "Z"),
+                  "petssCycleUtc": cycle["cycleUtc"].isoformat().replace("+00:00", "Z"),
+                  "forecastStartUtc": mean_hours[0]["timeUtc"],
+                  "forecastEndUtc": mean_hours[-1]["timeUtc"],
+                  "sourceUrl": source_url,
+                  "sourceMember": member,
+                  "sourceType": "NOMADS_PETSS_FORECAST_ONLY_station_csv_TWL_TWL10p_TWL90p",
+                  "sourceDatum": "MLLW",
+                  "mapDatum": "NAVD88",
+                  "rawPetssScale": 1.0,
+                  "navd88OffsetFromMllwFt": zone["navd88OffsetFromMllwFt"],
+                  "twlFormula": "navd88StageFt = twlMllwFt + navd88OffsetFromMllwFt.",
+                  "thresholdsMLLW": zone["thresholdsMllw"],
+                  "thresholdsNAVD88": thresholds_navd_from_mllw(zone),
+                  "layerStageRangeNAVD88": {"min": MIN_LAYER_STAGE, "max": MAX_LAYER_STAGE, "increment": LAYER_INCREMENT},
+                  "forecastOptions": options,
+                  "products": product_meta,
+                  "forecasts": forecasts,
+                  "hours": mean_hours,
+              }
 
-            output.push(current);
-            return output;
-          }
+          def main():
+              now_utc = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+              if IS_SPLIT:
+                  output = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-forecast-v1", "issuedUtc": now_utc.isoformat().replace("+00:00", "Z"), "zones": {}}
+                  for zone in ZONES:
+                      forecast = build_zone_forecast(zone, now_utc)
+                      output["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "forecast": forecast}
+              else:
+                  output = build_zone_forecast(ZONES[0], now_utc)
+                  output.pop("zoneId", None)
+                  output.pop("zoneName", None)
+              OUT_PATH.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
+              print("Wrote", OUT_PATH)
 
-          function normalizeHeader(header) {
-            return String(header || "")
-              .trim()
-              .toLowerCase()
-              .replace(/\s+/g, "")
-              .replace(/[^a-z0-9_]/g, "");
-          }
+          if __name__ == "__main__":
+              main()
+          PY
 
-          function normalizeTime(value) {
-            const raw = String(value || "").trim();
-
-            if (/^\d{10}$/.test(raw)) {
-              return new Date(Date.UTC(+raw.slice(0, 4), +raw.slice(4, 6) - 1, +raw.slice(6, 8), +raw.slice(8, 10))).toISOString();
-            }
-
-            if (/^\d{12}$/.test(raw)) {
-              return new Date(Date.UTC(+raw.slice(0, 4), +raw.slice(4, 6) - 1, +raw.slice(6, 8), +raw.slice(8, 10), +raw.slice(10, 12))).toISOString();
-            }
-
-            const parsed = new Date(raw.endsWith("Z") ? raw : `${raw}Z`);
-            return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
-          }
-
-          function cleanWaterLevel(value) {
-            const parsed = Number(String(value || "").trim());
-
-            if (!Number.isFinite(parsed)) return null;
-            if (Math.abs(parsed) >= 9000) return null;
-            if (parsed < -50 || parsed > 50) return null;
-
-            return parsed;
-          }
-
-          function floorToHour(date) {
-            return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours()));
-          }
-
-          function stageKey(navd88) {
-            const clamped = Math.max(CFG.layer.min, Math.min(CFG.layer.max, navd88));
-
-            return {
-              key: (Math.round(clamped / CFG.layer.increment) * CFG.layer.increment).toFixed(1),
-              wasClamped: navd88 < CFG.layer.min || navd88 > CFG.layer.max,
-            };
-          }
-
-          function compactUtcTime(iso) {
-            const date = new Date(iso);
-            return `${date.getUTCFullYear()}${pad2(date.getUTCMonth() + 1)}${pad2(date.getUTCDate())}${pad2(date.getUTCHours())}${pad2(date.getUTCMinutes())}`;
-          }
-
-          function findIdx(values, names) {
-            for (const name of names) {
-              const idx = values.indexOf(name);
-              if (idx >= 0) return idx;
-            }
-            return -1;
-          }
-
-          function findRequiredIdx(values, names, label) {
-            const idx = findIdx(values, names);
-
-            if (idx < 0) {
-              throw new Error(`CSV is missing required ${label} column. Headers: ${values.join(",")}`);
-            }
-
-            return idx;
-          }
-
-          function signature(hours) {
-            return hours.slice(0, 120).map((hour) => `${hour.timeUtc}:${hour.twlMllwFt}`).join("|");
-          }
-
-          function minOf(rows, key) {
-            return round2(Math.min(...rows.map((row) => row[key]).filter(Number.isFinite)));
-          }
-
-          function maxOf(rows, key) {
-            return round2(Math.max(...rows.map((row) => row[key]).filter(Number.isFinite)));
-          }
-
-          function round2(value) {
-            return Math.round(Number(value) * 100) / 100;
-          }
-
-          function round3(value) {
-            return Math.round(Number(value) * 1000) / 1000;
-          }
-
-          function pad2(value) {
-            return String(value).padStart(2, "0");
-          }
-
-          function escapeRegex(value) {
-            return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-          }
-
-          function getEnv(name, fallback) {
-            const value = process.env[name];
-            return value === undefined || value === null || String(value).trim() === "" ? fallback : String(value).trim();
-          }
-
-          function numberEnv(name, fallback) {
-            const value = Number(getEnv(name, String(fallback)));
-            if (!Number.isFinite(value)) {
-              throw new Error(`${name} must be numeric`);
-            }
-            return value;
-          }
-
-          function positiveInt(raw, fallback) {
-            const value = Number(raw);
-            return Number.isInteger(value) && value > 0 ? value : fallback;
-          }
-          NODE
-
-          node /tmp/update_petss_forecast.js
-
-      - name: Validate forecast output before commit
+      - name: Commit updated forecast
         shell: bash
         run: |
-          set -euo pipefail
-
-          test -s "$FORECAST_OUTPUT_PATH"
-
-          node -e '
-            const fs = require("fs");
-            const file = process.env.FORECAST_OUTPUT_PATH || "forecast.json";
-            const json = JSON.parse(fs.readFileSync(file, "utf8"));
-
-            for (const key of ["mean", "lowEnd", "highEnd"]) {
-              const rows = json.forecasts?.[key]?.hours;
-
-              if (!Array.isArray(rows) || rows.length < 12) {
-                throw new Error(`Missing or short forecast array: ${key}`);
-              }
-
-              for (const row of rows) {
-                for (const field of ["twlMllwFt", "navd88StageFt", "rawPetssValue"]) {
-                  if (!Number.isFinite(row[field]) || Math.abs(row[field]) >= 9000) {
-                    throw new Error(`Invalid ${key}.${field}: ${row[field]}`);
-                  }
-                }
-              }
-            }
-
-            console.log(`Validated ${file}: ${["mean", "lowEnd", "highEnd"].map((key) => `${key}=${json.forecasts[key].hours.length}`).join(", ")}`);
-          '
-
-      - name: Commit & push if changed
-        shell: bash
-        run: |
-          set -euo pipefail
-
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add "$FORECAST_OUTPUT_PATH"
-
-          if git diff --cached --quiet; then
-            echo "No forecast changes."
-            exit 0
-          fi
-
-          git commit -m "Update PETSS forecast"
-          git pull --rebase
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add forecast.json
+          git diff --staged --quiet || git commit -m "Update Ventnor City forecast"
           git push
