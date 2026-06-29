@@ -1,4 +1,4 @@
-name: Run observed update
+name: Trigger observed update now
 
 on:
   push:
@@ -11,10 +11,10 @@ permissions:
   contents: read
 
 jobs:
-  run-observed:
+  trigger-observed:
     runs-on: ubuntu-latest
     steps:
-      - name: Start observed workflow
+      - name: Dispatch existing observed workflow
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-observed.yml --ref main

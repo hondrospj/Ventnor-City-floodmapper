@@ -1,0 +1,20 @@
+name: Trigger forecast update now
+
+on:
+  push:
+    paths:
+      - .github/workflows/trigger-forecast-now.yml
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger-forecast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch existing forecast workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-forecast.yml --ref main
