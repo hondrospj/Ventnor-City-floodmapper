@@ -1,6 +1,9 @@
 name: Update Ventnor City forecast
 
 on:
+  push:
+    paths:
+      - .github/workflows/update-forecast.yml
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
