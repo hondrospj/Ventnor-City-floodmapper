@@ -16393,7 +16393,16 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       const picker = elements.datePicker;
       if (!picker || picker.disabled) return;
       const parsed = parseExportDateText(elements.dateText?.value);
-      if (parsed) picker.value = parsed.isoDate;
+      const current = getRangeInputDate(elements.canonical?.id || "");
+      const currentIso = current ? formatNyLocalIso(current).slice(0, 10) : "";
+      picker.value = parsed?.isoDate || currentIso || picker.value || "";
+      const rect = elements.dateText?.getBoundingClientRect?.();
+      if (rect && rect.width && rect.height) {
+        picker.style.left = `${Math.max(0, Math.round(rect.left))}px`;
+        picker.style.top = `${Math.max(0, Math.round(rect.top))}px`;
+        picker.style.width = `${Math.max(44, Math.round(rect.width))}px`;
+        picker.style.height = `${Math.max(44, Math.round(rect.height))}px`;
+      }
       try {
         if (typeof picker.showPicker === "function") {
           picker.showPicker();
@@ -29033,7 +29042,7 @@ html body #timelineDock #hourSlider{
 
 @media (pointer:coarse){
   .export-calendar-button{
-    pointer-events:none;
+    pointer-events:auto;
   }
 
   .export-native-date-picker{
@@ -29045,7 +29054,8 @@ html body #timelineDock #hourSlider{
     height:100%;
     opacity:.001;
     cursor:pointer;
-    z-index:3;
+    pointer-events:none;
+    z-index:1;
   }
 }
 
