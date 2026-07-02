@@ -19435,6 +19435,13 @@ function formatSelectedObservedDate(dateStr) {
       modal.classList.toggle("open", !!open);
       modal.setAttribute("aria-hidden", open ? "false" : "true");
       document.body.classList.toggle("top-tides-modal-open", !!open);
+      if (window.ShorelyCompactMobileLayout && typeof window.ShorelyCompactMobileLayout.apply === "function") {
+        window.ShorelyCompactMobileLayout.apply();
+      }
+      if (window.CapeMayMobileFollowup && typeof window.CapeMayMobileFollowup.apply === "function") {
+        window.setTimeout(window.CapeMayMobileFollowup.apply, 0);
+        window.setTimeout(window.CapeMayMobileFollowup.apply, 120);
+      }
       if (open) document.getElementById("topTidesModalCloseBtn")?.focus();
     }
 
@@ -29509,5 +29516,836 @@ main().catch(err => {
   toast(err.message);
 });
 </script>
+<style id="shorely-mobile-slider-polish">
+@media (max-width:900px), (max-height:560px){
+  :root{
+    --shorely-mobile-timeline-height:94px !important;
+    --pj-request-timeline-height:94px !important;
+    --shorely-mobile-drawer-bottom:98px !important;
+    --shorely-mobile-pill-bg:rgba(11,18,32,.97);
+    --shorely-mobile-pill-border:rgba(191,219,254,.38);
+    --shorely-mobile-pill-shadow:0 14px 28px rgba(0,0,0,.34);
+  }
+
+  html body.mobile-optimized #legendDock,
+  html body.mobile-optimized #legendDock.legend-card,
+  html body.mobile-optimized #mobileControlsToggle,
+  html body.mobile-optimized #shorelyLegendOriginPill,
+  html body.mobile-optimized #timelineBubble,
+  html body.mobile-optimized #timelineBubble .timeline-bubble-stage,
+  html body.mobile-optimized .leaflet-top.leaflet-right .leaflet-control-zoom{
+    background:var(--shorely-mobile-pill-bg) !important;
+    border-color:var(--shorely-mobile-pill-border) !important;
+    box-shadow:var(--shorely-mobile-pill-shadow) !important;
+  }
+
+  html body.mobile-optimized .leaflet-control-zoom a{
+    background:var(--shorely-mobile-pill-bg) !important;
+  }
+
+  html body.mobile-optimized.mobile-legend-open #legendDock,
+  html body.mobile-optimized.mobile-legend-open #legendDock.legend-card{
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    width:min(340px, calc(100vw - 18px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))) !important;
+    max-width:calc(100vw - 18px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)) !important;
+    max-height:min(27dvh, 144px) !important;
+    padding:5px 9px 6px !important;
+  }
+
+  html body.mobile-optimized.mobile-legend-open #legendDock .legend-list{ gap:3px 10px !important; }
+
+  html body.mobile-optimized.mobile-legend-open #legendDock .legend-row,
+  html body.mobile-optimized.mobile-legend-open #legendDock .legend-row:nth-child(n){
+    grid-template-columns:8px minmax(0, 1fr) !important;
+    min-height:12px !important;
+    font-size:8.8px !important;
+    line-height:1 !important;
+  }
+
+  html body.mobile-optimized.mobile-legend-open #legendDock .legend-label{
+    font-size:8.8px !important;
+    line-height:1.02 !important;
+  }
+
+  html body.mobile-optimized.mobile-legend-open #legendDock .legend-swatch{
+    width:8px !important;
+    height:8px !important;
+    border-radius:2px !important;
+  }
+
+  html body.mobile-optimized #timelineDock .timeline-top{
+    left:10px !important;
+    top:calc(50% + 3px) !important;
+    transform:translateY(-50%) !important;
+    width:36px !important;
+    height:36px !important;
+    display:grid !important;
+    place-items:center !important;
+    z-index:8 !important;
+  }
+
+  html body.mobile-optimized #timelineDock #playBtn .playTriangle{
+    border-top-width:7px !important;
+    border-bottom-width:7px !important;
+    border-left-width:11px !important;
+    margin-left:2px !important;
+  }
+
+  html body.mobile-optimized #timelineDock #playBtn .pauseIcon{
+    width:15px !important;
+    height:16px !important;
+    margin:0 !important;
+  }
+
+  html body.mobile-optimized #timelineDock #playBtn .pauseIcon::before,
+  html body.mobile-optimized #timelineDock #playBtn .pauseIcon::after{
+    top:0 !important;
+    width:4.5px !important;
+    height:16px !important;
+    border-radius:2.5px !important;
+  }
+
+  html body.mobile-optimized #timelineDock #timelineFloodKey,
+  html body.mobile-optimized #timelineDock .timeline-flood-key{
+    position:relative !important;
+    top:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    left:auto !important;
+    transform:none !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:calc(100% - 54px) !important;
+    max-width:calc(100% - 54px) !important;
+    height:11px !important;
+    min-height:11px !important;
+    max-height:11px !important;
+    margin:0 0 4px 54px !important;
+    padding:0 !important;
+    gap:clamp(5px, 2vw, 10px) !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    opacity:.96 !important;
+    z-index:7 !important;
+    font-size:0 !important;
+    line-height:1 !important;
+  }
+
+  html body.mobile-optimized #timelineDock .timeline-key-item{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex:0 1 auto !important;
+    width:auto !important;
+    min-width:0 !important;
+    gap:3px !important;
+    color:#eaf0ff !important;
+    font-size:0 !important;
+    line-height:1 !important;
+    overflow:hidden !important;
+    white-space:nowrap !important;
+  }
+
+  html body.mobile-optimized #timelineDock .timeline-key-item::after{
+    display:inline-block !important;
+    color:#eaf0ff !important;
+    font-size:8px !important;
+    font-weight:900 !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+  }
+
+  html body.mobile-optimized #timelineDock .timeline-key-item:nth-child(1)::after{ content:"None" !important; }
+  html body.mobile-optimized #timelineDock .timeline-key-item:nth-child(2)::after{ content:"Minor" !important; }
+  html body.mobile-optimized #timelineDock .timeline-key-item:nth-child(3)::after{ content:"Mod" !important; }
+  html body.mobile-optimized #timelineDock .timeline-key-item:nth-child(4)::after{ content:"Major" !important; }
+
+  html body.mobile-optimized #timelineDock .timeline-key-swatch{
+    width:7px !important;
+    min-width:7px !important;
+    height:7px !important;
+    min-height:7px !important;
+    flex:0 0 7px !important;
+    border-radius:999px !important;
+    box-shadow:0 0 0 1px rgba(255,255,255,.16) !important;
+  }
+}
+</style>
+<style id="shorely-mobile-slider-key-correction">
+@media (max-width:900px), (max-height:560px){
+  html body.mobile-optimized #shorelyMobileSliderKey{
+    position:absolute !important;
+    top:13px !important;
+    left:62px !important;
+    right:46px !important;
+    height:18px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:clamp(8px, 2.4vw, 14px) !important;
+    z-index:16 !important;
+    pointer-events:none !important;
+    overflow:hidden !important;
+    white-space:nowrap !important;
+  }
+
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-item{
+    display:inline-flex !important;
+    align-items:center !important;
+    gap:4px !important;
+    min-width:0 !important;
+    color:#eaf0ff !important;
+    font-size:9.8px !important;
+    font-weight:900 !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.35) !important;
+  }
+
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch{
+    width:10px !important;
+    min-width:10px !important;
+    height:10px !important;
+    border-radius:999px !important;
+    box-shadow:0 0 0 1px rgba(255,255,255,.16) !important;
+  }
+
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch.no{ background:#72d85d !important; }
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch.minor{ background:#d99a28 !important; }
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch.moderate{ background:#d75470 !important; }
+  html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch.major{ background:#7659d6 !important; }
+
+  @media (max-width:340px) and (orientation:portrait){
+    html body.mobile-optimized #shorelyMobileSliderKey{
+      gap:5px !important;
+    }
+
+    html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-item{
+      gap:3px !important;
+      font-size:8.6px !important;
+    }
+
+    html body.mobile-optimized #shorelyMobileSliderKey .shorely-mobile-slider-key-swatch{
+      width:8px !important;
+      min-width:8px !important;
+      height:8px !important;
+    }
+  }
+}
+</style>
+<style id="cape-may-floodmapper-followup-polish">
+:root{
+  --cape-may-pill-bg:rgba(11,18,32,.97);
+  --cape-may-pill-border:rgba(191,219,254,.38);
+  --cape-may-pill-shadow:0 14px 28px rgba(0,0,0,.34);
+}
+
+html body #mapTitleBadge,
+html body #timelineDock,
+html body #timelineBubble,
+html body #mobileControlsToggle,
+html body #shorelyLegendOriginPill,
+html body #legendDock,
+html body .panel-card,
+html body .rail-card,
+html body .legend-card,
+html body .download-modal-card,
+html body .datum-modal-card,
+html body .export-progress-card,
+html body .pill,
+html body .leaflet-control-zoom,
+html body .leaflet-control-zoom a{
+  background:var(--cape-may-pill-bg) !important;
+  border-color:var(--cape-may-pill-border) !important;
+}
+
+html body #mapTitleBadge,
+html body #timelineDock,
+html body #timelineBubble,
+html body #mobileControlsToggle,
+html body #shorelyLegendOriginPill,
+html body #legendDock,
+html body .panel-card,
+html body .rail-card,
+html body .legend-card{
+  box-shadow:var(--cape-may-pill-shadow) !important;
+}
+
+html body #mapTitleBadge #mapTitleLogo{
+  width:46px !important;
+  height:46px !important;
+  max-width:46px !important;
+  max-height:46px !important;
+  border-radius:999px !important;
+  background:#fff !important;
+  padding:2px !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.28) !important;
+}
+
+#shorelyMobileSliderHelpBtn,
+#shorelyMobileLegendHelpBtn{
+  display:none;
+}
+
+@media (max-width:900px), (max-height:560px){
+  html body.mobile-optimized #mapTitleBadge #mapTitleLogo{
+    width:34px !important;
+    height:34px !important;
+    max-width:34px !important;
+    max-height:34px !important;
+  }
+
+  html body.mobile-optimized #shorelyMobileSliderHelpBtn,
+  html body.mobile-optimized.mobile-legend-open #shorelyMobileLegendHelpBtn{
+    display:inline-grid !important;
+    place-items:center !important;
+    position:absolute !important;
+    width:26px !important;
+    height:26px !important;
+    min-width:26px !important;
+    min-height:26px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(191,219,254,.48) !important;
+    background:rgba(15,23,42,.98) !important;
+    color:#f8fafc !important;
+    box-shadow:0 10px 20px rgba(0,0,0,.34) !important;
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    z-index:40 !important;
+    cursor:pointer !important;
+    padding:0 !important;
+  }
+
+  html body.mobile-optimized #shorelyMobileSliderHelpBtn{
+    top:8px !important;
+    right:12px !important;
+  }
+
+  html body.mobile-optimized.mobile-legend-open #shorelyMobileLegendHelpBtn{
+    top:7px !important;
+    right:8px !important;
+  }
+
+  html body.mobile-optimized #shorelyRotateNotice{
+    pointer-events:none !important;
+  }
+
+  html body.mobile-optimized.shorely-phone-landscape #shorelyRotateNotice{
+    inset:auto 12px calc(var(--shorely-mobile-timeline-height, 118px) + 10px) 12px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+    background:transparent !important;
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+    z-index:18 !important;
+  }
+
+  html body.mobile-optimized #shorelyRotateNotice .shorely-rotate-dialog{
+    width:auto !important;
+    min-height:0 !important;
+    padding:7px 12px !important;
+    border-radius:999px !important;
+    font-size:12px !important;
+    line-height:1 !important;
+    box-shadow:0 8px 20px rgba(0,0,0,.28) !important;
+  }
+
+  html body.mobile-optimized #timelineDock .timeline-days,
+  html body.mobile-optimized #timelineDock #timelineDayTabs,
+  html body.mobile-optimized #timelineDock .timeline-trackRow{
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px) !important;
+    margin-left:12px !important;
+    margin-right:12px !important;
+  }
+
+  html body.mobile-optimized #timelineDock #hourSlider{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+  }
+
+  html body.mobile-optimized #mobileControlsToggle,
+  html body.mobile-optimized.mobile-controls-open #mobileControlsToggle,
+  html body.mobile-optimized.mobile-legend-open #mobileControlsToggle,
+  html body.mobile-optimized.mobile-controls-open.mobile-legend-open #mobileControlsToggle{
+    display:inline-grid !important;
+    place-items:center !important;
+    justify-content:center !important;
+    align-items:center !important;
+    text-align:center !important;
+    overflow:hidden !important;
+  }
+
+  html body.mobile-optimized #mobileControlsToggle > *{
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+  }
+
+  html body.mobile-optimized #mobileControlsToggle::before{
+    content:none !important;
+    display:none !important;
+  }
+
+  html body.mobile-optimized #mobileControlsToggle::after,
+  html body.mobile-optimized.mobile-legend-open #mobileControlsToggle::after{
+    content:"Controls \25BE" !important;
+    position:absolute !important;
+    inset:0 !important;
+    display:grid !important;
+    place-items:center !important;
+    width:auto !important;
+    height:auto !important;
+    padding:0 !important;
+    margin:0 !important;
+    transform:none !important;
+    text-align:center !important;
+    color:#fff !important;
+    font-size:11px !important;
+    font-weight:950 !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:clip !important;
+  }
+
+  html body.mobile-optimized.mobile-controls-open #mobileControlsToggle::after,
+  html body.mobile-optimized.mobile-controls-open.mobile-legend-open #mobileControlsToggle::after{
+    content:"Controls \25B4" !important;
+  }
+}
+</style>
+<script id="shorely-mobile-slider-key-correction-script">
+(function(){
+  "use strict";
+
+  var queued = false;
+  var observerStarted = false;
+
+  function isMobile(){
+    try {
+      return window.matchMedia("(max-width: 900px), (max-height: 560px)").matches;
+    } catch (e) {
+      return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 900;
+    }
+  }
+
+  function setImportant(el, prop, value){
+    if (!el) return;
+    el.style.setProperty(prop, value, "important");
+  }
+
+  function ensureSliderKey(timeline){
+    if (!timeline) return null;
+    var key = document.getElementById("shorelyMobileSliderKey");
+    if (!key) {
+      key = document.createElement("div");
+      key.id = "shorelyMobileSliderKey";
+      key.setAttribute("aria-label", "Flood stage key");
+      key.innerHTML = [
+        '<span class="shorely-mobile-slider-key-item"><span class="shorely-mobile-slider-key-swatch no"></span>None</span>',
+        '<span class="shorely-mobile-slider-key-item"><span class="shorely-mobile-slider-key-swatch minor"></span>Minor</span>',
+        '<span class="shorely-mobile-slider-key-item"><span class="shorely-mobile-slider-key-swatch moderate"></span>Moderate</span>',
+        '<span class="shorely-mobile-slider-key-item"><span class="shorely-mobile-slider-key-swatch major"></span>Major</span>'
+      ].join("");
+      timeline.appendChild(key);
+    } else if (key.parentNode !== timeline) {
+      timeline.appendChild(key);
+    }
+    return key;
+  }
+
+  function getTownConfig(){
+    try {
+      return window.TOWN_CONFIG || TOWN_CONFIG || {};
+    } catch (e) {
+      return window.TOWN_CONFIG || {};
+    }
+  }
+
+  function ft(value){
+    var n = Number(value);
+    return Number.isFinite(n) ? n.toFixed(2).replace(/\.00$/, ".0") : "--";
+  }
+
+  function upperBound(value){
+    var n = Number(value);
+    return Number.isFinite(n) ? ft(n - 0.01) : "--";
+  }
+
+  function sliderHelpBody(){
+    var cfg = getTownConfig();
+    var mllw = (cfg.thresholds && cfg.thresholds.mllw) || { minor:6.2, moderate:7.2, major:8.2 };
+    var navd = (cfg.thresholds && cfg.thresholds.navd88) || { minor:3.43, moderate:4.43, major:5.43 };
+    return [
+      "<p><strong>National Weather Service flood categories for this area.</strong></p>",
+      "<ul>",
+      "<li><strong>No Flooding:</strong> below Minor Coastal Flooding. Below " + ft(mllw.minor) + " ft MLLW / below " + ft(navd.minor) + " ft NAVD88.</li>",
+      "<li><strong>Minor Flooding:</strong> minimal or no property damage, but possibly some public threat. " + ft(mllw.minor) + " - " + upperBound(mllw.moderate) + " ft MLLW / " + ft(navd.minor) + " - " + upperBound(navd.moderate) + " ft NAVD88.</li>",
+      "<li><strong>Moderate Flooding:</strong> some inundation of structures and roads. Some evacuations of people and/or transfer of property to higher elevations. " + ft(mllw.moderate) + " - " + upperBound(mllw.major) + " ft MLLW / " + ft(navd.moderate) + " - " + upperBound(navd.major) + " ft NAVD88.</li>",
+      "<li><strong>Major Flooding:</strong> extensive inundation of structures and roads. Significant evacuations of people and/or transfer of property to higher elevations. " + ft(mllw.major) + "+ ft MLLW / " + ft(navd.major) + "+ ft NAVD88.</li>",
+      "</ul>"
+    ].join("");
+  }
+
+  function openMobileInfo(title, body){
+    if (typeof window.setInfoModalOpen === "function") {
+      window.setInfoModalOpen(true, title, body);
+      return;
+    }
+    var modal = document.getElementById("infoModal");
+    var titleEl = document.getElementById("infoModalTitle");
+    var bodyEl = document.getElementById("infoModalBody");
+    if (!modal || !titleEl || !bodyEl) return;
+    titleEl.textContent = title;
+    bodyEl.innerHTML = body;
+    modal.hidden = false;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function ensureSliderHelp(timeline){
+    if (!timeline) return null;
+    var btn = document.getElementById("shorelyMobileSliderHelpBtn");
+    if (!btn) {
+      btn = document.createElement("button");
+      btn.id = "shorelyMobileSliderHelpBtn";
+      btn.type = "button";
+      btn.textContent = "?";
+      btn.setAttribute("aria-label", "Explain flood stage ranges");
+      btn.setAttribute("title", "Explain flood stage ranges");
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        openMobileInfo("Flood Stage Key", sliderHelpBody());
+      });
+      timeline.appendChild(btn);
+    } else if (btn.parentNode !== timeline) {
+      timeline.appendChild(btn);
+    }
+    return btn;
+  }
+
+  function ensureMobileLegendHelp(legend){
+    if (!legend) return null;
+    var btn = document.getElementById("shorelyMobileLegendHelpBtn");
+    if (!btn) {
+      btn = document.createElement("button");
+      btn.id = "shorelyMobileLegendHelpBtn";
+      btn.type = "button";
+      btn.textContent = "?";
+      btn.setAttribute("aria-label", "Explain current map key");
+      btn.setAttribute("title", "Explain current map key");
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var desktopHelp = document.getElementById("legendHelpBtn");
+        if (desktopHelp && desktopHelp !== btn) {
+          desktopHelp.click();
+        } else {
+          openMobileInfo("Flood Stages Key", sliderHelpBody());
+        }
+      });
+      legend.appendChild(btn);
+    } else if (btn.parentNode !== legend) {
+      legend.appendChild(btn);
+    }
+    return btn;
+  }
+
+  function compactLegend(legend){
+    if (!legend || !document.body.classList.contains("mobile-legend-open")) return;
+    setImportant(legend, "left", "50%");
+    setImportant(legend, "right", "auto");
+    setImportant(legend, "transform", "translateX(-50%)");
+    setImportant(legend, "width", "min(344px, calc(100vw - 18px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)))");
+    setImportant(legend, "max-width", "calc(100vw - 18px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))");
+    setImportant(legend, "height", "auto");
+    setImportant(legend, "max-height", "min(38dvh, 190px)");
+    setImportant(legend, "overflow", "hidden");
+    setImportant(legend, "padding", "5px 10px 7px");
+
+    var list = legend.querySelector(".legend-list");
+    if (list) {
+      setImportant(list, "display", "grid");
+      setImportant(list, "grid-template-columns", "repeat(2, minmax(0, 1fr))");
+      setImportant(list, "gap", "3px 12px");
+    }
+
+    legend.querySelectorAll(".legend-row").forEach(function(row){
+      setImportant(row, "grid-template-columns", "8px minmax(0, 1fr)");
+      setImportant(row, "gap", "4px");
+      setImportant(row, "min-height", "11px");
+      setImportant(row, "font-size", "8.4px");
+      setImportant(row, "line-height", "1");
+      setImportant(row, "overflow", "visible");
+    });
+
+    legend.querySelectorAll(".legend-label").forEach(function(label){
+      setImportant(label, "font-size", "8.4px");
+      setImportant(label, "line-height", "1.02");
+      setImportant(label, "white-space", "nowrap");
+      setImportant(label, "overflow", "visible");
+    });
+
+    legend.querySelectorAll(".legend-swatch").forEach(function(swatch){
+      setImportant(swatch, "width", "8px");
+      setImportant(swatch, "height", "8px");
+      setImportant(swatch, "border-radius", "2px");
+    });
+
+    ensureMobileLegendHelp(legend);
+  }
+
+  function syncTimelineDayWeights(){
+    document.querySelectorAll("#timelineDayTabs .timeline-day").forEach(function(day){
+      var hours = Math.max(1, Number(day.dataset.timelineHours || 1));
+      var width = day.getBoundingClientRect ? day.getBoundingClientRect().width : day.offsetWidth;
+      var full = day.dataset.timelineLabelFull || day.textContent || "";
+      var short = day.dataset.timelineLabelShort || full;
+      var tiny = day.dataset.timelineLabelTiny || short;
+      var label = full;
+      if (width > 0 && width < 38) label = tiny;
+      else if (width > 0 && width < 58) label = short;
+      if (label && day.textContent !== label) day.textContent = label;
+      setImportant(day, "flex", hours + " 1 0");
+      setImportant(day, "min-width", "0");
+      setImportant(day, "max-width", "none");
+      setImportant(day, "white-space", "nowrap");
+      setImportant(day, "overflow", "hidden");
+      setImportant(day, "text-overflow", "clip");
+      setImportant(day, "padding", width > 0 && width < 38 ? "0 1px" : "0 3px");
+      setImportant(day, "font-size", width > 0 && width < 38 ? "10px" : (width > 0 && width < 58 ? "11px" : "13px"));
+    });
+  }
+
+  function syncTopTidesModalVisibility(){
+    var body = document.body;
+    var modalOpen = body && body.classList.contains("top-tides-modal-open");
+    var title = document.getElementById("mapTitleBadge");
+    var toggle = document.getElementById("mobileControlsToggle");
+    var legend = document.getElementById("legendDock");
+    var timeline = document.getElementById("timelineDock");
+    var zoomCorner = document.querySelector(".leaflet-top.leaflet-right");
+    [title, toggle, legend, zoomCorner].forEach(function(el){
+      if (!el) return;
+      setImportant(el, "visibility", modalOpen ? "hidden" : "visible");
+      setImportant(el, "opacity", modalOpen ? "0" : "1");
+      setImportant(el, "pointer-events", modalOpen ? "none" : "auto");
+    });
+    if (timeline && !modalOpen) {
+      setImportant(timeline, "display", "block");
+      setImportant(timeline, "visibility", "visible");
+      setImportant(timeline, "opacity", "1");
+      setImportant(timeline, "pointer-events", "auto");
+    }
+  }
+
+  function apply(){
+    queued = false;
+    var body = document.body;
+    if (!body) return;
+    var mobile = isMobile();
+    var timeline = document.getElementById("timelineDock");
+    var sliderKey = document.getElementById("shorelyMobileSliderKey");
+    var sliderHelp = document.getElementById("shorelyMobileSliderHelpBtn");
+    var legendHelp = document.getElementById("shorelyMobileLegendHelpBtn");
+    if (!mobile) {
+      if (sliderKey) setImportant(sliderKey, "display", "none");
+      if (sliderHelp) setImportant(sliderHelp, "display", "none");
+      if (legendHelp) setImportant(legendHelp, "display", "none");
+      return;
+    }
+
+    document.documentElement.style.setProperty("--shorely-mobile-timeline-height", "118px");
+    document.documentElement.style.setProperty("--pj-request-timeline-height", "118px");
+    document.documentElement.style.setProperty("--shorely-mobile-drawer-bottom", "122px");
+
+    var originalKey = document.getElementById("timelineFloodKey");
+    var toggle = document.getElementById("mobileControlsToggle");
+    var legend = document.getElementById("legendDock");
+    var origin = document.getElementById("shorelyLegendOriginPill");
+    var top = timeline && timeline.querySelector(".timeline-top");
+    var controls = timeline && timeline.querySelector(".timeline-controls");
+    var play = document.getElementById("playBtn");
+    var days = document.getElementById("timelineDayTabs");
+    var track = timeline && timeline.querySelector(".timeline-trackRow");
+    var slider = document.getElementById("hourSlider");
+    var start = document.getElementById("timelineStart");
+    var end = document.getElementById("timelineEnd");
+    var key = ensureSliderKey(timeline);
+    var help = ensureSliderHelp(timeline);
+    var mobileLegendHelp = ensureMobileLegendHelp(legend);
+
+    if (originalKey) setImportant(originalKey, "display", "none");
+    if (timeline) {
+      setImportant(timeline, "left", "7px");
+      setImportant(timeline, "right", "7px");
+      setImportant(timeline, "bottom", "4px");
+      setImportant(timeline, "top", "auto");
+      setImportant(timeline, "width", "auto");
+      setImportant(timeline, "max-width", "calc(100vw - 14px)");
+      setImportant(timeline, "transform", "none");
+      setImportant(timeline, "-webkit-transform", "none");
+      setImportant(timeline, "height", "118px");
+      setImportant(timeline, "min-height", "118px");
+      setImportant(timeline, "max-height", "118px");
+      setImportant(timeline, "padding", "12px 12px 12px");
+      setImportant(timeline, "overflow", "visible");
+    }
+    if (key) {
+      var tinyPhone = window.innerWidth <= 340;
+      setImportant(key, "display", "flex");
+      setImportant(key, "top", "13px");
+      setImportant(key, "left", tinyPhone ? "56px" : "62px");
+      setImportant(key, "right", tinyPhone ? "38px" : "46px");
+      setImportant(key, "height", "18px");
+    }
+    if (help) {
+      setImportant(help, "display", "inline-grid");
+      setImportant(help, "top", "8px");
+      setImportant(help, "right", "12px");
+    }
+    if (mobileLegendHelp) {
+      setImportant(mobileLegendHelp, "display", body.classList.contains("mobile-legend-open") ? "inline-grid" : "none");
+    }
+    if (top) {
+      setImportant(top, "left", "12px");
+      setImportant(top, "right", "auto");
+      setImportant(top, "top", "12px");
+      setImportant(top, "transform", "none");
+      setImportant(top, "width", "38px");
+      setImportant(top, "height", "38px");
+      setImportant(top, "z-index", "18");
+    }
+    if (controls) {
+      setImportant(controls, "width", "38px");
+      setImportant(controls, "height", "38px");
+      setImportant(controls, "display", "grid");
+      setImportant(controls, "place-items", "center");
+    }
+    if (play) {
+      setImportant(play, "width", "38px");
+      setImportant(play, "height", "38px");
+      setImportant(play, "min-width", "38px");
+      setImportant(play, "min-height", "38px");
+      setImportant(play, "max-width", "38px");
+      setImportant(play, "max-height", "38px");
+      setImportant(play, "flex", "0 0 38px");
+    }
+    if (days) {
+      setImportant(days, "width", "calc(100% - 24px)");
+      setImportant(days, "max-width", "calc(100% - 24px)");
+      setImportant(days, "height", "22px");
+      setImportant(days, "margin", "42px 12px 4px 12px");
+      syncTimelineDayWeights();
+    }
+    if (track) {
+      setImportant(track, "width", "calc(100% - 24px)");
+      setImportant(track, "max-width", "calc(100% - 24px)");
+      setImportant(track, "margin-left", "12px");
+      setImportant(track, "margin-right", "12px");
+      setImportant(track, "margin-top", "6px");
+      setImportant(track, "height", "28px");
+      setImportant(track, "grid-template-columns", "minmax(0, 1fr)");
+    }
+    if (start) {
+      setImportant(start, "display", "none");
+    }
+    if (end) {
+      setImportant(end, "display", "none");
+    }
+    if (slider) {
+      setImportant(slider, "width", "100%");
+      setImportant(slider, "max-width", "100%");
+      setImportant(slider, "margin", "0");
+    }
+
+    if (toggle) {
+      setImportant(toggle, "display", "inline-grid");
+      setImportant(toggle, "position", "fixed");
+      setImportant(toggle, "left", "50%");
+      setImportant(toggle, "right", "auto");
+      setImportant(toggle, "bottom", "auto");
+      setImportant(toggle, "margin", "0");
+      setImportant(toggle, "transform", "translateX(-50%)");
+      setImportant(toggle, "-webkit-transform", "translateX(-50%)");
+      setImportant(toggle, "translate", "0 0");
+      setImportant(toggle, "top", "calc(var(--shorely-compact-top-row, 52px) + env(safe-area-inset-top, 0px))");
+      setImportant(toggle, "width", window.innerWidth <= 360 ? "104px" : "112px");
+      setImportant(toggle, "min-width", window.innerWidth <= 360 ? "104px" : "112px");
+      setImportant(toggle, "max-width", window.innerWidth <= 360 ? "104px" : "112px");
+      setImportant(toggle, "place-items", "center");
+      setImportant(toggle, "justify-content", "center");
+      setImportant(toggle, "align-items", "center");
+      setImportant(toggle, "text-align", "center");
+      setImportant(toggle, "overflow", "hidden");
+    }
+    if (origin) {
+      setImportant(origin, "background", "rgba(11,18,32,.97)");
+      setImportant(origin, "border-color", "rgba(191,219,254,.38)");
+    }
+    compactLegend(legend);
+    syncTopTidesModalVisibility();
+  }
+
+  function schedule(){
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(apply);
+  }
+
+  function boot(){
+    apply();
+    [40, 120, 260, 600, 1200, 2400].forEach(function(ms){ window.setTimeout(schedule, ms); });
+    if (observerStarted) return;
+    observerStarted = true;
+    try {
+      var observer = new MutationObserver(schedule);
+      observer.observe(document.documentElement, { attributes:true, attributeFilter:["class", "style"] });
+      if (document.body) observer.observe(document.body, { attributes:true, attributeFilter:["class", "style"] });
+      ["timelineDock", "timelineDayTabs", "timelineFloodKey", "mobileControlsToggle", "legendDock", "shorelyLegendOriginPill", "shorelyMobileSliderHelpBtn", "shorelyMobileLegendHelpBtn", "mapTitleBadge", "topTidesModal"].forEach(function(id){
+        var el = document.getElementById(id);
+        if (el) observer.observe(el, { attributes:true, attributeFilter:["class", "style"] });
+      });
+    } catch(e) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once:true });
+  } else {
+    boot();
+  }
+  window.addEventListener("load", boot, { once:true });
+  window.addEventListener("resize", schedule, { passive:true });
+  window.addEventListener("orientationchange", function(){ window.setTimeout(schedule, 80); }, { passive:true });
+  document.addEventListener("click", function(){
+    [20, 80, 180, 360, 700].forEach(function(ms){ window.setTimeout(schedule, ms); });
+  }, true);
+  document.addEventListener("keydown", function(event){
+    if (event.key === "Escape") [20, 120, 260, 520].forEach(function(ms){ window.setTimeout(schedule, ms); });
+  }, true);
+  ["pointerdown", "touchstart", "mousedown"].forEach(function(type){
+    document.addEventListener(type, function(event){
+      if (event.target && event.target.closest && event.target.closest("#mobileControlsToggle, #topTidesModal, .top-tide-more-btn, .top-tide-item, #topTidesModalCloseBtn")) {
+        apply();
+        [0, 40, 120, 260, 620].forEach(function(ms){ window.setTimeout(schedule, ms); });
+      }
+    }, true);
+  });
+  window.CapeMayMobileFollowup = window.ShorelyMobileFollowup = { apply: apply, schedule: schedule };
+})();
+</script>
+
 </body>
 </html>
