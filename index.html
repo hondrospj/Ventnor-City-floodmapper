@@ -13751,6 +13751,60 @@ body .timeline-trackRow{
   box-sizing:border-box !important;
 }
 
+.timeline-interval-toggle{
+  display:inline-grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:3px !important;
+  align-items:center !important;
+  width:112px !important;
+  min-width:112px !important;
+  height:34px !important;
+  min-height:34px !important;
+  padding:3px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(191,219,254,.22) !important;
+  background:rgba(11,18,32,.62) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06) !important;
+  flex:0 0 auto !important;
+}
+
+.timeline-interval-toggle button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:28px !important;
+  min-height:28px !important;
+  padding:0 6px !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:transparent !important;
+  color:#c7d2fe !important;
+  box-shadow:none !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:0 !important;
+  white-space:nowrap !important;
+  text-transform:none !important;
+  transform:none !important;
+}
+
+.timeline-interval-toggle button:hover:not(:disabled){
+  transform:none !important;
+  box-shadow:none !important;
+  color:#ffffff !important;
+  background:rgba(255,255,255,.08) !important;
+}
+
+.timeline-interval-toggle button.active{
+  background:linear-gradient(180deg, rgba(96,165,250,.36), rgba(96,165,250,.18)) !important;
+  color:#ffffff !important;
+  border-color:transparent !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 8px 16px rgba(15,23,42,.16) !important;
+}
+
 
 @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
   body.mobile-optimized #timelineDock #hourSlider{
@@ -13758,6 +13812,33 @@ body .timeline-trackRow{
     max-width:calc(100% - var(--pj-slider-thumb-size)) !important;
     margin-left:var(--pj-slider-thumb-half) !important;
     margin-right:var(--pj-slider-thumb-half) !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle{
+    width:92px !important;
+    min-width:92px !important;
+    height:30px !important;
+    min-height:30px !important;
+    padding:2px !important;
+    gap:2px !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle button{
+    height:26px !important;
+    min-height:26px !important;
+    padding:0 4px !important;
+    font-size:10px !important;
+  }
+}
+
+@media (max-width: 360px){
+  body.mobile-optimized .timeline-interval-toggle{
+    width:84px !important;
+    min-width:84px !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle button{
+    font-size:9px !important;
   }
 }
 
@@ -14047,6 +14128,10 @@ html.win-compact-ui #timelineDock #hourSlider{
         <div class="timeline-top">
           <div class="timeline-controls">
             <button id="playBtn" type="button" class="playFab" aria-label="Play">▶</button>
+            <div id="timelineIntervalToggle" class="timeline-interval-toggle" role="group" aria-label="Timeline interval">
+              <button id="intervalHourBtn" class="active" type="button" data-interval-minutes="60" aria-pressed="true">1 hr</button>
+              <button id="intervalQuarterBtn" type="button" data-interval-minutes="15" aria-pressed="false">15 min</button>
+            </div>
           </div>
           <div id="timelineMeta" class="timeline-meta">--</div>
         </div>
@@ -14618,6 +14703,7 @@ function cloneStyleObject(value) {
     let currentBaseModeBeforeTopTide = "observed";
     let currentDatum = "mllw";
     let currentObservedResolution = "1hour";
+    let currentTimelineIntervalMinutes = 60;
     let currentRawSeriesHours = [];
 
     let playTimer = null;
@@ -14746,8 +14832,37 @@ function cloneStyleObject(value) {
       if (stageSub) stageSub.textContent = getDatumLongLabel();
     }
 
+    function getTimelineIntervalMinutes() {
+      return currentTimelineIntervalMinutes === 15 ? 15 : 60;
+    }
+
+    function getTimelineIntervalLabel(minutes = getTimelineIntervalMinutes()) {
+      return minutes === 15 ? "15 min" : "1 hour";
+    }
+
+    function updateTimelineIntervalUI() {
+      const minutes = getTimelineIntervalMinutes();
+      currentObservedResolution = minutes === 15 ? "15min" : "1hour";
+
+      const hourBtn = document.getElementById("intervalHourBtn");
+      const quarterBtn = document.getElementById("intervalQuarterBtn");
+      if (hourBtn) {
+        const active = minutes === 60;
+        hourBtn.classList.toggle("active", active);
+        hourBtn.setAttribute("aria-pressed", String(active));
+      }
+      if (quarterBtn) {
+        const active = minutes === 15;
+        quarterBtn.classList.toggle("active", active);
+        quarterBtn.setAttribute("aria-pressed", String(active));
+      }
+
+      const dock = document.getElementById("timelineDock");
+      if (dock) dock.dataset.timelineInterval = String(minutes);
+    }
+
     function updateObservedResolutionUI() {
-      currentObservedResolution = "1hour";
+      updateTimelineIntervalUI();
     }
 
     function getForecastScenarioConfig(scenario = currentForecastScenario) {
@@ -14970,7 +15085,11 @@ function parseStoredLocalNyToDate(timeEST) {
     }
 
     function buildObservedDayDisplaySeries(dayRecord, dateStr) {
-      const hours = Array.isArray(dayRecord?.hours) ? dayRecord.hours : [];
+      if (getTimelineIntervalMinutes() === 15) {
+        return buildObservedQuarterHourDisplaySeries(dayRecord, dateStr);
+      }
+
+      const hours = getObservedSourceHoursForDay(dayRecord);
       const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
       const byHour = new Map();
 
@@ -14985,7 +15104,7 @@ function parseStoredLocalNyToDate(timeEST) {
         }
       });
 
-      const fullArchiveDay = hours.length >= 20;
+      const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
       const out = [];
       for (let hourIndex = 0; hourIndex < 24; hourIndex++) {
         const resolved = getObservedArchiveEntryByDateHour(dateStr, hourIndex);
@@ -15104,6 +15223,174 @@ function parseStoredLocalNyToDate(timeEST) {
         }
       });
       return bestIndex;
+    }
+
+    function getObservedSourceHoursForDay(dayRecord) {
+      const dense = Array.isArray(dayRecord?.timelineRawHours) ? dayRecord.timelineRawHours : [];
+      if (dense.length) return dense;
+      return Array.isArray(dayRecord?.hours) ? dayRecord.hours : [];
+    }
+
+    function setTimelineSlotFields(entry, slotMs, intervalMinutes, options = {}) {
+      const date = new Date(slotMs);
+      const localIso = formatNyLocalIso(date);
+      const dateKey = localIso ? localIso.slice(0, 10) : (options.observedDate || entry?.observedDate || "");
+      const hourIndex = localIso ? Number(localIso.slice(11, 13)) : (entry?.hourIndex ?? null);
+      const minuteIndex = localIso ? Number(localIso.slice(14, 16)) : (entry?.minuteIndex ?? null);
+      return {
+        ...entry,
+        timeUtc: date.toISOString(),
+        displayTimeUtc: date.toISOString(),
+        displayTimeEST: localIso || entry?.displayTimeEST || entry?.timeEST || "",
+        timeEST: localIso || entry?.timeEST || entry?.displayTimeEST || "",
+        observedDate: dateKey,
+        hourIndex,
+        minuteIndex,
+        timelineIntervalMinutes: intervalMinutes,
+        observationInterval: intervalMinutes === 15 ? "15min" : "1hour"
+      };
+    }
+
+    function makeMissingTimelineEntry(slotMs, intervalMinutes, options = {}) {
+      const date = new Date(slotMs);
+      const localIso = formatNyLocalIso(date);
+      const dateKey = localIso ? localIso.slice(0, 10) : (options.observedDate || "");
+      return {
+        displayTimeEST: localIso,
+        timeEST: localIso,
+        displayTimeUtc: date.toISOString(),
+        timeUtc: date.toISOString(),
+        observedDate: dateKey,
+        hourIndex: localIso ? Number(localIso.slice(11, 13)) : null,
+        minuteIndex: localIso ? Number(localIso.slice(14, 16)) : null,
+        navd88StageFt: null,
+        stageFt: null,
+        value: null,
+        observationInterval: intervalMinutes === 15 ? "15min" : "1hour",
+        timelineIntervalMinutes: intervalMinutes,
+        sourceResolutionMinutes: options.sourceResolutionMinutes ?? null,
+        isMissingObservedHour: options.kind !== "forecast",
+        isMissingTimelineFrame: true
+      };
+    }
+
+    function makeInterpolatedTimelineEntry(beforeItem, afterItem, slotMs, intervalMinutes, options = {}) {
+      const beforeStage = getStageValue(beforeItem?.entry);
+      const afterStage = getStageValue(afterItem?.entry);
+      if (!Number.isFinite(beforeStage) || !Number.isFinite(afterStage) || afterItem.t <= beforeItem.t) {
+        return makeMissingTimelineEntry(slotMs, intervalMinutes, options);
+      }
+
+      const ratio = (slotMs - beforeItem.t) / (afterItem.t - beforeItem.t);
+      const stage = Number((beforeStage + ((afterStage - beforeStage) * ratio)).toFixed(4));
+      return setTimelineSlotFields({
+        ...beforeItem.entry,
+        navd88StageFt: stage,
+        stageFt: stage,
+        value: stage,
+        sourceResolutionMinutes: options.sourceResolutionMinutes ?? detectSeriesResolutionMinutes(options.sourceEntries || []),
+        isInterpolatedTimelineFrame: true,
+        interpolationStartUtc: new Date(beforeItem.t).toISOString(),
+        interpolationEndUtc: new Date(afterItem.t).toISOString()
+      }, slotMs, intervalMinutes, options);
+    }
+
+    function buildQuarterHourTimelineSeries(entries = [], options = {}) {
+      const intervalMinutes = 15;
+      const stepMs = intervalMinutes * 60 * 1000;
+      const valid = (Array.isArray(entries) ? entries : [])
+        .map((entry, idx) => ({ entry, idx, t: entryTimeMs(entry) }))
+        .filter(item => Number.isFinite(item.t))
+        .sort((a, b) => a.t - b.t || a.idx - b.idx);
+
+      if (!valid.length) return [];
+
+      const sourceResolutionMinutes = options.sourceResolutionMinutes ?? detectSeriesResolutionMinutes(entries);
+      const startMs = Number.isFinite(options.startMs) ? options.startMs : Math.ceil(valid[0].t / stepMs) * stepMs;
+      const endMs = Number.isFinite(options.endMs) ? options.endMs : Math.floor(valid[valid.length - 1].t / stepMs) * stepMs;
+      const maxGapMs = (Number(options.maxGapMinutes) || 75) * 60 * 1000;
+      const fillMissingSlots = options.fillMissingSlots !== false;
+
+      const exactBySlot = new Map();
+      valid.forEach(item => {
+        const slot = Math.round(item.t / stepMs) * stepMs;
+        if (Math.abs(item.t - slot) > stepMs / 2) return;
+        const existing = exactBySlot.get(slot);
+        if (!existing || Math.abs(item.t - slot) < Math.abs(existing.t - slot)) exactBySlot.set(slot, item);
+      });
+
+      const out = [];
+      let cursor = 0;
+      for (let slot = startMs; slot <= endMs; slot += stepMs) {
+        const exact = exactBySlot.get(slot);
+        if (exact && Number.isFinite(getStageValue(exact.entry))) {
+          out.push(setTimelineSlotFields({
+            ...exact.entry,
+            sourceResolutionMinutes
+          }, slot, intervalMinutes, options));
+          continue;
+        }
+
+        while (cursor < valid.length - 1 && valid[cursor + 1].t < slot) cursor += 1;
+        const before = valid[cursor];
+        const after = valid[cursor + 1];
+        if (before && after && before.t <= slot && after.t >= slot && after.t - before.t <= maxGapMs) {
+          const frame = makeInterpolatedTimelineEntry(before, after, slot, intervalMinutes, {
+            ...options,
+            sourceResolutionMinutes,
+            sourceEntries: entries
+          });
+          if (!frame.isMissingTimelineFrame || fillMissingSlots) out.push(frame);
+        } else if (fillMissingSlots) {
+          out.push(makeMissingTimelineEntry(slot, intervalMinutes, {
+            ...options,
+            sourceResolutionMinutes
+          }));
+        }
+      }
+
+      return out;
+    }
+
+    function buildForecastDisplaySeries(entries = currentRawSeriesHours) {
+      const source = Array.isArray(entries) ? entries : [];
+      if (getTimelineIntervalMinutes() !== 15) {
+        return source.map(entry => ({
+          ...entry,
+          timelineIntervalMinutes: 60,
+          observationInterval: entry.observationInterval || "1hour"
+        }));
+      }
+      return buildQuarterHourTimelineSeries(source, {
+        kind: "forecast",
+        fillMissingSlots: false,
+        maxGapMinutes: 75
+      });
+    }
+
+    function buildObservedQuarterHourDisplaySeries(dayRecord, dateStr) {
+      const source = getObservedSourceHoursForDay(dayRecord);
+      const start = parseStoredLocalNyToDate(`${dateStr}T00:00`);
+      const end = parseStoredLocalNyToDate(`${dateStr}T23:45`);
+      const sourceResolutionMinutes = detectSeriesResolutionMinutes(source);
+      const series = buildQuarterHourTimelineSeries(source, {
+        kind: "observed",
+        observedDate: dateStr,
+        startMs: start ? start.getTime() : null,
+        endMs: end ? end.getTime() : null,
+        sourceResolutionMinutes,
+        fillMissingSlots: true,
+        maxGapMinutes: 75
+      });
+
+      return series.map((entry, idx) => ({
+        ...entry,
+        observedDate: dateStr,
+        quarterHourIndex: idx,
+        classification: dayRecord?.classification || entry.classification || "none",
+        peakNAVD88: dayRecord?.peakNAVD88 ?? entry.peakNAVD88,
+        sourceResolutionMinutes
+      }));
     }
 
 function setDatumHelpOpen(isOpen) {
@@ -18977,7 +19264,8 @@ function getEntryESTDate(entry) {
       rawDays.forEach(day => {
         const dateStr = String(day?.date || "");
         const hours = Array.isArray(day?.hours) ? day.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((entry, idx) => {
           if (!Number.isFinite(getStageValue(entry))) return;
 
@@ -19017,11 +19305,24 @@ function getEntryESTDate(entry) {
       const sortedRecords = records.slice().sort((a, b) => scoreObservedDayRecord(a) - scoreObservedDayRecord(b));
       const base = { ...sortedRecords[sortedRecords.length - 1] };
       const byHour = new Map();
+      const timelineRawHours = [];
 
       sortedRecords.forEach(record => {
         const hours = Array.isArray(record?.hours) ? record.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((hour, idx) => {
+          if (entryTimeMs(hour) != null) {
+            timelineRawHours.push({
+              ...hour,
+              observedDate: record.date,
+              classification: record.classification || base.classification || "none",
+              peakNAVD88: record.peakNAVD88 ?? base.peakNAVD88,
+              sourceHourIndex: idx,
+              sourceResolutionMinutes
+            });
+          }
+
           let hourIndex = getStoredEntryHourIndex(hour);
           if (!(hourIndex >= 0 && hourIndex <= 23) && fullArchiveDay && idx >= 0 && idx <= 23) {
             hourIndex = idx;
@@ -19059,6 +19360,13 @@ function getEntryESTDate(entry) {
           }));
       } else {
         base.hours = Array.isArray(base.hours) ? base.hours : [];
+      }
+
+      if (timelineRawHours.length) {
+        base.timelineRawHours = timelineRawHours
+          .sort((a, b) => (entryTimeMs(a) ?? 0) - (entryTimeMs(b) ?? 0));
+      } else {
+        base.timelineRawHours = Array.isArray(base.hours) ? base.hours : [];
       }
 
       return base;
@@ -19218,8 +19526,9 @@ function formatSelectedObservedDate(dateStr) {
     function buildObservedFlatHours() {
       const flat = [];
       getObservedDays().forEach(day => {
-        const hours = Array.isArray(day.hours) ? day.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const hours = getObservedSourceHoursForDay(day);
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((hour, idx) => {
           const safeHour = fullArchiveDay && idx >= 0 && idx <= 23
             ? idx
@@ -19502,9 +19811,9 @@ function formatSelectedObservedDate(dateStr) {
       timelineValue.textContent = currentTime;
 
       if (currentViewType === "forecast") {
-        label.textContent = getForecastScenarioLabel();
+        label.textContent = `${getForecastScenarioLabel()} • ${getTimelineIntervalLabel()}`;
       } else if (currentViewType === "observed-day") {
-        label.textContent = "Observed • 1 hour";
+        label.textContent = `Observed • ${getTimelineIntervalLabel()}`;
       } else {
         label.textContent = "Top 10 Highest Floods";
       }
@@ -19514,7 +19823,7 @@ function formatSelectedObservedDate(dateStr) {
       if (timelineDock) timelineDock.classList.toggle("top-tide-crest-only", Boolean(crestOnlyTopTide));
 
       if (crestOnlyTopTide) {
-        const msg = "Hourly observations not available; maximum flood extent plotted instead.";
+        const msg = "Detailed observations not available; maximum flood extent plotted instead.";
         timelineMeta.textContent = msg;
         timelineStart.textContent = msg;
         timelineEnd.textContent = "";
@@ -19544,7 +19853,7 @@ function formatSelectedObservedDate(dateStr) {
       if (currentViewType === "top-tide") {
         return (entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest")
           ? "Maximum extent only"
-          : "Hourly record";
+          : `${getTimelineIntervalLabel()} record`;
       }
       return "";
     }
@@ -19553,13 +19862,13 @@ function formatSelectedObservedDate(dateStr) {
       document.getElementById("timeText").textContent = formatSnapshotTime(entry);
       if (entry?.isMissingObservedHour || !Number.isFinite(rawStage)) {
         document.getElementById("stageText").textContent = "No data";
-        document.getElementById("stageSubText").textContent = "No observed record for this hour";
+        document.getElementById("stageSubText").textContent = "No observed record for this time";
       } else {
         document.getElementById("stageText").textContent = formatStageForDisplay(rawStage);
         const stageSub = currentViewType === "forecast"
           ? getForecastScenarioLabel()
           : currentViewType === "top-tide"
-            ? ((entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest") ? "Maximum extent only" : "Hourly record")
+            ? ((entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest") ? "Maximum extent only" : `${getTimelineIntervalLabel()} record`)
             : getDatumLabel();
         document.getElementById("stageSubText").textContent = stageSub;
       }
@@ -19666,7 +19975,7 @@ function formatSelectedObservedDate(dateStr) {
       slider.value = String(index);
 
       if (displayStage == null) {
-        toast("No observed record for this hour.");
+        toast("No observed record for this time.");
         ++lastRenderToken;
         clearFloodLayer();
         return;
@@ -19686,21 +19995,21 @@ function formatSelectedObservedDate(dateStr) {
       slider.value = String(Math.min(currentHourIndex, currentSeriesHours.length - 1));
     }
 
-    async function loadForecast() {
+    async function loadForecast(preferredEntry = null) {
       forecastData = await fetchJson(withFreshJsonUrl(FORECAST_URL));
       clearExportAvailabilityCache();
       currentRawSeriesHours = getActiveForecastHours();
-      currentSeriesHours = currentRawSeriesHours.slice();
+      currentSeriesHours = buildForecastDisplaySeries(currentRawSeriesHours);
       currentViewType = "forecast";
       currentTopTideIndex = null;
       currentSelectedLabel = getForecastScenarioLabel();
       currentSelectedSubLabel = getForecastScenarioPercentileLabel();
-      currentRangeLabel = currentRawSeriesHours.length
-        ? `${formatHourEntryTime(currentRawSeriesHours[0])} to ${formatHourEntryTime(currentRawSeriesHours[currentRawSeriesHours.length - 1])}`
+      currentRangeLabel = currentSeriesHours.length
+        ? `${formatHourEntryTime(currentSeriesHours[0])} to ${formatHourEntryTime(currentSeriesHours[currentSeriesHours.length - 1])}`
         : getForecastScenarioLabel();
 
       syncSliderBounds();
-      currentHourIndex = getPeakHourIndex(currentSeriesHours);
+      currentHourIndex = preferredEntry ? findClosestEntryIndex(currentSeriesHours, preferredEntry) : getPeakHourIndex(currentSeriesHours);
       document.getElementById("hourSlider").value = String(currentHourIndex);
     }
 
@@ -19799,13 +20108,15 @@ function formatSelectedObservedDate(dateStr) {
             const localIso = formatNyLocalIso(dt);
             const dateKey = localIso.slice(0, 10);
             const hourIndex = Number(localIso.slice(11, 13));
-            if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || !Number.isInteger(hourIndex)) return;
+            const minuteIndex = Number(localIso.slice(14, 16));
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || !Number.isInteger(hourIndex) || !Number.isInteger(minuteIndex)) return;
             rows.push({
               displayTimeEST: localIso,
               displayTimeUtc: dt.toISOString(),
               timeUtc: dt.toISOString(),
               observedDate: dateKey,
               hourIndex,
+              minuteIndex,
               navd88StageFt: n,
               stageFt: n,
               value: n,
@@ -19818,19 +20129,8 @@ function formatSelectedObservedDate(dateStr) {
         });
       });
 
-      const byDateHour = new Map();
-      rows.forEach(row => {
-        const key = `${row.observedDate}|${pad2(row.hourIndex)}`;
-        const existing = byDateHour.get(key);
-        const existingStage = existing ? getStageValue(existing) : null;
-        const rowStage = getStageValue(row);
-        if (!existing || (!Number.isFinite(existingStage) && Number.isFinite(rowStage))) {
-          byDateHour.set(key, row);
-        }
-      });
-
       const byDate = new Map();
-      Array.from(byDateHour.values())
+      rows
         .sort((a, b) => String(a.displayTimeEST).localeCompare(String(b.displayTimeEST)))
         .forEach(row => {
           if (!byDate.has(row.observedDate)) byDate.set(row.observedDate, []);
@@ -20154,7 +20454,7 @@ function populateCalendarSelectors() {
 
       selectedObservedDate = dateStr;
       currentMonthKey = dateStr.slice(0, 7);
-      currentRawSeriesHours = Array.isArray(dayRecord.hours) ? dayRecord.hours : [];
+      currentRawSeriesHours = getObservedSourceHoursForDay(dayRecord);
       currentSeriesHours = buildObservedDayDisplaySeries(dayRecord, dateStr);
       currentViewType = "observed-day";
       currentTopTideIndex = null;
@@ -20218,6 +20518,44 @@ function populateCalendarSelectors() {
       await renderCalendar();
       await renderHour(currentHourIndex);
       renderTopTides();
+    }
+
+    async function setTimelineIntervalMinutes(minutes) {
+      const nextMinutes = Number(minutes) === 15 ? 15 : 60;
+      if (nextMinutes === getTimelineIntervalMinutes()) return;
+
+      const referenceEntry = currentSeriesHours[currentHourIndex] || null;
+      stopPlayback();
+      toast("");
+      currentTimelineIntervalMinutes = nextMinutes;
+      updateTimelineIntervalUI();
+      clearFloodLayer();
+
+      if (currentViewType === "forecast" || currentDataMode === "forecast") {
+        currentDataMode = "forecast";
+        currentViewType = "forecast";
+        updateDataModeButtons();
+        await loadForecast(referenceEntry);
+        renderTopTides();
+        await renderHour(currentHourIndex);
+        return;
+      }
+
+      if (currentViewType === "observed-day" && selectedObservedDate) {
+        await loadObservedDay(selectedObservedDate, null, referenceEntry);
+        return;
+      }
+
+      if (currentViewType === "top-tide" && currentTopTideIndex != null) {
+        topTideEvents = buildTopTideEvents();
+        const nextIndex = Math.min(currentTopTideIndex, Math.max(0, topTideEvents.length - 1));
+        if (topTideEvents[nextIndex]) {
+          await loadTopTideEvent(nextIndex, referenceEntry);
+        }
+        return;
+      }
+
+      refreshCurrentDisplayText();
     }
 
     async function switchOverlayMode(mode) {
@@ -20430,7 +20768,7 @@ function populateCalendarSelectors() {
 function startPlayback() {
       stopPlayback({ resetDayGuard: false, closePrompt: true });
       if (!currentSeriesHours.length) {
-        toast("No hourly frames are available to play for this selection.");
+        toast("No timeline frames are available to play for this selection.");
         updatePlayPauseButton();
         return;
       }
@@ -21124,6 +21462,14 @@ function startPlayback() {
       document.getElementById("hourSlider").addEventListener("input", async e => {
         stopPlayback();
         await renderHour(Number(e.target.value));
+      });
+
+      document.getElementById("intervalHourBtn")?.addEventListener("click", () => {
+        setTimelineIntervalMinutes(60).catch(err => toast(err.message));
+      });
+
+      document.getElementById("intervalQuarterBtn")?.addEventListener("click", () => {
+        setTimelineIntervalMinutes(15).catch(err => toast(err.message));
       });
 
       document.getElementById("opacitySlider").addEventListener("input", e => {
