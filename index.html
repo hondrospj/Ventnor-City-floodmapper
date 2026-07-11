@@ -2256,6 +2256,19 @@
       background:rgba(255,255,255,.12);
     }
 
+    .export-progress-close.is-cancel-action{
+      width:auto;
+      min-width:74px;
+      height:32px;
+      min-height:32px;
+      padding:0 12px;
+      border-radius:999px;
+      font-size:12px;
+      line-height:1;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
     .export-progress-wheel{
       width:46px;
       height:46px;
@@ -14716,6 +14729,8 @@ function cloneStyleObject(value) {
     let overlayRecordCache = new Map();
     let preloadPromiseCache = new Map();
     let exportInProgress = false;
+    let exportCancelRequested = false;
+    let activeGifExport = null;
     let gifWorkerUrlPromise = null;
     let exportPngSelections = new Map();
     let exportCalendarCursorDate = null;
@@ -15702,14 +15717,35 @@ function setDatumHelpOpen(isOpen) {
     }
 
     async function testImageUrl(url) {
+      if (!url) return { ok: false };
+      if (exportCancelRequested) return { ok: false, cancelled: true };
       if (imageExistsCache.has(url)) return imageExistsCache.get(url);
       const result = await new Promise(resolve => {
         const img = new Image();
-        img.onload = () => resolve({ ok: true });
-        img.onerror = () => resolve({ ok: false });
+        let settled = false;
+        let cancelTimer = null;
+        const done = value => {
+          if (settled) return;
+          settled = true;
+          if (cancelTimer) window.clearInterval(cancelTimer);
+          resolve(value);
+        };
+        const cancelIfRequested = () => {
+          if (!exportCancelRequested) return false;
+          imageExistsCache.delete(url);
+          img.onload = null;
+          img.onerror = null;
+          try { img.src = ""; } catch (_) {}
+          done({ ok: false, cancelled: true });
+          return true;
+        };
+        if (cancelIfRequested()) return;
+        if (exportInProgress) cancelTimer = window.setInterval(cancelIfRequested, 80);
+        img.onload = () => done({ ok: true });
+        img.onerror = () => done({ ok: false });
         img.src = url;
       });
-      imageExistsCache.set(url, result);
+      if (!result.cancelled) imageExistsCache.set(url, result);
       return result;
     }
 
@@ -15719,9 +15755,28 @@ function setDatumHelpOpen(isOpen) {
 
       const promise = new Promise(resolve => {
         const img = new Image();
+        let settled = false;
+        let cancelTimer = null;
+        const done = value => {
+          if (settled) return;
+          settled = true;
+          if (cancelTimer) window.clearInterval(cancelTimer);
+          resolve(value);
+        };
+        const cancelIfRequested = () => {
+          if (!exportCancelRequested) return false;
+          preloadPromiseCache.delete(url);
+          img.onload = null;
+          img.onerror = null;
+          try { img.src = ""; } catch (_) {}
+          done(null);
+          return true;
+        };
+        if (cancelIfRequested()) return;
+        if (exportInProgress) cancelTimer = window.setInterval(cancelIfRequested, 80);
         img.decoding = "async";
-        img.onload = () => resolve(url);
-        img.onerror = () => resolve(null);
+        img.onload = () => done(url);
+        img.onerror = () => done(null);
         img.src = url;
       });
 
@@ -15731,15 +15786,35 @@ function setDatumHelpOpen(isOpen) {
 
     function getExportImageElement(url) {
       if (!url) return Promise.resolve(null);
+      if (exportCancelRequested) return Promise.resolve(null);
       if (exportImageElementCache.has(url)) return exportImageElementCache.get(url);
       const promise = new Promise(resolve => {
         const img = new Image();
+        let settled = false;
+        let cancelTimer = null;
+        const done = value => {
+          if (settled) return;
+          settled = true;
+          if (cancelTimer) window.clearInterval(cancelTimer);
+          resolve(value);
+        };
+        const cancelIfRequested = () => {
+          if (!exportCancelRequested) return false;
+          exportImageElementCache.delete(url);
+          img.onload = null;
+          img.onerror = null;
+          try { img.src = ""; } catch (_) {}
+          done(null);
+          return true;
+        };
+        if (cancelIfRequested()) return;
+        cancelTimer = window.setInterval(cancelIfRequested, 80);
         img.decoding = "async";
         img.loading = "eager";
         img.fetchPriority = "high";
         img.crossOrigin = "anonymous";
-        img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
+        img.onload = () => done(img);
+        img.onerror = () => done(null);
         img.src = url;
       });
       exportImageElementCache.set(url, promise);
@@ -15749,18 +15824,23 @@ function setDatumHelpOpen(isOpen) {
     async function findWorkingOverlay(mode, stageValue) {
       const candidates = getOverlayCandidates(mode, stageValue);
       for (const url of candidates) {
+        throwIfExportCancelled();
         const exists = await testImageUrl(url);
+        throwIfExportCancelled();
         if (exists.ok) {
           return { url, filename: url.split('/').pop() || getOverlayFilename(mode, stageValue) };
         }
       }
+      throwIfExportCancelled();
       return null;
     }
 
     async function getOverlayRecord(mode, stageValue) {
       const key = `${mode}:${stageToCode(stageValue)}`;
+      if (exportCancelRequested) throwIfExportCancelled();
       if (overlayRecordCache.has(key)) return overlayRecordCache.get(key);
       const match = await findWorkingOverlay(mode, stageValue);
+      throwIfExportCancelled();
       overlayRecordCache.set(key, match);
       return match;
     }
@@ -16367,6 +16447,42 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       window.setTimeout(() => {
         if (!exportInProgress) setExportProgressVisible(false);
       }, isError ? 5200 : 1600);
+    }
+
+    function makeExportCancelledError() {
+      const err = new Error("Export cancelled.");
+      err.name = "AbortError";
+      return err;
+    }
+
+    function isExportCancelledError(err) {
+      const raw = String(err?.message || err || "");
+      return err?.name === "AbortError" || /export (?:cancelled|canceled|aborted)|gif export was aborted/i.test(raw);
+    }
+
+    function throwIfExportCancelled() {
+      if (exportCancelRequested) throw makeExportCancelledError();
+    }
+
+    function finishCancelledExportProgress(message = "Export cancelled.") {
+      setExportProgress(message, null, false);
+      window.setTimeout(() => {
+        if (!exportInProgress) setExportProgressVisible(false);
+      }, 900);
+    }
+
+    function cancelCurrentExport() {
+      if (!exportInProgress) {
+        setExportProgressVisible(false);
+        return;
+      }
+      exportCancelRequested = true;
+      const closeBtn = document.getElementById("exportProgressCloseBtn");
+      if (closeBtn) closeBtn.disabled = true;
+      setExportProgress("Cancelling export...", null, false);
+      if (activeGifExport && typeof activeGifExport.abort === "function") {
+        try { activeGifExport.abort(); } catch (_) {}
+      }
     }
 
     function getExportBaseName() {
@@ -18061,9 +18177,16 @@ function updateExportSegmentedUI() {
     }
 
     function setDownloadBusy(isBusy, message = "") {
+      if (isBusy) {
+        exportCancelRequested = false;
+      } else {
+        exportCancelRequested = false;
+        activeGifExport = null;
+      }
       exportInProgress = isBusy;
       const btn = document.getElementById("downloadBtn");
       const btnLabel = document.getElementById("downloadBtnLabel");
+      const progressCloseBtn = document.getElementById("exportProgressCloseBtn");
       const scope = document.getElementById("downloadScopeSelect");
       const start = document.getElementById("downloadStartInput");
       const format = document.getElementById("downloadFormatSelect");
@@ -18087,6 +18210,13 @@ function updateExportSegmentedUI() {
       }
       if (btnLabel) {
         btnLabel.textContent = isBusy ? "Exporting..." : "Download";
+      }
+      if (progressCloseBtn) {
+        progressCloseBtn.disabled = false;
+        progressCloseBtn.classList.toggle("is-cancel-action", isBusy);
+        progressCloseBtn.textContent = isBusy ? "Cancel" : "×";
+        progressCloseBtn.setAttribute("aria-label", isBusy ? "Cancel export" : "Hide export progress");
+        progressCloseBtn.title = isBusy ? "Cancel export" : "Hide export progress";
       }
       if (scope) scope.disabled = isBusy;
       if (format) format.disabled = isBusy;
@@ -18156,6 +18286,7 @@ function updateExportSegmentedUI() {
     function getFriendlyExportError(err, format = "") {
       const raw = String(err?.message || err || "Download failed.").trim();
       const formatLabel = String(format || "export").toUpperCase();
+      if (isExportCancelledError(err)) return "Export cancelled.";
       if (!raw) return `${formatLabel} export failed.`;
       if (/JSZip|zip export library/i.test(raw)) {
         return "PNG export could not package multiple images. Reload the page and try again.";
@@ -18565,8 +18696,10 @@ async function runExportLimited(items, limit, worker) {
       const results = new Array(list.length);
       const runners = Array.from({ length: max }, async () => {
         while (cursor < list.length) {
+          throwIfExportCancelled();
           const index = cursor++;
           results[index] = await worker(list[index], index);
+          throwIfExportCancelled();
         }
       });
       await Promise.all(runners);
@@ -18596,40 +18729,51 @@ function getUniqueExportStages(frameItems) {
     async function preloadExportFrameAssets(frameItems) {
       const uniqueStages = getUniqueExportStages(frameItems);
       if (!uniqueStages.length) return new Map();
+      throwIfExportCancelled();
 
       const lookup = new Map();
       let firstUrl = null;
 
       await runExportLimited(uniqueStages, EXPORT_PRELOAD_CONCURRENCY, async ({ key, stage }, idx) => {
+        throwIfExportCancelled();
         const record = await getOverlayRecord(currentOverlayMode, stage);
         if (!record?.url) return;
         if (!firstUrl) firstUrl = record.url;
         const img = await getExportImageElement(record.url);
         if (img) lookup.set(key, img);
+        throwIfExportCancelled();
         if (idx % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
           const pct = 2 + Math.min(10, (idx / Math.max(1, uniqueStages.length)) * 10);
           setExportProgress(`Preloading ${idx + 1} of ${uniqueStages.length} unique overlay images...`, pct, false);
         }
       });
 
+      throwIfExportCancelled();
       if (firstUrl) await ensureOverlayBounds(firstUrl).catch(() => null);
+      throwIfExportCancelled();
       return lookup;
     }
     async function withExportFrames(frameItems, onFrame, progressStart = 4, progressEnd = 82) {
       const total = Math.max(1, frameItems.length);
       exportFrameViewPrimed = false;
+      throwIfExportCancelled();
       for (let i = 0; i < frameItems.length; i++) {
         const item = frameItems[i];
+        throwIfExportCancelled();
         const pct = progressStart + ((i / total) * (progressEnd - progressStart));
         const message = `Rendering frame ${i + 1} of ${frameItems.length}...`;
         setDownloadStatus(message);
         setExportProgress(message, pct, false);
         await prepareExportFrame(item, { isFirstFrame: i === 0 });
+        throwIfExportCancelled();
         if (i === 0) {
           await waitForExportMapReady(40);
+          throwIfExportCancelled();
         }
         const canvas = await captureExportCanvas();
+        throwIfExportCancelled();
         await onFrame({ sequence: i, item, entry: item.entry, canvas });
+        throwIfExportCancelled();
         canvas.width = 1;
         canvas.height = 1;
         const donePct = progressStart + (((i + 1) / total) * (progressEnd - progressStart));
@@ -18779,7 +18923,9 @@ function getUniqueExportStages(frameItems) {
 
     async function addFastCompositeGifFrames(gif, frameItems, progressStart = 4, progressEnd = 68, overlayImageLookup = null) {
       const total = Math.max(1, frameItems.length);
+      throwIfExportCancelled();
       const { baseCanvas, overlayRect } = await captureFastGifBaseCanvas(frameItems[0]);
+      throwIfExportCancelled();
       const frameCanvas = document.createElement("canvas");
       frameCanvas.width = baseCanvas.width;
       frameCanvas.height = baseCanvas.height;
@@ -18795,6 +18941,7 @@ function getUniqueExportStages(frameItems) {
       }
       for (let i = 0; i < frameItems.length; i++) {
         const item = frameItems[i];
+        throwIfExportCancelled();
         const pct = progressStart + ((i / total) * (progressEnd - progressStart));
         const message = `Compositing frame ${i + 1} of ${frameItems.length}...`;
         if (i === 0 || i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
@@ -18812,6 +18959,7 @@ function getUniqueExportStages(frameItems) {
           if (!overlayImg) {
             const record = await getOverlayRecord(currentOverlayMode, displayStage);
             overlayImg = record?.url ? await getExportImageElement(record.url) : null;
+            throwIfExportCancelled();
           }
           if (overlayImg) {
             ctx.globalAlpha = Math.max(0, Math.min(1, overlayOpacity));
@@ -18822,6 +18970,7 @@ function getUniqueExportStages(frameItems) {
         drawExportTimestampOnCanvas(ctx, frameCanvas, item.entry);
         seedGifLegendPalette(ctx, frameCanvas);
         gif.addFrame(frameCanvas, { delay: getGifFrameDelayMs(), copy: true });
+        throwIfExportCancelled();
         const donePct = progressStart + (((i + 1) / total) * (progressEnd - progressStart));
         if (i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
           setExportProgress(`Composited frame ${i + 1} of ${frameItems.length}...`, donePct, false);
@@ -18835,6 +18984,7 @@ function getUniqueExportStages(frameItems) {
     }
 
     async function exportGif(frameItems) {
+      throwIfExportCancelled();
       if (typeof GIF === "undefined") {
         throw new Error("GIF export library did not load.");
       }
@@ -18843,7 +18993,9 @@ function getUniqueExportStages(frameItems) {
       setDownloadStatus(`Preloading ${aspectConfig.label} GIF frames...`);
       setExportProgress(`Preloading ${aspectConfig.label} GIF frames...`, 2, false);
       const overlayImageLookup = await preloadExportFrameAssets(items);
+      throwIfExportCancelled();
       const workerScript = await getGifWorkerUrl();
+      throwIfExportCancelled();
 
       const gifQuality = EXPORT_GIF_QUALITY;
 
@@ -18859,27 +19011,37 @@ function getUniqueExportStages(frameItems) {
         repeat: 0,
         background: "#0b1220"
       });
+      activeGifExport = gif;
       await addFastCompositeGifFrames(gif, items, 4, 58, overlayImageLookup);
+      throwIfExportCancelled();
       setDownloadStatus("Encoding GIF...");
       setExportProgress("Encoding GIF...", 60, false);
       const blob = await new Promise((resolve, reject) => {
         gif.on("progress", value => {
+          if (exportCancelRequested) {
+            try { gif.abort(); } catch (_) {}
+            return;
+          }
           const pct = 60 + ((Number(value) || 0) * 38);
           setExportProgress(`Encoding GIF... ${Math.round((Number(value) || 0) * 100)}%`, pct, false);
         });
         gif.on("finished", resolve);
         gif.on("abort", () => reject(new Error("GIF export was aborted.")));
         try {
+          throwIfExportCancelled();
           gif.render();
         } catch (err) {
           reject(err);
         }
       });
+      throwIfExportCancelled();
       setExportProgress("Starting GIF download...", 99, false);
       downloadBlob(blob, `${getExportBaseName()}.gif`);
+      if (activeGifExport === gif) activeGifExport = null;
     }
 
     async function exportPng(frameItems) {
+      throwIfExportCancelled();
       const aspectConfig = applyExportStageAspect(getDownloadAspectValue());
       const items = frameItems.slice(0, EXPORT_PNG_SELECTION_LIMIT);
       setDownloadStatus(`Preparing ${items.length} PNG frame${items.length === 1 ? "" : "s"}...`);
@@ -18889,6 +19051,7 @@ function getUniqueExportStages(frameItems) {
       if (items.length === 1) {
         await withExportFrames(items, async ({ canvas, entry, sequence }) => {
           const blob = await canvasToBlob(canvas, "image/png");
+          throwIfExportCancelled();
           downloadBlob(blob, `${getExportBaseName()}-${getSafeFrameStamp(entry, sequence)}.png`);
         }, 8, 94);
         return;
@@ -18900,14 +19063,18 @@ function getUniqueExportStages(frameItems) {
       const zip = new JSZip();
       await withExportFrames(items, async ({ canvas, entry, sequence }) => {
         const blob = await canvasToBlob(canvas, "image/png");
+        throwIfExportCancelled();
         zip.file(`${String(sequence + 1).padStart(2, "0")}-${getSafeFrameStamp(entry, sequence)}.png`, blob);
+        throwIfExportCancelled();
       }, 8, 76);
       setDownloadStatus("Packaging PNG files...");
       setExportProgress("Packaging PNG files...", 82, false);
       const zipBlob = await zip.generateAsync({ type: "blob", compression: "STORE" }, metadata => {
+        throwIfExportCancelled();
         const pct = 82 + ((Number(metadata.percent) || 0) * 0.16);
         setExportProgress(`Packaging PNG files... ${Math.round(metadata.percent || 0)}%`, pct, false);
       });
+      throwIfExportCancelled();
       downloadBlob(zipBlob, `${getExportBaseName()}-pngs.zip`);
     }
 
@@ -18943,6 +19110,7 @@ function getUniqueExportStages(frameItems) {
       }
       setDownloadModalOpen(false);
       setDownloadBusy(true, "Preparing export...");
+      throwIfExportCancelled();
       const label = format === "png" ? "PNG" : `${getDownloadAspectValue()} GIF`;
       setExportProgress(`Preparing ${label} export with ${frameItems.length} frame${frameItems.length === 1 ? "" : "s"}...`, 1, false);
       try {
@@ -18955,11 +19123,17 @@ function getUniqueExportStages(frameItems) {
         setDownloadStatus(doneMessage);
         finishExportProgress(doneMessage, false);
       } catch (err) {
-        console.error(err);
-        const friendlyMessage = getFriendlyExportError(err, format);
-        toast(friendlyMessage);
-        setDownloadStatus(friendlyMessage, true);
-        finishExportProgress(friendlyMessage, true);
+        if (isExportCancelledError(err)) {
+          const cancelMessage = "Export cancelled.";
+          setDownloadStatus(cancelMessage, false);
+          finishCancelledExportProgress(cancelMessage);
+        } else {
+          console.error(err);
+          const friendlyMessage = getFriendlyExportError(err, format);
+          toast(friendlyMessage);
+          setDownloadStatus(friendlyMessage, true);
+          finishExportProgress(friendlyMessage, true);
+        }
       } finally {
         setDownloadBusy(false, document.getElementById("downloadStatus")?.textContent || "");
         updateDownloadSummary();
@@ -21457,7 +21631,7 @@ function startPlayback() {
     function wireEvents() {
       document.getElementById("topBannerCloseBtn")?.addEventListener("click", clearTopBanner);
       document.getElementById("toastCloseBtn")?.addEventListener("click", () => toast(""));
-      document.getElementById("exportProgressCloseBtn")?.addEventListener("click", () => setExportProgressVisible(false));
+      document.getElementById("exportProgressCloseBtn")?.addEventListener("click", cancelCurrentExport);
 
       document.getElementById("hourSlider").addEventListener("input", async e => {
         stopPlayback();
@@ -21679,7 +21853,8 @@ function startPlayback() {
           closeExportDateOrderPopup();
           if (playbackPausedForConfirmation) stopPlayback();
           setPlaybackStillThereOpen(false);
-          setExportProgressVisible(false);
+          if (exportInProgress && isExportProgressOpen()) cancelCurrentExport();
+          else setExportProgressVisible(false);
           toast("");
         }
       });
@@ -29335,6 +29510,33 @@ html body #timelineDock #hourSlider{
   padding:0 34px 0 12px !important;
   cursor:pointer;
   font-variant-numeric:tabular-nums;
+}
+
+#downloadModal .export-date-text-input,
+#downloadModal .export-time-select{
+  -webkit-text-fill-color:#eaf0ff !important;
+}
+
+#downloadModal .export-time-select option,
+#downloadModal .export-time-select optgroup,
+#downloadModal .download-field select option,
+#downloadModal .export-wheel-field select option{
+  background-color:#ffffff !important;
+  color:#0f172a !important;
+  -webkit-text-fill-color:#0f172a !important;
+}
+
+#downloadModal .export-time-select option:checked{
+  background-color:#dbeafe !important;
+  color:#0f172a !important;
+  -webkit-text-fill-color:#0f172a !important;
+}
+
+#downloadModal .export-native-date-picker{
+  background-color:#ffffff !important;
+  color:#0f172a !important;
+  -webkit-text-fill-color:#0f172a !important;
+  color-scheme:light !important;
 }
 
 .export-date-text-input:focus,
