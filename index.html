@@ -19022,15 +19022,56 @@ function getUniqueExportStages(frameItems) {
     }
 
 
+    function resolveCssColorToken(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      const varMatch = raw.match(/^var\((--[^)]+)\)$/);
+      if (varMatch) {
+        return getComputedStyle(document.documentElement).getPropertyValue(varMatch[1]).trim() || raw;
+      }
+      return raw;
+    }
+
+    function collectGifLegendSwatchColors() {
+      const colors = [];
+      document.querySelectorAll("#legendDock .legend-swatch, #exportLegendDock .legend-swatch").forEach(swatch => {
+        const styles = window.getComputedStyle(swatch);
+        const image = styles.backgroundImage && styles.backgroundImage !== "none" ? styles.backgroundImage : "";
+        if (!image || !/^linear-gradient/i.test(image)) {
+          const inlineBackground = swatch.style.background || "";
+          if (inlineBackground && !/^linear-gradient/i.test(inlineBackground)) colors.push(inlineBackground);
+          if (styles.backgroundColor && styles.backgroundColor !== "rgba(0, 0, 0, 0)") colors.push(styles.backgroundColor);
+        }
+        if (styles.borderColor && styles.borderColor !== "rgba(0, 0, 0, 0)") colors.push(styles.borderColor);
+      });
+      return colors;
+    }
+
+    function getGifLegendPaletteColors() {
+      const dynamicSamples = [
+        Math.max(MIN_STAGE, MINOR_FLOOD_FT - 0.1),
+        MINOR_FLOOD_FT,
+        MODERATE_FLOOD_FT,
+        MAJOR_FLOOD_FT
+      ].map(stageColor);
+      const legendColors = [
+        ...collectGifLegendSwatchColors(),
+        ...DEPTH_LEGEND.map(item => resolveCssColorToken(item.color)),
+        ...DYNAMIC_LEGEND.map(item => resolveCssColorToken(item.color)),
+        ...dynamicSamples,
+        "rgba(121,221,90,.92)",
+        "rgba(213,138,0,.92)",
+        "rgba(216,75,103,.92)",
+        "rgba(124,92,224,.92)",
+        "#79DD5A", "#ffffff", "#c7d2fe", "#1b2536", "#0b1220"
+      ].filter(Boolean);
+      return Array.from(new Set(legendColors));
+    }
+
     function seedGifLegendPalette(ctx, canvas) {
       if (!ctx || !canvas) return;
-      const colors = [
-        "#CFEFFF", "#2769DB", "#5B5FD6", "#5F2DA8", "#7C42C4",
-        "#A73FA1", "#E05AAE", "#B1367B", "#A52440", "#3F000A",
-        "#3A0008", "#79DD5A", "#ef4444", "#d58a00", "#d84b67", "#7c5ce0",
-        "#1b2536", "#ffffff", "#c7d2fe", "#0b1220"
-      ];
-      const size = Math.max(2, Math.round(Math.min(canvas.width, canvas.height) * 0.003));
+      const colors = getGifLegendPaletteColors();
+      const size = Math.max(4, Math.round(Math.min(canvas.width, canvas.height) * 0.004));
       const y = Math.max(0, canvas.height - size - 1);
       ctx.save();
       ctx.globalAlpha = 1;
