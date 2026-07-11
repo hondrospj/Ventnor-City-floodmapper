@@ -2346,6 +2346,54 @@
       background:#050b16;
     }
 
+    .export-stage-logo-strip{
+      position:absolute;
+      top:16px;
+      left:16px;
+      z-index:1260;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      max-width:calc(100% - 236px);
+      min-height:54px;
+      padding:9px 12px;
+      border-radius:22px;
+      border:1px solid rgba(191,219,254,.24);
+      background:rgba(11,18,32,.92);
+      box-shadow:0 12px 24px rgba(0,0,0,.24);
+      pointer-events:none;
+      overflow:hidden;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+      isolation:isolate;
+    }
+
+    .export-stage-logo{
+      display:none;
+      flex:0 1 auto;
+      max-width:150px;
+      max-height:38px;
+      object-fit:contain;
+      filter:none;
+    }
+
+    .export-stage-logo.is-visible{
+      display:block;
+    }
+
+    .export-stage-logo-shorelysafe{
+      max-width:170px;
+    }
+
+    .export-stage-frame[data-export-aspect="9:16"] .export-stage-logo-strip{
+      right:16px;
+      max-width:calc(100% - 32px);
+    }
+
+    .export-stage-frame[data-export-aspect="9:16"] .export-stage-logo{
+      max-width:135px;
+    }
+
     .export-stage-legend{
       position:absolute;
       top:16px;
@@ -2391,7 +2439,9 @@
     }
 
     .export-stage-legend *,
-    .export-stage-timestamp *{
+    .export-stage-timestamp *,
+    .export-stage-logo-strip,
+    .export-stage-logo-strip *{
       animation:none !important;
       transition:none !important;
       filter:none !important;
@@ -14320,6 +14370,10 @@ html.win-compact-ui #timelineDock #hourSlider{
   <div id="exportStage" class="export-stage" aria-hidden="true">
     <div id="exportStageFrame" class="export-stage-frame">
       <div id="exportMap" class="export-stage-map"></div>
+      <div id="exportLogoStrip" class="export-stage-logo-strip" aria-hidden="true">
+        <img id="exportTownLogo" class="export-stage-logo export-stage-logo-town" src="" alt="" loading="eager" decoding="async" style="display:none;" />
+        <img id="exportPartnerLogo" class="export-stage-logo export-stage-logo-shorelysafe" src="" alt="" loading="eager" decoding="async" style="display:none;" />
+      </div>
       <section id="exportLegendDock" class="export-stage-legend"></section>
       <div id="exportTimestampLabel" class="export-stage-timestamp">--</div>
     </div>
@@ -14421,6 +14475,32 @@ html.win-compact-ui #timelineDock #hourSlider{
       return el.value;
     }
 
+    function setExportLogoImage(id, src, alt = "") {
+      const img = document.getElementById(id);
+      if (!img) return;
+      if (src) {
+        img.src = src;
+        img.alt = alt || "";
+        img.classList.add("is-visible");
+        img.style.display = "";
+        img.onerror = function(){
+          this.classList.remove("is-visible");
+          this.style.display = "none";
+        };
+      } else {
+        img.removeAttribute("src");
+        img.alt = "";
+        img.classList.remove("is-visible");
+        img.style.display = "none";
+      }
+    }
+
+    function syncExportBrandLogos(config) {
+      const assets = config?.assets || {};
+      setExportLogoImage("exportTownLogo", assets.titleLogoPath, assets.titleLogoAlt || config?.site?.name || "");
+      setExportLogoImage("exportPartnerLogo", assets.partnerLogoPath || assets.rightRailLogoPath, assets.partnerLogoAlt || assets.rightRailLogoAlt || "ShorelySafe");
+    }
+
     function applyTownConfig(config) {
       if (!config) throw new Error("Missing TOWN_CONFIG at bottom of HTML.");
       TOWN_CONFIG = config;
@@ -14498,6 +14578,8 @@ html.win-compact-ui #timelineDock #hourSlider{
           rightRailLogo.style.display = "none";
         }
       }
+
+      syncExportBrandLogos(config);
 
       const addressTitle = document.getElementById("townAddressTitle");
       if (addressTitle) addressTitle.textContent = decodeHtmlText(config.addressLookup?.title || `Find a ${config.site?.name || "Town"} Address`);
@@ -18244,6 +18326,35 @@ function updateExportSegmentedUI() {
       await wait(EXPORT_CAPTURE_DELAY_MS);
     }
 
+    function waitForImageElementReady(img, timeoutMs = 1500) {
+      if (!img || !img.src || img.style.display === "none" || !img.classList.contains("is-visible")) {
+        return Promise.resolve();
+      }
+      if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+      return new Promise(resolve => {
+        let settled = false;
+        const done = () => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          img.removeEventListener("load", done);
+          img.removeEventListener("error", done);
+          resolve();
+        };
+        const timer = setTimeout(done, timeoutMs);
+        img.addEventListener("load", done, { once: true });
+        img.addEventListener("error", done, { once: true });
+      });
+    }
+
+    async function waitForExportChromeReady() {
+      const images = [
+        document.getElementById("exportTownLogo"),
+        document.getElementById("exportPartnerLogo")
+      ];
+      await Promise.all(images.map(img => waitForImageElementReady(img)));
+    }
+
 
     function waitForTileLayerReady(layer, timeoutMs = 3500) {
       return new Promise(resolve => {
@@ -18621,6 +18732,7 @@ function updateExportSegmentedUI() {
       }
       const stage = document.getElementById("exportStageFrame");
       if (!stage) throw new Error("Export stage is unavailable.");
+      await waitForExportChromeReady();
       const captureScale = getExportCaptureScale();
       return await html2canvas(stage, {
         backgroundColor: null,
@@ -18632,6 +18744,38 @@ function updateExportSegmentedUI() {
         imageTimeout: 7000,
         scale: captureScale
       });
+    }
+
+    async function captureExportChromeCanvas() {
+      if (typeof html2canvas !== "function") return null;
+      const stage = document.getElementById("exportStageFrame");
+      const mapEl = document.getElementById("exportMap");
+      const timestamp = document.getElementById("exportTimestampLabel");
+      if (!stage) return null;
+      await waitForExportChromeReady();
+      const previousMapVisibility = mapEl?.style.visibility || "";
+      const previousTimestampVisibility = timestamp?.style.visibility || "";
+      const previousBackground = stage.style.background || "";
+      try {
+        if (mapEl) mapEl.style.visibility = "hidden";
+        if (timestamp) timestamp.style.visibility = "hidden";
+        stage.style.background = "transparent";
+        const captureScale = getExportCaptureScale();
+        return await html2canvas(stage, {
+          backgroundColor: null,
+          useCORS: true,
+          allowTaint: false,
+          logging: false,
+          removeContainer: true,
+          foreignObjectRendering: false,
+          imageTimeout: 7000,
+          scale: captureScale
+        });
+      } finally {
+        if (mapEl) mapEl.style.visibility = previousMapVisibility;
+        if (timestamp) timestamp.style.visibility = previousTimestampVisibility;
+        stage.style.background = previousBackground;
+      }
     }
 
 function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set()) {
@@ -18911,20 +19055,29 @@ function getUniqueExportStages(frameItems) {
         mapInstance.removeLayer(exportFloodLayer);
       }
       const timestamp = document.getElementById("exportTimestampLabel");
-      const previousVisibility = timestamp?.style.visibility || "";
+      const legend = document.getElementById("exportLegendDock");
+      const logoStrip = document.getElementById("exportLogoStrip");
+      const previousTimestampVisibility = timestamp?.style.visibility || "";
+      const previousLegendVisibility = legend?.style.visibility || "";
+      const previousLogoVisibility = logoStrip?.style.visibility || "";
       if (timestamp) timestamp.style.visibility = "hidden";
+      if (legend) legend.style.visibility = "hidden";
+      if (logoStrip) logoStrip.style.visibility = "hidden";
       await waitForExportMapReady(80);
       await waitForStableRender();
       const baseCanvas = await captureExportCanvas();
-      if (timestamp) timestamp.style.visibility = previousVisibility;
+      if (timestamp) timestamp.style.visibility = previousTimestampVisibility;
+      if (legend) legend.style.visibility = previousLegendVisibility;
+      if (logoStrip) logoStrip.style.visibility = previousLogoVisibility;
+      const chromeCanvas = await captureExportChromeCanvas();
       updateExportTimestampLabel(firstItem?.entry || null);
-      return { baseCanvas, overlayRect: getExportOverlayRect(mapInstance) };
+      return { baseCanvas, overlayRect: getExportOverlayRect(mapInstance), chromeCanvas };
     }
 
     async function addFastCompositeGifFrames(gif, frameItems, progressStart = 4, progressEnd = 68, overlayImageLookup = null) {
       const total = Math.max(1, frameItems.length);
       throwIfExportCancelled();
-      const { baseCanvas, overlayRect } = await captureFastGifBaseCanvas(frameItems[0]);
+      const { baseCanvas, overlayRect, chromeCanvas } = await captureFastGifBaseCanvas(frameItems[0]);
       throwIfExportCancelled();
       const frameCanvas = document.createElement("canvas");
       frameCanvas.width = baseCanvas.width;
@@ -18967,6 +19120,7 @@ function getUniqueExportStages(frameItems) {
             ctx.globalAlpha = 1;
           }
         }
+        if (chromeCanvas) ctx.drawImage(chromeCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
         drawExportTimestampOnCanvas(ctx, frameCanvas, item.entry);
         seedGifLegendPalette(ctx, frameCanvas);
         gif.addFrame(frameCanvas, { delay: getGifFrameDelayMs(), copy: true });
@@ -18979,6 +19133,10 @@ function getUniqueExportStages(frameItems) {
       }
       baseCanvas.width = 1;
       baseCanvas.height = 1;
+      if (chromeCanvas) {
+        chromeCanvas.width = 1;
+        chromeCanvas.height = 1;
+      }
       frameCanvas.width = 1;
       frameCanvas.height = 1;
     }
