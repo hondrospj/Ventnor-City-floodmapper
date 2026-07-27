@@ -17062,13 +17062,33 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       return { firstDate, lastDate: cappedLast };
     }
 
-    function seedDownloadRangeToCurrentForecast(force = false) {
+        function getCurrentSelectionExportRange() {
+      const currentDate = getEntryESTDate(getDownloadCurrentEntry());
+      if (!currentDate) return getCurrentForecastExportRange();
+
+      const currentMs = currentDate.getTime();
+      const maxEndMs = currentMs + EXPORT_RANGE_MAX_MS;
+      const remainingDates = currentSeriesHours
+        .map(entry => getEntryESTDate(entry))
+        .filter(date => {
+          const timeMs = date?.getTime();
+          return Number.isFinite(timeMs) && timeMs >= currentMs && timeMs <= maxEndMs;
+        })
+        .sort((a, b) => a.getTime() - b.getTime());
+      const lastDate = remainingDates.length
+        ? remainingDates[remainingDates.length - 1]
+        : currentDate;
+
+      return { firstDate: currentDate, lastDate };
+    }
+
+    function seedDownloadRangeToCurrentSelection(force = false) {
       const startEl = document.getElementById("downloadStartInput");
       const endEl = document.getElementById("downloadEndInput");
       if (!startEl || !endEl) return false;
 
-      const forecastRange = getCurrentForecastExportRange();
-      if (!forecastRange) return false;
+      const selectedRange = getCurrentSelectionExportRange();
+      if (!selectedRange) return false;
 
       if (force) {
         delete startEl.dataset.userEdited;
@@ -17076,10 +17096,10 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       }
 
       if (force || !startEl.value || startEl.dataset.userEdited !== "1") {
-        setRangeInputDate("downloadStartInput", forecastRange.firstDate);
+        setRangeInputDate("downloadStartInput", selectedRange.firstDate);
       }
       if (force || !endEl.value || endEl.dataset.userEdited !== "1") {
-        setRangeInputDate("downloadEndInput", forecastRange.lastDate);
+        setRangeInputDate("downloadEndInput", selectedRange.lastDate);
       }
       return true;
     }
@@ -17175,8 +17195,8 @@ function syncDownloadRangeInputs(force = false) {
         });
       }
 
-      const seededForecast = seedDownloadRangeToCurrentForecast(force);
-      if (!seededForecast && (!startEl.value || !endEl.value)) {
+      const seededSelection = seedDownloadRangeToCurrentSelection(force);
+      if (!seededSelection && (!startEl.value || !endEl.value)) {
         const currentDate = getEntryESTDate(getDownloadCurrentEntry());
         if (currentDate) {
           if (!startEl.value) setRangeInputDate("downloadStartInput", currentDate);
