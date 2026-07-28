@@ -19073,7 +19073,7 @@ function getUniqueExportStages(frameItems) {
         MINOR_FLOOD_FT,
         MODERATE_FLOOD_FT,
         MAJOR_FLOOD_FT
-      ].map(stageColor);
+      ].map(getImpactTimelineColor);
       const legendColors = [
         ...collectGifLegendSwatchColors(),
         ...DEPTH_LEGEND.map(item => resolveCssColorToken(item.color)),
