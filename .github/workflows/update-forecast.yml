@@ -25,11 +25,15 @@ jobs:
         run: |
           python - <<'PY'
           import csv
+          import http.client
           import io
           import json
           import math
+          import random
           import re
           import tarfile
+          import time
+          import urllib.error
           import urllib.request
           from datetime import datetime, timedelta, timezone
           from pathlib import Path
@@ -78,9 +82,23 @@ jobs:
           }
 
           def fetch_bytes(url):
-              req = urllib.request.Request(url, headers={"User-Agent": f"{TOWN_NAME}-floodmapper/1.0"})
-              with urllib.request.urlopen(req, timeout=180) as resp:
-                  return resp.read()
+              last_error = None
+              for attempt in range(1, 6):
+                  try:
+                      req = urllib.request.Request(url, headers={"User-Agent": f"{TOWN_NAME}-floodmapper/2.0"})
+                      with urllib.request.urlopen(req, timeout=180) as resp:
+                          return resp.read()
+                  except urllib.error.HTTPError as exc:
+                      if exc.code not in {429, 500, 502, 503, 504}:
+                          raise
+                      last_error = exc
+                  except (urllib.error.URLError, http.client.IncompleteRead, TimeoutError, OSError, ValueError) as exc:
+                      last_error = exc
+                  if attempt == 5:
+                      raise last_error
+                  delay = min(30.0, 2 ** attempt) + random.random() * 2.0
+                  print(f"Transient forecast fetch failure ({last_error}); retry {attempt}/5 in {delay:.1f}s")
+                  time.sleep(delay)
 
           def petss_station_csv_url(cycle):
               return f"https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.{cycle['ymd']}/petss.t{cycle['hh']:02d}z.csv.tar.gz"
@@ -317,5 +335,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add forecast.json
           git diff --staged --quiet || git commit -m "Update Ventnor City forecast"
-          git pull --rebase --autostash origin main
-          git push
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main
+            if git push; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 5 ]; then
+              echo "Push failed after 5 pull/rebase retries." >&2
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
