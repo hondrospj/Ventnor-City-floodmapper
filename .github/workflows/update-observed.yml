@@ -11,8 +11,11 @@ on:
 permissions:
   contents: write
 
-jobs:
-  update-observed:
+concurrency:
+  group: ventnor-city-floodmapper-data-updates-v2
+  cancel-in-progress: false
+
+jobs:  update-observed:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
