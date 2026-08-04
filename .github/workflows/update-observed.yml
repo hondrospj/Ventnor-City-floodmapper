@@ -263,8 +263,27 @@ jobs:
               return str(payload.get("site", "")) == str(zone["usgsGaugeId"] or zone["noaaGaugeId"])
 
           def merge_recent(zone, payload, now_utc):
-              start_utc = now_utc - timedelta(hours=48)
-              hourly, last_url = fetch_hourly(zone, start_utc, now_utc)
+              archive_end = now_utc.astimezone(LOCAL_ZONE).date()
+              existing_dates = []
+              for day in payload.get("days", []):
+                  try:
+                      existing_dates.append(datetime.strptime(str(day.get("date", ""))[:10], "%Y-%m-%d").date())
+                  except Exception:
+                      continue
+              latest_existing = max(existing_dates) if existing_dates else archive_end - timedelta(days=2)
+              # Re-fetch the latest stored day so a partial final day is completed,
+              # then cover every missing day. A fixed 48-hour window silently left
+              # archive gaps whenever Actions had been paused for longer than that.
+              cur = max(datetime.strptime(ARCHIVE_START_DATE, "%Y-%m-%d").date(), latest_existing)
+              hourly = {}
+              last_url = ""
+              while cur <= archive_end:
+                  end = min(cur + timedelta(days=CHUNK_DAYS - 1), archive_end)
+                  start_utc = datetime.combine(cur, datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc)
+                  end_utc = datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=LOCAL_ZONE).astimezone(timezone.utc) - timedelta(seconds=1)
+                  chunk, last_url = fetch_hourly(zone, start_utc, min(end_utc, now_utc))
+                  hourly.update(chunk)
+                  cur = end + timedelta(days=1)
               day_map = {str(day.get("date")): day for day in payload.get("days", []) if isinstance(day, dict) and day.get("date")}
               for date_str in sorted({key[0] for key in hourly}):
                   combined = {}
