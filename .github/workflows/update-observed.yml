@@ -15,7 +15,8 @@ concurrency:
   group: ventnor-city-floodmapper-data-updates-v2
   cancel-in-progress: false
 
-jobs:  update-observed:
+jobs:
+  update-observed:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -49,9 +50,9 @@ jobs:  update-observed:
               "id": "default",
               "zoneName": "Ventnor City",
               "label": "Ventnor City",
-              "gaugeName": "Margate",
+              "gaugeName": "Inside Thorofare at Atlantic City",
               "petssGaugeId": "8534836",
-              "usgsGaugeId": "01411330",
+              "usgsGaugeId": "01410560",
               "noaaGaugeId": "8534720",
               "observedSource": "usgs",
               "navd88OffsetFromMllwFt": -2.39,
