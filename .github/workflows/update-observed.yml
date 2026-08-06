@@ -15,7 +15,8 @@ concurrency:
   group: ventnor-city-floodmapper-data-updates-v2
   cancel-in-progress: false
 
-jobs:  update-observed:
+jobs:
+  update-observed:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -49,9 +50,9 @@ jobs:  update-observed:
               "id": "default",
               "zoneName": "Ventnor City",
               "label": "Ventnor City",
-              "gaugeName": "Margate",
+              "gaugeName": "Inside Thorofare at Atlantic City",
               "petssGaugeId": "8534836",
-              "usgsGaugeId": "01411330",
+              "usgsGaugeId": "01410560",
               "noaaGaugeId": "8534720",
               "observedSource": "usgs",
               "navd88OffsetFromMllwFt": -2.39,
@@ -257,6 +258,7 @@ jobs:  update-observed:
 
           def load_existing_zone(zone):
               candidates = []
+              existing_site = ""
               for path in [PRIMARY_PATH, OVERFLOW_PATH]:
                   if not path.exists():
                       continue
@@ -265,15 +267,20 @@ jobs:  update-observed:
                   except Exception:
                       continue
                   if data.get("zones"):
-                      payload = data.get("zones", {}).get(zone["id"], {}).get("observed")
-                      if payload:
-                          candidates.extend(payload.get("days") or [])
+                      source_payload = data.get("zones", {}).get(zone["id"], {}).get("observed")
+                      if source_payload:
+                          candidates.extend(source_payload.get("days") or [])
+                          if not existing_site:
+                              existing_site = str(source_payload.get("site", ""))
                   else:
                       candidates.extend(data.get("days") or [])
+                      if not existing_site:
+                          existing_site = str(data.get("site", ""))
               if not candidates:
                   return None
               days = sorted(candidates, key=lambda d: str(d.get("date", "")))
               payload = empty_zone_payload(zone, datetime.now(timezone.utc), days[-1].get("date", ARCHIVE_START_DATE))
+              payload["site"] = existing_site
               payload["days"] = days
               payload["fullArchiveBuiltISO"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
               return payload
@@ -408,7 +415,7 @@ jobs:  update-observed:
           git add observed.json observedoverflow.json 2>/dev/null || git add observed.json
           git diff --staged --quiet || git commit -m "Update Ventnor City observed"
           for attempt in 1 2 3 4 5; do
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash
             if git push; then
               exit 0
             fi

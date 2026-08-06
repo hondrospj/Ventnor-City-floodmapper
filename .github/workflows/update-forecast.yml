@@ -15,7 +15,8 @@ concurrency:
   group: ventnor-city-floodmapper-data-updates-v2
   cancel-in-progress: false
 
-jobs:  update-forecast:
+jobs:
+  update-forecast:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -49,9 +50,9 @@ jobs:  update-forecast:
               "id": "default",
               "zoneName": "Ventnor City",
               "label": "Ventnor City",
-              "gaugeName": "Margate",
+              "gaugeName": "Inside Thorofare at Atlantic City",
               "petssGaugeId": "8534836",
-              "usgsGaugeId": "01411330",
+              "usgsGaugeId": "01410560",
               "noaaGaugeId": "8534720",
               "observedSource": "usgs",
               "navd88OffsetFromMllwFt": -2.39,
@@ -339,7 +340,7 @@ jobs:  update-forecast:
           git add forecast.json
           git diff --staged --quiet || git commit -m "Update Ventnor City forecast"
           for attempt in 1 2 3 4 5; do
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash
             if git push; then
               exit 0
             fi
