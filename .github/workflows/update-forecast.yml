@@ -340,7 +340,7 @@ jobs:
           git add forecast.json
           git diff --staged --quiet || git commit -m "Update Ventnor City forecast"
           for attempt in 1 2 3 4 5; do
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash
             if git push; then
               exit 0
             fi
