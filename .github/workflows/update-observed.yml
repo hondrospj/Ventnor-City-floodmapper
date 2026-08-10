@@ -359,7 +359,7 @@ jobs:
           def existing_matches_zone(payload, zone):
               if not payload or not payload.get("days"):
                   return False
-              expected_site = str(zone["usgsGaugeId"] or zone["noaaGaugeId"])
+              expected_site = str(zone["noaaGaugeId"] if zone.get("observedSource") == "noaa" else zone["usgsGaugeId"])
               if str(payload.get("site", "")) != expected_site:
                   return False
               expected_offset = float(zone["navd88OffsetFromMllwFt"])
