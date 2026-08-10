@@ -2,6 +2,8 @@ name: Update Ventnor City observed
 
 on:
   push:
+    branches:
+      - main
     paths:
       - .github/workflows/update-observed.yml
   schedule:
@@ -22,7 +24,10 @@ jobs:
 
     steps:
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Build observed archives
         shell: bash

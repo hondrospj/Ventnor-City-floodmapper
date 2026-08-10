@@ -13814,6 +13814,60 @@ body .timeline-trackRow{
   box-sizing:border-box !important;
 }
 
+.timeline-interval-toggle{
+  display:inline-grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:3px !important;
+  align-items:center !important;
+  width:112px !important;
+  min-width:112px !important;
+  height:34px !important;
+  min-height:34px !important;
+  padding:3px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(191,219,254,.22) !important;
+  background:rgba(11,18,32,.62) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06) !important;
+  flex:0 0 auto !important;
+}
+
+.timeline-interval-toggle button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:28px !important;
+  min-height:28px !important;
+  padding:0 6px !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:transparent !important;
+  color:#c7d2fe !important;
+  box-shadow:none !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:0 !important;
+  white-space:nowrap !important;
+  text-transform:none !important;
+  transform:none !important;
+}
+
+.timeline-interval-toggle button:hover:not(:disabled){
+  transform:none !important;
+  box-shadow:none !important;
+  color:#ffffff !important;
+  background:rgba(255,255,255,.08) !important;
+}
+
+.timeline-interval-toggle button.active{
+  background:linear-gradient(180deg, rgba(96,165,250,.36), rgba(96,165,250,.18)) !important;
+  color:#ffffff !important;
+  border-color:transparent !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 8px 16px rgba(15,23,42,.16) !important;
+}
+
 
 @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
   body.mobile-optimized #timelineDock #hourSlider{
@@ -13821,6 +13875,33 @@ body .timeline-trackRow{
     max-width:calc(100% - var(--pj-slider-thumb-size)) !important;
     margin-left:var(--pj-slider-thumb-half) !important;
     margin-right:var(--pj-slider-thumb-half) !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle{
+    width:92px !important;
+    min-width:92px !important;
+    height:30px !important;
+    min-height:30px !important;
+    padding:2px !important;
+    gap:2px !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle button{
+    height:26px !important;
+    min-height:26px !important;
+    padding:0 4px !important;
+    font-size:10px !important;
+  }
+}
+
+@media (max-width: 360px){
+  body.mobile-optimized .timeline-interval-toggle{
+    width:84px !important;
+    min-width:84px !important;
+  }
+
+  body.mobile-optimized .timeline-interval-toggle button{
+    font-size:9px !important;
   }
 }
 
@@ -13840,6 +13921,8 @@ html.win-compact-ui #timelineDock #hourSlider{
   <style id="v2-export-visibility-fix">
     #gifSpeedField[hidden]{display:none !important}
   </style>
+  <meta name="floodmapper-version" content="1.1" />
+  <script id="floodmapper-v11-geotiff" src="https://cdn.jsdelivr.net/npm/geotiff@2.1.3/dist-browser/geotiff.js"></script>
 </head>
 <body>
   <div id="topBanner">
@@ -14113,6 +14196,10 @@ html.win-compact-ui #timelineDock #hourSlider{
         <div class="timeline-top">
           <div class="timeline-controls">
             <button id="playBtn" type="button" class="playFab" aria-label="Play">▶</button>
+            <div id="timelineIntervalToggle" class="timeline-interval-toggle" role="group" aria-label="Timeline interval">
+              <button id="intervalHourBtn" class="active" type="button" data-interval-minutes="60" aria-pressed="true">1 hr</button>
+              <button id="intervalQuarterBtn" type="button" data-interval-minutes="15" aria-pressed="false">15 min</button>
+            </div>
           </div>
           <div id="timelineMeta" class="timeline-meta">--</div>
         </div>
@@ -14718,6 +14805,7 @@ function cloneStyleObject(value) {
     let currentBaseModeBeforeTopTide = "observed";
     let currentDatum = "mllw";
     let currentObservedResolution = "1hour";
+    let currentTimelineIntervalMinutes = 60;
     let currentRawSeriesHours = [];
 
     let playTimer = null;
@@ -14849,8 +14937,37 @@ function cloneStyleObject(value) {
       if (stageSub) stageSub.textContent = getDatumLongLabel();
     }
 
+    function getTimelineIntervalMinutes() {
+      return currentTimelineIntervalMinutes === 15 ? 15 : 60;
+    }
+
+    function getTimelineIntervalLabel(minutes = getTimelineIntervalMinutes()) {
+      return minutes === 15 ? "15 min" : "1 hour";
+    }
+
+    function updateTimelineIntervalUI() {
+      const minutes = getTimelineIntervalMinutes();
+      currentObservedResolution = minutes === 15 ? "15min" : "1hour";
+
+      const hourBtn = document.getElementById("intervalHourBtn");
+      const quarterBtn = document.getElementById("intervalQuarterBtn");
+      if (hourBtn) {
+        const active = minutes === 60;
+        hourBtn.classList.toggle("active", active);
+        hourBtn.setAttribute("aria-pressed", String(active));
+      }
+      if (quarterBtn) {
+        const active = minutes === 15;
+        quarterBtn.classList.toggle("active", active);
+        quarterBtn.setAttribute("aria-pressed", String(active));
+      }
+
+      const dock = document.getElementById("timelineDock");
+      if (dock) dock.dataset.timelineInterval = String(minutes);
+    }
+
     function updateObservedResolutionUI() {
-      currentObservedResolution = "1hour";
+      updateTimelineIntervalUI();
     }
 
     function getForecastScenarioConfig(scenario = currentForecastScenario) {
@@ -15073,7 +15190,11 @@ function parseStoredLocalNyToDate(timeEST) {
     }
 
     function buildObservedDayDisplaySeries(dayRecord, dateStr) {
-      const hours = Array.isArray(dayRecord?.hours) ? dayRecord.hours : [];
+      if (getTimelineIntervalMinutes() === 15) {
+        return buildObservedQuarterHourDisplaySeries(dayRecord, dateStr);
+      }
+
+      const hours = getObservedSourceHoursForDay(dayRecord);
       const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
       const byHour = new Map();
 
@@ -15088,7 +15209,7 @@ function parseStoredLocalNyToDate(timeEST) {
         }
       });
 
-      const fullArchiveDay = hours.length >= 20;
+      const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
       const out = [];
       for (let hourIndex = 0; hourIndex < 24; hourIndex++) {
         const resolved = getObservedArchiveEntryByDateHour(dateStr, hourIndex);
@@ -15207,6 +15328,174 @@ function parseStoredLocalNyToDate(timeEST) {
         }
       });
       return bestIndex;
+    }
+
+    function getObservedSourceHoursForDay(dayRecord) {
+      const dense = Array.isArray(dayRecord?.timelineRawHours) ? dayRecord.timelineRawHours : [];
+      if (dense.length) return dense;
+      return Array.isArray(dayRecord?.hours) ? dayRecord.hours : [];
+    }
+
+    function setTimelineSlotFields(entry, slotMs, intervalMinutes, options = {}) {
+      const date = new Date(slotMs);
+      const localIso = formatNyLocalIso(date);
+      const dateKey = localIso ? localIso.slice(0, 10) : (options.observedDate || entry?.observedDate || "");
+      const hourIndex = localIso ? Number(localIso.slice(11, 13)) : (entry?.hourIndex ?? null);
+      const minuteIndex = localIso ? Number(localIso.slice(14, 16)) : (entry?.minuteIndex ?? null);
+      return {
+        ...entry,
+        timeUtc: date.toISOString(),
+        displayTimeUtc: date.toISOString(),
+        displayTimeEST: localIso || entry?.displayTimeEST || entry?.timeEST || "",
+        timeEST: localIso || entry?.timeEST || entry?.displayTimeEST || "",
+        observedDate: dateKey,
+        hourIndex,
+        minuteIndex,
+        timelineIntervalMinutes: intervalMinutes,
+        observationInterval: intervalMinutes === 15 ? "15min" : "1hour"
+      };
+    }
+
+    function makeMissingTimelineEntry(slotMs, intervalMinutes, options = {}) {
+      const date = new Date(slotMs);
+      const localIso = formatNyLocalIso(date);
+      const dateKey = localIso ? localIso.slice(0, 10) : (options.observedDate || "");
+      return {
+        displayTimeEST: localIso,
+        timeEST: localIso,
+        displayTimeUtc: date.toISOString(),
+        timeUtc: date.toISOString(),
+        observedDate: dateKey,
+        hourIndex: localIso ? Number(localIso.slice(11, 13)) : null,
+        minuteIndex: localIso ? Number(localIso.slice(14, 16)) : null,
+        navd88StageFt: null,
+        stageFt: null,
+        value: null,
+        observationInterval: intervalMinutes === 15 ? "15min" : "1hour",
+        timelineIntervalMinutes: intervalMinutes,
+        sourceResolutionMinutes: options.sourceResolutionMinutes ?? null,
+        isMissingObservedHour: options.kind !== "forecast",
+        isMissingTimelineFrame: true
+      };
+    }
+
+    function makeInterpolatedTimelineEntry(beforeItem, afterItem, slotMs, intervalMinutes, options = {}) {
+      const beforeStage = getStageValue(beforeItem?.entry);
+      const afterStage = getStageValue(afterItem?.entry);
+      if (!Number.isFinite(beforeStage) || !Number.isFinite(afterStage) || afterItem.t <= beforeItem.t) {
+        return makeMissingTimelineEntry(slotMs, intervalMinutes, options);
+      }
+
+      const ratio = (slotMs - beforeItem.t) / (afterItem.t - beforeItem.t);
+      const stage = Number((beforeStage + ((afterStage - beforeStage) * ratio)).toFixed(4));
+      return setTimelineSlotFields({
+        ...beforeItem.entry,
+        navd88StageFt: stage,
+        stageFt: stage,
+        value: stage,
+        sourceResolutionMinutes: options.sourceResolutionMinutes ?? detectSeriesResolutionMinutes(options.sourceEntries || []),
+        isInterpolatedTimelineFrame: true,
+        interpolationStartUtc: new Date(beforeItem.t).toISOString(),
+        interpolationEndUtc: new Date(afterItem.t).toISOString()
+      }, slotMs, intervalMinutes, options);
+    }
+
+    function buildQuarterHourTimelineSeries(entries = [], options = {}) {
+      const intervalMinutes = 15;
+      const stepMs = intervalMinutes * 60 * 1000;
+      const valid = (Array.isArray(entries) ? entries : [])
+        .map((entry, idx) => ({ entry, idx, t: entryTimeMs(entry) }))
+        .filter(item => Number.isFinite(item.t))
+        .sort((a, b) => a.t - b.t || a.idx - b.idx);
+
+      if (!valid.length) return [];
+
+      const sourceResolutionMinutes = options.sourceResolutionMinutes ?? detectSeriesResolutionMinutes(entries);
+      const startMs = Number.isFinite(options.startMs) ? options.startMs : Math.ceil(valid[0].t / stepMs) * stepMs;
+      const endMs = Number.isFinite(options.endMs) ? options.endMs : Math.floor(valid[valid.length - 1].t / stepMs) * stepMs;
+      const maxGapMs = (Number(options.maxGapMinutes) || 75) * 60 * 1000;
+      const fillMissingSlots = options.fillMissingSlots !== false;
+
+      const exactBySlot = new Map();
+      valid.forEach(item => {
+        const slot = Math.round(item.t / stepMs) * stepMs;
+        if (Math.abs(item.t - slot) > stepMs / 2) return;
+        const existing = exactBySlot.get(slot);
+        if (!existing || Math.abs(item.t - slot) < Math.abs(existing.t - slot)) exactBySlot.set(slot, item);
+      });
+
+      const out = [];
+      let cursor = 0;
+      for (let slot = startMs; slot <= endMs; slot += stepMs) {
+        const exact = exactBySlot.get(slot);
+        if (exact && Number.isFinite(getStageValue(exact.entry))) {
+          out.push(setTimelineSlotFields({
+            ...exact.entry,
+            sourceResolutionMinutes
+          }, slot, intervalMinutes, options));
+          continue;
+        }
+
+        while (cursor < valid.length - 1 && valid[cursor + 1].t < slot) cursor += 1;
+        const before = valid[cursor];
+        const after = valid[cursor + 1];
+        if (before && after && before.t <= slot && after.t >= slot && after.t - before.t <= maxGapMs) {
+          const frame = makeInterpolatedTimelineEntry(before, after, slot, intervalMinutes, {
+            ...options,
+            sourceResolutionMinutes,
+            sourceEntries: entries
+          });
+          if (!frame.isMissingTimelineFrame || fillMissingSlots) out.push(frame);
+        } else if (fillMissingSlots) {
+          out.push(makeMissingTimelineEntry(slot, intervalMinutes, {
+            ...options,
+            sourceResolutionMinutes
+          }));
+        }
+      }
+
+      return out;
+    }
+
+    function buildForecastDisplaySeries(entries = currentRawSeriesHours) {
+      const source = Array.isArray(entries) ? entries : [];
+      if (getTimelineIntervalMinutes() !== 15) {
+        return source.map(entry => ({
+          ...entry,
+          timelineIntervalMinutes: 60,
+          observationInterval: entry.observationInterval || "1hour"
+        }));
+      }
+      return buildQuarterHourTimelineSeries(source, {
+        kind: "forecast",
+        fillMissingSlots: false,
+        maxGapMinutes: 75
+      });
+    }
+
+    function buildObservedQuarterHourDisplaySeries(dayRecord, dateStr) {
+      const source = getObservedSourceHoursForDay(dayRecord);
+      const start = parseStoredLocalNyToDate(`${dateStr}T00:00`);
+      const end = parseStoredLocalNyToDate(`${dateStr}T23:45`);
+      const sourceResolutionMinutes = detectSeriesResolutionMinutes(source);
+      const series = buildQuarterHourTimelineSeries(source, {
+        kind: "observed",
+        observedDate: dateStr,
+        startMs: start ? start.getTime() : null,
+        endMs: end ? end.getTime() : null,
+        sourceResolutionMinutes,
+        fillMissingSlots: true,
+        maxGapMinutes: 75
+      });
+
+      return series.map((entry, idx) => ({
+        ...entry,
+        observedDate: dateStr,
+        quarterHourIndex: idx,
+        classification: dayRecord?.classification || entry.classification || "none",
+        peakNAVD88: dayRecord?.peakNAVD88 ?? entry.peakNAVD88,
+        sourceResolutionMinutes
+      }));
     }
 
 function setDatumHelpOpen(isOpen) {
@@ -19464,7 +19753,8 @@ function getEntryESTDate(entry) {
       rawDays.forEach(day => {
         const dateStr = String(day?.date || "");
         const hours = Array.isArray(day?.hours) ? day.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((entry, idx) => {
           if (!Number.isFinite(getStageValue(entry))) return;
 
@@ -19504,11 +19794,24 @@ function getEntryESTDate(entry) {
       const sortedRecords = records.slice().sort((a, b) => scoreObservedDayRecord(a) - scoreObservedDayRecord(b));
       const base = { ...sortedRecords[sortedRecords.length - 1] };
       const byHour = new Map();
+      const timelineRawHours = [];
 
       sortedRecords.forEach(record => {
         const hours = Array.isArray(record?.hours) ? record.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((hour, idx) => {
+          if (entryTimeMs(hour) != null) {
+            timelineRawHours.push({
+              ...hour,
+              observedDate: record.date,
+              classification: record.classification || base.classification || "none",
+              peakNAVD88: record.peakNAVD88 ?? base.peakNAVD88,
+              sourceHourIndex: idx,
+              sourceResolutionMinutes
+            });
+          }
+
           let hourIndex = getStoredEntryHourIndex(hour);
           if (!(hourIndex >= 0 && hourIndex <= 23) && fullArchiveDay && idx >= 0 && idx <= 23) {
             hourIndex = idx;
@@ -19546,6 +19849,13 @@ function getEntryESTDate(entry) {
           }));
       } else {
         base.hours = Array.isArray(base.hours) ? base.hours : [];
+      }
+
+      if (timelineRawHours.length) {
+        base.timelineRawHours = timelineRawHours
+          .sort((a, b) => (entryTimeMs(a) ?? 0) - (entryTimeMs(b) ?? 0));
+      } else {
+        base.timelineRawHours = Array.isArray(base.hours) ? base.hours : [];
       }
 
       return base;
@@ -19736,8 +20046,9 @@ function formatSelectedObservedDate(dateStr) {
     function buildObservedFlatHours() {
       const flat = [];
       getObservedDays().forEach(day => {
-        const hours = Array.isArray(day.hours) ? day.hours : [];
-        const fullArchiveDay = hours.length >= 20;
+        const hours = getObservedSourceHoursForDay(day);
+        const sourceResolutionMinutes = detectSeriesResolutionMinutes(hours);
+        const fullArchiveDay = hours.length >= 20 && (!sourceResolutionMinutes || sourceResolutionMinutes >= 45);
         hours.forEach((hour, idx) => {
           const safeHour = fullArchiveDay && idx >= 0 && idx <= 23
             ? idx
@@ -20021,9 +20332,9 @@ function formatSelectedObservedDate(dateStr) {
       timelineValue.textContent = currentTime;
 
       if (currentViewType === "forecast") {
-        label.textContent = getForecastScenarioLabel();
+        label.textContent = `${getForecastScenarioLabel()} • ${getTimelineIntervalLabel()}`;
       } else if (currentViewType === "observed-day") {
-        label.textContent = "Observed • 1 hour";
+        label.textContent = `Observed • ${getTimelineIntervalLabel()}`;
       } else {
         label.textContent = "Top 10 Highest Floods";
       }
@@ -20033,7 +20344,7 @@ function formatSelectedObservedDate(dateStr) {
       if (timelineDock) timelineDock.classList.toggle("top-tide-crest-only", Boolean(crestOnlyTopTide));
 
       if (crestOnlyTopTide) {
-        const msg = "Hourly observations not available; maximum flood extent plotted instead.";
+        const msg = "Detailed observations not available; maximum flood extent plotted instead.";
         timelineMeta.textContent = msg;
         timelineStart.textContent = msg;
         timelineEnd.textContent = "";
@@ -20063,7 +20374,7 @@ function formatSelectedObservedDate(dateStr) {
       if (currentViewType === "top-tide") {
         return (entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest")
           ? "Maximum extent only"
-          : "Hourly record";
+          : `${getTimelineIntervalLabel()} record`;
       }
       return "";
     }
@@ -20072,13 +20383,13 @@ function formatSelectedObservedDate(dateStr) {
       document.getElementById("timeText").textContent = formatSnapshotTime(entry);
       if (entry?.isMissingObservedHour || !Number.isFinite(rawStage)) {
         document.getElementById("stageText").textContent = "No data";
-        document.getElementById("stageSubText").textContent = "No observed record for this hour";
+        document.getElementById("stageSubText").textContent = "No observed record for this time";
       } else {
         document.getElementById("stageText").textContent = formatStageForDisplay(rawStage);
         const stageSub = currentViewType === "forecast"
           ? getForecastScenarioLabel()
           : currentViewType === "top-tide"
-            ? ((entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest") ? "Maximum extent only" : "Hourly record")
+            ? ((entry?.isHistoricalTopTide || currentSeriesHours.length <= 1 || entry?.observationInterval === "crest") ? "Maximum extent only" : `${getTimelineIntervalLabel()} record`)
             : getDatumLabel();
         document.getElementById("stageSubText").textContent = stageSub;
       }
@@ -20186,7 +20497,7 @@ function formatSelectedObservedDate(dateStr) {
       slider.value = String(index);
 
       if (displayStage == null) {
-        toast("No observed record for this hour.");
+        toast("No observed record for this time.");
         ++lastRenderToken;
         clearFloodLayer();
         return;
@@ -20206,21 +20517,21 @@ function formatSelectedObservedDate(dateStr) {
       slider.value = String(Math.min(currentHourIndex, currentSeriesHours.length - 1));
     }
 
-    async function loadForecast() {
+    async function loadForecast(preferredEntry = null) {
       forecastData = await fetchJson(withFreshJsonUrl(FORECAST_URL));
       clearExportAvailabilityCache();
       currentRawSeriesHours = getActiveForecastHours();
-      currentSeriesHours = currentRawSeriesHours.slice();
+      currentSeriesHours = buildForecastDisplaySeries(currentRawSeriesHours);
       currentViewType = "forecast";
       currentTopTideIndex = null;
       currentSelectedLabel = getForecastScenarioLabel();
       currentSelectedSubLabel = getForecastScenarioPercentileLabel();
-      currentRangeLabel = currentRawSeriesHours.length
-        ? `${formatHourEntryTime(currentRawSeriesHours[0])} to ${formatHourEntryTime(currentRawSeriesHours[currentRawSeriesHours.length - 1])}`
+      currentRangeLabel = currentSeriesHours.length
+        ? `${formatHourEntryTime(currentSeriesHours[0])} to ${formatHourEntryTime(currentSeriesHours[currentSeriesHours.length - 1])}`
         : getForecastScenarioLabel();
 
       syncSliderBounds();
-      currentHourIndex = getPeakHourIndex(currentSeriesHours);
+      currentHourIndex = preferredEntry ? findClosestEntryIndex(currentSeriesHours, preferredEntry) : getPeakHourIndex(currentSeriesHours);
       document.getElementById("hourSlider").value = String(currentHourIndex);
     }
 
@@ -20319,13 +20630,15 @@ function formatSelectedObservedDate(dateStr) {
             const localIso = formatNyLocalIso(dt);
             const dateKey = localIso.slice(0, 10);
             const hourIndex = Number(localIso.slice(11, 13));
-            if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || !Number.isInteger(hourIndex)) return;
+            const minuteIndex = Number(localIso.slice(14, 16));
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || !Number.isInteger(hourIndex) || !Number.isInteger(minuteIndex)) return;
             rows.push({
               displayTimeEST: localIso,
               displayTimeUtc: dt.toISOString(),
               timeUtc: dt.toISOString(),
               observedDate: dateKey,
               hourIndex,
+              minuteIndex,
               navd88StageFt: n,
               stageFt: n,
               value: n,
@@ -20338,19 +20651,8 @@ function formatSelectedObservedDate(dateStr) {
         });
       });
 
-      const byDateHour = new Map();
-      rows.forEach(row => {
-        const key = `${row.observedDate}|${pad2(row.hourIndex)}`;
-        const existing = byDateHour.get(key);
-        const existingStage = existing ? getStageValue(existing) : null;
-        const rowStage = getStageValue(row);
-        if (!existing || (!Number.isFinite(existingStage) && Number.isFinite(rowStage))) {
-          byDateHour.set(key, row);
-        }
-      });
-
       const byDate = new Map();
-      Array.from(byDateHour.values())
+      rows
         .sort((a, b) => String(a.displayTimeEST).localeCompare(String(b.displayTimeEST)))
         .forEach(row => {
           if (!byDate.has(row.observedDate)) byDate.set(row.observedDate, []);
@@ -20381,7 +20683,7 @@ function formatSelectedObservedDate(dateStr) {
       url.searchParams.set("startDT", startDate);
       url.searchParams.set("endDT", endDate);
       url.searchParams.set("siteStatus", "all");
-      const data = await fetchJson(withFreshJsonUrl(url.href));
+      const data = await fetchJson(url.href);
       return normalizeUsgsIvObservedDays(data);
     }
 
@@ -20675,7 +20977,7 @@ function populateCalendarSelectors() {
 
       selectedObservedDate = dateStr;
       currentMonthKey = dateStr.slice(0, 7);
-      currentRawSeriesHours = Array.isArray(dayRecord.hours) ? dayRecord.hours : [];
+      currentRawSeriesHours = getObservedSourceHoursForDay(dayRecord);
       currentSeriesHours = buildObservedDayDisplaySeries(dayRecord, dateStr);
       currentViewType = "observed-day";
       currentTopTideIndex = null;
@@ -20739,6 +21041,44 @@ function populateCalendarSelectors() {
       await renderCalendar();
       await renderHour(currentHourIndex);
       renderTopTides();
+    }
+
+    async function setTimelineIntervalMinutes(minutes) {
+      const nextMinutes = Number(minutes) === 15 ? 15 : 60;
+      if (nextMinutes === getTimelineIntervalMinutes()) return;
+
+      const referenceEntry = currentSeriesHours[currentHourIndex] || null;
+      stopPlayback();
+      toast("");
+      currentTimelineIntervalMinutes = nextMinutes;
+      updateTimelineIntervalUI();
+      clearFloodLayer();
+
+      if (currentViewType === "forecast" || currentDataMode === "forecast") {
+        currentDataMode = "forecast";
+        currentViewType = "forecast";
+        updateDataModeButtons();
+        await loadForecast(referenceEntry);
+        renderTopTides();
+        await renderHour(currentHourIndex);
+        return;
+      }
+
+      if (currentViewType === "observed-day" && selectedObservedDate) {
+        await loadObservedDay(selectedObservedDate, null, referenceEntry);
+        return;
+      }
+
+      if (currentViewType === "top-tide" && currentTopTideIndex != null) {
+        topTideEvents = buildTopTideEvents();
+        const nextIndex = Math.min(currentTopTideIndex, Math.max(0, topTideEvents.length - 1));
+        if (topTideEvents[nextIndex]) {
+          await loadTopTideEvent(nextIndex, referenceEntry);
+        }
+        return;
+      }
+
+      refreshCurrentDisplayText();
     }
 
     async function switchOverlayMode(mode) {
@@ -20951,7 +21291,7 @@ function populateCalendarSelectors() {
 function startPlayback() {
       stopPlayback({ resetDayGuard: false, closePrompt: true });
       if (!currentSeriesHours.length) {
-        toast("No hourly frames are available to play for this selection.");
+        toast("No timeline frames are available to play for this selection.");
         updatePlayPauseButton();
         return;
       }
@@ -21647,6 +21987,14 @@ function startPlayback() {
         const index = Math.max(0, Math.min(Math.round(Number(e.target.value) || 0), currentSeriesHours.length - 1));
         e.target.value = String(index);
         await renderHour(index);
+      });
+
+      document.getElementById("intervalHourBtn")?.addEventListener("click", () => {
+        setTimelineIntervalMinutes(60).catch(err => toast(err.message));
+      });
+
+      document.getElementById("intervalQuarterBtn")?.addEventListener("click", () => {
+        setTimelineIntervalMinutes(15).catch(err => toast(err.message));
       });
 
       document.getElementById("opacitySlider").addEventListener("input", e => {
@@ -33609,6 +33957,282 @@ html body #mapTitleBadge #mapTitleLogo:not([src]){
     }, true);
   });
   window.VentnorCityMobileFollowup = window.ShorelyMobileFollowup = { apply: apply, schedule: schedule };
+})();
+</script>
+
+
+<style id="floodmapper-v11-depth-query-style">
+  .shorely-v11-depth-popup .leaflet-popup-content-wrapper{
+    border:1px solid rgba(125,249,255,.34);border-radius:18px;
+    background:rgba(8,15,31,.97);color:#edf7ff;
+    box-shadow:0 20px 55px rgba(2,6,23,.48),inset 0 1px 0 rgba(255,255,255,.05)
+  }
+  .shorely-v11-depth-popup .leaflet-popup-content{margin:16px 18px 17px}
+  .shorely-v11-depth-popup .leaflet-popup-tip{background:#08101f;border:1px solid rgba(125,249,255,.2)}
+  .shorely-v11-depth-popup .leaflet-popup-close-button{
+    position:absolute!important;top:8px!important;right:8px!important;left:auto!important;
+    display:grid!important;place-items:center!important;width:30px!important;height:30px!important;
+    border:1px solid rgba(191,219,254,.25)!important;border-radius:10px!important;
+    background:rgba(30,41,59,.9)!important;color:#d8f9ff!important;font-size:23px!important;
+    line-height:28px!important;text-align:center!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important
+  }
+  .shorely-v11-depth-query{min-width:240px;max-width:calc(100vw - 70px);color:#edf7ff;font:16px/1.25 Inter,system-ui,sans-serif;text-align:center}
+  .shorely-v11-depth-query h3{margin:0 0 10px;padding:0 28px;color:#c9d8ee;font-size:20px}
+  .shorely-v11-depth-value{color:#7df9ff;font-size:48px;line-height:1;font-weight:950;letter-spacing:-.03em}
+  .shorely-v11-depth-note{margin-top:8px;color:#8fa5bf;font-size:10px;font-weight:750;line-height:1.3}
+  #map[data-clickable-depth="true"]{cursor:crosshair}
+  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+    .shorely-v11-depth-query{min-width:min(238px,calc(100vw - 86px))}
+    .shorely-v11-depth-query h3{padding:0 34px;font-size:18px}
+    .shorely-v11-depth-value{font-size:43px}
+    .shorely-v11-depth-popup .leaflet-popup-close-button{top:7px!important;right:7px!important;width:36px!important;height:36px!important;line-height:34px!important}
+  }
+</style>
+<script id="floodmapper-v11-depth-query">
+(function(){
+  "use strict";
+
+  const V11_RASTERS = {"VentnorCityDepth":{"id":"ventnor-city","width":2400,"height":2048,"bounds":[[39.3304968,-74.506437],[39.358618,-74.463995]],"noDataValue":-9999,"geoTransform":[490304.9999999895,5,0,191304.99999999919,0,-5],"cogUrl":"https://floodmapperv1.b-cdn.net/MasterRasters/cog-cors/ventnor-city.png"}};
+  const V11_EPSG_6527 = "+proj=tmerc +lat_0=38.8333333333333 +lon_0=-74.5 +k=0.9999 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs +type=crs";
+  const V11_DEPTH_COLORS = [
+    { rgb:[207,239,255], value:0.05 }, { rgb:[39,105,219], value:0.175 },
+    { rgb:[91,95,214], value:0.375 }, { rgb:[95,45,168], value:0.75 },
+    { rgb:[124,66,196], value:1.25 }, { rgb:[167,63,161], value:1.75 },
+    { rgb:[224,90,174], value:2.25 }, { rgb:[177,54,123], value:2.75 },
+    { rgb:[165,36,64], value:3.5 }, { rgb:[63,0,10], value:4.5 },
+    { rgb:[58,0,8], value:5.5 }
+  ];
+  const v11TiffImages = new Map();
+  const v11GroundSamples = new Map();
+  const v11OverlayCanvases = new Map();
+  let v11Popup = null;
+  let v11PopupContext = null;
+  let v11Bound = false;
+  let v11RequestToken = 0;
+
+  function v11ActivePrefix(){
+    try { return String(SITE_CONFIG?.depthPngPrefix || TOWN_CONFIG?.overlays?.depthPngPrefix || ""); }
+    catch (_) { return ""; }
+  }
+
+  function v11ActiveRaster(){
+    return V11_RASTERS[v11ActivePrefix()] || null;
+  }
+
+  function v11Stage(){
+    try {
+      const raw = getStageValue(currentSeriesHours[currentHourIndex]);
+      if (!Number.isFinite(raw)) return null;
+      const displayed = getOverlayStage(raw);
+      return Number.isFinite(displayed) ? displayed : Number(raw);
+    } catch (_) { return null; }
+  }
+
+  function v11Heading(){
+    try {
+      if (currentDataMode === "forecast") return "Forecast Water Depth";
+      if (currentDataMode === "observed") return "Water Depth";
+    } catch (_) {}
+    return "Modeled Water Depth";
+  }
+
+  function v11PopupHtml(value, state){
+    const display = state === "loading" ? "…" : (Number.isFinite(value) ? value.toFixed(2) + " ft" : "N/A");
+    const note = state === "approximate" ? '<div class="shorely-v11-depth-note">Depth estimated from the displayed map class.</div>' : "";
+    return '<div class="shorely-v11-depth-query" role="status" aria-live="polite">' +
+      '<h3>' + v11Heading() + '</h3><div class="shorely-v11-depth-value">' + display + '</div>' + note + '</div>';
+  }
+
+  function v11OpenPopup(latlng){
+    if (!map || !latlng) return null;
+    if (v11Popup && map.hasLayer(v11Popup)) map.removeLayer(v11Popup);
+    const isMobile = window.matchMedia("(max-width:900px),(max-height:560px) and (pointer:coarse)").matches;
+    v11Popup = L.popup({
+      className:"shorely-v11-depth-popup",
+      maxWidth:isMobile ? Math.max(240, Math.min(300, window.innerWidth - 28)) : 300,
+      minWidth:0,autoClose:false,closeOnClick:false,closeButton:true,keepInView:true,autoPan:true,
+      autoPanPaddingTopLeft:isMobile ? L.point(10,126) : L.point(16,16),
+      autoPanPaddingBottomRight:isMobile ? L.point(10,140) : L.point(16,16)
+    }).setLatLng(latlng).setContent(v11PopupHtml(null,"loading")).addTo(map);
+    v11Popup.on("remove", function(){
+      if (v11PopupContext && v11PopupContext.popup === v11Popup) v11PopupContext = null;
+    });
+    return v11Popup;
+  }
+
+  async function v11GetTiffImage(raster){
+    if (!raster || !window.GeoTIFF?.fromUrl) return null;
+    if (!v11TiffImages.has(raster.id)) {
+      v11TiffImages.set(raster.id, GeoTIFF.fromUrl(raster.cogUrl).then(function(tiff){ return tiff.getImage(); }).catch(function(error){
+        v11TiffImages.delete(raster.id);
+        throw error;
+      }));
+    }
+    return v11TiffImages.get(raster.id);
+  }
+
+  function v11InsideRaster(raster, lat, lon){
+    const bounds = raster?.bounds;
+    return Array.isArray(bounds) && bounds.length === 2 &&
+      lat >= Number(bounds[0][0]) && lat <= Number(bounds[1][0]) &&
+      lon >= Number(bounds[0][1]) && lon <= Number(bounds[1][1]);
+  }
+
+  async function v11SampleGround(raster, lat, lon){
+    if (!raster || !v11InsideRaster(raster,lat,lon) || !window.proj4) return null;
+    const cacheKey = raster.id + ":" + lat.toFixed(6) + ":" + lon.toFixed(6);
+    if (v11GroundSamples.has(cacheKey)) return v11GroundSamples.get(cacheKey);
+    const promise = (async function(){
+      if (!proj4.defs("EPSG:6527")) proj4.defs("EPSG:6527", V11_EPSG_6527);
+      const image = await v11GetTiffImage(raster);
+      if (!image) return null;
+      const xy = proj4("EPSG:4326","EPSG:6527",[lon,lat]);
+      const transform = raster.geoTransform || [];
+      const originX = Number(transform[0]), pixelWidth = Number(transform[1]), rotX = Number(transform[2]);
+      const originY = Number(transform[3]), rotY = Number(transform[4]), pixelHeight = Number(transform[5]);
+      if (![originX,pixelWidth,rotX,originY,rotY,pixelHeight].every(Number.isFinite) || rotX !== 0 || rotY !== 0) return null;
+      const col = Math.floor((xy[0] - originX) / pixelWidth);
+      const row = Math.floor((xy[1] - originY) / pixelHeight);
+      if (col < 0 || row < 0 || col >= raster.width || row >= raster.height) return null;
+      const data = await image.readRasters({ window:[col,row,col + 1,row + 1], width:1, height:1, interleave:true });
+      const value = Number(data[0]);
+      if (!Number.isFinite(value)) return null;
+      if (raster.noDataValue != null && Math.abs(value - Number(raster.noDataValue)) < 0.0001) return null;
+      return value;
+    })();
+    v11GroundSamples.set(cacheKey,promise);
+    try { return await promise; }
+    catch (error) { v11GroundSamples.delete(cacheKey); throw error; }
+  }
+
+  function v11ClosestDepthColor(rgba){
+    if (!rgba || rgba[3] <= 8) return { visible:false, value:0 };
+    let best = null;
+    for (const item of V11_DEPTH_COLORS) {
+      const distance = (rgba[0] - item.rgb[0]) ** 2 + (rgba[1] - item.rgb[1]) ** 2 + (rgba[2] - item.rgb[2]) ** 2;
+      if (!best || distance < best.distance) best = { distance, value:item.value };
+    }
+    return best ? { visible:true, value:best.value, distance:best.distance } : null;
+  }
+
+  function v11LoadOverlayCanvas(url){
+    if (v11OverlayCanvases.has(url)) return v11OverlayCanvases.get(url);
+    const promise = new Promise(function(resolve,reject){
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.decoding = "async";
+      image.onload = function(){
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = image.naturalWidth;
+          canvas.height = image.naturalHeight;
+          const context = canvas.getContext("2d",{willReadFrequently:true});
+          if (!context) throw new Error("Depth canvas is unavailable.");
+          context.drawImage(image,0,0);
+          resolve({ context:context, width:canvas.width, height:canvas.height });
+        } catch (error) { reject(error); }
+      };
+      image.onerror = function(){ reject(new Error("Depth overlay could not be loaded.")); };
+      image.src = url;
+    }).catch(function(error){ v11OverlayCanvases.delete(url); throw error; });
+    v11OverlayCanvases.set(url,promise);
+    return promise;
+  }
+
+  async function v11SampleDisplayedDepth(lat,lon,stage){
+    if (!Number.isFinite(stage) || !floodLatLngBounds) return null;
+    const record = await getOverlayRecord("depth",stage);
+    if (!record?.url) return null;
+    const canvas = await v11LoadOverlayCanvas(record.url);
+    const west = floodLatLngBounds.getWest(), east = floodLatLngBounds.getEast();
+    const south = floodLatLngBounds.getSouth(), north = floodLatLngBounds.getNorth();
+    const x = Math.floor(((lon - west) / (east - west)) * canvas.width);
+    const y = Math.floor(((north - lat) / (north - south)) * canvas.height);
+    if (x < 0 || y < 0 || x >= canvas.width || y >= canvas.height) return null;
+    return v11ClosestDepthColor(canvas.context.getImageData(x,y,1,1).data);
+  }
+
+  async function v11DepthAt(latlng){
+    const stage = v11Stage();
+    if (!Number.isFinite(stage)) return { value:null, state:"unavailable" };
+    const raster = v11ActiveRaster();
+    const results = await Promise.allSettled([
+      raster ? v11SampleGround(raster,latlng.lat,latlng.lng) : Promise.resolve(null),
+      v11SampleDisplayedDepth(latlng.lat,latlng.lng,stage)
+    ]);
+    const elevation = results[0].status === "fulfilled" ? results[0].value : null;
+    const rendered = results[1].status === "fulfilled" ? results[1].value : null;
+    if (Number.isFinite(elevation)) {
+      const exact = Math.max(0,stage - elevation);
+      return { value:rendered && rendered.visible === false ? 0 : exact, state:"exact" };
+    }
+    if (rendered) return { value:rendered.visible ? rendered.value : 0, state:"approximate" };
+    return { value:null, state:"unavailable" };
+  }
+
+  async function v11UpdatePopup(context){
+    if (!context || !context.popup || context.popup !== v11Popup || !map?.hasLayer(context.popup)) return;
+    const token = ++v11RequestToken;
+    try {
+      const result = await v11DepthAt(context.latlng);
+      if (token !== v11RequestToken || context.popup !== v11Popup || !map?.hasLayer(context.popup)) return;
+      context.popup.setContent(v11PopupHtml(result.value,result.state));
+      context.popup.update();
+    } catch (error) {
+      console.warn("V1.1 depth query failed",error);
+      if (token === v11RequestToken && context.popup === v11Popup && map?.hasLayer(context.popup)) {
+        context.popup.setContent(v11PopupHtml(null,"unavailable"));
+        context.popup.update();
+      }
+    }
+  }
+
+  function v11HandleClick(event){
+    if (!event?.latlng) return;
+    window.setTimeout(function(){
+      const popup = v11OpenPopup(event.latlng);
+      if (!popup) return;
+      v11PopupContext = { popup:popup, latlng:L.latLng(event.latlng.lat,event.latlng.lng) };
+      v11UpdatePopup(v11PopupContext);
+    },0);
+  }
+
+  function v11RefreshPopup(){
+    if (v11PopupContext) v11UpdatePopup(v11PopupContext);
+  }
+
+  function v11Bind(){
+    if (v11Bound) return true;
+    try {
+      if (typeof map === "undefined" || !map || typeof renderHour !== "function") return false;
+      map.on("click",v11HandleClick);
+      const container = map.getContainer();
+      container.dataset.clickableDepth = "true";
+      container.setAttribute("title","Click the map for modeled water depth");
+      container.setAttribute("aria-label","Interactive flood map. Click the map for modeled water depth.");
+      const originalRenderHour = renderHour;
+      const wrappedRenderHour = async function(){
+        const result = await originalRenderHour.apply(this,arguments);
+        v11RefreshPopup();
+        return result;
+      };
+      wrappedRenderHour.__floodmapperV11DepthWrapped = true;
+      renderHour = wrappedRenderHour;
+      v11Bound = true;
+      return true;
+    } catch (error) {
+      console.warn("Could not initialize V1.1 clickable depth",error);
+      return false;
+    }
+  }
+
+  if (!v11Bind()) {
+    let attempts = 0;
+    const timer = window.setInterval(function(){
+      attempts += 1;
+      if (v11Bind() || attempts >= 120) window.clearInterval(timer);
+    },100);
+  }
 })();
 </script>
 
