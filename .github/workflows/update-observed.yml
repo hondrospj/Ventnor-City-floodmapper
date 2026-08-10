@@ -74,7 +74,9 @@ jobs:
           ARCHIVE_START_DATE = "2007-10-01"
           PRIMARY_PATH = Path("observed.json")
           OVERFLOW_PATH = Path("observedoverflow.json")
+          TOP_TIDES_PATH = Path("toptides.json")
           CHUNK_DAYS = 31
+          TOP_TIDE_LIMIT = 10
 
           def fetch_json(url):
               last_error = None
@@ -256,6 +258,70 @@ jobs:
               payload["fullArchiveBuiltISO"] = now_utc.replace(microsecond=0).isoformat().replace("+00:00", "Z")
               return payload
 
+          def format_display_date(date_str):
+              try:
+                  dt = datetime.strptime(str(date_str), "%Y-%m-%d")
+              except Exception:
+                  return str(date_str or "")
+              return dt.strftime("%b %-d, %Y")
+
+          def day_peak_navd88(day):
+              try:
+                  value = float(day.get("peakNAVD88"))
+                  if math.isfinite(value):
+                      return value
+              except Exception:
+                  pass
+              values = []
+              for hour in day.get("hours") or []:
+                  try:
+                      value = float(hour.get("navd88StageFt"))
+                      if math.isfinite(value):
+                          values.append(value)
+                  except Exception:
+                      continue
+              return max(values) if values else None
+
+          def day_peak_mllw(day, zone, peak_navd88):
+              try:
+                  value = float(day.get("peakMLLW"))
+                  if math.isfinite(value):
+                      return value
+              except Exception:
+                  pass
+              if peak_navd88 is None:
+                  return None
+              return round_hundredth(peak_navd88 - zone["navd88OffsetFromMllwFt"])
+
+          def top_tide_rows(zone, payload):
+              rows = []
+              seen_dates = set()
+              candidates = []
+              for day in payload.get("days") or []:
+                  date = str(day.get("date", ""))[:10]
+                  if not date or date in seen_dates:
+                      continue
+                  peak_navd88 = day_peak_navd88(day)
+                  if peak_navd88 is None or not math.isfinite(peak_navd88):
+                      continue
+                  peak_mllw = day_peak_mllw(day, zone, peak_navd88)
+                  candidates.append((peak_navd88, date, peak_mllw, day))
+                  seen_dates.add(date)
+              for rank, (peak_navd88, date, peak_mllw, day) in enumerate(sorted(candidates, reverse=True)[:TOP_TIDE_LIMIT], 1):
+                  rows.append({
+                      "rank": rank,
+                      "height_ft": round_hundredth(peak_navd88),
+                      "height_navd88_ft": round_hundredth(peak_navd88),
+                      "height_mllw_ft": round_hundredth(peak_mllw) if peak_mllw is not None else None,
+                      "date": date,
+                      "display_date": format_display_date(date),
+                      "zoneId": zone["id"],
+                      "zoneLabel": zone["label"],
+                      "gaugeName": zone["gaugeName"],
+                      "source": "observed-archive",
+                  })
+              return rows
+
           def load_existing_zone(zone):
               candidates = []
               existing_site = ""
@@ -288,7 +354,32 @@ jobs:
           def existing_matches_zone(payload, zone):
               if not payload or not payload.get("days"):
                   return False
-              return str(payload.get("site", "")) == str(zone["usgsGaugeId"] or zone["noaaGaugeId"])
+              expected_site = str(zone["usgsGaugeId"] or zone["noaaGaugeId"])
+              if str(payload.get("site", "")) != expected_site:
+                  return False
+              expected_offset = float(zone["navd88OffsetFromMllwFt"])
+              days = payload.get("days") or []
+              sample_indexes = sorted({0, len(days) // 2, len(days) - 1})
+              for index in sample_indexes:
+                  if index < 0 or index >= len(days):
+                      continue
+                  day = days[index]
+                  hours = day.get("hours") if isinstance(day, dict) else []
+                  if not isinstance(hours, list) or not hours:
+                      continue
+                  hour_indexes = sorted({0, len(hours) // 2, len(hours) - 1})
+                  for hour_index in hour_indexes:
+                      hour = hours[hour_index]
+                      try:
+                          navd88 = float(hour["navd88StageFt"])
+                          mllw = float(hour["mllwStageFt"])
+                      except (KeyError, TypeError, ValueError):
+                          continue
+                      if abs(mllw - (navd88 - expected_offset)) > 0.011:
+                          return False
+                  if day.get("classification") and day.get("classification") != classify_peak(day.get("peakNAVD88"), zone["thresholdsNavd88"]):
+                      return False
+              return True
 
           def merge_recent(zone, payload, now_utc):
               archive_end = now_utc.astimezone(LOCAL_ZONE).date()
@@ -382,26 +473,39 @@ jobs:
                   print("Not midnight in local time; no observed update needed.")
                   return
               if not IS_SPLIT:
-                  payload = zone_payload(ZONES[0], now_utc)
+                  zone = ZONES[0]
+                  payload = zone_payload(zone, now_utc)
+                  top_tides = {
+                      "generatedAt": now_utc.isoformat().replace("+00:00", "Z"),
+                      "schema": "single-zone-top-tides-v1",
+                      "town": TOWN_NAME,
+                      "toptides": top_tide_rows(zone, payload),
+                  }
                   payload.pop("zoneId", None)
                   payload.pop("zoneName", None)
                   PRIMARY_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+                  TOP_TIDES_PATH.write_text(json.dumps(top_tides, indent=2) + "\n", encoding="utf-8")
                   print("Wrote", PRIMARY_PATH, "days", len(payload.get("days", [])))
+                  print("Wrote", TOP_TIDES_PATH, "rows", len(top_tides["toptides"]))
                   return
               archive_start = datetime.strptime(ARCHIVE_START_DATE, "%Y-%m-%d").date()
               archive_end = now_utc.astimezone(LOCAL_ZONE).date()
               overflow_years, primary_years, split_year = year_split(archive_start, archive_end)
               primary = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-observed-v1", "lastProcessedISO": now_utc.isoformat().replace("+00:00", "Z"), "splitArchive": {"part": "primary", "contains": f"{min(primary_years)}-{max(primary_years)}", "splitYear": split_year, "companion": str(OVERFLOW_PATH)}, "zones": {}}
               overflow = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-observed-v1", "lastProcessedISO": now_utc.isoformat().replace("+00:00", "Z"), "splitArchive": {"part": "overflow", "contains": f"{min(overflow_years)}-{max(overflow_years)}", "splitYear": split_year, "companion": str(PRIMARY_PATH)}, "zones": {}}
+              top_tides = {"town": TOWN_NAME, "defaultZoneId": DEFAULT_ZONE_ID, "schema": "multi-zone-top-tides-v1", "generatedAt": now_utc.isoformat().replace("+00:00", "Z"), "zones": {}}
               for zone in ZONES:
                   payload = zone_payload(zone, now_utc)
                   older, newer = split_days(payload.get("days", []), overflow_years, primary_years)
                   primary["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "observed": with_days(payload, newer, "primary", "newer-years", split_year)}
                   overflow["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "observed": with_days(payload, older, "overflow", "older-years", split_year)}
+                  top_tides["zones"][zone["id"]] = {"label": zone["label"], "gaugeName": zone["gaugeName"], "toptides": top_tide_rows(zone, payload)}
                   print(zone["id"], "days", len(payload.get("days", [])))
               PRIMARY_PATH.write_text(json.dumps(primary, indent=2) + "\n", encoding="utf-8")
               OVERFLOW_PATH.write_text(json.dumps(overflow, indent=2) + "\n", encoding="utf-8")
+              TOP_TIDES_PATH.write_text(json.dumps(top_tides, indent=2) + "\n", encoding="utf-8")
               print("Wrote", PRIMARY_PATH, "and", OVERFLOW_PATH)
+              print("Wrote", TOP_TIDES_PATH)
 
           if __name__ == "__main__":
               main()
@@ -412,10 +516,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add observed.json observedoverflow.json 2>/dev/null || git add observed.json
+          git add observed.json observedoverflow.json toptides.json 2>/dev/null || git add observed.json toptides.json
           git diff --staged --quiet || git commit -m "Update Ventnor City observed"
           for attempt in 1 2 3 4 5; do
-            git pull --rebase --autostash
+            git pull --rebase --autostash origin main
             if git push; then
               exit 0
             fi
