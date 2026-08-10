@@ -220,7 +220,7 @@ jobs:
                   "zoneId": zone["id"],
                   "zoneName": zone["zoneName"],
                   "gaugeName": zone["gaugeName"],
-                  "site": zone["usgsGaugeId"] or zone["noaaGaugeId"],
+                  "site": zone["noaaGaugeId"] if zone.get("observedSource") == "noaa" else zone["usgsGaugeId"],
                   "petssGaugeId": zone["petssGaugeId"],
                   "noaaGaugeId": zone["noaaGaugeId"],
                   "parameterCd": PARAMETER_CD if zone.get("observedSource") == "usgs" else "",
