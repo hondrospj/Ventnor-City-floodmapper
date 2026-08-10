@@ -1,29 +1,127 @@
 {
+  "generatedAt": "2026-08-10T01:00:00Z",
+  "schema": "single-zone-top-tides-v1",
+  "town": "Ventnor City",
   "toptides": [
     {
-      "height_ft": "",
-      "date": "",
-      "display_date": ""
+      "rank": 1,
+      "height_ft": 5.62,
+      "height_navd88_ft": 5.62,
+      "height_mllw_ft": 8.01,
+      "date": "2012-10-30",
+      "display_date": "Oct 30, 2012",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
     },
     {
-      "height_ft": "",
-      "date": "",
-      "display_date": ""
+      "rank": 2,
+      "height_ft": 5.4,
+      "height_navd88_ft": 5.4,
+      "height_mllw_ft": 7.79,
+      "date": "2018-10-27",
+      "display_date": "Oct 27, 2018",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
     },
     {
-      "height_ft": "",
-      "date": "",
-      "display_date": ""
+      "rank": 3,
+      "height_ft": 5.28,
+      "height_navd88_ft": 5.28,
+      "height_mllw_ft": 7.67,
+      "date": "2016-01-23",
+      "display_date": "Jan 23, 2016",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
     },
     {
-      "height_ft": "",
-      "date": "",
-      "display_date": ""
+      "rank": 4,
+      "height_ft": 5.21,
+      "height_navd88_ft": 5.21,
+      "height_mllw_ft": 7.6,
+      "date": "2025-08-21",
+      "display_date": "Aug 21, 2025",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
     },
     {
-      "height_ft": "",
-      "date": "",
-      "display_date": ""
+      "rank": 5,
+      "height_ft": 5.07,
+      "height_navd88_ft": 5.07,
+      "height_mllw_ft": 7.46,
+      "date": "2025-10-13",
+      "display_date": "Oct 13, 2025",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
+    },
+    {
+      "rank": 6,
+      "height_ft": 5.05,
+      "height_navd88_ft": 5.05,
+      "height_mllw_ft": 7.44,
+      "date": "2009-11-13",
+      "display_date": "Nov 13, 2009",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
+    },
+    {
+      "rank": 7,
+      "height_ft": 4.95,
+      "height_navd88_ft": 4.95,
+      "height_mllw_ft": 7.34,
+      "date": "2021-02-01",
+      "display_date": "Feb 1, 2021",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
+    },
+    {
+      "rank": 8,
+      "height_ft": 4.92,
+      "height_navd88_ft": 4.92,
+      "height_mllw_ft": 7.31,
+      "date": "2021-02-02",
+      "display_date": "Feb 2, 2021",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
+    },
+    {
+      "rank": 9,
+      "height_ft": 4.86,
+      "height_navd88_ft": 4.86,
+      "height_mllw_ft": 7.25,
+      "date": "2022-12-23",
+      "display_date": "Dec 23, 2022",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
+    },
+    {
+      "rank": 10,
+      "height_ft": 4.81,
+      "height_navd88_ft": 4.81,
+      "height_mllw_ft": 7.2,
+      "date": "2019-10-11",
+      "display_date": "Oct 11, 2019",
+      "zoneId": "default",
+      "zoneLabel": "Ventnor City",
+      "gaugeName": "Inside Thorofare at Atlantic City",
+      "source": "observed-archive"
     }
   ]
 }
