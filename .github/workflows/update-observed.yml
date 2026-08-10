@@ -80,6 +80,7 @@ jobs:
           PRIMARY_PATH = Path("observed.json")
           OVERFLOW_PATH = Path("observedoverflow.json")
           TOP_TIDES_PATH = Path("toptides.json")
+          USGS_CRESTS_PATH = Path("usgs_crests.json")
           CHUNK_DAYS = 31
           TOP_TIDE_LIMIT = 10
 
@@ -298,6 +299,59 @@ jobs:
                   return None
               return round_hundredth(peak_navd88 - zone["navd88OffsetFromMllwFt"])
 
+          def load_official_crest_rows(zone):
+              if not USGS_CRESTS_PATH.exists():
+                  raise RuntimeError(f"Official USGS crest catalog is missing: {USGS_CRESTS_PATH}")
+              data = json.loads(USGS_CRESTS_PATH.read_text(encoding="utf-8"))
+              zone_data = (data.get("zones") or {}).get(zone["id"], {})
+              rows = []
+              for item in zone_data.get("crests") or []:
+                  try:
+                      height = float(item.get("height_navd88_ft", item.get("height_ft")))
+                  except Exception:
+                      continue
+                  date = str(item.get("date", ""))[:10]
+                  if not date or not math.isfinite(height):
+                      continue
+                  row = copy.deepcopy(item)
+                  row["height_ft"] = round_hundredth(height)
+                  row["height_navd88_ft"] = round_hundredth(height)
+                  row["zoneId"] = zone["id"]
+                  row["zoneLabel"] = zone["label"]
+                  row["gaugeName"] = zone["gaugeName"]
+                  row["officialCrestOverride"] = True
+                  rows.append(row)
+              if not rows:
+                  raise RuntimeError(f"Official USGS crest catalog has no rows for {zone['id']}")
+              return rows
+
+          def merge_official_crest_rows(zone, observed_rows):
+              observed_by_date = {}
+              for row in observed_rows or []:
+                  if row.get("officialCrestOverride"):
+                      continue
+                  date = str(row.get("date", ""))[:10]
+                  try:
+                      height = float(row.get("height_navd88_ft", row.get("height_ft")))
+                  except Exception:
+                      continue
+                  if not date or not math.isfinite(height):
+                      continue
+                  previous = observed_by_date.get(date)
+                  if previous is None or height > previous[0]:
+                      observed_by_date[date] = (height, copy.deepcopy(row))
+              observed = [row for _, row in sorted(observed_by_date.values(), key=lambda item: item[0], reverse=True)[:TOP_TIDE_LIMIT]]
+              authoritative = {str(row.get("date", ""))[:10]: row for row in load_official_crest_rows(zone)}
+              combined = [row for row in observed if str(row.get("date", ""))[:10] not in authoritative]
+              combined.extend(authoritative.values())
+              combined.sort(key=lambda row: (float(row.get("height_navd88_ft", row.get("height_ft"))), str(row.get("date", ""))), reverse=True)
+              for rank, row in enumerate(combined, 1):
+                  row["rank"] = rank
+                  row["zoneId"] = zone["id"]
+                  row["zoneLabel"] = zone["label"]
+                  row["gaugeName"] = zone["gaugeName"]
+              return combined
+
           def top_tide_rows(zone, payload):
               rows = []
               seen_dates = set()
@@ -325,7 +379,7 @@ jobs:
                       "gaugeName": zone["gaugeName"],
                       "source": "observed-archive",
                   })
-              return rows
+              return merge_official_crest_rows(zone, rows)
 
           def load_existing_zone(zone):
               candidates = []
