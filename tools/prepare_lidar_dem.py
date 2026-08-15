@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Create a five-foot NAVD88 DEM from cubic one-foot USGS 3DEP tiles."""
 from __future__ import annotations
-import argparse, json, math, subprocess, tempfile, urllib.parse, urllib.request
+import argparse, json, math, subprocess, tempfile, time, urllib.parse, urllib.request
 from pathlib import Path
 
 NODATA = -999999.0
 ONE_FOOT_M = 0.3048
 FIVE_FOOT_M = 1.524
-TILE_PIXELS = 1600
+TILE_PIXELS = 2000
 FT_PER_M = 3.280839895013123
 
 def run(args):
@@ -26,12 +26,21 @@ def snap_floor(value, step): return math.floor(value / step) * step
 def snap_ceil(value, step): return math.ceil(value / step) * step
 
 def download(url, output):
-    request = urllib.request.Request(url, headers={"User-Agent": "nj-floodmapper-lidar-v2/1.0"})
-    with urllib.request.urlopen(request, timeout=240) as response:
-        body = response.read()
-    if len(body) < 1024 or body[:2] not in (b"II", b"MM"):
-        raise RuntimeError(f"3DEP returned invalid TIFF ({len(body)} bytes): {body[:200]!r}")
-    output.write_bytes(body)
+    last_error = None
+    for attempt in range(1, 7):
+        try:
+            request = urllib.request.Request(url, headers={"User-Agent": "nj-floodmapper-lidar-v2/1.0"})
+            with urllib.request.urlopen(request, timeout=240) as response:
+                body = response.read()
+            if len(body) < 1024 or body[:2] not in (b"II", b"MM"):
+                raise RuntimeError(f"3DEP returned invalid TIFF ({len(body)} bytes): {body[:200]!r}")
+            output.write_bytes(body)
+            return
+        except Exception as error:
+            last_error = error
+            if attempt < 6:
+                time.sleep(min(30, 2 ** attempt))
+    raise RuntimeError(f"3DEP tile failed after six attempts: {last_error}")
 
 def build(config_path, output):
     cfg = json.loads(config_path.read_text(encoding="utf-8"))

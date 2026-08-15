@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y gdal-bin python3-gdal
-          python3 -m pip install --disable-pip-version-check numpy scipy pillow
+          python3 -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.14.1 pillow
       - name: Prepare newest LiDAR-derived DEM
         run: python3 tools/prepare_lidar_dem.py --config terrain_provenance.json --output /tmp/floodmapper-dem.tif
       - name: Build connected flood catalog
