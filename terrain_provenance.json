@@ -1,0 +1,46 @@
+{
+  "schema": "nj-floodmapper-lidar-provenance-v2",
+  "municipality": "Ventnor City",
+  "county": "ATLANTIC",
+  "sourceService": "USGS 3DEP Bare Earth DEM Dynamic ImageServer",
+  "sourceServiceUrl": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+  "lidar": {
+    "project": "NJ South Jersey LiDAR",
+    "projectId": "NJ_South_Jersey_Lidar_2018_B18",
+    "acquisitionYear": 2019,
+    "qualityLevel": "USGS QL2",
+    "nativeResolutionMeters": 1
+  },
+  "acquisitionAgeYearsAtRelease": 7,
+  "processing": {
+    "requestedIntermediateResolutionFeet": 1,
+    "requestedIntermediateResolutionMeters": 0.3048,
+    "sourceServiceInterpolation": "cubic convolution",
+    "browserCatalogResolutionFeet": 5,
+    "browserCatalogResolutionMeters": 1.524,
+    "browserResampling": "cubic spline from one-foot intermediate tiles",
+    "reason": "The one-foot intermediate retains road crowns, curbs, channels, and narrow barriers before the five-foot web catalog is produced; upsampling does not create detail beyond the native LiDAR.",
+    "verticalDatum": "NAVD88",
+    "outputVerticalUnits": "feet"
+  },
+  "boundsWgs84": {
+    "south": 39.3305106,
+    "west": -74.506433,
+    "north": 39.358618,
+    "east": -74.4640293
+  },
+  "boundaryPath": "Boundaries/Ventnor City.geojson",
+  "catalog": {
+    "townFolder": "Ventnor City",
+    "prefix": "VentnorCity",
+    "thresholdsNavd88Ft": {
+      "minor": 3.21,
+      "moderate": 4.21,
+      "major": 5.21
+    },
+    "stageMinimumFt": 0,
+    "stageMaximumFt": 20,
+    "stageStepFt": 0.1
+  },
+  "releaseVersion": "20260815-v2-statewide"
+}

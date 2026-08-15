@@ -1,0 +1,63 @@
+name: Rebuild Ventnor City connected flood catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/rebuild-terrain.yml
+      - tools/prepare_lidar_dem.py
+      - tools/build_connected_catalog.py
+      - terrain_provenance.json
+      - Boundaries/Ventnor City.geojson
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ventnor-city-terrain-v2
+  cancel-in-progress: false
+
+jobs:
+  rebuild-terrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Install raster dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin python3-gdal
+          python3 -m pip install --disable-pip-version-check numpy scipy pillow
+      - name: Prepare newest LiDAR-derived DEM
+        run: python3 tools/prepare_lidar_dem.py --config terrain_provenance.json --output /tmp/floodmapper-dem.tif
+      - name: Build connected flood catalog
+        run: >-
+          python3 tools/build_connected_catalog.py
+          --dem /tmp/floodmapper-dem.tif
+          --output assets/connected-v2
+          --town-folder "Ventnor City"
+          --prefix "VentnorCity"
+          --minor 3.21
+          --moderate 4.21
+          --major 5.21
+      - name: Commit rebuilt catalog
+        shell: bash
+        run: |
+          git add assets/connected-v2 terrain_provenance.json
+          if git diff --cached --quiet; then
+            echo "Connected catalog is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Rebuild Ventnor City connected flood catalog"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main
+            if git push; then exit 0; fi
+            [ "$attempt" -eq 5 ] && exit 1
+            sleep $((attempt * 4))
+          done

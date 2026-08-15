@@ -1,0 +1,105 @@
+{
+  "schema": "nj-floodmapper-v2-config",
+  "repo": "Ventnor-City-floodmapper",
+  "releaseVersion": "20260815-v2-statewide",
+  "site": {
+    "name": "Ventnor City",
+    "municipalityName": "Ventnor City",
+    "county": "ATLANTIC",
+    "usgsGaugeId": "01410560",
+    "noaaGaugeId": "8534720",
+    "petssGaugeId": "8534836",
+    "gaugeName": "Inside Thorofare at Atlantic City"
+  },
+  "observed": {
+    "usgsGaugeId": "01410560",
+    "usgsParameterCd": "72279",
+    "primaryArchiveStartDate": "2007-10-01",
+    "sourcePrecedence": [
+      "primary-usgs-continuous",
+      "noaa-atlantic-city-historical-fill",
+      "official-usgs-storm-tide-crest-override"
+    ],
+    "surrogate": {
+      "enabled": true,
+      "key": "atlantic-city",
+      "stationId": "8534720",
+      "stationName": "Atlantic City, New Jersey",
+      "stationShort": "Atlantic City",
+      "hostRepo": "Ocean-City-floodmapper",
+      "indexPath": "atlantic_city_archive_index.json",
+      "hourlyPath": "atlantic_city_hourly.json",
+      "shardPath": "observed_archive/atlantic-city/{year}.json",
+      "archiveStartDate": "1911-08-19",
+      "indexUrl": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_archive_index.json",
+      "hourlyUrl": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_hourly.json",
+      "shardPathTemplate": "https://hondrospj.github.io/Ocean-City-floodmapper/observed_archive/atlantic-city/{year}.json"
+    }
+  },
+  "thresholds": {
+    "navd88": {
+      "minor": 3.21,
+      "moderate": 4.21,
+      "major": 5.21
+    },
+    "mllw": {
+      "minor": 5.6,
+      "moderate": 6.6,
+      "major": 7.6
+    }
+  },
+  "datums": {
+    "helpText": "Changing the reference changes the number shown, not the mapped flood area.",
+    "navd88OffsetFromMllwFt": -2.39,
+    "offsets": {
+      "navd88": 0,
+      "mllw": 2.39
+    }
+  },
+  "terrain": {
+    "schema": "nj-floodmapper-lidar-provenance-v2",
+    "municipality": "Ventnor City",
+    "county": "ATLANTIC",
+    "sourceService": "USGS 3DEP Bare Earth DEM Dynamic ImageServer",
+    "sourceServiceUrl": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "lidar": {
+      "project": "NJ South Jersey LiDAR",
+      "projectId": "NJ_South_Jersey_Lidar_2018_B18",
+      "acquisitionYear": 2019,
+      "qualityLevel": "USGS QL2",
+      "nativeResolutionMeters": 1
+    },
+    "acquisitionAgeYearsAtRelease": 7,
+    "processing": {
+      "requestedIntermediateResolutionFeet": 1,
+      "requestedIntermediateResolutionMeters": 0.3048,
+      "sourceServiceInterpolation": "cubic convolution",
+      "browserCatalogResolutionFeet": 5,
+      "browserCatalogResolutionMeters": 1.524,
+      "browserResampling": "cubic spline from one-foot intermediate tiles",
+      "reason": "The one-foot intermediate retains road crowns, curbs, channels, and narrow barriers before the five-foot web catalog is produced; upsampling does not create detail beyond the native LiDAR.",
+      "verticalDatum": "NAVD88",
+      "outputVerticalUnits": "feet"
+    },
+    "boundsWgs84": {
+      "south": 39.3305106,
+      "west": -74.506433,
+      "north": 39.358618,
+      "east": -74.4640293
+    },
+    "boundaryPath": "Boundaries/Ventnor City.geojson",
+    "catalog": {
+      "townFolder": "Ventnor City",
+      "prefix": "VentnorCity",
+      "thresholdsNavd88Ft": {
+        "minor": 3.21,
+        "moderate": 4.21,
+        "major": 5.21
+      },
+      "stageMinimumFt": 0,
+      "stageMaximumFt": 20,
+      "stageStepFt": 0.1
+    },
+    "releaseVersion": "20260815-v2-statewide"
+  }
+}
