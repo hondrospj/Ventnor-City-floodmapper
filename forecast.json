@@ -4,10 +4,10 @@
   "stationName": "INSIDE THOROFARE AT ATLANTIC CITY, NJ",
   "noaaGaugeId": "8534720",
   "usgsGaugeId": "01410560",
-  "issuedUtc": "2026-09-02T13:00:00Z",
+  "issuedUtc": "2026-09-02T14:00:00Z",
   "petssCycleUtc": "2026-09-02T06:00:00Z",
-  "forecastStartUtc": "2026-09-02T13:00:00Z",
-  "forecastEndUtc": "2026-09-06T01:00:00Z",
+  "forecastStartUtc": "2026-09-02T14:00:00Z",
+  "forecastEndUtc": "2026-09-06T02:00:00Z",
   "sourceUrl": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.20260902/petss.t06z.csv.tar.gz",
   "sourceMember": "petss.20260902/t06z.csv/8534836.csv",
   "sourceType": "NOMADS_PETSS_FORECAST_ONLY_station_csv_TWL_TWL10p_TWL90p",
@@ -96,24 +96,6 @@
       "product": "mean",
       "hours": [
         {
-          "timeUtc": "2026-09-02T13:00:00Z",
-          "scenario": "mean",
-          "product": "mean",
-          "percentile": "Mean",
-          "rawPetssValue": 2.956,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 0.57,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 0.57,
-          "mllwStageFt": 2.96,
-          "twlMllwFt": 2.96,
-          "tideMllwFt": 2.439,
-          "surgeFt": 0.9,
-          "matchedStageKey": "0.6",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
-        {
           "timeUtc": "2026-09-02T14:00:00Z",
           "scenario": "mean",
           "product": "mean",
@@ -129,7 +111,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-02T15:00:00Z",
@@ -147,7 +129,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-02T16:00:00Z",
@@ -165,7 +147,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-02T17:00:00Z",
@@ -183,7 +165,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-02T18:00:00Z",
@@ -201,7 +183,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-02T19:00:00Z",
@@ -219,7 +201,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-02T20:00:00Z",
@@ -237,7 +219,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-02T21:00:00Z",
@@ -255,7 +237,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-02T22:00:00Z",
@@ -273,7 +255,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-02T23:00:00Z",
@@ -291,7 +273,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-03T00:00:00Z",
@@ -309,7 +291,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-03T01:00:00Z",
@@ -327,7 +309,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-03T02:00:00Z",
@@ -345,7 +327,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-03T03:00:00Z",
@@ -363,7 +345,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-03T04:00:00Z",
@@ -381,7 +363,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-03T05:00:00Z",
@@ -399,7 +381,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-03T06:00:00Z",
@@ -417,7 +399,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-03T07:00:00Z",
@@ -435,7 +417,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-03T08:00:00Z",
@@ -453,7 +435,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-03T09:00:00Z",
@@ -471,7 +453,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-03T10:00:00Z",
@@ -489,7 +471,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-03T11:00:00Z",
@@ -507,7 +489,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-03T12:00:00Z",
@@ -525,7 +507,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-03T13:00:00Z",
@@ -543,7 +525,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-03T14:00:00Z",
@@ -561,7 +543,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-03T15:00:00Z",
@@ -579,7 +561,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-03T16:00:00Z",
@@ -597,7 +579,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-03T17:00:00Z",
@@ -615,7 +597,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-03T18:00:00Z",
@@ -633,7 +615,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-03T19:00:00Z",
@@ -651,7 +633,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-03T20:00:00Z",
@@ -669,7 +651,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-03T21:00:00Z",
@@ -687,7 +669,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-03T22:00:00Z",
@@ -705,7 +687,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-03T23:00:00Z",
@@ -723,7 +705,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-04T00:00:00Z",
@@ -741,7 +723,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-04T01:00:00Z",
@@ -759,7 +741,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-04T02:00:00Z",
@@ -777,7 +759,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-04T03:00:00Z",
@@ -795,7 +777,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-04T04:00:00Z",
@@ -813,7 +795,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-04T05:00:00Z",
@@ -831,7 +813,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-04T06:00:00Z",
@@ -849,7 +831,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-04T07:00:00Z",
@@ -867,7 +849,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-04T08:00:00Z",
@@ -885,7 +867,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-04T09:00:00Z",
@@ -903,7 +885,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-04T10:00:00Z",
@@ -921,7 +903,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-04T11:00:00Z",
@@ -939,7 +921,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-04T12:00:00Z",
@@ -957,7 +939,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-04T13:00:00Z",
@@ -975,7 +957,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-04T14:00:00Z",
@@ -993,7 +975,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-04T15:00:00Z",
@@ -1011,7 +993,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-04T16:00:00Z",
@@ -1029,7 +1011,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-04T17:00:00Z",
@@ -1047,7 +1029,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-04T18:00:00Z",
@@ -1065,7 +1047,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-04T19:00:00Z",
@@ -1083,7 +1065,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-04T20:00:00Z",
@@ -1101,7 +1083,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-04T21:00:00Z",
@@ -1119,7 +1101,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-04T22:00:00Z",
@@ -1137,7 +1119,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-04T23:00:00Z",
@@ -1155,7 +1137,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-05T00:00:00Z",
@@ -1173,7 +1155,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-05T01:00:00Z",
@@ -1191,7 +1173,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-05T02:00:00Z",
@@ -1209,7 +1191,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-05T03:00:00Z",
@@ -1227,7 +1209,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-05T04:00:00Z",
@@ -1245,7 +1227,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-05T05:00:00Z",
@@ -1263,7 +1245,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-05T06:00:00Z",
@@ -1281,7 +1263,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-05T07:00:00Z",
@@ -1299,7 +1281,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-05T08:00:00Z",
@@ -1317,7 +1299,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-05T09:00:00Z",
@@ -1335,7 +1317,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-05T10:00:00Z",
@@ -1353,7 +1335,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-05T11:00:00Z",
@@ -1371,7 +1353,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-05T12:00:00Z",
@@ -1389,7 +1371,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-05T13:00:00Z",
@@ -1407,7 +1389,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-05T14:00:00Z",
@@ -1425,7 +1407,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-05T15:00:00Z",
@@ -1443,7 +1425,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-05T16:00:00Z",
@@ -1461,7 +1443,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-05T17:00:00Z",
@@ -1479,7 +1461,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-05T18:00:00Z",
@@ -1497,7 +1479,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-05T19:00:00Z",
@@ -1515,7 +1497,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-05T20:00:00Z",
@@ -1533,7 +1515,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-05T21:00:00Z",
@@ -1551,7 +1533,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-05T22:00:00Z",
@@ -1569,7 +1551,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-05T23:00:00Z",
@@ -1587,7 +1569,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-06T00:00:00Z",
@@ -1605,7 +1587,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-06T01:00:00Z",
@@ -1623,6 +1605,24 @@
           "surgeFt": 0.9,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-06T02:00:00Z",
+          "scenario": "mean",
+          "product": "mean",
+          "percentile": "Mean",
+          "rawPetssValue": 1.533,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -0.86,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -0.86,
+          "mllwStageFt": 1.53,
+          "twlMllwFt": 1.53,
+          "tideMllwFt": 0.666,
+          "surgeFt": 0.9,
+          "matchedStageKey": "-0.9",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
@@ -1632,24 +1632,6 @@
       "percentile": "90p / e90",
       "product": "e90",
       "hours": [
-        {
-          "timeUtc": "2026-09-02T13:00:00Z",
-          "scenario": "lowEnd",
-          "product": "e90",
-          "percentile": "90p / e90",
-          "rawPetssValue": 2.856,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 0.47,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 0.47,
-          "mllwStageFt": 2.86,
-          "twlMllwFt": 2.86,
-          "tideMllwFt": 2.439,
-          "surgeFt": 0.9,
-          "matchedStageKey": "0.5",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
         {
           "timeUtc": "2026-09-02T14:00:00Z",
           "scenario": "lowEnd",
@@ -1666,7 +1648,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-02T15:00:00Z",
@@ -1684,7 +1666,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-02T16:00:00Z",
@@ -1702,7 +1684,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-02T17:00:00Z",
@@ -1720,7 +1702,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-02T18:00:00Z",
@@ -1738,7 +1720,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-02T19:00:00Z",
@@ -1756,7 +1738,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-02T20:00:00Z",
@@ -1774,7 +1756,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-02T21:00:00Z",
@@ -1792,7 +1774,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-02T22:00:00Z",
@@ -1810,7 +1792,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-02T23:00:00Z",
@@ -1828,7 +1810,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-03T00:00:00Z",
@@ -1846,7 +1828,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-03T01:00:00Z",
@@ -1864,7 +1846,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-03T02:00:00Z",
@@ -1882,7 +1864,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-03T03:00:00Z",
@@ -1900,7 +1882,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-03T04:00:00Z",
@@ -1918,7 +1900,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-03T05:00:00Z",
@@ -1936,7 +1918,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-03T06:00:00Z",
@@ -1954,7 +1936,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-03T07:00:00Z",
@@ -1972,7 +1954,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-03T08:00:00Z",
@@ -1990,7 +1972,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-03T09:00:00Z",
@@ -2008,7 +1990,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-03T10:00:00Z",
@@ -2026,7 +2008,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-03T11:00:00Z",
@@ -2044,7 +2026,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-03T12:00:00Z",
@@ -2062,7 +2044,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-03T13:00:00Z",
@@ -2080,7 +2062,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-03T14:00:00Z",
@@ -2098,7 +2080,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-03T15:00:00Z",
@@ -2116,7 +2098,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-03T16:00:00Z",
@@ -2134,7 +2116,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-03T17:00:00Z",
@@ -2152,7 +2134,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-03T18:00:00Z",
@@ -2170,7 +2152,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-03T19:00:00Z",
@@ -2188,7 +2170,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-03T20:00:00Z",
@@ -2206,7 +2188,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-03T21:00:00Z",
@@ -2224,7 +2206,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-03T22:00:00Z",
@@ -2242,7 +2224,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-03T23:00:00Z",
@@ -2260,7 +2242,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-04T00:00:00Z",
@@ -2278,7 +2260,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-04T01:00:00Z",
@@ -2296,7 +2278,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-04T02:00:00Z",
@@ -2314,7 +2296,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-04T03:00:00Z",
@@ -2332,7 +2314,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-04T04:00:00Z",
@@ -2350,7 +2332,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-04T05:00:00Z",
@@ -2368,7 +2350,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-04T06:00:00Z",
@@ -2386,7 +2368,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-04T07:00:00Z",
@@ -2404,7 +2386,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-04T08:00:00Z",
@@ -2422,7 +2404,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-04T09:00:00Z",
@@ -2440,7 +2422,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-04T10:00:00Z",
@@ -2458,7 +2440,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-04T11:00:00Z",
@@ -2476,7 +2458,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-04T12:00:00Z",
@@ -2494,7 +2476,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-04T13:00:00Z",
@@ -2512,7 +2494,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-04T14:00:00Z",
@@ -2530,7 +2512,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-04T15:00:00Z",
@@ -2548,7 +2530,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-04T16:00:00Z",
@@ -2566,7 +2548,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-04T17:00:00Z",
@@ -2584,7 +2566,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-04T18:00:00Z",
@@ -2602,7 +2584,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-04T19:00:00Z",
@@ -2620,7 +2602,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-04T20:00:00Z",
@@ -2638,7 +2620,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-04T21:00:00Z",
@@ -2656,7 +2638,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-04T22:00:00Z",
@@ -2674,7 +2656,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-04T23:00:00Z",
@@ -2692,7 +2674,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-05T00:00:00Z",
@@ -2710,7 +2692,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-05T01:00:00Z",
@@ -2728,7 +2710,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-05T02:00:00Z",
@@ -2746,7 +2728,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-05T03:00:00Z",
@@ -2764,7 +2746,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-05T04:00:00Z",
@@ -2782,7 +2764,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-05T05:00:00Z",
@@ -2800,7 +2782,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-05T06:00:00Z",
@@ -2818,7 +2800,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-05T07:00:00Z",
@@ -2836,7 +2818,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-05T08:00:00Z",
@@ -2854,7 +2836,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-05T09:00:00Z",
@@ -2872,7 +2854,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-05T10:00:00Z",
@@ -2890,7 +2872,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-05T11:00:00Z",
@@ -2908,7 +2890,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-05T12:00:00Z",
@@ -2926,7 +2908,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-05T13:00:00Z",
@@ -2944,7 +2926,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-05T14:00:00Z",
@@ -2962,7 +2944,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-05T15:00:00Z",
@@ -2980,7 +2962,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-05T16:00:00Z",
@@ -2998,7 +2980,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-05T17:00:00Z",
@@ -3016,7 +2998,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-05T18:00:00Z",
@@ -3034,7 +3016,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-05T19:00:00Z",
@@ -3052,7 +3034,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-05T20:00:00Z",
@@ -3070,7 +3052,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-05T21:00:00Z",
@@ -3088,7 +3070,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-05T22:00:00Z",
@@ -3106,7 +3088,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-05T23:00:00Z",
@@ -3124,7 +3106,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-06T00:00:00Z",
@@ -3142,7 +3124,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-06T01:00:00Z",
@@ -3160,6 +3142,24 @@
           "surgeFt": 0.9,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-06T02:00:00Z",
+          "scenario": "lowEnd",
+          "product": "e90",
+          "percentile": "90p / e90",
+          "rawPetssValue": 1.433,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -0.96,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -0.96,
+          "mllwStageFt": 1.43,
+          "twlMllwFt": 1.43,
+          "tideMllwFt": 0.666,
+          "surgeFt": 0.9,
+          "matchedStageKey": "-1.0",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
@@ -3169,24 +3169,6 @@
       "percentile": "10p / e10",
       "product": "e10",
       "hours": [
-        {
-          "timeUtc": "2026-09-02T13:00:00Z",
-          "scenario": "highEnd",
-          "product": "e10",
-          "percentile": "10p / e10",
-          "rawPetssValue": 3.056,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 0.67,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 0.67,
-          "mllwStageFt": 3.06,
-          "twlMllwFt": 3.06,
-          "tideMllwFt": 2.439,
-          "surgeFt": 0.9,
-          "matchedStageKey": "0.7",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
         {
           "timeUtc": "2026-09-02T14:00:00Z",
           "scenario": "highEnd",
@@ -3203,7 +3185,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-02T15:00:00Z",
@@ -3221,7 +3203,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-02T16:00:00Z",
@@ -3239,7 +3221,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-02T17:00:00Z",
@@ -3257,7 +3239,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-02T18:00:00Z",
@@ -3275,7 +3257,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-02T19:00:00Z",
@@ -3293,7 +3275,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-02T20:00:00Z",
@@ -3311,7 +3293,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-02T21:00:00Z",
@@ -3329,7 +3311,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-02T22:00:00Z",
@@ -3347,7 +3329,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-02T23:00:00Z",
@@ -3365,7 +3347,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-03T00:00:00Z",
@@ -3383,7 +3365,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-03T01:00:00Z",
@@ -3401,7 +3383,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-03T02:00:00Z",
@@ -3419,7 +3401,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-03T03:00:00Z",
@@ -3437,7 +3419,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-03T04:00:00Z",
@@ -3455,7 +3437,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-03T05:00:00Z",
@@ -3473,7 +3455,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-03T06:00:00Z",
@@ -3491,7 +3473,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-03T07:00:00Z",
@@ -3509,7 +3491,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-03T08:00:00Z",
@@ -3527,7 +3509,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-03T09:00:00Z",
@@ -3545,7 +3527,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-03T10:00:00Z",
@@ -3563,7 +3545,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-03T11:00:00Z",
@@ -3581,7 +3563,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-03T12:00:00Z",
@@ -3599,7 +3581,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-03T13:00:00Z",
@@ -3617,7 +3599,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-03T14:00:00Z",
@@ -3635,7 +3617,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-03T15:00:00Z",
@@ -3653,7 +3635,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-03T16:00:00Z",
@@ -3671,7 +3653,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-03T17:00:00Z",
@@ -3689,7 +3671,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-03T18:00:00Z",
@@ -3707,7 +3689,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-03T19:00:00Z",
@@ -3725,7 +3707,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-03T20:00:00Z",
@@ -3743,7 +3725,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-03T21:00:00Z",
@@ -3761,7 +3743,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-03T22:00:00Z",
@@ -3779,7 +3761,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-03T23:00:00Z",
@@ -3797,7 +3779,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-04T00:00:00Z",
@@ -3815,7 +3797,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-04T01:00:00Z",
@@ -3833,7 +3815,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-04T02:00:00Z",
@@ -3851,7 +3833,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-04T03:00:00Z",
@@ -3869,7 +3851,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-04T04:00:00Z",
@@ -3887,7 +3869,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-04T05:00:00Z",
@@ -3905,7 +3887,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-04T06:00:00Z",
@@ -3923,7 +3905,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-04T07:00:00Z",
@@ -3941,7 +3923,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-04T08:00:00Z",
@@ -3959,7 +3941,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-04T09:00:00Z",
@@ -3977,7 +3959,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-04T10:00:00Z",
@@ -3995,7 +3977,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-04T11:00:00Z",
@@ -4013,7 +3995,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-04T12:00:00Z",
@@ -4031,7 +4013,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-04T13:00:00Z",
@@ -4049,7 +4031,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-04T14:00:00Z",
@@ -4067,7 +4049,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-04T15:00:00Z",
@@ -4085,7 +4067,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-04T16:00:00Z",
@@ -4103,7 +4085,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-04T17:00:00Z",
@@ -4121,7 +4103,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-04T18:00:00Z",
@@ -4139,7 +4121,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-04T19:00:00Z",
@@ -4157,7 +4139,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-04T20:00:00Z",
@@ -4175,7 +4157,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-04T21:00:00Z",
@@ -4193,7 +4175,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-04T22:00:00Z",
@@ -4211,7 +4193,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-04T23:00:00Z",
@@ -4229,7 +4211,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-05T00:00:00Z",
@@ -4247,7 +4229,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-05T01:00:00Z",
@@ -4265,7 +4247,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-05T02:00:00Z",
@@ -4283,7 +4265,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-05T03:00:00Z",
@@ -4301,7 +4283,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-05T04:00:00Z",
@@ -4319,7 +4301,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-05T05:00:00Z",
@@ -4337,7 +4319,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-05T06:00:00Z",
@@ -4355,7 +4337,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-05T07:00:00Z",
@@ -4373,7 +4355,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-05T08:00:00Z",
@@ -4391,7 +4373,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-05T09:00:00Z",
@@ -4409,7 +4391,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-05T10:00:00Z",
@@ -4427,7 +4409,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-05T11:00:00Z",
@@ -4445,7 +4427,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-05T12:00:00Z",
@@ -4463,7 +4445,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-05T13:00:00Z",
@@ -4481,7 +4463,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-05T14:00:00Z",
@@ -4499,7 +4481,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-05T15:00:00Z",
@@ -4517,7 +4499,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-05T16:00:00Z",
@@ -4535,7 +4517,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-05T17:00:00Z",
@@ -4553,7 +4535,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-05T18:00:00Z",
@@ -4571,7 +4553,7 @@
           "surgeFt": 0.8,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-05T19:00:00Z",
@@ -4589,7 +4571,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-05T20:00:00Z",
@@ -4607,7 +4589,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-05T21:00:00Z",
@@ -4625,7 +4607,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-05T22:00:00Z",
@@ -4643,7 +4625,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-05T23:00:00Z",
@@ -4661,7 +4643,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-06T00:00:00Z",
@@ -4679,7 +4661,7 @@
           "surgeFt": 0.9,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-06T01:00:00Z",
@@ -4697,30 +4679,30 @@
           "surgeFt": 0.9,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-06T02:00:00Z",
+          "scenario": "highEnd",
+          "product": "e10",
+          "percentile": "10p / e10",
+          "rawPetssValue": 1.733,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -0.66,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -0.66,
+          "mllwStageFt": 1.73,
+          "twlMllwFt": 1.73,
+          "tideMllwFt": 0.666,
+          "surgeFt": 0.9,
+          "matchedStageKey": "-0.7",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
     }
   },
   "hours": [
-    {
-      "timeUtc": "2026-09-02T13:00:00Z",
-      "scenario": "mean",
-      "product": "mean",
-      "percentile": "Mean",
-      "rawPetssValue": 2.956,
-      "rawPetssScale": 1.0,
-      "sourceStageFt": 0.57,
-      "sourceDatum": "NAVD88",
-      "navd88StageFt": 0.57,
-      "mllwStageFt": 2.96,
-      "twlMllwFt": 2.96,
-      "tideMllwFt": 2.439,
-      "surgeFt": 0.9,
-      "matchedStageKey": "0.6",
-      "wasClamped": false,
-      "hourIndex": 0
-    },
     {
       "timeUtc": "2026-09-02T14:00:00Z",
       "scenario": "mean",
@@ -4737,7 +4719,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 1
+      "hourIndex": 0
     },
     {
       "timeUtc": "2026-09-02T15:00:00Z",
@@ -4755,7 +4737,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 2
+      "hourIndex": 1
     },
     {
       "timeUtc": "2026-09-02T16:00:00Z",
@@ -4773,7 +4755,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "3.2",
       "wasClamped": false,
-      "hourIndex": 3
+      "hourIndex": 2
     },
     {
       "timeUtc": "2026-09-02T17:00:00Z",
@@ -4791,7 +4773,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "3.3",
       "wasClamped": false,
-      "hourIndex": 4
+      "hourIndex": 3
     },
     {
       "timeUtc": "2026-09-02T18:00:00Z",
@@ -4809,7 +4791,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "2.8",
       "wasClamped": false,
-      "hourIndex": 5
+      "hourIndex": 4
     },
     {
       "timeUtc": "2026-09-02T19:00:00Z",
@@ -4827,7 +4809,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 6
+      "hourIndex": 5
     },
     {
       "timeUtc": "2026-09-02T20:00:00Z",
@@ -4845,7 +4827,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 7
+      "hourIndex": 6
     },
     {
       "timeUtc": "2026-09-02T21:00:00Z",
@@ -4863,7 +4845,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "-0.2",
       "wasClamped": false,
-      "hourIndex": 8
+      "hourIndex": 7
     },
     {
       "timeUtc": "2026-09-02T22:00:00Z",
@@ -4881,7 +4863,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "-0.9",
       "wasClamped": false,
-      "hourIndex": 9
+      "hourIndex": 8
     },
     {
       "timeUtc": "2026-09-02T23:00:00Z",
@@ -4899,7 +4881,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 10
+      "hourIndex": 9
     },
     {
       "timeUtc": "2026-09-03T00:00:00Z",
@@ -4917,7 +4899,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "-0.9",
       "wasClamped": false,
-      "hourIndex": 11
+      "hourIndex": 10
     },
     {
       "timeUtc": "2026-09-03T01:00:00Z",
@@ -4935,7 +4917,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-0.4",
       "wasClamped": false,
-      "hourIndex": 12
+      "hourIndex": 11
     },
     {
       "timeUtc": "2026-09-03T02:00:00Z",
@@ -4953,7 +4935,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "0.5",
       "wasClamped": false,
-      "hourIndex": 13
+      "hourIndex": 12
     },
     {
       "timeUtc": "2026-09-03T03:00:00Z",
@@ -4971,7 +4953,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.3",
       "wasClamped": false,
-      "hourIndex": 14
+      "hourIndex": 13
     },
     {
       "timeUtc": "2026-09-03T04:00:00Z",
@@ -4989,7 +4971,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 15
+      "hourIndex": 14
     },
     {
       "timeUtc": "2026-09-03T05:00:00Z",
@@ -5007,7 +4989,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "2.1",
       "wasClamped": false,
-      "hourIndex": 16
+      "hourIndex": 15
     },
     {
       "timeUtc": "2026-09-03T06:00:00Z",
@@ -5025,7 +5007,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 17
+      "hourIndex": 16
     },
     {
       "timeUtc": "2026-09-03T07:00:00Z",
@@ -5043,7 +5025,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.2",
       "wasClamped": false,
-      "hourIndex": 18
+      "hourIndex": 17
     },
     {
       "timeUtc": "2026-09-03T08:00:00Z",
@@ -5061,7 +5043,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "0.3",
       "wasClamped": false,
-      "hourIndex": 19
+      "hourIndex": 18
     },
     {
       "timeUtc": "2026-09-03T09:00:00Z",
@@ -5079,7 +5061,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-0.5",
       "wasClamped": false,
-      "hourIndex": 20
+      "hourIndex": 19
     },
     {
       "timeUtc": "2026-09-03T10:00:00Z",
@@ -5097,7 +5079,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 21
+      "hourIndex": 20
     },
     {
       "timeUtc": "2026-09-03T11:00:00Z",
@@ -5115,7 +5097,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.4",
       "wasClamped": false,
-      "hourIndex": 22
+      "hourIndex": 21
     },
     {
       "timeUtc": "2026-09-03T12:00:00Z",
@@ -5133,7 +5115,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 23
+      "hourIndex": 22
     },
     {
       "timeUtc": "2026-09-03T13:00:00Z",
@@ -5151,7 +5133,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 24
+      "hourIndex": 23
     },
     {
       "timeUtc": "2026-09-03T14:00:00Z",
@@ -5169,7 +5151,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 25
+      "hourIndex": 24
     },
     {
       "timeUtc": "2026-09-03T15:00:00Z",
@@ -5187,7 +5169,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 26
+      "hourIndex": 25
     },
     {
       "timeUtc": "2026-09-03T16:00:00Z",
@@ -5205,7 +5187,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 27
+      "hourIndex": 26
     },
     {
       "timeUtc": "2026-09-03T17:00:00Z",
@@ -5223,7 +5205,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.9",
       "wasClamped": false,
-      "hourIndex": 28
+      "hourIndex": 27
     },
     {
       "timeUtc": "2026-09-03T18:00:00Z",
@@ -5241,7 +5223,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.9",
       "wasClamped": false,
-      "hourIndex": 29
+      "hourIndex": 28
     },
     {
       "timeUtc": "2026-09-03T19:00:00Z",
@@ -5259,7 +5241,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 30
+      "hourIndex": 29
     },
     {
       "timeUtc": "2026-09-03T20:00:00Z",
@@ -5277,7 +5259,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 31
+      "hourIndex": 30
     },
     {
       "timeUtc": "2026-09-03T21:00:00Z",
@@ -5295,7 +5277,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 32
+      "hourIndex": 31
     },
     {
       "timeUtc": "2026-09-03T22:00:00Z",
@@ -5313,7 +5295,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-0.4",
       "wasClamped": false,
-      "hourIndex": 33
+      "hourIndex": 32
     },
     {
       "timeUtc": "2026-09-03T23:00:00Z",
@@ -5331,7 +5313,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 34
+      "hourIndex": 33
     },
     {
       "timeUtc": "2026-09-04T00:00:00Z",
@@ -5349,7 +5331,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.4",
       "wasClamped": false,
-      "hourIndex": 35
+      "hourIndex": 34
     },
     {
       "timeUtc": "2026-09-04T01:00:00Z",
@@ -5367,7 +5349,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 36
+      "hourIndex": 35
     },
     {
       "timeUtc": "2026-09-04T02:00:00Z",
@@ -5385,7 +5367,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-0.7",
       "wasClamped": false,
-      "hourIndex": 37
+      "hourIndex": 36
     },
     {
       "timeUtc": "2026-09-04T03:00:00Z",
@@ -5403,7 +5385,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "0.1",
       "wasClamped": false,
-      "hourIndex": 38
+      "hourIndex": 37
     },
     {
       "timeUtc": "2026-09-04T04:00:00Z",
@@ -5421,7 +5403,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 39
+      "hourIndex": 38
     },
     {
       "timeUtc": "2026-09-04T05:00:00Z",
@@ -5439,7 +5421,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 40
+      "hourIndex": 39
     },
     {
       "timeUtc": "2026-09-04T06:00:00Z",
@@ -5457,7 +5439,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 41
+      "hourIndex": 40
     },
     {
       "timeUtc": "2026-09-04T07:00:00Z",
@@ -5475,7 +5457,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 42
+      "hourIndex": 41
     },
     {
       "timeUtc": "2026-09-04T08:00:00Z",
@@ -5493,7 +5475,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "0.7",
       "wasClamped": false,
-      "hourIndex": 43
+      "hourIndex": 42
     },
     {
       "timeUtc": "2026-09-04T09:00:00Z",
@@ -5511,7 +5493,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-0.1",
       "wasClamped": false,
-      "hourIndex": 44
+      "hourIndex": 43
     },
     {
       "timeUtc": "2026-09-04T10:00:00Z",
@@ -5529,7 +5511,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-0.8",
       "wasClamped": false,
-      "hourIndex": 45
+      "hourIndex": 44
     },
     {
       "timeUtc": "2026-09-04T11:00:00Z",
@@ -5547,7 +5529,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-1.3",
       "wasClamped": false,
-      "hourIndex": 46
+      "hourIndex": 45
     },
     {
       "timeUtc": "2026-09-04T12:00:00Z",
@@ -5565,7 +5547,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-1.5",
       "wasClamped": false,
-      "hourIndex": 47
+      "hourIndex": 46
     },
     {
       "timeUtc": "2026-09-04T13:00:00Z",
@@ -5583,7 +5565,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-1.3",
       "wasClamped": false,
-      "hourIndex": 48
+      "hourIndex": 47
     },
     {
       "timeUtc": "2026-09-04T14:00:00Z",
@@ -5601,7 +5583,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 49
+      "hourIndex": 48
     },
     {
       "timeUtc": "2026-09-04T15:00:00Z",
@@ -5619,7 +5601,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 50
+      "hourIndex": 49
     },
     {
       "timeUtc": "2026-09-04T16:00:00Z",
@@ -5637,7 +5619,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "1.5",
       "wasClamped": false,
-      "hourIndex": 51
+      "hourIndex": 50
     },
     {
       "timeUtc": "2026-09-04T17:00:00Z",
@@ -5655,7 +5637,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 52
+      "hourIndex": 51
     },
     {
       "timeUtc": "2026-09-04T18:00:00Z",
@@ -5673,7 +5655,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.9",
       "wasClamped": false,
-      "hourIndex": 53
+      "hourIndex": 52
     },
     {
       "timeUtc": "2026-09-04T19:00:00Z",
@@ -5691,7 +5673,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "3.0",
       "wasClamped": false,
-      "hourIndex": 54
+      "hourIndex": 53
     },
     {
       "timeUtc": "2026-09-04T20:00:00Z",
@@ -5709,7 +5691,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 55
+      "hourIndex": 54
     },
     {
       "timeUtc": "2026-09-04T21:00:00Z",
@@ -5727,7 +5709,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 56
+      "hourIndex": 55
     },
     {
       "timeUtc": "2026-09-04T22:00:00Z",
@@ -5745,7 +5727,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 57
+      "hourIndex": 56
     },
     {
       "timeUtc": "2026-09-04T23:00:00Z",
@@ -5763,7 +5745,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-0.1",
       "wasClamped": false,
-      "hourIndex": 58
+      "hourIndex": 57
     },
     {
       "timeUtc": "2026-09-05T00:00:00Z",
@@ -5781,7 +5763,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-0.8",
       "wasClamped": false,
-      "hourIndex": 59
+      "hourIndex": 58
     },
     {
       "timeUtc": "2026-09-05T01:00:00Z",
@@ -5799,7 +5781,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 60
+      "hourIndex": 59
     },
     {
       "timeUtc": "2026-09-05T02:00:00Z",
@@ -5817,7 +5799,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 61
+      "hourIndex": 60
     },
     {
       "timeUtc": "2026-09-05T03:00:00Z",
@@ -5835,7 +5817,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 62
+      "hourIndex": 61
     },
     {
       "timeUtc": "2026-09-05T04:00:00Z",
@@ -5853,7 +5835,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.1",
       "wasClamped": false,
-      "hourIndex": 63
+      "hourIndex": 62
     },
     {
       "timeUtc": "2026-09-05T05:00:00Z",
@@ -5871,7 +5853,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.9",
       "wasClamped": false,
-      "hourIndex": 64
+      "hourIndex": 63
     },
     {
       "timeUtc": "2026-09-05T06:00:00Z",
@@ -5889,7 +5871,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 65
+      "hourIndex": 64
     },
     {
       "timeUtc": "2026-09-05T07:00:00Z",
@@ -5907,7 +5889,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 66
+      "hourIndex": 65
     },
     {
       "timeUtc": "2026-09-05T08:00:00Z",
@@ -5925,7 +5907,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.5",
       "wasClamped": false,
-      "hourIndex": 67
+      "hourIndex": 66
     },
     {
       "timeUtc": "2026-09-05T09:00:00Z",
@@ -5943,7 +5925,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "0.9",
       "wasClamped": false,
-      "hourIndex": 68
+      "hourIndex": 67
     },
     {
       "timeUtc": "2026-09-05T10:00:00Z",
@@ -5961,7 +5943,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "0.2",
       "wasClamped": false,
-      "hourIndex": 69
+      "hourIndex": 68
     },
     {
       "timeUtc": "2026-09-05T11:00:00Z",
@@ -5979,7 +5961,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-0.4",
       "wasClamped": false,
-      "hourIndex": 70
+      "hourIndex": 69
     },
     {
       "timeUtc": "2026-09-05T12:00:00Z",
@@ -5997,7 +5979,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.0",
       "wasClamped": false,
-      "hourIndex": 71
+      "hourIndex": 70
     },
     {
       "timeUtc": "2026-09-05T13:00:00Z",
@@ -6015,7 +5997,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 72
+      "hourIndex": 71
     },
     {
       "timeUtc": "2026-09-05T14:00:00Z",
@@ -6033,7 +6015,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 73
+      "hourIndex": 72
     },
     {
       "timeUtc": "2026-09-05T15:00:00Z",
@@ -6051,7 +6033,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "-0.3",
       "wasClamped": false,
-      "hourIndex": 74
+      "hourIndex": 73
     },
     {
       "timeUtc": "2026-09-05T16:00:00Z",
@@ -6069,7 +6051,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 75
+      "hourIndex": 74
     },
     {
       "timeUtc": "2026-09-05T17:00:00Z",
@@ -6087,7 +6069,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 76
+      "hourIndex": 75
     },
     {
       "timeUtc": "2026-09-05T18:00:00Z",
@@ -6105,7 +6087,7 @@
       "surgeFt": 0.8,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 77
+      "hourIndex": 76
     },
     {
       "timeUtc": "2026-09-05T19:00:00Z",
@@ -6123,7 +6105,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "3.3",
       "wasClamped": false,
-      "hourIndex": 78
+      "hourIndex": 77
     },
     {
       "timeUtc": "2026-09-05T20:00:00Z",
@@ -6141,7 +6123,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "3.4",
       "wasClamped": false,
-      "hourIndex": 79
+      "hourIndex": 78
     },
     {
       "timeUtc": "2026-09-05T21:00:00Z",
@@ -6159,7 +6141,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "3.0",
       "wasClamped": false,
-      "hourIndex": 80
+      "hourIndex": 79
     },
     {
       "timeUtc": "2026-09-05T22:00:00Z",
@@ -6177,7 +6159,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "2.2",
       "wasClamped": false,
-      "hourIndex": 81
+      "hourIndex": 80
     },
     {
       "timeUtc": "2026-09-05T23:00:00Z",
@@ -6195,7 +6177,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "1.3",
       "wasClamped": false,
-      "hourIndex": 82
+      "hourIndex": 81
     },
     {
       "timeUtc": "2026-09-06T00:00:00Z",
@@ -6213,7 +6195,7 @@
       "surgeFt": 0.9,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 83
+      "hourIndex": 82
     },
     {
       "timeUtc": "2026-09-06T01:00:00Z",
@@ -6230,6 +6212,24 @@
       "tideMllwFt": 0.938,
       "surgeFt": 0.9,
       "matchedStageKey": "-0.4",
+      "wasClamped": false,
+      "hourIndex": 83
+    },
+    {
+      "timeUtc": "2026-09-06T02:00:00Z",
+      "scenario": "mean",
+      "product": "mean",
+      "percentile": "Mean",
+      "rawPetssValue": 1.533,
+      "rawPetssScale": 1.0,
+      "sourceStageFt": -0.86,
+      "sourceDatum": "NAVD88",
+      "navd88StageFt": -0.86,
+      "mllwStageFt": 1.53,
+      "twlMllwFt": 1.53,
+      "tideMllwFt": 0.666,
+      "surgeFt": 0.9,
+      "matchedStageKey": "-0.9",
       "wasClamped": false,
       "hourIndex": 84
     }
