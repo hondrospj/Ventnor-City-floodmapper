@@ -2353,11 +2353,11 @@
       z-index:1260;
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:20px;
       max-width:calc(100% - 236px);
-      min-height:54px;
-      padding:9px 12px;
-      border-radius:22px;
+      min-height:108px;
+      padding:18px 24px;
+      border-radius:44px;
       border:1px solid rgba(191,219,254,.24);
       background:rgba(11,18,32,.92);
       box-shadow:0 12px 24px rgba(0,0,0,.24);
@@ -2371,8 +2371,8 @@
     .export-stage-logo{
       display:none;
       flex:0 1 auto;
-      max-width:150px;
-      max-height:38px;
+      max-width:300px;
+      max-height:76px;
       object-fit:contain;
       filter:none;
     }
@@ -2382,7 +2382,7 @@
     }
 
     .export-stage-logo-shorelysafe{
-      max-width:170px;
+      max-width:340px;
     }
 
     .export-stage-frame[data-export-aspect="9:16"] .export-stage-logo-strip{
@@ -2391,7 +2391,7 @@
     }
 
     .export-stage-frame[data-export-aspect="9:16"] .export-stage-logo{
-      max-width:135px;
+      max-width:270px;
     }
 
     .export-stage-legend{
@@ -18776,7 +18776,7 @@ function updateExportSegmentedUI() {
     function getExportFrameTimestampText(entry) {
       const text = formatHourEntryTime(entry);
       const timeText = text && text !== "--" ? text : "Selected time";
-      return `${timeText}\nWater level: ${getExportFrameWaterLevelText(entry)}`;
+      return `${decodeHtmlText(TOWN_CONFIG?.site?.name || TOWN_CONFIG?.brandTitleLine1 || "").trim()}\n${timeText}\nWater level: ${getExportFrameWaterLevelText(entry)}`;
     }
 
     function updateExportTimestampLabel(entry) {
@@ -19045,9 +19045,7 @@ function getUniqueExportStages(frameItems) {
     }
 
     function drawExportTimestampOnCanvas(ctx, canvas, entry) {
-      const label = getExportFrameTimestampText(entry);
-      if (!label) return;
-      const lines = String(label).split(/\n+/).filter(Boolean);
+      const lines = String(getExportFrameTimestampText(entry) || "").split(/\n+/).filter(Boolean);
       if (!lines.length) return;
       const w = canvas.width;
       const h = canvas.height;
@@ -19056,38 +19054,39 @@ function getUniqueExportStages(frameItems) {
       const gap = Math.max(4, Math.round(mainFontSize * 0.18));
       const padX = Math.round(mainFontSize * 1.05);
       const padY = Math.round(mainFontSize * 0.58);
+      const fontFamily = "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
+      // Town and time remain prominent; the water level keeps its secondary row.
+      const rows = lines.map((text, index) => ({
+        text,
+        size: index < 2 ? mainFontSize : subFontSize,
+        weight: index < 2 ? 900 : 850,
+        color: index < 2 ? "#ffffff" : "#c7d2fe"
+      }));
       ctx.save();
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.font = `900 ${mainFontSize}px Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-      const mainWidth = ctx.measureText(lines[0]).width;
-      ctx.font = `850 ${subFontSize}px Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-      const subWidth = lines[1] ? ctx.measureText(lines[1]).width : 0;
-      const maxLineWidth = Math.min(Math.max(mainWidth, subWidth), w - 56);
+      const maxLineWidth = Math.max(...rows.map(row => {
+        ctx.font = `${row.weight} ${row.size}px ${fontFamily}`;
+        return ctx.measureText(row.text).width;
+      }));
       const boxWidth = Math.min(w - 48, Math.max(Math.round(w * 0.44), Math.ceil(maxLineWidth + padX * 2)));
-      const contentHeight = lines[1] ? mainFontSize + gap + subFontSize : mainFontSize;
+      const contentHeight = rows.reduce((height, row) => height + row.size, 0) + gap * (rows.length - 1);
       const boxHeight = Math.ceil(contentHeight + padY * 2);
       const x = Math.round((w - boxWidth) / 2);
       const y = h - boxHeight - Math.round(Math.max(12, h * 0.025));
-      const radius = Math.round(Math.min(24, boxHeight / 2));
       ctx.fillStyle = "rgba(11,18,32,0.92)";
       ctx.strokeStyle = "rgba(191,219,254,0.42)";
       ctx.lineWidth = 1;
-      drawRoundedRectPath(ctx, x, y, boxWidth, boxHeight, radius);
+      drawRoundedRectPath(ctx, x, y, boxWidth, boxHeight, Math.round(Math.min(24, boxHeight / 2)));
       ctx.fill();
       ctx.stroke();
-      const centerX = x + boxWidth / 2;
-      const firstY = lines[1]
-        ? y + padY + (mainFontSize / 2)
-        : y + boxHeight / 2 + 1;
-      ctx.font = `900 ${mainFontSize}px Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(lines[0], centerX, firstY, boxWidth - padX * 2);
-      if (lines[1]) {
-        ctx.font = `850 ${subFontSize}px Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-        ctx.fillStyle = "#c7d2fe";
-        ctx.fillText(lines[1], centerX, firstY + (mainFontSize / 2) + gap + (subFontSize / 2), boxWidth - padX * 2);
-      }
+      let rowTop = y + padY;
+      rows.forEach(row => {
+        ctx.font = `${row.weight} ${row.size}px ${fontFamily}`;
+        ctx.fillStyle = row.color;
+        ctx.fillText(row.text, x + boxWidth / 2, rowTop + row.size / 2, boxWidth - padX * 2);
+        rowTop += row.size + gap;
+      });
       ctx.restore();
     }
 
@@ -34244,5 +34243,28 @@ html body #mapTitleBadge #mapTitleLogo:not([src]){
 })();
 </script>
 
+
+<style id="floodmapper-export-town-label-20260906">
+  /* Keep the location, time and water level together at the bottom in every layout. */
+  #exportStageFrame #exportTimestampLabel{
+    top:auto !important;
+    bottom:18px !important;
+    left:0 !important;
+    right:0 !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    transform:none !important;
+    width:max-content !important;
+    min-width:min(520px, calc(100% - 48px)) !important;
+    max-width:calc(100% - 48px) !important;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+  }
+  /* The enlarged portrait branding still needs its own space beside the legend. */
+  #exportStageFrame[data-export-aspect="9:16"] .export-stage-logo-strip{
+    right:auto !important;
+    max-width:calc(100% - 236px) !important;
+  }
+</style>
 </body>
 </html>
