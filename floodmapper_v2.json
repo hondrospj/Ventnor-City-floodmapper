@@ -69,7 +69,9 @@
     ],
     "dynamicRoots": [
       "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
-    ]
+    ],
+    "stageCodeScale": 10,
+    "stageCodeWidth": 3
   },
   "addressLookup": {
     "title": "Find a Ventnor City Address",
