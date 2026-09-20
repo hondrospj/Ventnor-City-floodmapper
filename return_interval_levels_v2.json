@@ -1,0 +1,133 @@
+{
+  "schema": "nj-floodmapper-return-levels-v2",
+  "generatedAt": "2026-09-20T18:06:02.717Z",
+  "datum": "NAVD88",
+  "provenance": {
+    "policyVersion": "20260920-nj-universal-v2",
+    "sourcePrecedence": [
+      "primary-usgs-continuous",
+      "bias-corrected-noaa-historical-fill",
+      "official-usgs-storm-tide-crest-override"
+    ],
+    "primaryUsgsGaugeId": "01410560",
+    "noaaStationId": "8534720",
+    "noaaRegion": "atlantic-city",
+    "noaaBiasCorrectionFt": 0.136,
+    "calibrationPairKey": "01410560:atlantic-city",
+    "calibrationMethod": "constant robust vertical offset = median(USGS local-day peak NAVD88 - NOAA verified hourly local-day peak NAVD88), fit on complete calendar years 2021-2025; 3-IQR difference screen; leave-one-year-out validation",
+    "calibrationOverlap": {
+      "startDate": "2021-01-01",
+      "endDate": "2025-12-31",
+      "rawDays": 1826,
+      "acceptedDays": 1801,
+      "excludedDays": 25
+    },
+    "calibrationValidation": {
+      "medianResidualFt": 0,
+      "maeFt": 0.1011,
+      "rmseFt": 0.1329,
+      "folds": [
+        {
+          "year": 2021,
+          "samples": 362,
+          "trainingOffsetFt": 0.132,
+          "medianBiasFt": 0.0195,
+          "maeFt": 0.1018,
+          "rmseFt": 0.1301
+        },
+        {
+          "year": 2022,
+          "samples": 363,
+          "trainingOffsetFt": 0.132,
+          "medianBiasFt": 0.016,
+          "maeFt": 0.1015,
+          "rmseFt": 0.1351
+        },
+        {
+          "year": 2023,
+          "samples": 361,
+          "trainingOffsetFt": 0.144,
+          "medianBiasFt": -0.043,
+          "maeFt": 0.1033,
+          "rmseFt": 0.1356
+        },
+        {
+          "year": 2024,
+          "samples": 365,
+          "trainingOffsetFt": 0.1365,
+          "medianBiasFt": -0.0025,
+          "maeFt": 0.0956,
+          "rmseFt": 0.1256
+        },
+        {
+          "year": 2025,
+          "samples": 350,
+          "trainingOffsetFt": 0.134,
+          "medianBiasFt": 0.0145,
+          "maeFt": 0.1063,
+          "rmseFt": 0.1407
+        }
+      ]
+    },
+    "crestUsgsStationId": "01410560",
+    "crestStationName": "Inside Thorofare at Atlantic City NJ"
+  },
+  "method": "Gumbel method-of-moments fit to water-year maxima from the canonical USGS-first, bias-corrected NOAA, USGS-crest-override composite",
+  "sampleYears": 115,
+  "locationFt": 3.8566,
+  "scaleFt": 0.65063,
+  "levels": [
+    {
+      "years": 1,
+      "navd88Ft": 2.8423
+    },
+    {
+      "years": 2,
+      "navd88Ft": 4.0951
+    },
+    {
+      "years": 5,
+      "navd88Ft": 4.8325
+    },
+    {
+      "years": 10,
+      "navd88Ft": 5.3208
+    },
+    {
+      "years": 20,
+      "navd88Ft": 5.7891
+    },
+    {
+      "years": 50,
+      "navd88Ft": 6.3953
+    },
+    {
+      "years": 100,
+      "navd88Ft": 6.8496
+    },
+    {
+      "years": 200,
+      "navd88Ft": 7.3022
+    },
+    {
+      "years": 500,
+      "navd88Ft": 7.8994
+    },
+    {
+      "years": 1000,
+      "navd88Ft": 8.3507
+    },
+    {
+      "years": 2000,
+      "navd88Ft": 8.8018
+    },
+    {
+      "years": 5000,
+      "navd88Ft": 9.3981
+    },
+    {
+      "years": 10000,
+      "navd88Ft": 9.8491
+    }
+  ]
+}

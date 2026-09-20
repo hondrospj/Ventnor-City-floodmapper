@@ -1,0 +1,97 @@
+{
+  "schema": "nj-floodmapper-gauge-pipeline-v2",
+  "releaseVersion": "20260920-nj-universal-v2",
+  "town": "Ventnor City",
+  "repo": "Ventnor-City-floodmapper",
+  "sourcePrecedence": [
+    "primary-usgs-continuous",
+    "bias-corrected-noaa-historical-fill",
+    "official-usgs-storm-tide-crest-override"
+  ],
+  "primaryUsgs": {
+    "stationId": "01410560",
+    "stationName": "Inside Thorofare at Atlantic City"
+  },
+  "noaaHistoricalFill": {
+    "stationId": "8534720",
+    "stationName": "Atlantic City, New Jersey",
+    "region": "atlantic-city",
+    "biasCorrectionFt": 0.136,
+    "correctionApplication": "corrected NOAA NAVD88 = raw NOAA NAVD88 + biasCorrectionFt"
+  },
+  "officialUsgsCrestTruth": {
+    "stationId": "01410560",
+    "stationName": "Inside Thorofare at Atlantic City NJ"
+  },
+  "calibration": {
+    "schema": "noaa-to-usgs-daily-high-offset-v2",
+    "pairKey": "01410560:atlantic-city",
+    "primaryUsgsGaugeId": "01410560",
+    "noaaRegion": "atlantic-city",
+    "noaaStationId": "8534720",
+    "noaaStationName": "Atlantic City, New Jersey",
+    "method": "constant robust vertical offset = median(USGS local-day peak NAVD88 - NOAA verified hourly local-day peak NAVD88), fit on complete calendar years 2021-2025; 3-IQR difference screen; leave-one-year-out validation",
+    "application": "correctedNoaaNavd88Ft = rawNoaaNavd88Ft + offsetFt",
+    "overlap": {
+      "startDate": "2021-01-01",
+      "endDate": "2025-12-31",
+      "rawDays": 1826,
+      "acceptedDays": 1801,
+      "excludedDays": 25
+    },
+    "offsetFt": 0.136,
+    "validation": {
+      "medianResidualFt": 0,
+      "maeFt": 0.1011,
+      "rmseFt": 0.1329,
+      "folds": [
+        {
+          "year": 2021,
+          "samples": 362,
+          "trainingOffsetFt": 0.132,
+          "medianBiasFt": 0.0195,
+          "maeFt": 0.1018,
+          "rmseFt": 0.1301
+        },
+        {
+          "year": 2022,
+          "samples": 363,
+          "trainingOffsetFt": 0.132,
+          "medianBiasFt": 0.016,
+          "maeFt": 0.1015,
+          "rmseFt": 0.1351
+        },
+        {
+          "year": 2023,
+          "samples": 361,
+          "trainingOffsetFt": 0.144,
+          "medianBiasFt": -0.043,
+          "maeFt": 0.1033,
+          "rmseFt": 0.1356
+        },
+        {
+          "year": 2024,
+          "samples": 365,
+          "trainingOffsetFt": 0.1365,
+          "medianBiasFt": -0.0025,
+          "maeFt": 0.0956,
+          "rmseFt": 0.1256
+        },
+        {
+          "year": 2025,
+          "samples": 350,
+          "trainingOffsetFt": 0.134,
+          "medianBiasFt": 0.0145,
+          "maeFt": 0.1063,
+          "rmseFt": 0.1407
+        }
+      ]
+    },
+    "provenance": {
+      "usgsArchive": "../../2026-08-10/gene/work/gauge-archives/01410560.json",
+      "noaaArchive": "work/data/noaa-overlap/atlantic-city.json",
+      "usgsSource": "https://waterdata.usgs.gov/monitoring-location/USGS-01410560/",
+      "noaaSource": "https://tidesandcurrents.noaa.gov/stationhome.html?id=8534720"
+    }
+  }
+}
