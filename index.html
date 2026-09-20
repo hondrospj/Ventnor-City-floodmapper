@@ -19393,6 +19393,14 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function createHydraulicImageOverlay(url, options = {}) {
+      if (url === PARCEL_BOUNDARY_PNG_URL && TOWN_CONFIG.parcels?.worldFileCornersWgs84) {
+        const raster = TOWN_CONFIG.parcels.worldFileRasterSize;
+        return new WorldFileImageOverlay(url, TOWN_CONFIG.parcels.worldFileCornersWgs84, {
+          ...options,
+          pixelWidth: raster?.width,
+          pixelHeight: raster?.height
+        });
+      }
       return createWorldFileImageOverlay(url, options) || L.imageOverlay(url, floodLatLngBounds, options);
     }
 
