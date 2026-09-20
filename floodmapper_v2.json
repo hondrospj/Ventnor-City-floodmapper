@@ -1,7 +1,37 @@
 {
-  "schema": "nj-floodmapper-v2-config",
-  "repo": "Ventnor-City-floodmapper",
-  "releaseVersion": "20260920-nj-universal-v2",
+  "pageTitle": "Ventnor City Flood Mapper",
+  "mapTitle": "Ventnor City Flood Mapper",
+  "brandTitleLine1": "Ventnor City",
+  "brandTitleLine2": "Flood Mapper",
+  "data": {
+    "forecastPath": "./forecast.json",
+    "observedPath": "./observed.json",
+    "topTidesPath": "./toptides.json",
+    "observed15MinPath": "./observed15min.json",
+    "observedArchiveIndexPath": "./observed_archive_index.json",
+    "surrogateArchiveIndexPath": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_archive_index.json",
+    "surrogateHourlyPath": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_hourly.json",
+    "canonicalDailyPath": "./canonical_daily_v2.json",
+    "returnIntervalsPath": "./return_intervals.json",
+    "returnLevelsPath": "./return_interval_levels_v2.json"
+  },
+  "bunny": {
+    "storageZoneId": "5907481",
+    "cdnBaseUrl": "https://floodmapperv1.b-cdn.net"
+  },
+  "assets": {
+    "titleLogoPath": null,
+    "titleLogoAlt": "",
+    "partnerLogoPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "partnerLogoFallbackPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "partnerLogoAlt": "ShorelySafe",
+    "rightRailLogoPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "rightRailLogoAlt": "ShorelySafe"
+  },
+  "links": {
+    "partnerUrl": "https://cupajoe.live",
+    "partnerAriaLabel": "Visit cupajoe.live"
+  },
   "site": {
     "name": "Ventnor City",
     "municipalityName": "Ventnor City",
@@ -10,6 +40,83 @@
     "noaaGaugeId": "8534720",
     "petssGaugeId": "8534836",
     "gaugeName": "Inside Thorofare at Atlantic City"
+  },
+  "datums": {
+    "helpText": "Changing the reference changes the number shown, not the mapped flood area.",
+    "navd88OffsetFromMllwFt": -2.39,
+    "offsets": {
+      "navd88": 0,
+      "mllw": 2.39
+    }
+  },
+  "thresholds": {
+    "navd88": {
+      "minor": 3.21,
+      "moderate": 4.21,
+      "major": 5.21
+    },
+    "mllw": {
+      "minor": 5.6,
+      "moderate": 6.6,
+      "major": 7.6
+    }
+  },
+  "overlays": {
+    "depthPngPrefix": "VentnorCityDepth",
+    "stagePngPrefix": "VentnorCityStage",
+    "depthRoots": [
+      "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
+    ],
+    "dynamicRoots": [
+      "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
+    ]
+  },
+  "addressLookup": {
+    "title": "Find a Ventnor City Address",
+    "displayName": "Ventnor City",
+    "city": "Ventnor City",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "countryCode": "us",
+    "sourceCountry": "USA",
+    "postalCode": "",
+    "placeholder": "Example: 123 Main St",
+    "buttonText": "Search Ventnor City",
+    "bbox": {
+      "west": -74.506433,
+      "south": 39.3305106,
+      "east": -74.4640293,
+      "north": 39.358618
+    },
+    "geocodeCenter": {
+      "lat": 39.3445643,
+      "lon": -74.4852312
+    },
+    "searchDistanceMeters": 9000
+  },
+  "alerts": {
+    "zoneCodes": []
+  },
+  "exportSlug": "Ventnor-City-floodmapper",
+  "boundary": {
+    "boundaryUrl": "Boundaries/Ventnor City.geojson",
+    "bunnyBoundaryPath": "Boundaries/Ventnor City.geojson",
+    "queryUrl": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/NJ_Municipalities_3857/FeatureServer/0/query",
+    "outFields": "NAME,COUNTY,MUN,MUN_LABEL,MUN_TYPE,GNIS_NAME",
+    "queryCandidates": [
+      "MUN_LABEL = 'Ventnor City'",
+      "NAME = 'Ventnor City'"
+    ]
+  },
+  "map": {
+    "center": {
+      "lat": 39.3445643,
+      "lon": -74.4852312
+    }
+  },
+  "nwsPoint": {
+    "lat": 39.3445643,
+    "lon": -74.4852312
   },
   "observed": {
     "usgsGaugeId": "01410560",
@@ -38,36 +145,15 @@
     },
     "crestStationId": "01410560"
   },
-  "thresholds": {
-    "navd88": {
-      "minor": 3.21,
-      "moderate": 4.21,
-      "major": 5.21
-    },
-    "mllw": {
-      "minor": 5.6,
-      "moderate": 6.6,
-      "major": 7.6
-    }
+  "structures": {},
+  "release": {
+    "reference": "North Wildwood Floodmapper V2",
+    "version": "20260920-nj-universal-v2",
+    "policy": "Primary USGS continuous record; bias-corrected regional NOAA record fills missing history; the nearest official USGS storm-tide crest overwrites the same date as absolute truth."
   },
-  "datums": {
-    "helpText": "Changing the reference changes the number shown, not the mapped flood area.",
-    "navd88OffsetFromMllwFt": -2.39,
-    "offsets": {
-      "navd88": 0,
-      "mllw": 2.39
-    }
-  },
+  "schema": "nj-floodmapper-v2-config",
+  "repo": "Ventnor-City-floodmapper",
+  "releaseVersion": "20260920-nj-universal-v2",
   "terrain": null,
-  "pipelineFile": "gauge_pipeline_v2.json",
-  "overlays": {
-    "depthPngPrefix": "VentnorCityDepth",
-    "stagePngPrefix": "VentnorCityStage",
-    "depthRoots": [
-      "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
-    ],
-    "dynamicRoots": [
-      "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
-    ]
-  }
+  "pipelineFile": "gauge_pipeline_v2.json"
 }
