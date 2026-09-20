@@ -59,5 +59,15 @@
     }
   },
   "terrain": null,
-  "pipelineFile": "gauge_pipeline_v2.json"
+  "pipelineFile": "gauge_pipeline_v2.json",
+  "overlays": {
+    "depthPngPrefix": "VentnorCityDepth",
+    "stagePngPrefix": "VentnorCityStage",
+    "depthRoots": [
+      "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
+    ],
+    "dynamicRoots": [
+      "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
+    ]
+  }
 }
