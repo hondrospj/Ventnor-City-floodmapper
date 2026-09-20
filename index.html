@@ -26385,15 +26385,20 @@ function startPlayback() {
       return Number.isFinite(stage) ? stage : null;
     }
 
+    function finiteStructureNumber(value) {
+      if (value == null || String(value).trim() === "") return null;
+      const number = Number(value);
+      return Number.isFinite(number) ? number : null;
+    }
+
     function getNsiFirstOccupiedFloorNavd88(properties) {
       const p = properties || {};
-      const localGround = Number(p.localGroundNavd88Ft ?? p.nsi2026LocalGroundNavd88Ft);
-      const riseToOccupiedFloor = Number(p.foundationHeightFt ?? p.nsi2026FoundationHeightFt);
-      if (Number.isFinite(localGround) && Number.isFinite(riseToOccupiedFloor)) {
+      const localGround = finiteStructureNumber(p.localGroundNavd88Ft ?? p.nsi2026LocalGroundNavd88Ft);
+      const riseToOccupiedFloor = finiteStructureNumber(p.foundationHeightFt ?? p.nsi2026FoundationHeightFt);
+      if (localGround != null && riseToOccupiedFloor != null) {
         return localGround + Math.max(0, riseToOccupiedFloor);
       }
-      const storedEstimate = Number(p.modeledFirstFloorNavd88Ft ?? p.nsi2026ModeledFirstFloorNavd88Ft);
-      return Number.isFinite(storedEstimate) ? storedEstimate : null;
+      return finiteStructureNumber(p.modeledFirstFloorNavd88Ft ?? p.nsi2026ModeledFirstFloorNavd88Ft);
     }
 
     function getNsiStructureImpactStyle(properties, stage = getSelectedStageNavd88()) {
