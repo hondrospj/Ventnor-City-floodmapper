@@ -18002,6 +18002,23 @@ function setDatumHelpOpen(isOpen) {
     function getVerticalBathtubPenalty(stageValue) {
       const stage = Number(stageValue);
       if (!Number.isFinite(stage)) return null;
+      const configured = TOWN_CONFIG?.overlays?.depthPenalty;
+      if (configured) {
+        const low = Number(configured.atOrBelowMinorFt);
+        const high = Number(configured.atOrAboveMajorFt);
+        const decay = Number(configured.exponentialDecayRate);
+        const lowPenalty = Number.isFinite(low) ? low : 0;
+        const highPenalty = Number.isFinite(high) ? high : 0;
+        if (stage <= MINOR_FLOOD_FT) return lowPenalty;
+        if (stage >= MAJOR_FLOOD_FT) return highPenalty;
+        const progress = (stage - MINOR_FLOOD_FT) / (MAJOR_FLOOD_FT - MINOR_FLOOD_FT);
+        if (Number.isFinite(decay) && decay > 0) {
+          const residual = Math.exp(-decay);
+          const normalized = (Math.exp(-decay * progress) - residual) / (1 - residual);
+          return highPenalty + (lowPenalty - highPenalty) * normalized;
+        }
+        return lowPenalty + (highPenalty - lowPenalty) * progress;
+      }
       if (stage < MINOR_FLOOD_FT) return 0;
       if (stage >= MAJOR_FLOOD_FT) return MAJOR_VERTICAL_PENALTY_FT;
       const x0 = MINOR_FLOOD_FT;
@@ -18018,6 +18035,7 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function getPenaltyRemainingFraction(stageValue, phase = "slack") {
+      if (TOWN_CONFIG?.overlays?.phaseModelEnabled === false) return 1;
       const stage = Number(stageValue);
       const normalizedPhase = normalizeHydraulicPhase(phase);
       const penalty = getVerticalBathtubPenalty(stage);
@@ -18037,14 +18055,21 @@ function setDatumHelpOpen(isOpen) {
       const ground = Number(groundValue);
       const polynomialPenalty = getVerticalBathtubPenalty(stage);
       if (!Number.isFinite(stage) || !Number.isFinite(ground) || !Number.isFinite(polynomialPenalty)) return null;
-      const appliedPenalty = developed ? polynomialPenalty : 0;
+      const rawDepth = Math.max(0, stage - ground);
+      const configuredPenalty = TOWN_CONFIG?.overlays?.depthPenalty;
+      const maximumLocalFraction = Number(configuredPenalty?.maximumLocalDepthFraction);
+      const staticPenaltyModel = TOWN_CONFIG?.overlays?.phaseModelEnabled === false;
+      const appliedPenalty = developed
+        ? (staticPenaltyModel && Number.isFinite(maximumLocalFraction)
+          ? Math.min(polynomialPenalty, rawDepth * maximumLocalFraction)
+          : polynomialPenalty)
+        : 0;
       const normalizedPhase = normalizeHydraulicPhase(phase);
       const penaltyRemainingFraction = getPenaltyRemainingFraction(stage, normalizedPhase);
       const adjustment = -appliedPenalty * penaltyRemainingFraction;
       const adjustedStage = stage + adjustment;
-      const postCrest = normalizedPhase.startsWith("draining");
+      const postCrest = staticPenaltyModel ? false : normalizedPhase.startsWith("draining");
       const waterSurface = postCrest ? stage : adjustedStage;
-      const rawDepth = Math.max(0, stage - ground);
       const depth = Math.max(0, waterSurface - ground);
       return {
         rawDepth,
