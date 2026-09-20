@@ -1,0 +1,28 @@
+/* Persistent selection status, separate from temporary notifications. */
+#floodFrameStatus {
+  position: fixed;
+  left: 50%;
+  bottom: var(--flood-status-bottom, 190px);
+  transform: translateX(-50%);
+  width: min(540px, calc(100vw - 40px));
+  box-sizing: border-box;
+  padding: 9px 13px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 10px;
+  background: #162235;
+  color: #fff;
+  font: 600 13px/1.4 system-ui, sans-serif;
+  text-align: center;
+  z-index: 1500;
+  pointer-events: none;
+}
+#floodFrameStatus[hidden] { display: none !important; }
+#floodFrameStatus[data-state="error"] { background: #631f26; }
+
+#floodHistoryPane #floodHistoryProvenance {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+  line-height: 1.4;
+}
