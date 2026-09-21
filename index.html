@@ -15910,11 +15910,18 @@ html.win-compact-ui #timelineDock #hourSlider{
       timeZoneName: "short"
     });
 
+    // Depths stay in feet internally; only their display units change.
+    function formatWaterDepth(depth, feetDigits = 2) {
+      if (!Number.isFinite(depth)) return "N/A";
+      if (Math.abs(depth) < 1) return `${Number((depth * 12).toFixed(1))} in`;
+      return `${depth.toFixed(feetDigits)} ft`;
+    }
+
     const DEPTH_LEGEND = [
-      { label: "< 0.10 ft", color: "var(--depth-0)" },
-      { label: "0.10–0.25 ft", color: "var(--depth-1)" },
-      { label: "0.25–0.50 ft", color: "var(--depth-2)" },
-      { label: "0.50–1.00 ft", color: "var(--depth-3)" },
+      { label: "< 1.2 in", color: "var(--depth-0)" },
+      { label: "1.2–3 in", color: "var(--depth-1)" },
+      { label: "3–6 in", color: "var(--depth-2)" },
+      { label: "6–12 in", color: "var(--depth-3)" },
       { label: "1.00–1.50 ft", color: "var(--depth-4)" },
       { label: "1.50–2.00 ft", color: "var(--depth-5)" },
       { label: "2.00–2.50 ft", color: "var(--depth-6)" },
@@ -17737,7 +17744,7 @@ function setDatumHelpOpen(isOpen) {
       overlay: {
         title: "Overlay",
         body: `
-          <p><strong>Flood Depth</strong> shows the estimated feet of water above the ground.</p>
+          <p><strong>Flood Depth</strong> shows the estimated water depth above the ground, in inches below 1 foot and feet at 1 foot or more.</p>
           <p><strong>Flood Stages</strong> groups flooding as minor, moderate, or major.</p>
         `
       },
@@ -26150,14 +26157,14 @@ function startPlayback() {
         : Math.abs(difference) <= 0.1
           ? "Current water is at the estimated occupied floor."
           : difference > 0
-            ? `Current water is ${difference.toFixed(1)} ft above the estimated occupied floor.`
-            : `Current water is ${Math.abs(difference).toFixed(1)} ft below the estimated occupied floor.`;
+            ? `Current water is ${formatWaterDepth(difference, 1)} above the estimated occupied floor.`
+            : `Current water is ${formatWaterDepth(Math.abs(difference), 1)} below the estimated occupied floor.`;
       return '<div class="house-alert-popup building-info-card">' +
         '<span class="house-alert-kicker">Building</span>' +
         '<h3>' + address + '</h3>' +
         '<div class="building-info-facts">' +
           '<div><span>Crawlspace / garage depth</span><strong>' +
-            (Number.isFinite(crawlspaceDepth) ? crawlspaceDepth.toFixed(1) + ' ft' : 'Not available') +
+            (Number.isFinite(crawlspaceDepth) ? formatWaterDepth(crawlspaceDepth, 1) : 'Not available') +
           '</strong></div>' +
           '<p>' + escapeTownAddressHtml(waterStatus) + '</p>' +
         '</div>' +
@@ -26428,9 +26435,9 @@ function startPlayback() {
       const firstFloor = getNsiFirstOccupiedFloorNavd88(properties);
       if (!Number.isFinite(firstFloor) || !Number.isFinite(stage)) return "Choose a water level to compare.";
       const difference = stage - firstFloor;
-      if (difference > 0.1) return `Current water is ${difference.toFixed(1)} ft above the estimated first occupied floor.`;
+      if (difference > 0.1) return `Current water is ${formatWaterDepth(difference, 1)} above the estimated first occupied floor.`;
       if (difference >= -0.1) return "Current water is at the estimated first occupied floor.";
-      return `Current water is ${Math.abs(difference).toFixed(1)} ft below the estimated first occupied floor.`;
+      return `Current water is ${formatWaterDepth(Math.abs(difference), 1)} below the estimated first occupied floor.`;
     }
 
     function buildNsiStructurePopup(feature) {
@@ -27101,8 +27108,8 @@ function startPlayback() {
 
     function formatDepthQueryValue(depth) {
       if (!Number.isFinite(depth)) return "N/A";
-      if (depth > 0 && depth <= 0.1000001) return "0.0-0.1ft";
-      return `${depth.toFixed(2)} ft`;
+      if (depth > 0 && depth <= 0.1000001) return "0–1.2 in";
+      return formatWaterDepth(depth);
     }
 
     function buildDepthQueryPopupHtml(depth) {
@@ -27189,10 +27196,10 @@ function startPlayback() {
         const physicsAsset = getPhysicsAssetForEntry(entry);
         if (physicsAsset) {
           const result = await samplePhysicsDepth(physicsAsset, event.latlng.lat, event.latlng.lng);
-          const depthFt = result?.depthM == null ? null : result.depthM * 3.280839895;
+          const depthFt = result?.depthM == null ? null : result.depthM / 0.3048;
           const html = '<div class="depth-query-popup" role="status" aria-live="polite">' +
             '<h3>Physics Water Depth</h3><div class="depth-query-value">' +
-            (depthFt == null ? '0.00 ft' : depthFt.toFixed(2) + ' ft') +
+            formatWaterDepth(depthFt == null ? 0 : depthFt) +
             '</div><div class="house-alert-note">' +
             (result?.wet ? 'Hydraulically connected modeled flooding' : 'Dry in this exact time step') +
             ' • cycle ' + escapeTownAddressHtml(getActivePhysicsManifest()?.cycleId || '—') +
@@ -36481,7 +36488,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
 })();
 </script>
 
-<script src="./assets/3d/north-wildwood-3d.js?v=20260912-audit-repair"></script>
+<script src="./assets/3d/north-wildwood-3d.js?v=20260921-depth-inches"></script>
 <script>
 const BUNNY_STORAGE_ZONE_ID = "5907481";
 const BUNNY_CDN_BASE_URL = "https://floodmapperv1.b-cdn.net";

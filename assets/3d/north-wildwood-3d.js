@@ -1292,13 +1292,13 @@
       : Math.abs(difference) <= 0.1
         ? "Current water is at the estimated occupied floor."
         : difference > 0
-          ? "Current water is " + difference.toFixed(1) + " ft above the estimated occupied floor."
-          : "Current water is " + Math.abs(difference).toFixed(1) + " ft below the estimated occupied floor.";
+          ? "Current water is " + formatWaterDepth(difference, 1) + " above the estimated occupied floor."
+          : "Current water is " + formatWaterDepth(Math.abs(difference), 1) + " below the estimated occupied floor.";
     return '<div class="nsi-structure-popup building-info-card">' +
       '<span class="house-alert-kicker">Building</span>' +
       '<h3>' + address + '</h3>' +
       '<div class="building-info-facts">' +
-        '<div><span>Crawlspace / garage depth</span><strong>' + (Number.isFinite(crawlspaceDepth) ? crawlspaceDepth.toFixed(1) + ' ft' : '—') + '</strong></div>' +
+        '<div><span>Crawlspace / garage depth</span><strong>' + (Number.isFinite(crawlspaceDepth) ? formatWaterDepth(crawlspaceDepth, 1) : '—') + '</strong></div>' +
         '<p>' + escapeTownAddressHtml(status) + '</p>' +
       '</div>' +
       '</div>';
