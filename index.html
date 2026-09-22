@@ -26796,6 +26796,26 @@ function startPlayback() {
       return Number.isFinite(encoded) && encoded !== drySentinel ? encoded / 100 : null;
     }
 
+    // Query grids follow their own georeferencing, not one town's layout.
+    // Rotated grids keep the affine transform; north-up catalogs use Mercator Y.
+    function latLngToDepthQueryPixel(lat, lng, width, height) {
+      if (![lat, lng, width, height].every(Number.isFinite) ||
+          width <= 0 || height <= 0 || Math.abs(lat) >= 90) return null;
+      if (TOWN_CONFIG?.overlays?.worldFileCornersWgs84) {
+        return latLngToWorldFilePixel(lat, lng, width, height);
+      }
+      const bounds = TOWN_CONFIG?.overlays?.boundsWgs84;
+      if (!bounds) return null;
+      const { west, east, south, north } = bounds;
+      if (![west, east, south, north].every(Number.isFinite) ||
+          west >= east || south >= north || south <= -90 || north >= 90) return null;
+      const mercY = latitude => Math.log(Math.tan(Math.PI / 4 + latitude * Math.PI / 360));
+      const u = (lng - west) / (east - west);
+      const v = (mercY(north) - mercY(lat)) / (mercY(north) - mercY(south));
+      if (!Number.isFinite(u) || !Number.isFinite(v) || u < 0 || v < 0 || u >= 1 || v >= 1) return null;
+      return { x: Math.floor(u * width), y: Math.floor(v * height), u, v };
+    }
+
     async function samplePackedDepthGrid(lat, lon) {
       const [grid, developedGrid] = await Promise.all([
         getDepthQueryGrid(),
@@ -26805,7 +26825,7 @@ function startPlayback() {
         })
       ]);
       if (!grid || !floodLatLngBounds) return null;
-      const pixel = latLngToWorldFilePixel(lat, lon, grid.width, grid.height);
+      const pixel = latLngToDepthQueryPixel(lat, lon, grid.width, grid.height);
       if (!pixel) return null;
       const { x, y } = pixel;
       const offset = (y * grid.width + x) * 4;
@@ -36569,6 +36589,13 @@ TOWN_CONFIG = {
   "overlays": {
     "depthPngPrefix": "VentnorCityDepth",
     "stagePngPrefix": "VentnorCityStage",
+    "depthQueryPngPath": "./assets/connected-v2/COGs/Ventnor%20City/VentnorCityHydraulicQuery5ft.png",
+    "boundsWgs84": {
+      "west": -74.50644465669045,
+      "south": 39.33050548209528,
+      "east": -74.46401833973245,
+      "north": 39.35862555243322
+    },
     "depthRoots": [
       "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
     ],

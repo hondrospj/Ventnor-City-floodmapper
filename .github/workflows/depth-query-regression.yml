@@ -1,0 +1,25 @@
+name: Depth query regression
+on:
+  push:
+    paths: ['index.html', 'tools/test_depth_query.mjs', 'assets/**/*Query*.png', '.github/workflows/depth-query-regression.yml']
+  pull_request:
+    paths: ['index.html', 'tools/test_depth_query.mjs', 'assets/**/*Query*.png', '.github/workflows/depth-query-regression.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  depth-query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /tools/test_depth_query.mjs
+            /assets/**/*Query*.png
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/test_depth_query.mjs --assets
