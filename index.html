@@ -17,6 +17,11 @@
       root.classList.add("os-mac", "platform-mac-template");
       root.style.removeProperty("--win-ui-zoom");
     })();
+
+    // Shared responsive breakpoint used by startup cache sizing and controls.
+    function isCompactFloodmapperLayout() {
+      return window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches;
+    }
   </script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
