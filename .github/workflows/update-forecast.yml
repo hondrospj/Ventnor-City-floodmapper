@@ -337,12 +337,15 @@ jobs:
               main()
           PY
 
+      - name: Generate non-operational PETSS research comparison
+        run: python tools/experimental_petss_guidance.py --input forecast.json --output data/experimental_petss_guidance.json
+
       - name: Commit updated forecast
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add forecast.json
+          git add forecast.json data/experimental_petss_guidance.json
           git diff --staged --quiet || git commit -m "Update Ventnor City forecast"
           for attempt in 1 2 3 4 5; do
             git pull --rebase --autostash origin main
