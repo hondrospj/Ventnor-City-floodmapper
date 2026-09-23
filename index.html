@@ -40202,13 +40202,16 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v5">
+<script id="shorelysafe-responsive-fit-v8">
 (function () {
   'use strict';
   const owned = new Map();
   let legendOrigin = null;
   let compactLegendWidth = null;
   let pending = false;
+  let lastCompact = null;
+  let shortLandscapeApplied = false;
+  const drawerLegend = /\/(avalon-test|highlands-beta|salem-beta)\/?$/.test(location.pathname);
   function set(el, name, value) {
     if (!el) return;
     let props = owned.get(el);
@@ -40231,6 +40234,77 @@ html body #mapTitleBadge #mapTitleLogo{
     const s = getComputedStyle(el);
     return s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0' && el.getBoundingClientRect().width > 0;
   }
+  function fitTitleContent(title, label) {
+    if (!shown(title)) return;
+    const overflow = () => {
+      const box = title.getBoundingClientRect();
+      const children = [...title.children].filter(shown).map(el => el.getBoundingClientRect());
+      if (!children.length) return Math.max(0, title.scrollWidth - title.clientWidth);
+      return Math.max(0, box.left - Math.min(...children.map(r => r.left))) +
+        Math.max(0, Math.max(...children.map(r => r.right)) - box.right) +
+        (label ? Math.max(0, label.scrollWidth - label.clientWidth) : 0);
+    };
+    if (label) restore(label);
+    if (overflow() <= 2) return;
+    if (label) {
+      set(title, 'gap', '4px');
+      for (let i = 0; i < 20 && overflow() > 2; i++) {
+        const size = parseFloat(getComputedStyle(label).fontSize) || 16;
+        if (size <= 11) break;
+        set(label, 'font-size', Math.max(11, size - 1) + 'px');
+      }
+      set(label, 'min-width', '0px');
+      set(label, 'overflow', 'hidden');
+      set(label, 'text-overflow', 'ellipsis');
+    } else {
+      for (let i = 0; i < 20 && overflow() > 2; i++) {
+        const size = parseFloat(getComputedStyle(title).fontSize) || 24;
+        if (size <= 12) break;
+        set(title, 'font-size', Math.max(12, size - 1) + 'px');
+      }
+    }
+    set(title, 'overflow', 'hidden');
+  }
+  function clearStaleMobileTimeline() {
+    const tabs = document.getElementById('timelineDayTabs');
+    const key = document.getElementById('timelineFloodKey');
+    const track = document.querySelector('#timelineDock .timeline-trackRow');
+    if (tabs?.style.getPropertyValue('position') !== 'relative' &&
+        key?.style.getPropertyValue('display') !== 'flex' &&
+        track?.style.getPropertyValue('position') !== 'relative') return;
+    for (const el of [
+      document.querySelector('#timelineDock .timeline-top'),
+      document.querySelector('#timelineDock .timeline-controls'),
+      key, tabs, track,
+      document.getElementById('hourSlider'),
+      document.getElementById('playBtn')
+    ]) if (el?.hasAttribute('style')) el.removeAttribute('style');
+  }
+  function ensureDrawerClose(left) {
+    if (document.getElementById('mobileControlsClose')) return;
+    let button = document.getElementById('shorelyResponsiveClose');
+    if (!button) {
+      button = document.createElement('button');
+      button.id = 'shorelyResponsiveClose';
+      button.type = 'button';
+      button.textContent = '×';
+      button.setAttribute('aria-label', 'Close controls');
+      button.addEventListener('click', () => {
+        document.getElementById('mobileControlsToggle')?.click();
+      });
+      left.prepend(button);
+    }
+    const styles = {
+      display: document.body.classList.contains('mobile-controls-open') ? 'grid' : 'none',
+      'place-items': 'center', position: 'sticky', top: '0px', 'z-index': '9000',
+      'align-self': 'flex-end', order: '-100', flex: '0 0 auto',
+      width: '36px', height: '36px', 'min-width': '36px',
+      margin: '0 0 8px auto', padding: '0px', 'border-radius': '10px',
+      border: '1px solid rgba(255,255,255,.2)', background: '#263449',
+      color: '#fff', 'font-size': '26px', 'line-height': '1', cursor: 'pointer'
+    };
+    for (const [name, value] of Object.entries(styles)) set(button, name, value);
+  }
   function fit() {
     pending = false;
     const left = document.getElementById('leftPanel');
@@ -40238,18 +40312,80 @@ html body #mapTitleBadge #mapTitleLogo{
     const timeline = document.getElementById('timelineDock');
     const title = document.getElementById('mapTitleBadge');
     const legend = document.getElementById('legendDock');
+    const banner = document.getElementById('topBanner');
     if (!left || !right || !timeline || !title) return;
     const compact = matchMedia('(max-width: 900px)').matches || document.body.classList.contains('mobile-optimized');
+    const switched = lastCompact !== compact;
+    const tabs = document.getElementById('timelineDayTabs');
+    const track = timeline.querySelector('.timeline-trackRow');
+    const play = document.getElementById('playBtn');
+    const slider = document.getElementById('hourSlider');
+    const toggle = document.getElementById('mobileControlsToggle');
+    const shortLandscape = compact && !!tabs && !!track && innerWidth > innerHeight && innerHeight <= 500 &&
+      getComputedStyle(tabs).position === 'absolute' && getComputedStyle(track).position === 'absolute';
+    if (!shortLandscape && shortLandscapeApplied) {
+      for (const el of [toggle,banner,timeline,tabs,track,slider,play]) restore(el);
+      shortLandscapeApplied = false;
+    }
+    const partnerLogo = document.getElementById('mapTitlePartnerLogo');
+    if (compact && innerWidth <= 360) set(partnerLogo, 'display', 'none');
+    else restore(partnerLogo);
+    if (switched) {
+      restore(title);
+      restore(document.getElementById('mapTitleText'));
+      restore(banner);
+      restore(banner?.querySelector('.banner-text'));
+      restore(legend);
+      restore(left);
+      restore(right);
+      lastCompact = compact;
+    }
     if (compact) {
-      restore(left); restore(right); restore(title); restore(document.getElementById('mapTitleText'));
+      clearStaleMobileTimeline();
+      ensureDrawerClose(left);
       set(timeline, 'left', 'calc(8px + env(safe-area-inset-left))');
       set(timeline, 'right', 'calc(8px + env(safe-area-inset-right))');
       set(timeline, 'width', 'auto');
       set(timeline, 'min-width', '0px');
       set(timeline, 'max-width', 'calc(100vw - 16px)');
       set(timeline, 'transform', 'none');
-      if (legendOrigin && legend?.parentNode === left) legendOrigin.parent.insertBefore(legend, legendOrigin.next?.parentNode === legendOrigin.parent ? legendOrigin.next : null);
-      if (legend && shown(legend)) {
+      if (document.body.classList.contains('mobile-controls-open') && shown(left)) {
+        const lr = left.getBoundingClientRect();
+        const tr = timeline.getBoundingClientRect();
+        if (tr.top > lr.top + 80) {
+          const room = Math.floor(tr.top - lr.top - 8);
+          set(left, 'bottom', Math.ceil(innerHeight - tr.top + 8) + 'px');
+          set(left, 'max-height', room + 'px');
+          set(left, 'min-height', '0px');
+          set(left, 'overflow-y', 'auto');
+          set(left, 'overscroll-behavior-y', 'contain');
+        }
+      }
+      if (drawerLegend && legend) {
+        if (!left.contains(legend)) {
+          if (!legendOrigin) legendOrigin = {parent:legend.parentNode,next:legend.nextSibling};
+          left.appendChild(legend);
+        }
+        set(legend, 'position', 'static');
+        set(legend, 'inset', 'auto');
+        set(legend, 'left', 'auto');
+        set(legend, 'right', 'auto');
+        set(legend, 'top', 'auto');
+        set(legend, 'bottom', 'auto');
+        set(legend, 'display', 'block');
+        set(legend, 'width', '100%');
+        set(legend, 'min-width', '0px');
+        set(legend, 'max-width', '100%');
+        set(legend, 'height', 'auto');
+        set(legend, 'max-height', 'none');
+        set(legend, 'transform', 'none');
+        set(legend, 'margin', '0px');
+        set(legend, 'flex', '0 0 auto');
+        set(legend, 'order', '20');
+        set(legend, 'overflow', 'visible');
+      } else if (legendOrigin && legend?.parentNode === left) legendOrigin.parent.insertBefore(legend, legendOrigin.next?.parentNode === legendOrigin.parent ? legendOrigin.next : null);
+      if (!drawerLegend && innerWidth > 360 && owned.get(legend)?.has('top')) restore(legend);
+      if (!drawerLegend && legend && shown(legend)) {
         const r = legend.getBoundingClientRect();
         if (compactLegendWidth === null && (r.right > innerWidth - 8 || r.left < 8)) compactLegendWidth = r.width;
         if (compactLegendWidth !== null) {
@@ -40258,11 +40394,44 @@ html body #mapTitleBadge #mapTitleLogo{
           set(legend, 'max-width', width + 'px');
           set(legend, 'width', width + 'px');
           if (r.left < 8) set(legend, 'left', '8px');
-        } else restore(legend);
-      } else restore(legend);
+        }
+        if (innerWidth <= 360 && legend.getBoundingClientRect().right < document.getElementById('mobileControlsToggle')?.getBoundingClientRect().left)
+          set(legend, 'top', '60px');
+      } else if (!drawerLegend) restore(legend);
+      fitTitleContent(title, document.getElementById('mapTitleText'));
+      if (banner && shown(banner) && shown(title)) {
+        const tb = title.getBoundingClientRect();
+        const bb = banner.getBoundingClientRect();
+        if ((bb.top < tb.bottom + 6 && bb.bottom > tb.top && bb.left < tb.right && bb.right > tb.left) || owned.get(banner)?.has('top'))
+          set(banner, 'top', Math.ceil(tb.bottom + 8) + 'px');
+      }
+      if (shortLandscape) {
+        set(toggle, 'left', 'auto');
+        set(toggle, 'right', '8px');
+        set(toggle, 'top', '8px');
+        set(toggle, 'width', '118px');
+        set(toggle, 'min-width', '118px');
+        set(toggle, 'max-width', '118px');
+        set(banner, 'top', '60px');
+        set(banner, 'left', '112px');
+        set(banner, 'right', '104px');
+        set(banner, 'width', 'auto');
+        set(banner, 'transform', 'none');
+        set(banner, 'max-width', 'none');
+        for (const name of ['height','min-height','max-height']) set(timeline, name, '122px');
+        set(timeline, 'padding', '5px 8px');
+        set(tabs, 'top', '52px');
+        for (const name of ['height','min-height','max-height']) set(tabs, name, '30px');
+        set(track, 'top', '86px');
+        for (const name of ['height','min-height','max-height']) set(track, name, '28px');
+        for (const name of ['height','min-height','max-height']) set(slider, name, '28px');
+        for (const name of ['height','min-height','max-height','width','min-width','max-width']) set(play, name, '34px');
+        shortLandscapeApplied = true;
+      }
       return;
     }
     restore(timeline);
+    set(document.getElementById('shorelyResponsiveClose'), 'display', 'none');
     if (compactLegendWidth !== null) { restore(legend); compactLegendWidth = null; }
 
     const tr = timeline.getBoundingClientRect();
@@ -40320,18 +40489,20 @@ html body #mapTitleBadge #mapTitleLogo{
     set(title, 'width', 'max-content');
 
     const label = document.getElementById('mapTitleText');
-    if (!label) return;
-    restore(label);
-    const width = title.getBoundingClientRect().width;
-    const excess = title.scrollWidth - title.clientWidth;
-    if (excess > 2 && width > 0) {
-      const font = parseFloat(getComputedStyle(label).fontSize) || parseFloat(getComputedStyle(title).fontSize) || 22;
-      const textWidth = label.scrollWidth || label.getBoundingClientRect().width;
-      const available = Math.max(70, textWidth - excess - 8);
-      set(label, 'font-size', Math.max(12, Math.floor(font * available / Math.max(textWidth, 1))) + 'px');
-      set(label, 'min-width', '0px');
-      set(label, 'overflow', 'hidden');
-      set(label, 'text-overflow', 'ellipsis');
+    fitTitleContent(title, label);
+    if (banner && shown(banner)) {
+      set(banner, 'left', Math.round((laneLeft + laneRight) / 2) + 'px');
+      set(banner, 'right', 'auto');
+      set(banner, 'transform', 'translateX(-50%)');
+      set(banner, 'box-sizing', 'border-box');
+      set(banner, 'width', 'max-content');
+      set(banner, 'min-width', '0px');
+      set(banner, 'max-width', Math.floor(lane) + 'px');
+      set(banner?.querySelector('.banner-text'), 'min-width', '0px');
+      const tb = title.getBoundingClientRect();
+      const bb = banner.getBoundingClientRect();
+      if (bb.top < tb.bottom + 8 && bb.bottom > tb.top)
+        set(banner, 'top', Math.ceil(tb.bottom + 8) + 'px');
     }
   }
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
@@ -40347,6 +40518,12 @@ html body #mapTitleBadge #mapTitleLogo{
     nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['style','class'],childList:el.id==='rightRail'}));
     const legend = document.getElementById('legendDock');
     if (legend) mo.observe(legend, {attributes:true,attributeFilter:['style','class']});
+    const banner = document.getElementById('topBanner');
+    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['style','class']}); }
+    for (const selector of ['#timelineDock .timeline-top','#timelineDock .timeline-controls','#timelineFloodKey','#timelineDayTabs','#timelineDock .timeline-trackRow','#hourSlider','#playBtn']) {
+      const node = document.querySelector(selector);
+      if (node) mo.observe(node, {attributes:true,attributeFilter:['style']});
+    }
     const app = document.getElementById('app');
     if (app) mo.observe(app, {childList:true});
     mo.observe(document.getElementById('leftPanel'), {childList:true});
