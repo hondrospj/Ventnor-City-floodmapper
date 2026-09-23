@@ -187,6 +187,9 @@
     }
 
     #topBanner .banner-eyebrow{
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-size:11px;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -14670,11 +14673,10 @@ html.win-compact-ui #timelineDock #hourSlider{
   </div>
   <div id="topBanner">
     <div class="banner-text">
-      <div class="banner-eyebrow">Flood alert</div>
+      <div class="banner-eyebrow">Flood alert <span id="bannerCount">0 active</span></div>
       <div id="bannerTitle" class="banner-title">Checking alerts</div>
       <div id="bannerMeta" class="banner-meta"></div>
     </div>
-    <div id="bannerCount" class="pill">0 active</div>
     <button id="topBannerCloseBtn" class="centered-close-control" type="button" aria-label="Close flood alert">×</button>
   </div>
 
@@ -35603,8 +35605,7 @@ html body #timelineDock #hourSlider{
   html body #rightRail .pill,
   html body .section-kicker,
   html body .range-value,
-  html body .badge,
-  html body #bannerCount{
+  html body .badge{
     background:var(--pj-pill-bg) !important;
     border-color:var(--pj-pill-border) !important;
     color:var(--pj-pill-color) !important;
@@ -39675,10 +39676,10 @@ html body #mapTitleBadge #mapTitleLogo{
   html body.map-3d-ready #leftPanel,
   html body.map-3d-ready #rightRail,
   html body.map-3d-ready #timelineDock,
-  html body.map-3d-ready #topBanner,
   html body.map-3d-ready #nwDefaultNavControl{
     transform:translateZ(0) !important;
   }
+  html body.map-3d-ready #topBanner,
   html body.map-3d-ready #mapTitleBadge,
   html body.map-3d-ready #mapClickModeControl{
     transform:translateX(-50%) translateZ(0) !important;
@@ -39812,10 +39813,10 @@ html body #mapTitleBadge #mapTitleLogo{
   html body[data-map-view-mode="3d"] #rightRail,
   html body[data-map-view-mode="3d"] #timelineDock,
   html body[data-map-view-mode="3d"] #timelineBubble,
-  html body[data-map-view-mode="3d"] #topBanner,
   html body[data-map-view-mode="3d"] #nwDefaultNavControl{
     transform:none !important;
   }
+  html body[data-map-view-mode="3d"] #topBanner,
   html body[data-map-view-mode="3d"] #mapTitleBadge,
   html body[data-map-view-mode="3d"] #mapClickModeControl{
     transform:translateX(-50%) !important;
