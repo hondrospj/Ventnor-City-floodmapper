@@ -17914,6 +17914,9 @@ function setDatumHelpOpen(isOpen) {
 
     function renderLegend() {
       const list = document.getElementById("legendList");
+      // Avoid tearing down the key during unrelated map and boundary updates.
+      if (list.dataset.renderedLegendMode === currentOverlayMode && list.childElementCount) return;
+      list.dataset.renderedLegendMode = currentOverlayMode;
       const title = document.getElementById("legendTitle");
       const sub = document.getElementById("legendSub");
       const note = document.getElementById("legendNote");
@@ -18302,7 +18305,8 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function getOverlayFilenameCandidates(mode, stageValue) {
-      return [getOverlayFilename(mode, stageValue)];
+      const png = getOverlayFilename(mode, stageValue);
+      return [png.replace(/\.png$/, ".webp"), png];
     }
 
     function getOverlayCandidates(mode, stageValue, phase = "slack") {
@@ -18447,10 +18451,16 @@ function setDatumHelpOpen(isOpen) {
       return promise;
     }
 
+    const RASTER_IMAGE_CACHE_LIMIT = isCompactFloodmapperLayout() ? 2 : 4;
     function getExportImageElement(url) {
       if (!url) return Promise.resolve(null);
       if (exportCancelRequested) return Promise.resolve(null);
-      if (exportImageElementCache.has(url)) return exportImageElementCache.get(url);
+      if (exportImageElementCache.has(url)) {
+        const cached = exportImageElementCache.get(url);
+        exportImageElementCache.delete(url);
+        exportImageElementCache.set(url, cached);
+        return cached;
+      }
       const promise = new Promise(resolve => {
         const img = new Image();
         let settled = false;
@@ -18484,6 +18494,9 @@ function setDatumHelpOpen(isOpen) {
         img.src = url;
       });
       exportImageElementCache.set(url, promise);
+      while (exportImageElementCache.size > RASTER_IMAGE_CACHE_LIMIT) {
+        exportImageElementCache.delete(exportImageElementCache.keys().next().value);
+      }
       promise.then(result => {
         if (!result && exportImageElementCache.get(url) === promise) exportImageElementCache.delete(url);
       });
@@ -18534,9 +18547,9 @@ function setDatumHelpOpen(isOpen) {
     const DRAINAGE_STAGE_COLORS = [
       [244, 167, 66], [231, 76, 60], [125, 60, 152]
     ];
-    const DRAINAGE_RASTER_IMAGE_CACHE_LIMIT = 18;
-    const FILLING_COMPOSITE_CACHE_LIMIT = 48;
-    const DRAINAGE_COMPOSITE_CACHE_LIMIT = 48;
+    const DRAINAGE_RASTER_IMAGE_CACHE_LIMIT = 4;
+    const FILLING_COMPOSITE_CACHE_LIMIT = 4;
+    const DRAINAGE_COMPOSITE_CACHE_LIMIT = 4;
 
     function isDisconnectedRasterPixel(values, offset) {
       return values[offset + 3] > 0 &&
@@ -19181,66 +19194,11 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function preloadAroundHour(index) {
-      if (!currentSeriesHours.length) return;
-      const generation = ++overlayPreloadGeneration;
-      const queued = new Set();
-      const preloadOffset = (offset, priority = "low") => {
-        if (generation !== overlayPreloadGeneration) return Promise.resolve(null);
-        const i = index + offset;
-        if (i < 0 || i >= currentSeriesHours.length) return Promise.resolve(null);
-        const entry = currentSeriesHours[i];
-        const physicsAsset = getPhysicsAssetForEntry(entry);
-        const physicsRecord = getPhysicsDisplayRecord(physicsAsset);
-        if (physicsRecord?.url) {
-          return preloadImage(physicsRecord.url, priority);
-        }
-        const stage = getOverlayStage(getStageValue(entry));
-        if (stage == null) return Promise.resolve(null);
-        const phase = getHydraulicPhaseForEntry(entry, i, currentSeriesHours);
-        const key = `${currentOverlayMode}:${phase}:${stageToCode(stage)}`;
-        if (queued.has(key)) return Promise.resolve(null);
-        queued.add(key);
-        const recordRequest = currentOverlayMode === "dynamic"
-          ? getBathtubStageOverlayRecord(stage)
-          : getOverlayRecord(currentOverlayMode, stage, phase);
-        return recordRequest.then(record => {
-          if (generation !== overlayPreloadGeneration) return null;
-          return record?.url ? preloadImage(record.url, priority) : null;
-        });
-      };
-
-      [0, 1, -1].forEach(offset => {
-        preloadOffset(offset, "high");
-      });
-      const backgroundOffsets = [];
-      for (let distance = 2; distance <= 12; distance += 1) {
-        backgroundOffsets.push(distance, -distance);
-      }
-      let cursor = 0;
-      const loadNextInBackground = async () => {
-        if (generation !== overlayPreloadGeneration || cursor >= backgroundOffsets.length) return;
-        await preloadOffset(backgroundOffsets[cursor++], "low");
-        if (generation !== overlayPreloadGeneration) return;
-        if (typeof window.requestIdleCallback === "function") {
-          window.requestIdleCallback(loadNextInBackground, { timeout: 900 });
-        } else {
-          window.setTimeout(loadNextInBackground, 120);
-        }
-      };
-      if (typeof window.requestIdleCallback === "function") {
-        window.requestIdleCallback(loadNextInBackground, { timeout: 500 });
-      } else {
-        window.setTimeout(loadNextInBackground, 120);
-      }
+      // Full-resolution composites are loaded only for the selected frame.
     }
 
     function scheduleOverlayCatalogWarmup(index) {
-      const start = () => preloadAroundHour(index);
-      if (typeof window.requestIdleCallback === "function") {
-        window.requestIdleCallback(start, { timeout: 900 });
-      } else {
-        window.setTimeout(start, 160);
-      }
+      // The selected frame is loaded on demand by the map renderer.
     }
 
     function scheduleHistoricalTopTideWarmup() {
@@ -36642,9 +36600,11 @@ TOWN_CONFIG = {
       "north": 39.35862555243322
     },
     "depthRoots": [
+      "./assets/connected-v2/DepthPNGs/Ventnor%20City/",
       "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
     ],
     "dynamicRoots": [
+      "./assets/connected-v2/StagePNGs/Ventnor%20City/",
       "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
     ],
     "stageCodeScale": 10,
