@@ -15085,7 +15085,7 @@ html.win-compact-ui #timelineDock #hourSlider{
           <button id="downloadModalCloseBtn" class="datum-modal-close centered-close-control" type="button" aria-label="Close export window">×</button>
         </div>
       </div>
-      <p id="downloadModalSub" class="download-modal-sub">Choose the timing, layout, and framing. Social 4:5 keeps Ventnor City large and readable.</p>
+      <p id="downloadModalSub" class="download-modal-sub">Choose the timing, layout, and framing. Map view preserves the area you are viewing.</p>
       <div class="download-grid">
         <label class="download-field export-filetype-field">
           File type
@@ -15104,8 +15104,9 @@ html.win-compact-ui #timelineDock #hourSlider{
         </label>
         <label class="download-field export-layout-field">
           Layout
-          <div id="downloadAspectControl" class="export-segmented" role="tablist" aria-label="Export layout" style="--seg-cols:4">
-            <button id="exportAspectSocialBtn" type="button" class="active" data-aspect="4:5" aria-pressed="true">Social 4:5</button>
+          <div id="downloadAspectControl" class="export-segmented" role="tablist" aria-label="Export layout" style="--seg-cols:5">
+            <button id="exportAspectViewportBtn" type="button" class="active" data-aspect="viewport" aria-pressed="true">Map view</button>
+            <button id="exportAspectSocialBtn" type="button" data-aspect="4:5" aria-pressed="false">Social 4:5</button>
             <button id="exportAspectLandscapeBtn" type="button" data-aspect="16:9" aria-pressed="false">Wide 16:9</button>
             <button id="exportAspectPortraitBtn" type="button" data-aspect="9:16" aria-pressed="false">Story 9:16</button>
             <button id="exportAspectSquareBtn" type="button" data-aspect="1:1" aria-pressed="false">Square 1:1</button>
@@ -15114,10 +15115,10 @@ html.win-compact-ui #timelineDock #hourSlider{
         <label class="download-field export-framing-field">
           Map framing
           <div id="downloadExtentControl" class="export-segmented" role="tablist" aria-label="Export map framing">
-            <button id="exportExtentTownBtn" type="button" class="active" data-extent="town" aria-pressed="true">Fill Ventnor City</button>
-            <button id="exportExtentCurrentBtn" type="button" data-extent="current" aria-pressed="false">Current View</button>
+            <button id="exportExtentTownBtn" type="button" data-extent="town" aria-pressed="false">Fill Ventnor City</button>
+            <button id="exportExtentCurrentBtn" type="button" data-extent="current" aria-pressed="true" class="active">Current View</button>
           </div>
-          <span class="export-extent-help"><span><strong>Fill Ventnor City</strong> removes excess surrounding area so the flood map stays readable when shared.</span><button id="adjustExportViewBtn" class="export-adjust-view-btn" type="button">Adjust map</button></span>
+          <span class="export-extent-help"><span><strong>Current View</strong> keeps the area you are viewing. Map view preserves its shape; other layouts crop from the center.</span><button id="adjustExportViewBtn" class="export-adjust-view-btn" type="button">Adjust map</button></span>
         </label>
         <label id="gifSpeedField" class="download-field export-speed-field">
           GIF speed
@@ -15163,8 +15164,8 @@ html.win-compact-ui #timelineDock #hourSlider{
         <input id="downloadScopeSelect" type="hidden" value="range" />
             <input id="downloadFormatSelect" type="hidden" value="gif" />
             <input id="downloadIntervalSelect" type="hidden" value="hourly" />
-            <input id="downloadAspectSelect" type="hidden" value="4:5" />
-            <input id="downloadExtentSelect" type="hidden" value="town" />
+            <input id="downloadAspectSelect" type="hidden" value="viewport" />
+            <input id="downloadExtentSelect" type="hidden" value="current" />
             <input id="downloadSpeedSelect" type="hidden" value="normal" />
             <div id="downloadSummary" class="download-summary" hidden aria-hidden="true"></div>
         <div class="download-actions">
@@ -17853,8 +17854,8 @@ function setDatumHelpOpen(isOpen) {
       }
       if (modalSub) {
         modalSub.textContent = modeled
-          ? `Choose a time range within this ${modeledHours}-hour storm. Social 4:5 keeps Ventnor City large and readable.`
-          : `Choose timing, layout, and framing for up to ${EXPORT_RANGE_MAX_HOURS} hours. Social 4:5 keeps Ventnor City large and readable.`;
+          ? `Choose a time range within this ${modeledHours}-hour storm. Map view preserves the area you are viewing.`
+          : `Choose timing, layout, and framing for up to ${EXPORT_RANGE_MAX_HOURS} hours. Map view preserves the area you are viewing.`;
       }
     }
 
@@ -20775,8 +20776,8 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
     function getDownloadAspectValue() {
       const hiddenAspect = document.getElementById("downloadAspectSelect");
       const activeAspectButton = document.querySelector("#downloadAspectControl button[data-aspect].active");
-      const raw = hiddenAspect?.value || activeAspectButton?.dataset?.aspect || "4:5";
-      const normalized = EXPORT_GIF_ASPECTS[raw] ? raw : "4:5";
+      const raw = hiddenAspect?.value || activeAspectButton?.dataset?.aspect || "viewport";
+      const normalized = raw === "viewport" || EXPORT_GIF_ASPECTS[raw] ? raw : "viewport";
       if (hiddenAspect && hiddenAspect.value !== normalized) hiddenAspect.value = normalized;
       return normalized;
     }
@@ -20784,8 +20785,8 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
     function getDownloadExtentValue() {
       const hiddenExtent = document.getElementById("downloadExtentSelect");
       const activeExtentButton = document.querySelector("#downloadExtentControl button[data-extent].active");
-      const raw = hiddenExtent?.value || activeExtentButton?.dataset?.extent || "town";
-      const normalized = raw === "current" ? "current" : "town";
+      const raw = hiddenExtent?.value || activeExtentButton?.dataset?.extent || "current";
+      const normalized = raw === "town" ? "town" : "current";
       if (hiddenExtent && hiddenExtent.value !== normalized) hiddenExtent.value = normalized;
       return normalized;
     }
@@ -20855,6 +20856,31 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       return true;
     }
 
+    // Freeze the visible geographic area once for the entire export job.
+    let exportViewportBounds = null;
+
+    function getActiveMapBounds() {
+      const activeMap = window.NORTH_WILDWOOD_3D?.getMap?.();
+      const bounds = document.body.classList.contains("map-3d-ready") && activeMap
+        ? activeMap.getBounds() : map?.getBounds();
+      if (!bounds) return null;
+      const south = bounds.getSouth(), north = bounds.getNorth();
+      const west = bounds.getWest(), east = bounds.getEast();
+      if (![south, north, west, east].every(Number.isFinite) || north <= south || east <= west) return null;
+      return L.latLngBounds([[south, west], [north, east]]);
+    }
+
+    function getExportViewportAspect() {
+      const bounds = exportViewportBounds || getActiveMapBounds();
+      const nw = bounds && L.CRS.EPSG3857.latLngToPoint(bounds.getNorthWest(), 0);
+      const se = bounds && L.CRS.EPSG3857.latLngToPoint(bounds.getSouthEast(), 0);
+      const ratio = nw && se ? (se.x - nw.x) / (se.y - nw.y) : 16 / 9;
+      const longEdge = getDownloadFormatValue() === "png" ? 2160 : 1440;
+      const width = Math.max(2, Math.round(longEdge * Math.min(1, ratio)));
+      const height = Math.max(2, Math.round(longEdge / Math.max(1, ratio)));
+      return { value: "viewport", width, height, label: "Map view", resolutionLabel: `${width} × ${height}` };
+    }
+
     function fitExportMapToSelectedExtent(mapInstance) {
       if (!mapInstance) return;
       const mode = getDownloadExtentValue();
@@ -20875,15 +20901,18 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
         }
       }
 
-      if (mode === "current" && map && typeof map.getBounds === "function") {
-        try {
-          // Preserve the geographic viewport, not the Leaflet zoom number.
-          // Reusing the zoom on a larger export canvas zoomed dramatically
-          // out and made the town occupy only a corner of 4K exports.
-          mapInstance.fitBounds(map.getBounds(), { padding: [0, 0], animate: false });
-          return;
-        } catch (e) {
-        }
+      if (mode === "current") {
+        const visibleBounds = exportViewportBounds || getActiveMapBounds();
+        if (!visibleBounds) throw new Error("The current map view is not ready. Please try again.");
+        // Fractional zoom preserves the selected area at any output resolution.
+        // A chosen social aspect crops around its center instead of zooming out.
+        mapInstance.options.zoomSnap = 0;
+        const zoom = mapInstance.getBoundsZoom(visibleBounds, true);
+        const nw = mapInstance.project(visibleBounds.getNorthWest(), zoom);
+        const se = mapInstance.project(visibleBounds.getSouthEast(), zoom);
+        const center = mapInstance.unproject(nw.add(se).divideBy(2), zoom);
+        mapInstance.setView(center, zoom, { animate: false });
+        return;
       }
 
       let bounds = null;
@@ -20906,6 +20935,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
 
 
     function getExportAspectConfig(aspect = null) {
+      if ((aspect || getDownloadAspectValue()) === "viewport") return getExportViewportAspect();
       const base = EXPORT_GIF_ASPECTS[aspect || getDownloadAspectValue()] || EXPORT_GIF_ASPECTS["4:5"];
       if (getDownloadFormatValue() !== "png") return base;
       return {
@@ -22084,24 +22114,26 @@ function updateExportSegmentedUI() {
 
       setHidden("downloadFormatSelect", "gif");
       setHidden("downloadIntervalSelect", "hourly");
-      setHidden("downloadAspectSelect", "4:5");
+      setHidden("downloadAspectSelect", "viewport");
       setHidden("downloadSpeedSelect", "normal");
       setHidden("downloadScopeSelect", "range");
-      setHidden("downloadExtentSelect", "town");
+      setHidden("downloadExtentSelect", "current");
 
       closeExportDateOrderPopup();
       setDownloadStatus("", false);
       updateExportSegmentedUI();
       syncDownloadRangeInputs(true);
-      applyExportStageAspect("4:5");
+      applyExportStageAspect("viewport");
       updateDownloadSummary();
       setTimeout(() => document.getElementById("downloadResetBtn")?.blur(), 0);
     }
 
     function setDownloadBusy(isBusy, message = "") {
       if (isBusy) {
+        if (!exportInProgress) exportViewportBounds = getActiveMapBounds();
         exportCancelRequested = false;
       } else {
+        exportViewportBounds = null;
         exportCancelRequested = false;
         activeGifExport = null;
       }
@@ -22345,9 +22377,9 @@ function updateExportSegmentedUI() {
       exportMap = L.map("exportMap", {
         zoomControl: false,
         attributionControl: false,
-        minZoom: 11,
-        maxZoom: 19,
-        zoomSnap: 1,
+        minZoom: 0,
+        maxZoom: 24,
+        zoomSnap: 0,
         zoomDelta: 1,
         preferCanvas: true,
         zoomAnimation: false,
@@ -22381,8 +22413,9 @@ function updateExportSegmentedUI() {
           }
           exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
             attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-            minZoom: 11,
-            maxZoom: 19,
+            minZoom: 0,
+            maxZoom: 24,
+            maxNativeZoom: 19,
             subdomains: "abc",
             crossOrigin: true,
             updateWhenIdle: true,
@@ -22394,8 +22427,9 @@ function updateExportSegmentedUI() {
       } else {
         exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
           attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-          minZoom: 11,
-          maxZoom: 19,
+          minZoom: 0,
+          maxZoom: 24,
+          maxNativeZoom: 19,
           subdomains: "abc",
           crossOrigin: true,
           updateWhenIdle: true,
@@ -22407,8 +22441,9 @@ function updateExportSegmentedUI() {
 
       exportSatelliteLayer = L.tileLayer(ESRI_WORLD_IMAGERY_URL, {
         attribution: "Tiles &copy; Esri",
-        minZoom: 11,
-        maxZoom: 19,
+        minZoom: 0,
+        maxZoom: 24,
+        maxNativeZoom: 19,
         crossOrigin: true,
         updateWhenIdle: true,
         keepBuffer: 1,
@@ -22418,8 +22453,9 @@ function updateExportSegmentedUI() {
 
       exportRoadsLayer = L.tileLayer(ROAD_LABELS_URL, {
         attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-        minZoom: 11,
-        maxZoom: 20,
+        minZoom: 0,
+        maxZoom: 24,
+        maxNativeZoom: 20,
         subdomains: "abcd",
         crossOrigin: true,
         opacity: 0,
@@ -22439,7 +22475,7 @@ function updateExportSegmentedUI() {
         lineJoin: "round"
       });
 
-      exportMap.fitBounds(getBoundaryDrivenOverlayBounds(), { padding: [20, 20] });
+      fitExportMapToSelectedExtent(exportMap);
       return exportMap;
     }
 
@@ -28452,7 +28488,7 @@ function startPlayback() {
           event.preventDefault();
           const input = document.getElementById("downloadAspectSelect");
           if (!input) return;
-          input.value = btn.dataset.aspect || "4:5";
+          input.value = btn.dataset.aspect || "viewport";
           if (!exportInProgress) setDownloadStatus("", false);
           applyExportStageAspect(input.value);
           updateExportSegmentedUI();
@@ -28472,7 +28508,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
           event.preventDefault();
           const input = document.getElementById("downloadExtentSelect");
           if (!input) return;
-          input.value = btn.dataset.extent || "town";
+          input.value = btn.dataset.extent || "current";
           if (!exportInProgress) setDownloadStatus("", false);
           updateExportSegmentedUI();
           updateDownloadSummary();
