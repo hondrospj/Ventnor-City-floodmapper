@@ -19202,46 +19202,7 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function scheduleHistoricalTopTideWarmup() {
-      if (historicalTopTideWarmupScheduled || !topTideEvents.length) return;
-      historicalTopTideWarmupScheduled = true;
-      const generation = ++historicalTopTideWarmupGeneration;
-      const events = topTideEvents.slice(0, TOP_TIDE_SELECT_COUNT);
-
-      const warmEvent = async event => {
-        if (generation !== historicalTopTideWarmupGeneration) return;
-        const dateKey = String(event?.dateKey || event?.entry?.observedDate || "");
-        const stage = getOverlayStage(event?.peakStage);
-        const tasks = [];
-        if (/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) {
-          tasks.push(ensureObservedArchiveForDate(dateKey).catch(() => null));
-        }
-        if (stage != null) {
-          const url = getOverlayCandidates("depth", stage, "slack")[0];
-          if (url) tasks.push(preloadImage(url, "low"));
-        }
-        await Promise.all(tasks);
-      };
-
-      // The two visible cards are ready first. Remaining storms warm one at a
-      // time so they never compete with the selected map frame.
-      Promise.all(events.slice(0, TOP_TIDE_DISPLAY_COUNT).map(warmEvent))
-        .finally(() => {
-          let cursor = TOP_TIDE_DISPLAY_COUNT;
-          const warmNext = async () => {
-            if (generation !== historicalTopTideWarmupGeneration || cursor >= events.length) return;
-            await warmEvent(events[cursor++]);
-            if (typeof window.requestIdleCallback === "function") {
-              window.requestIdleCallback(warmNext, { timeout: 1200 });
-            } else {
-              window.setTimeout(warmNext, 160);
-            }
-          };
-          if (typeof window.requestIdleCallback === "function") {
-            window.requestIdleCallback(warmNext, { timeout: 900 });
-          } else {
-            window.setTimeout(warmNext, 160);
-          }
-        });
+      // Historical data and its raster are requested only when a card is selected.
     }
 
     // The hydraulic grid is north-up in EPSG:6527, not in Web Mercator. Keep
