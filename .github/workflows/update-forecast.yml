@@ -230,6 +230,43 @@ jobs:
                       })
               return out
 
+          def remap_percentiles(raw, zone):
+              """Derive estimated p01/p25/p50 settings from PETSS station TWL/TWL90p."""
+              from statistics import NormalDist
+              z10 = abs(NormalDist().inv_cdf(0.10))
+              ratios = {"lowEnd": abs(NormalDist().inv_cdf(0.01)) / z10,
+                        "mean": abs(NormalDist().inv_cdf(0.25)) / z10,
+                        "highEnd": 0.0}
+              labels = {"lowEnd": ("Minimum", "Estimated 1st percentile", "estimated_p01"),
+                        "mean": ("Mean", "Estimated 25th percentile", "estimated_p25"),
+                        "highEnd": ("Maximum", "Estimated 50th percentile", "estimated_p50")}
+              by_key = {key: {row["timeUtc"]: row for row in rows} for key, rows in raw.items()}
+              common = sorted(set(by_key["mean"]) & set(by_key["lowEnd"]) & set(by_key["highEnd"]))
+              remapped = {key: [] for key in labels}
+              for time_utc in common:
+                  base = by_key["mean"][time_utc]
+                  center = base["rawPetssValue"]
+                  lower = by_key["lowEnd"][time_utc]["rawPetssValue"]
+                  upper = by_key["highEnd"][time_utc]["rawPetssValue"]
+                  spread = max(0.0, center - lower)
+                  for key, ratio in ratios.items():
+                      value = center - ratio * spread
+                      navd88 = round2(value + zone["navd88OffsetFromMllwFt"])
+                      matched, clamped = stage_key(navd88)
+                      _, percentile, product = labels[key]
+                      row = dict(base)
+                      row.update({"scenario": key, "product": product, "percentile": percentile,
+                                  "estimatedTwlMllwFt": round3(value), "sourceStageFt": navd88,
+                                  "navd88StageFt": navd88, "mllwStageFt": round2(value),
+                                  "twlMllwFt": round2(value), "surgeFt": None,
+                                  "matchedStageKey": matched, "wasClamped": clamped,
+                                  "isEstimatedPercentile": True,
+                                  "sourceMeanTwlMllwFt": center,
+                                  "sourceTwl90pMllwFt": lower,
+                                  "sourceTwl10pMllwFt": upper})
+                      remapped[key].append(row)
+              return remapped
+
           def align_products(products, forecast_start):
               by_key = {key: {row["timeUtc"]: row for row in rows} for key, rows in products.items()}
               common = sorted(set(by_key["mean"]) & set(by_key["lowEnd"]) & set(by_key["highEnd"]))
@@ -290,6 +327,16 @@ jobs:
                       "forecastNavd88Max": round2(max(h["navd88StageFt"] for h in hours)),
                   }
               mean_hours = forecasts["mean"]["hours"]
+              scenario_rows = remap_percentiles(products, zone)
+              scenario_definitions = {
+                  "lowEnd": ("Minimum", "Estimated 1st percentile", "estimated_p01"),
+                  "mean": ("Mean", "Estimated 25th percentile", "estimated_p25"),
+                  "highEnd": ("Maximum", "Estimated 50th percentile", "estimated_p50"),
+              }
+              scenario_options = {key: {"label": label, "percentile": percentile, "product": product}
+                                  for key, (label, percentile, product) in scenario_definitions.items()}
+              scenario_forecasts = {key: {**scenario_options[key], "hours": rows}
+                                    for key, rows in scenario_rows.items()}
               return {
                   "zoneId": zone["id"],
                   "zoneName": zone["zoneName"],
@@ -314,6 +361,9 @@ jobs:
                   "thresholdsNAVD88": thresholds_navd_from_mllw(zone),
                   "layerStageRangeNAVD88": {"min": MIN_LAYER_STAGE, "max": MAX_LAYER_STAGE, "increment": LAYER_INCREMENT},
                   "forecastOptions": options,
+                  "scenarioOptions": scenario_options,
+                  "scenarioForecasts": scenario_forecasts,
+                  "scenarioMethod": "Estimated non-exceedance percentiles from TWL and TWL90p assuming a normal lower-tail shape; p25 interpolated, p01 extrapolated, p50 approximated by ensemble mean. Not published NOAA percentile products or absolute bounds.",
                   "products": product_meta,
                   "forecasts": forecasts,
                   "hours": mean_hours,

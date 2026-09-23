@@ -14721,9 +14721,9 @@ html.win-compact-ui #timelineDock #hourSlider{
           <span id="forecastScenarioPill" class="pill">Mean</span>
         </div>
         <div class="button-grid-3">
-          <button id="forecastLowBtn" type="button" data-scenario="lowEnd">Low End</button>
+          <button id="forecastLowBtn" type="button" data-scenario="lowEnd">Minimum</button>
           <button id="forecastMeanBtn" class="active" type="button" data-scenario="mean">Mean</button>
-          <button id="forecastHighBtn" type="button" data-scenario="highEnd">High End</button>
+          <button id="forecastHighBtn" type="button" data-scenario="highEnd">Maximum</button>
         </div>
       </section>
 
@@ -16130,9 +16130,9 @@ function cloneStyleObject(value) {
     let forecastData = null;
     let currentForecastScenario = "mean";
     const FORECAST_SCENARIOS = {
-      lowEnd: { label: "Low End", percentile: "Low End", buttonId: "forecastLowBtn" },
-      mean: { label: "Mean", percentile: "Mean", buttonId: "forecastMeanBtn" },
-      highEnd: { label: "High End", percentile: "High End", buttonId: "forecastHighBtn" }
+      lowEnd: { label: "Minimum", percentile: "Estimated 1st percentile", buttonId: "forecastLowBtn" },
+      mean: { label: "Mean", percentile: "Estimated 25th percentile", buttonId: "forecastMeanBtn" },
+      highEnd: { label: "Maximum", percentile: "Estimated 50th percentile", buttonId: "forecastHighBtn" }
     };
     let returnIntervalData = null;
     let currentReturnIntervalYears = 10;
@@ -16530,9 +16530,9 @@ function cloneStyleObject(value) {
 
     function getForecastScenarioHours(data = forecastData, scenario = currentForecastScenario) {
       if (!data) return [];
-      const scenarioRecord = data.forecasts?.[scenario];
+      const scenarioRecord = data.scenarioForecasts?.[scenario];
       if (Array.isArray(scenarioRecord?.hours)) return scenarioRecord.hours;
-      if (scenario === "mean" && Array.isArray(data.hours)) return data.hours;
+      
       return [];
     }
 
@@ -17747,11 +17747,7 @@ function setDatumHelpOpen(isOpen) {
       forecastType: {
         title: "Forecast type",
         body: `
-          <ul>
-            <li><strong>Low End</strong> is a lower possible water level.</li>
-            <li><strong>Mean</strong> is the middle estimate.</li>
-            <li><strong>High End</strong> is a higher possible water level for extra planning.</li>
-          </ul>
+          <p>These settings are estimates derived from NOAA PETSS station guidance: Minimum is the 1st percentile, Mean is the 25th, and Maximum is the 50th. They are not published NOAA percentiles. “Maximum” is the highest of these three settings, not the highest water level possible.</p>
         `
       },
       overlay: {
