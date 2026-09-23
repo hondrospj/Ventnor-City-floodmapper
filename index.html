@@ -2,6 +2,10 @@
 <!doctype html>
 <html lang="en">
 <head>
+<style>@layer avalon-mobile;</style>
+<link rel="stylesheet" href="assets/avalon-mobile.css?v=20260923-1">
+<script>document.documentElement.classList.add("avalon-mobile-ui");</script>
+
 <meta charset="utf-8" />
   <title>Ventnor City Flood Mapper</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -15592,6 +15596,7 @@ html.win-compact-ui #timelineDock #hourSlider{
     let mapTitleFitRaf = 0;
 
     function fitMapTitleBadgeToViewport() {
+      if (document.documentElement.classList.contains("avalon-mobile-ui") && window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches) return;
       mapTitleFitRaf = 0;
       const badge = document.getElementById("mapTitleBadge");
       const text = document.getElementById("mapTitleText");
@@ -34843,6 +34848,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 
   function applyTimelinePlayLane(){
+    if (document.documentElement.classList.contains("avalon-mobile-ui") && isCompactTimeline()) return;
     var dock = document.getElementById("timelineDock");
     if (!dock) return;
 
@@ -36487,6 +36493,8 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
   "use strict";
 
 
+  if (document.documentElement.classList.contains("avalon-mobile-ui")) return;
+
   var queued = false;
 
   function syncMobileLegendOffset(){
@@ -37243,6 +37251,7 @@ html body #mapTitleBadge #mapTitleLogo{
 <script id="shorely-mobile-slider-key-correction-script">
 (function(){
   "use strict";
+  if (document.documentElement.classList.contains("avalon-mobile-ui")) return;
 
   var queued = false;
   var observerStarted = false;
@@ -40270,5 +40279,6 @@ html body #mapTitleBadge #mapTitleLogo{
     max-width:calc(100% - 236px) !important;
   }
 </style>
+<script src="assets/avalon-mobile.js?v=20260923-1"></script>
 </body>
 </html>
