@@ -13,8 +13,6 @@
 
   const panelParent = panel.parentNode;
   const panelNext = panel.nextSibling;
-  const legendParent = legend.parentNode;
-  const legendNext = legend.nextSibling;
   let wasMobile = false;
   const before = document.createElement('button');
   const after = document.createElement('button');
@@ -88,7 +86,7 @@
         }
       }
       if (panel.parentNode !== document.body) document.body.appendChild(panel);
-      if (legend.parentNode !== app) app.appendChild(legend);
+      // The mapper's existing mobile legend layout owns its placement.
       if (interval && intervalParent && timeline.contains(intervalParent)) {
         const sourceCard = panel.querySelector('.data-source-card');
         if (sourceCard && sourceCard.nextElementSibling !== interval) sourceCard.after(interval);
@@ -104,7 +102,7 @@
       legend.setAttribute('aria-expanded', String(document.body.classList.contains('mobile-legend-open')));
     } else {
       if (panel.parentNode !== panelParent) panelParent.insertBefore(panel, panelNext?.parentNode === panelParent ? panelNext : null);
-      if (legend.parentNode !== legendParent && legendParent?.isConnected) legendParent.insertBefore(legend, legendNext?.parentNode === legendParent ? legendNext : null);
+      // The mapper's desktop pane layout owns its placement.
       if (interval && intervalParent && interval.parentNode !== intervalParent) intervalParent.insertBefore(interval, intervalNext?.parentNode === intervalParent ? intervalNext : null);
       panel.inert = false;
       panel.removeAttribute('role'); panel.removeAttribute('aria-modal');

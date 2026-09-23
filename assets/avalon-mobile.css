@@ -160,7 +160,7 @@
     .mobile-legend-open #legendDock .legend-header,
     .mobile-legend-open #legendDock .legend-list { display:block !important; }
     .mobile-legend-open #legendDock .legend-header-text { display:block !important; }
-    body.mobile-legend-open #legendDock::before { content:attr(data-preview-text) !important; display:block !important; position:static !important; width:auto !important; height:auto !important; margin:0 0 10px !important; color:#fff !important; font:700 16px/1.25 system-ui !important; text-align:left !important; }
+    body.mobile-legend-open #legendDock::before { content:none !important; display:none !important; margin:0 !important; }
     .mobile-legend-open #legendDock .legend-list { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
     .mobile-legend-open #legendDock .legend-row { display:grid !important; }
     #timelineDock #timelineDayTabs { display:flex !important; }
