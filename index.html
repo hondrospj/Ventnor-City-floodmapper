@@ -40687,19 +40687,31 @@ html body #mapTitleBadge #mapTitleLogo{
     addEventListener('orientationchange', schedule, {passive:true});
     const ro = new ResizeObserver(schedule);
     nodes.forEach(el => ro.observe(el));
-    const mo = new MutationObserver(schedule);
+    const lastClassValue = new WeakMap();
+    const mo = new MutationObserver(records => {
+      let layoutChanged = false;
+      for (const record of records) {
+        if (record.type !== 'attributes' || record.attributeName !== 'class') {
+          layoutChanged = true;
+          continue;
+        }
+        const value = record.target.getAttribute('class');
+        if (!lastClassValue.has(record.target) || lastClassValue.get(record.target) !== value) {
+          lastClassValue.set(record.target, value);
+          layoutChanged = true;
+        }
+      }
+      if (layoutChanged) schedule();
+    });
     mo.observe(document.body, {attributes:true,attributeFilter:['class']});
-    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['style','class'],childList:el.id==='rightRail'}));
+    // fit() writes styles on these panes; observing those writes loops every frame.
+    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['class'],childList:el.id==='rightRail'}));
     const legend = document.getElementById('legendDock');
-    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['style','class']});
+    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['class']});
     const banner = document.getElementById('topBanner');
-    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['style','class']}); }
+    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['class']}); }
     const leafletNavAnchor = document.querySelector('.leaflet-top.leaflet-right');
     if (leafletNavAnchor) mo.observe(leafletNavAnchor, {attributes:true,attributeFilter:['style','class']});
-    for (const selector of ['#timelineDock .timeline-top','#timelineDock .timeline-controls','#timelineFloodKey','#timelineDayTabs','#timelineDock .timeline-trackRow','#hourSlider','#playBtn']) {
-      const node = document.querySelector(selector);
-      if (node) mo.observe(node, {attributes:true,attributeFilter:['style']});
-    }
     const app = document.getElementById('app');
     if (app) mo.observe(app, {childList:true});
     mo.observe(document.getElementById('leftPanel'), {childList:true});
