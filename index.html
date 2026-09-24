@@ -40202,7 +40202,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v8">
+<script id="shorelysafe-responsive-fit-v10">
 (function () {
   'use strict';
   const owned = new Map();
@@ -40210,6 +40210,7 @@ html body #mapTitleBadge #mapTitleLogo{
   let compactLegendWidth = null;
   let pending = false;
   let lastCompact = null;
+  let lastCompactWidth = null;
   let shortLandscapeApplied = false;
   const drawerLegend = /\/(avalon-test|highlands-beta|salem-beta)\/?$/.test(location.pathname);
   function set(el, name, value) {
@@ -40229,12 +40230,21 @@ html body #mapTitleBadge #mapTitleLogo{
     }
     owned.delete(el);
   }
+  function release(el, name) {
+    const props = owned.get(el);
+    if (!props?.has(name)) return;
+    const [value, priority] = props.get(name);
+    if (value) el.style.setProperty(name, value, priority);
+    else el.style.removeProperty(name);
+    props.delete(name);
+    if (!props.size) owned.delete(el);
+  }
   function shown(el) {
     if (!el) return false;
     const s = getComputedStyle(el);
     return s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0' && el.getBoundingClientRect().width > 0;
   }
-  function fitTitleContent(title, label) {
+  function fitTitleContent(title, label, resetLabel = true) {
     if (!shown(title)) return;
     const overflow = () => {
       const box = title.getBoundingClientRect();
@@ -40244,7 +40254,7 @@ html body #mapTitleBadge #mapTitleLogo{
         Math.max(0, Math.max(...children.map(r => r.right)) - box.right) +
         (label ? Math.max(0, label.scrollWidth - label.clientWidth) : 0);
     };
-    if (label) restore(label);
+    if (label && resetLabel) restore(label);
     if (overflow() <= 2) return;
     if (label) {
       set(title, 'gap', '4px');
@@ -40305,6 +40315,33 @@ html body #mapTitleBadge #mapTitleLogo{
     };
     for (const [name, value] of Object.entries(styles)) set(button, name, value);
   }
+  function fitShortLandscapeNavigation(active) {
+    const source = document.getElementById('nwDefaultNavControl');
+    if (!source) return;
+    let compact = document.getElementById('shorelyCompactMapNav');
+    if (!compact) {
+      compact = document.createElement('div');
+      compact.id = 'shorelyCompactMapNav';
+      compact.setAttribute('aria-label', 'Map navigation');
+      for (const [text, label, selector] of [
+        ['+', 'Zoom in', '.nw-simple-zoom-in, .nw-earth-zoom-in'],
+        ['−', 'Zoom out', '.nw-simple-zoom-out, .nw-earth-zoom-out'],
+        ['2D', 'Switch map view', '.nw-simple-view']
+      ]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = text;
+        button.setAttribute('aria-label', label);
+        button.addEventListener('click', () => source.querySelector(selector)?.click());
+        compact.appendChild(button);
+      }
+      document.body.appendChild(compact);
+    }
+    if (!active) { restore(source); restore(compact); for (const child of compact.children) restore(child); compact.style.display = 'none'; return; }
+    set(source, 'display', 'none');
+    for (const [name, value] of Object.entries({display:'grid',position:'fixed',top:'60px',right:'8px',width:'36px',gap:'3px','z-index':'2000','pointer-events':'auto'})) set(compact,name,value);
+    for (const button of compact.children) for (const [name, value] of Object.entries({width:'36px',height:'32px','min-width':'36px','min-height':'32px',padding:'0px',border:'1px solid rgba(164,205,255,.5)','border-radius':'8px',background:'#1d3c65',color:'#fff','font-size':'15px','font-weight':'800','line-height':'1',cursor:'pointer'})) set(button,name,value);
+  }
   function fit() {
     pending = false;
     const left = document.getElementById('leftPanel');
@@ -40341,6 +40378,9 @@ html body #mapTitleBadge #mapTitleLogo{
       lastCompact = compact;
     }
     if (compact) {
+      fitShortLandscapeNavigation(shortLandscape);
+      if (!right.children.length) set(right, 'display', 'none');
+      else if (owned.get(right)?.has('display')) restore(right);
       clearStaleMobileTimeline();
       ensureDrawerClose(left);
       set(timeline, 'left', 'calc(8px + env(safe-area-inset-left))');
@@ -40398,7 +40438,36 @@ html body #mapTitleBadge #mapTitleLogo{
         if (innerWidth <= 360 && legend.getBoundingClientRect().right < document.getElementById('mobileControlsToggle')?.getBoundingClientRect().left)
           set(legend, 'top', '60px');
       } else if (!drawerLegend) restore(legend);
-      fitTitleContent(title, document.getElementById('mapTitleText'));
+      const compactLabel = document.getElementById('mapTitleText');
+      if (compactLabel) {
+        if (lastCompactWidth !== innerWidth) {
+          for (const name of ['max-width', 'overflow', 'text-overflow']) release(compactLabel, name);
+          lastCompactWidth = innerWidth;
+        }
+        set(compactLabel, 'font-size', (innerWidth <= 360 ? 13 : innerWidth <= 430 ? 15 : 17) + 'px');
+        set(compactLabel, 'white-space', 'nowrap');
+      }
+      fitTitleContent(title, compactLabel, false);
+      if (compactLabel && shown(toggle)) {
+        const overlapsToggle = () => {
+          const a = compactLabel.getBoundingClientRect();
+          const b = toggle.getBoundingClientRect();
+          return a.top < b.bottom - 2 && a.bottom > b.top + 2 &&
+            a.right > b.left - 8 && a.left < b.right - 8;
+        };
+        for (let i = 0; i < 8 && overlapsToggle(); i++) {
+          const size = parseFloat(getComputedStyle(compactLabel).fontSize) || 17;
+          if (size <= 11) break;
+          set(compactLabel, 'font-size', Math.max(11, size - 1) + 'px');
+        }
+        if (overlapsToggle()) {
+          const room = Math.max(40, Math.floor(toggle.getBoundingClientRect().left -
+            compactLabel.getBoundingClientRect().left - 10));
+          set(compactLabel, 'max-width', room + 'px');
+          set(compactLabel, 'overflow', 'hidden');
+          set(compactLabel, 'text-overflow', 'ellipsis');
+        }
+      }
       if (banner && shown(banner) && shown(title)) {
         const tb = title.getBoundingClientRect();
         const bb = banner.getBoundingClientRect();
@@ -40430,6 +40499,7 @@ html body #mapTitleBadge #mapTitleLogo{
       }
       return;
     }
+    fitShortLandscapeNavigation(false);
     restore(timeline);
     set(document.getElementById('shorelyResponsiveClose'), 'display', 'none');
     if (compactLegendWidth !== null) { restore(legend); compactLegendWidth = null; }
@@ -40441,7 +40511,8 @@ html body #mapTitleBadge #mapTitleLogo{
       const br = title.getBoundingClientRect();
       const collidesWithTitle = gr.left < br.right - 8 && gr.right > br.left + 8 && gr.top < br.bottom - 8 && gr.bottom > br.top + 8;
       const escapesLeft = left.contains(legend) && (gr.left < lr.left - 4 || gr.right > lr.right + 4);
-      if ((legendOrigin && legend.dataset.userMoved !== '1') || collidesWithTitle || escapesLeft) {
+      const offscreenLegend = gr.top < 0 || gr.bottom > tr.top - 8 || gr.left < 8 || gr.right > innerWidth - 8;
+      if ((legendOrigin && legend.dataset.userMoved !== '1') || collidesWithTitle || escapesLeft || offscreenLegend) {
         if (!left.contains(legend)) {
           if (!legendOrigin) legendOrigin = {parent:legend.parentNode,next:legend.nextSibling};
           left.appendChild(legend);
@@ -40490,6 +40561,28 @@ html body #mapTitleBadge #mapTitleLogo{
 
     const label = document.getElementById('mapTitleText');
     fitTitleContent(title, label);
+    if (lane < 340 && label) {
+      set(title, 'white-space', 'normal');
+      set(label, 'white-space', 'normal');
+      set(label, 'overflow', 'visible');
+      set(label, 'text-overflow', 'clip');
+      set(label, 'line-height', '1.05');
+    } else {
+      for (const name of ['white-space','overflow','text-overflow','line-height']) {
+        if (owned.get(label)?.has(name)) {
+          const [value,priority]=owned.get(label).get(name);
+          if (value) label.style.setProperty(name,value,priority);
+          else label.style.removeProperty(name);
+          owned.get(label).delete(name);
+        }
+      }
+      if (owned.get(title)?.has('white-space')) {
+        const [value,priority]=owned.get(title).get('white-space');
+        if (value) title.style.setProperty('white-space',value,priority);
+        else title.style.removeProperty('white-space');
+        owned.get(title).delete('white-space');
+      }
+    }
     if (banner && shown(banner)) {
       set(banner, 'left', Math.round((laneLeft + laneRight) / 2) + 'px');
       set(banner, 'right', 'auto');
@@ -40503,6 +40596,13 @@ html body #mapTitleBadge #mapTitleLogo{
       const bb = banner.getBoundingClientRect();
       if (bb.top < tb.bottom + 8 && bb.bottom > tb.top)
         set(banner, 'top', Math.ceil(tb.bottom + 8) + 'px');
+    }
+    const nav = document.getElementById('nwDefaultNavControl');
+    if (nav && banner && shown(nav) && shown(banner)) {
+      const nr = nav.getBoundingClientRect();
+      const br = banner.getBoundingClientRect();
+      if (nr.left < br.right - 8 && nr.right > br.left + 8 && nr.top < br.bottom - 8 && nr.bottom > br.top + 8)
+        set(nav, 'top', Math.ceil(br.bottom + 8) + 'px');
     }
   }
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
