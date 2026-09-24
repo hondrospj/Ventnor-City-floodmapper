@@ -1513,6 +1513,7 @@
       var style = await load3dStyle();
       var leafletCenter = map && map.getCenter ? map.getCenter() : { lng: -74.7998357, lat: 39.006945 };
       var leafletZoom = map && map.getZoom ? map.getZoom() : 13;
+      var mobileRenderer = window.matchMedia("(pointer: coarse), (max-width: 900px)").matches;
       glMap = new maplibregl.Map({
         container: container,
         style: style,
@@ -1534,11 +1535,11 @@
         antialias: false,
         fadeDuration: 0,
         refreshExpiredTiles: false,
-        maxTileCacheZoomLevels: 8,
+        maxTileCacheZoomLevels: mobileRenderer ? 3 : 8,
         // Retain every cardinal/diagonal footprint rendered behind the loader
         // so the first wheel gesture does not synchronously fetch and rebuild
         // the newly exposed vector, raster, and building tiles.
-        maxTileCacheSize: 384,
+        maxTileCacheSize: mobileRenderer ? 64 : 384,
         // Render at one physical pixel per CSS pixel. The former 0.75 scale was
         // visibly resampled during camera movement, making the flood PNG and
         // thin building runs appear to wiggle or disappear at street scale.
@@ -1546,7 +1547,7 @@
         // MapLibre's supported no-inertia path avoids an expensive terrain
         // glide after every pointer release and makes mode changes atomic.
         reduceMotion: true,
-        powerPreference: "high-performance",
+        powerPreference: mobileRenderer ? "low-power" : "high-performance",
         attributionControl: false,
         canvasContextAttributes: { antialias: false }
       });

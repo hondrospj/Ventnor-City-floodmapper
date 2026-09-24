@@ -36473,7 +36473,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
 })();
 </script>
 
-<script src="./assets/3d/north-wildwood-3d.js?v=20260921-depth-inches"></script>
+<script src="./assets/3d/north-wildwood-3d.js?v=20260924-fleet-mobile-cache"></script>
 <script>
 const BUNNY_STORAGE_ZONE_ID = "5907481";
 const BUNNY_CDN_BASE_URL = "https://floodmapperv1.b-cdn.net";
@@ -36704,22 +36704,25 @@ async function preloadNorthWildwoodExperience(mainPromise) {
   const preloadImages = Promise.allSettled(
     Array.from(document.images).filter(image => image.src).map(image => waitForImageElementReady(image))
   );
-  const preload3d = window.NORTH_WILDWOOD_3D?.preload
+  // Keep mobile startup within Safari's memory budget; initialize 3D on demand.
+  const defer3dOnMobile = window.matchMedia("(pointer: coarse), (max-width: 900px)").matches;
+  const preload3d = !defer3dOnMobile && window.NORTH_WILDWOOD_3D?.preload
     ? Promise.resolve(mainPromise).then(() => window.NORTH_WILDWOOD_3D.preload({ initialize: true, warmCamera: "core" }))
     : Promise.resolve();
 
-  const completePreload = Promise.allSettled([
-    track(mainPromise, 68, "Drawing the current flood map…"),
-    track(preload3d, 96, "Preparing map navigation and 3D terrain…"),
-    track(preloadImages, 98, "Finishing the interface…")
-  ]);
-  // Reveal only after the current flood, initialized renderer, and first-use
-  // compass views are ready. Large archives, parcel/NSI details, and export
-  // engines stay on demand instead of blocking and parsing during startup.
+  const preloadTasks = [track(mainPromise, 68, "Drawing the current flood map…")];
+  if (!defer3dOnMobile) {
+    preloadTasks.push(track(preload3d, 96, "Preparing map navigation and 3D terrain…"));
+  }
+  preloadTasks.push(track(Promise.resolve(mainPromise).then(() => preloadImages), 98, "Finishing the interface…"));
+  const completePreload = Promise.allSettled(preloadTasks);
+  // Reveal mobile after the 2D flood map is ready; initialize 3D on demand.
   await completePreload;
   window.clearInterval(progressTimer);
   document.body.dataset.sitePreload = "complete";
-  document.body.dataset.sitePreloadBlockingPolicy = "initial-flood-renderer-cardinal-navigation";
+  document.body.dataset.sitePreloadBlockingPolicy = defer3dOnMobile
+    ? "initial-flood-renderer-3d-on-demand"
+    : "initial-flood-renderer-cardinal-navigation";
   document.body.dataset.sitePreloadAvoidedBytes = "observed-parcels-nsi-export-libraries";
   document.body.dataset.map3dDeferredWarmup = "on-demand-no-background-camera-traversal";
   const minimumDelay = Math.max(0, 800 - (performance.now() - startedAt));
@@ -40618,17 +40621,29 @@ html body #mapTitleBadge #mapTitleLogo{
     addEventListener('orientationchange', schedule, {passive:true});
     const ro = new ResizeObserver(schedule);
     nodes.forEach(el => ro.observe(el));
-    const mo = new MutationObserver(schedule);
+    const lastClassValue = new WeakMap();
+    const mo = new MutationObserver(records => {
+      let layoutChanged = false;
+      for (const record of records) {
+        if (record.type !== 'attributes' || record.attributeName !== 'class') {
+          layoutChanged = true;
+          continue;
+        }
+        const value = record.target.getAttribute('class');
+        if (!lastClassValue.has(record.target) || lastClassValue.get(record.target) !== value) {
+          lastClassValue.set(record.target, value);
+          layoutChanged = true;
+        }
+      }
+      if (layoutChanged) schedule();
+    });
     mo.observe(document.body, {attributes:true,attributeFilter:['class']});
-    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['style','class'],childList:el.id==='rightRail'}));
+    // fit() writes styles on these panes; observing those writes loops every frame.
+    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['class'],childList:el.id==='rightRail'}));
     const legend = document.getElementById('legendDock');
-    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['style','class']});
+    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['class']});
     const banner = document.getElementById('topBanner');
-    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['style','class']}); }
-    for (const selector of ['#timelineDock .timeline-top','#timelineDock .timeline-controls','#timelineFloodKey','#timelineDayTabs','#timelineDock .timeline-trackRow','#hourSlider','#playBtn']) {
-      const node = document.querySelector(selector);
-      if (node) mo.observe(node, {attributes:true,attributeFilter:['style']});
-    }
+    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['class']}); }
     const app = document.getElementById('app');
     if (app) mo.observe(app, {childList:true});
     mo.observe(document.getElementById('leftPanel'), {childList:true});
