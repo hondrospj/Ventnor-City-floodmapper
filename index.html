@@ -40686,7 +40686,7 @@ html body #mapTitleBadge #mapTitleLogo{
     addEventListener('resize', schedule, {passive:true});
     addEventListener('orientationchange', schedule, {passive:true});
     const ro = new ResizeObserver(schedule);
-    nodes.forEach(el => ro.observe(el));
+    nodes.filter(el => el.id === 'timelineDock' || el.id === 'mapTitleBadge').forEach(el => ro.observe(el));
     const lastClassValue = new WeakMap();
     const mo = new MutationObserver(records => {
       let layoutChanged = false;
