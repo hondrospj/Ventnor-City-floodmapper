@@ -40204,6 +40204,18 @@ html body #mapTitleBadge #mapTitleLogo{
     max-width:calc(100% - 236px) !important;
   }
 </style>
+<style id="floodmapper-popup-contrast-fix-20260924">
+  /* MapLibre depth popups use a dark card; keep their labels and values readable. */
+  #map3d .maplibregl-popup-content .depth-query-popup,
+  #map3d .maplibregl-popup-content .depth-query-popup h3,
+  #map3d .maplibregl-popup-content .pill {
+    color:#edf7ff !important;
+  }
+  #map3d .maplibregl-popup-content .depth-query-value {
+    color:#7df9ff !important;
+  }
+</style>
+
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
 <script id="shorelysafe-responsive-fit-v14">
 (function () {
