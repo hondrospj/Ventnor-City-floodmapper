@@ -40205,7 +40205,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v12">
+<script id="shorelysafe-responsive-fit-v13">
 (function () {
   'use strict';
   const owned = new Map();
@@ -40348,6 +40348,63 @@ html body #mapTitleBadge #mapTitleLogo{
     set(source, 'display', 'none');
     for (const [name, value] of Object.entries({display:'grid',position:'fixed',top:'60px',right:'8px',width:'36px',gap:'3px','z-index':'2000','pointer-events':'auto'})) set(compact,name,value);
     for (const button of compact.children) for (const [name, value] of Object.entries({width:'36px',height:'32px','min-width':'36px','min-height':'32px',padding:'0px',border:'1px solid rgba(164,205,255,.5)','border-radius':'8px',background:'#1d3c65',color:'#fff','font-size':'15px','font-weight':'800','line-height':'1',cursor:'pointer'})) set(button,name,value);
+  }
+  function fitLeafletNavigation(title, banner, timeline) {
+    const zoom = document.querySelector('.leaflet-top.leaflet-right .leaflet-control-zoom');
+    let compact = document.getElementById('shorelyCompactLeafletZoom');
+    if (!zoom) { if (compact) set(compact, 'display', 'none'); return; }
+    // Town layout setters rewrite top, margin and transform; translate remains independent.
+    release(zoom, 'translate');
+    release(zoom, 'opacity');
+    release(zoom, 'pointer-events');
+    if (!shown(zoom)) { if (compact) set(compact, 'display', 'none'); return; }
+    const landscape = innerWidth <= 900 && innerWidth > innerHeight && innerHeight <= 500;
+    if (landscape && !document.getElementById('nwDefaultNavControl')) {
+      const blockerBottom = Math.max(...[title, banner].filter(shown).map(el => el.getBoundingClientRect().bottom), 52);
+      const timelineTop = timeline?.getBoundingClientRect().top ?? innerHeight;
+      const top = Math.ceil(blockerBottom + 6);
+      if (top + 36 <= timelineTop - 5) {
+        if (!compact) {
+          compact = document.createElement('div');
+          compact.id = 'shorelyCompactLeafletZoom';
+          compact.setAttribute('aria-label', 'Map zoom');
+          for (const [symbol, label, selector] of [
+            ['+', 'Zoom in', '.leaflet-control-zoom-in'],
+            ['−', 'Zoom out', '.leaflet-control-zoom-out']
+          ]) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = symbol;
+            button.setAttribute('aria-label', label);
+            button.addEventListener('click', () => zoom.querySelector(selector)?.click());
+            compact.appendChild(button);
+          }
+          document.body.appendChild(compact);
+        }
+        for (const [name, value] of Object.entries({display:'flex',position:'fixed',top:top+'px',right:'8px',width:'78px',height:'34px',gap:'4px','z-index':'4000','pointer-events':'auto'})) set(compact,name,value);
+        for (const button of compact.children) for (const [name, value] of Object.entries({width:'37px',height:'34px','min-width':'37px','min-height':'34px',padding:'0px',border:'1px solid rgba(164,205,255,.5)','border-radius':'8px',background:'#1d3c65',color:'#fff','font-size':'19px','font-weight':'800','line-height':'1',cursor:'pointer'})) set(button,name,value);
+      } else if (compact) set(compact, 'display', 'none');
+      set(zoom, 'opacity', '0');
+      set(zoom, 'pointer-events', 'none');
+      return;
+    }
+    if (compact) set(compact, 'display', 'none');
+    const zr = zoom.getBoundingClientRect();
+    let blockerBottom = 0;
+    for (const blocker of [title, banner]) {
+      if (!shown(blocker)) continue;
+      const r = blocker.getBoundingClientRect();
+      if (Math.min(r.right, zr.right) - Math.max(r.left, zr.left) > 6 &&
+          Math.min(r.bottom, zr.bottom) - Math.max(r.top, zr.top) > 6)
+        blockerBottom = Math.max(blockerBottom, r.bottom);
+    }
+    const offset = Math.ceil(blockerBottom + 8 - zr.top);
+    if (blockerBottom && offset > 0) {
+      if (timeline && zr.bottom + offset > timeline.getBoundingClientRect().top - 4) {
+        set(zoom, 'opacity', '0');
+        set(zoom, 'pointer-events', 'none');
+      } else set(zoom, 'translate', '0px ' + offset + 'px');
+    }
   }
   function fit() {
     pending = false;
@@ -40512,6 +40569,7 @@ html body #mapTitleBadge #mapTitleLogo{
         for (const name of ['height','min-height','max-height','width','min-width','max-width']) set(play, name, '34px');
         shortLandscapeApplied = true;
       }
+      fitLeafletNavigation(title, banner, timeline);
       return;
     }
     fitShortLandscapeNavigation(false);
@@ -40561,7 +40619,7 @@ html body #mapTitleBadge #mapTitleLogo{
       if (!pane.hasAttribute('tabindex')) pane.setAttribute('tabindex', '0');
     }
 
-    if (!shown(title)) { restore(title); restore(document.getElementById('mapTitleText')); return; }
+    if (!shown(title)) { restore(title); restore(document.getElementById('mapTitleText')); fitLeafletNavigation(null, banner, timeline); return; }
     const lr = shown(left) ? left.getBoundingClientRect() : null;
     const rr = shown(right) && right.children.length ? right.getBoundingClientRect() : null;
     const laneLeft = Math.max(8, lr ? lr.right + 12 : 8);
@@ -40619,6 +40677,7 @@ html body #mapTitleBadge #mapTitleLogo{
       if (nr.left < br.right - 8 && nr.right > br.left + 8 && nr.top < br.bottom - 8 && nr.bottom > br.top + 8)
         set(nav, 'top', Math.ceil(br.bottom + 8) + 'px');
     }
+    fitLeafletNavigation(title, banner, timeline);
   }
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
   function init() {
@@ -40628,29 +40687,19 @@ html body #mapTitleBadge #mapTitleLogo{
     addEventListener('orientationchange', schedule, {passive:true});
     const ro = new ResizeObserver(schedule);
     nodes.forEach(el => ro.observe(el));
-    const lastClassValue = new WeakMap();
-    const mo = new MutationObserver(records => {
-      let layoutChanged = false;
-      for (const record of records) {
-        if (record.type !== 'attributes' || record.attributeName !== 'class') {
-          layoutChanged = true;
-          continue;
-        }
-        const value = record.target.getAttribute('class');
-        if (!lastClassValue.has(record.target) || lastClassValue.get(record.target) !== value) {
-          lastClassValue.set(record.target, value);
-          layoutChanged = true;
-        }
-      }
-      if (layoutChanged) schedule();
-    });
+    const mo = new MutationObserver(schedule);
     mo.observe(document.body, {attributes:true,attributeFilter:['class']});
-    // fit() writes styles on these panes; observing those writes loops every frame.
-    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['class'],childList:el.id==='rightRail'}));
+    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['style','class'],childList:el.id==='rightRail'}));
     const legend = document.getElementById('legendDock');
-    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['class']});
+    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['style','class']});
     const banner = document.getElementById('topBanner');
-    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['class']}); }
+    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['style','class']}); }
+    const leafletNavAnchor = document.querySelector('.leaflet-top.leaflet-right');
+    if (leafletNavAnchor) mo.observe(leafletNavAnchor, {attributes:true,attributeFilter:['style','class']});
+    for (const selector of ['#timelineDock .timeline-top','#timelineDock .timeline-controls','#timelineFloodKey','#timelineDayTabs','#timelineDock .timeline-trackRow','#hourSlider','#playBtn']) {
+      const node = document.querySelector(selector);
+      if (node) mo.observe(node, {attributes:true,attributeFilter:['style']});
+    }
     const app = document.getElementById('app');
     if (app) mo.observe(app, {childList:true});
     mo.observe(document.getElementById('leftPanel'), {childList:true});
