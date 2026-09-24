@@ -4,10 +4,10 @@
   "stationName": "INSIDE THOROFARE AT ATLANTIC CITY, NJ",
   "noaaGaugeId": "8534720",
   "usgsGaugeId": "01410560",
-  "issuedUtc": "2026-09-24T13:00:00Z",
+  "issuedUtc": "2026-09-24T14:00:00Z",
   "petssCycleUtc": "2026-09-24T06:00:00Z",
-  "forecastStartUtc": "2026-09-24T13:00:00Z",
-  "forecastEndUtc": "2026-09-28T01:00:00Z",
+  "forecastStartUtc": "2026-09-24T14:00:00Z",
+  "forecastEndUtc": "2026-09-28T02:00:00Z",
   "sourceUrl": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.20260924/petss.t06z.csv.tar.gz",
   "sourceMember": "petss.20260924/t06z.csv/8534836.csv",
   "sourceType": "NOMADS_PETSS_FORECAST_ONLY_station_csv_TWL_TWL10p_TWL90p",
@@ -72,29 +72,6 @@
       "product": "estimated_p01",
       "hours": [
         {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "lowEnd",
-          "product": "estimated_p01",
-          "percentile": "Estimated 1st percentile",
-          "rawPetssValue": 5.525,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 2.77,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 2.77,
-          "mllwStageFt": 5.16,
-          "twlMllwFt": 5.16,
-          "tideMllwFt": 2.839,
-          "surgeFt": null,
-          "matchedStageKey": "2.8",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "estimatedTwlMllwFt": 5.162,
-          "isEstimatedPercentile": true,
-          "sourceMeanTwlMllwFt": 5.525,
-          "sourceTwl90pMllwFt": 5.325,
-          "sourceTwl10pMllwFt": 5.725
-        },
-        {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "lowEnd",
           "product": "estimated_p01",
@@ -110,7 +87,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "estimatedTwlMllwFt": 4.448,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.811,
@@ -133,7 +110,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "estimatedTwlMllwFt": 3.719,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.082,
@@ -156,7 +133,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "estimatedTwlMllwFt": 2.872,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.417,
@@ -179,7 +156,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "estimatedTwlMllwFt": 2.469,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.832,
@@ -202,7 +179,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "estimatedTwlMllwFt": 2.203,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.748,
@@ -225,7 +202,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "estimatedTwlMllwFt": 2.688,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.233,
@@ -248,7 +225,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "estimatedTwlMllwFt": 3.587,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.132,
@@ -271,7 +248,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "estimatedTwlMllwFt": 4.532,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.077,
@@ -294,7 +271,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "estimatedTwlMllwFt": 5.302,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.847,
@@ -317,7 +294,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "estimatedTwlMllwFt": 5.995,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.358,
@@ -340,7 +317,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "estimatedTwlMllwFt": 6.022,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.567,
@@ -363,7 +340,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "estimatedTwlMllwFt": 5.657,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.202,
@@ -386,7 +363,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "estimatedTwlMllwFt": 5.122,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.485,
@@ -409,7 +386,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "estimatedTwlMllwFt": 4.247,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.61,
@@ -432,7 +409,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "estimatedTwlMllwFt": 3.394,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.757,
@@ -455,7 +432,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "estimatedTwlMllwFt": 2.746,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.109,
@@ -478,7 +455,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "estimatedTwlMllwFt": 2.281,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.826,
@@ -501,7 +478,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "estimatedTwlMllwFt": 2.466,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.011,
@@ -524,7 +501,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "estimatedTwlMllwFt": 3.01,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.736,
@@ -547,7 +524,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "estimatedTwlMllwFt": 4.06,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.605,
@@ -570,7 +547,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "estimatedTwlMllwFt": 4.964,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.509,
@@ -593,7 +570,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "estimatedTwlMllwFt": 5.626,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.352,
@@ -616,7 +593,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "estimatedTwlMllwFt": 5.914,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.64,
@@ -639,7 +616,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "estimatedTwlMllwFt": 5.516,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.424,
@@ -662,7 +639,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "estimatedTwlMllwFt": 4.991,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.717,
@@ -685,7 +662,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "estimatedTwlMllwFt": 4.178,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.904,
@@ -708,7 +685,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "estimatedTwlMllwFt": 3.28,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.188,
@@ -731,7 +708,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "estimatedTwlMllwFt": 2.543,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.451,
@@ -754,7 +731,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "estimatedTwlMllwFt": 2.048,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.137,
@@ -777,7 +754,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "estimatedTwlMllwFt": 2.215,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.304,
@@ -800,7 +777,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "estimatedTwlMllwFt": 3.139,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.047,
@@ -823,7 +800,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "estimatedTwlMllwFt": 4.039,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.128,
@@ -846,7 +823,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "estimatedTwlMllwFt": 4.935,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.024,
@@ -869,7 +846,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "estimatedTwlMllwFt": 5.582,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.853,
@@ -892,7 +869,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "estimatedTwlMllwFt": 6.035,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.306,
@@ -915,7 +892,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "estimatedTwlMllwFt": 5.892,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.344,
@@ -938,7 +915,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "estimatedTwlMllwFt": 5.286,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.738,
@@ -961,7 +938,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "estimatedTwlMllwFt": 4.316,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.95,
@@ -984,7 +961,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "estimatedTwlMllwFt": 3.396,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.03,
@@ -1007,7 +984,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "estimatedTwlMllwFt": 2.583,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.217,
@@ -1030,7 +1007,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "estimatedTwlMllwFt": 1.593,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.771,
@@ -1053,7 +1030,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "estimatedTwlMllwFt": 1.676,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.673,
@@ -1076,7 +1053,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "estimatedTwlMllwFt": 2.212,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.027,
@@ -1099,7 +1076,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "estimatedTwlMllwFt": 3.105,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.92,
@@ -1122,7 +1099,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "estimatedTwlMllwFt": 4.154,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.969,
@@ -1145,7 +1122,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "estimatedTwlMllwFt": 5.004,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.819,
@@ -1168,7 +1145,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "estimatedTwlMllwFt": 5.613,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.428,
@@ -1191,7 +1168,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "estimatedTwlMllwFt": 5.532,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.347,
@@ -1214,7 +1191,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "estimatedTwlMllwFt": 4.971,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.786,
@@ -1237,7 +1214,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "estimatedTwlMllwFt": 3.947,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.944,
@@ -1260,7 +1237,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "estimatedTwlMllwFt": 3.122,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.937,
@@ -1283,7 +1260,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "estimatedTwlMllwFt": 2.208,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.023,
@@ -1306,7 +1283,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "estimatedTwlMllwFt": 1.569,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.203,
@@ -1329,7 +1306,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "estimatedTwlMllwFt": 1.188,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.003,
@@ -1352,7 +1329,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "estimatedTwlMllwFt": 1.528,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.343,
@@ -1375,7 +1352,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "estimatedTwlMllwFt": 2.478,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.112,
@@ -1398,7 +1375,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "estimatedTwlMllwFt": 3.44,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.074,
@@ -1421,7 +1398,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "estimatedTwlMllwFt": 4.226,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.86,
@@ -1444,7 +1421,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "estimatedTwlMllwFt": 4.852,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.486,
@@ -1467,7 +1444,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "estimatedTwlMllwFt": 4.973,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.788,
@@ -1490,7 +1467,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "estimatedTwlMllwFt": 4.521,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.336,
@@ -1513,7 +1490,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "estimatedTwlMllwFt": 3.508,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.505,
@@ -1536,7 +1513,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "estimatedTwlMllwFt": 2.638,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.453,
@@ -1559,7 +1536,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "estimatedTwlMllwFt": 1.544,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.541,
@@ -1582,7 +1559,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "estimatedTwlMllwFt": 0.861,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.676,
@@ -1605,7 +1582,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "estimatedTwlMllwFt": 0.55,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.184,
@@ -1628,7 +1605,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "estimatedTwlMllwFt": 0.743,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.377,
@@ -1651,7 +1628,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "estimatedTwlMllwFt": 1.336,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.151,
@@ -1674,7 +1651,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "estimatedTwlMllwFt": 2.529,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.163,
@@ -1697,7 +1674,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "estimatedTwlMllwFt": 3.472,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.287,
@@ -1720,7 +1697,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "estimatedTwlMllwFt": 4.43,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.064,
@@ -1743,7 +1720,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "estimatedTwlMllwFt": 4.824,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.458,
@@ -1766,7 +1743,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "estimatedTwlMllwFt": 4.588,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.222,
@@ -1789,7 +1766,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "estimatedTwlMllwFt": 3.938,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.39,
@@ -1812,7 +1789,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "estimatedTwlMllwFt": 2.993,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.445,
@@ -1835,7 +1812,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "estimatedTwlMllwFt": 1.788,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.422,
@@ -1858,7 +1835,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "estimatedTwlMllwFt": 0.909,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.361,
@@ -1881,7 +1858,7 @@
           "surgeFt": null,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "estimatedTwlMllwFt": 0.153,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.787,
@@ -1904,7 +1881,7 @@
           "surgeFt": null,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "estimatedTwlMllwFt": 0.203,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.837,
@@ -1927,7 +1904,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "estimatedTwlMllwFt": 0.797,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.431,
@@ -1950,7 +1927,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "estimatedTwlMllwFt": 1.59,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.224,
@@ -1973,7 +1950,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "estimatedTwlMllwFt": 2.578,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.212,
@@ -1996,7 +1973,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "estimatedTwlMllwFt": 3.506,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.14,
@@ -2019,12 +1996,35 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 84,
+          "hourIndex": 83,
           "estimatedTwlMllwFt": 4.124,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.758,
           "sourceTwl90pMllwFt": 4.858,
           "sourceTwl10pMllwFt": 6.758
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "lowEnd",
+          "product": "estimated_p01",
+          "percentile": "Estimated 1st percentile",
+          "rawPetssValue": 5.767,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 1.74,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 1.74,
+          "mllwStageFt": 4.13,
+          "twlMllwFt": 4.13,
+          "tideMllwFt": 4.055,
+          "surgeFt": null,
+          "matchedStageKey": "1.7",
+          "wasClamped": false,
+          "hourIndex": 84,
+          "estimatedTwlMllwFt": 4.133,
+          "isEstimatedPercentile": true,
+          "sourceMeanTwlMllwFt": 5.767,
+          "sourceTwl90pMllwFt": 4.867,
+          "sourceTwl10pMllwFt": 6.767
         }
       ]
     },
@@ -2033,29 +2033,6 @@
       "percentile": "Estimated 25th percentile",
       "product": "estimated_p25",
       "hours": [
-        {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "mean",
-          "product": "estimated_p25",
-          "percentile": "Estimated 25th percentile",
-          "rawPetssValue": 5.525,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 3.03,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 3.03,
-          "mllwStageFt": 5.42,
-          "twlMllwFt": 5.42,
-          "tideMllwFt": 2.839,
-          "surgeFt": null,
-          "matchedStageKey": "3.0",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "estimatedTwlMllwFt": 5.42,
-          "isEstimatedPercentile": true,
-          "sourceMeanTwlMllwFt": 5.525,
-          "sourceTwl90pMllwFt": 5.325,
-          "sourceTwl10pMllwFt": 5.725
-        },
         {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "mean",
@@ -2072,7 +2049,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "estimatedTwlMllwFt": 4.706,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.811,
@@ -2095,7 +2072,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "estimatedTwlMllwFt": 3.977,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.082,
@@ -2118,7 +2095,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "estimatedTwlMllwFt": 3.259,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.417,
@@ -2141,7 +2118,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "estimatedTwlMllwFt": 2.727,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.832,
@@ -2164,7 +2141,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "estimatedTwlMllwFt": 2.59,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.748,
@@ -2187,7 +2164,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "estimatedTwlMllwFt": 3.075,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.233,
@@ -2210,7 +2187,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "estimatedTwlMllwFt": 3.974,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.132,
@@ -2233,7 +2210,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "estimatedTwlMllwFt": 4.919,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.077,
@@ -2256,7 +2233,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "estimatedTwlMllwFt": 5.689,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.847,
@@ -2279,7 +2256,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "estimatedTwlMllwFt": 6.253,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.358,
@@ -2302,7 +2279,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "estimatedTwlMllwFt": 6.409,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.567,
@@ -2325,7 +2302,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "estimatedTwlMllwFt": 6.044,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.202,
@@ -2348,7 +2325,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "estimatedTwlMllwFt": 5.38,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.485,
@@ -2371,7 +2348,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "estimatedTwlMllwFt": 4.505,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.61,
@@ -2394,7 +2371,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "estimatedTwlMllwFt": 3.652,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.757,
@@ -2417,7 +2394,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "estimatedTwlMllwFt": 3.004,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.109,
@@ -2440,7 +2417,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "estimatedTwlMllwFt": 2.668,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.826,
@@ -2463,7 +2440,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "estimatedTwlMllwFt": 2.853,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.011,
@@ -2486,7 +2463,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "estimatedTwlMllwFt": 3.525,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.736,
@@ -2509,7 +2486,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "estimatedTwlMllwFt": 4.447,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.605,
@@ -2532,7 +2509,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "estimatedTwlMllwFt": 5.351,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.509,
@@ -2555,7 +2532,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "estimatedTwlMllwFt": 6.141,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.352,
@@ -2578,7 +2555,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "estimatedTwlMllwFt": 6.429,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.64,
@@ -2601,7 +2578,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "estimatedTwlMllwFt": 6.161,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.424,
@@ -2624,7 +2601,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "estimatedTwlMllwFt": 5.506,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.717,
@@ -2647,7 +2624,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "estimatedTwlMllwFt": 4.693,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.904,
@@ -2670,7 +2647,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "estimatedTwlMllwFt": 3.925,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.188,
@@ -2693,7 +2670,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "estimatedTwlMllwFt": 3.188,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.451,
@@ -2716,7 +2693,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "estimatedTwlMllwFt": 2.821,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.137,
@@ -2739,7 +2716,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "estimatedTwlMllwFt": 2.988,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.304,
@@ -2762,7 +2739,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "estimatedTwlMllwFt": 3.784,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.047,
@@ -2785,7 +2762,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "estimatedTwlMllwFt": 4.812,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.128,
@@ -2808,7 +2785,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "estimatedTwlMllwFt": 5.708,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.024,
@@ -2831,7 +2808,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "estimatedTwlMllwFt": 6.485,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.853,
@@ -2854,7 +2831,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "estimatedTwlMllwFt": 6.938,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.306,
@@ -2877,7 +2854,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "estimatedTwlMllwFt": 6.923,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.344,
@@ -2900,7 +2877,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "estimatedTwlMllwFt": 6.317,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.738,
@@ -2923,7 +2900,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "estimatedTwlMllwFt": 5.476,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.95,
@@ -2946,7 +2923,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "estimatedTwlMllwFt": 4.556,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.03,
@@ -2969,7 +2946,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "estimatedTwlMllwFt": 3.743,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.217,
@@ -2992,7 +2969,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "estimatedTwlMllwFt": 3.139,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.771,
@@ -3015,7 +2992,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "estimatedTwlMllwFt": 3.094,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.673,
@@ -3038,7 +3015,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "estimatedTwlMllwFt": 3.501,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.027,
@@ -3061,7 +3038,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "estimatedTwlMllwFt": 4.394,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.92,
@@ -3084,7 +3061,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "estimatedTwlMllwFt": 5.443,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.969,
@@ -3107,7 +3084,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "estimatedTwlMllwFt": 6.293,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.819,
@@ -3130,7 +3107,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "estimatedTwlMllwFt": 6.902,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.428,
@@ -3153,7 +3130,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "estimatedTwlMllwFt": 6.821,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.347,
@@ -3176,7 +3153,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "estimatedTwlMllwFt": 6.26,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.786,
@@ -3199,7 +3176,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "estimatedTwlMllwFt": 5.365,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.944,
@@ -3222,7 +3199,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "estimatedTwlMllwFt": 4.411,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.937,
@@ -3245,7 +3222,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "estimatedTwlMllwFt": 3.497,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.023,
@@ -3268,7 +3245,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "estimatedTwlMllwFt": 2.729,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.203,
@@ -3291,7 +3268,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "estimatedTwlMllwFt": 2.477,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.003,
@@ -3314,7 +3291,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "estimatedTwlMllwFt": 2.817,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.343,
@@ -3337,7 +3314,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "estimatedTwlMllwFt": 3.638,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.112,
@@ -3360,7 +3337,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "estimatedTwlMllwFt": 4.6,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.074,
@@ -3383,7 +3360,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "estimatedTwlMllwFt": 5.386,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.86,
@@ -3406,7 +3383,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "estimatedTwlMllwFt": 6.012,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.486,
@@ -3429,7 +3406,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "estimatedTwlMllwFt": 6.262,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.788,
@@ -3452,7 +3429,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "estimatedTwlMllwFt": 5.81,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.336,
@@ -3475,7 +3452,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "estimatedTwlMllwFt": 4.926,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.505,
@@ -3498,7 +3475,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "estimatedTwlMllwFt": 3.927,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.453,
@@ -3521,7 +3498,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "estimatedTwlMllwFt": 2.962,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.541,
@@ -3544,7 +3521,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "estimatedTwlMllwFt": 2.15,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.676,
@@ -3567,7 +3544,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "estimatedTwlMllwFt": 1.71,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.184,
@@ -3590,7 +3567,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "estimatedTwlMllwFt": 1.903,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.377,
@@ -3613,7 +3590,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "estimatedTwlMllwFt": 2.625,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.151,
@@ -3636,7 +3613,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "estimatedTwlMllwFt": 3.689,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.163,
@@ -3659,7 +3636,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "estimatedTwlMllwFt": 4.761,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.287,
@@ -3682,7 +3659,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "estimatedTwlMllwFt": 5.59,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.064,
@@ -3705,7 +3682,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "estimatedTwlMllwFt": 5.984,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.458,
@@ -3728,7 +3705,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "estimatedTwlMllwFt": 5.748,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.222,
@@ -3751,7 +3728,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "estimatedTwlMllwFt": 4.969,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.39,
@@ -3774,7 +3751,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "estimatedTwlMllwFt": 4.024,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.445,
@@ -3797,7 +3774,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "estimatedTwlMllwFt": 2.948,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.422,
@@ -3820,7 +3797,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "estimatedTwlMllwFt": 1.94,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.361,
@@ -3843,7 +3820,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "estimatedTwlMllwFt": 1.313,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.787,
@@ -3866,7 +3843,7 @@
           "surgeFt": null,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "estimatedTwlMllwFt": 1.363,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.837,
@@ -3889,7 +3866,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "estimatedTwlMllwFt": 1.957,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.431,
@@ -3912,7 +3889,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "estimatedTwlMllwFt": 2.75,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.224,
@@ -3935,7 +3912,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "estimatedTwlMllwFt": 3.738,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.212,
@@ -3958,7 +3935,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "estimatedTwlMllwFt": 4.666,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.14,
@@ -3981,12 +3958,35 @@
           "surgeFt": null,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 84,
+          "hourIndex": 83,
           "estimatedTwlMllwFt": 5.284,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.758,
           "sourceTwl90pMllwFt": 4.858,
           "sourceTwl10pMllwFt": 6.758
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "mean",
+          "product": "estimated_p25",
+          "percentile": "Estimated 25th percentile",
+          "rawPetssValue": 5.767,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 2.9,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 2.9,
+          "mllwStageFt": 5.29,
+          "twlMllwFt": 5.29,
+          "tideMllwFt": 4.055,
+          "surgeFt": null,
+          "matchedStageKey": "2.9",
+          "wasClamped": false,
+          "hourIndex": 84,
+          "estimatedTwlMllwFt": 5.293,
+          "isEstimatedPercentile": true,
+          "sourceMeanTwlMllwFt": 5.767,
+          "sourceTwl90pMllwFt": 4.867,
+          "sourceTwl10pMllwFt": 6.767
         }
       ]
     },
@@ -3995,29 +3995,6 @@
       "percentile": "Estimated 50th percentile",
       "product": "estimated_p50",
       "hours": [
-        {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "highEnd",
-          "product": "estimated_p50",
-          "percentile": "Estimated 50th percentile",
-          "rawPetssValue": 5.525,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 3.14,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 3.14,
-          "mllwStageFt": 5.53,
-          "twlMllwFt": 5.53,
-          "tideMllwFt": 2.839,
-          "surgeFt": null,
-          "matchedStageKey": "3.1",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "estimatedTwlMllwFt": 5.525,
-          "isEstimatedPercentile": true,
-          "sourceMeanTwlMllwFt": 5.525,
-          "sourceTwl90pMllwFt": 5.325,
-          "sourceTwl10pMllwFt": 5.725
-        },
         {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "highEnd",
@@ -4034,7 +4011,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "estimatedTwlMllwFt": 4.811,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.811,
@@ -4057,7 +4034,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "estimatedTwlMllwFt": 4.082,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.082,
@@ -4080,7 +4057,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "estimatedTwlMllwFt": 3.417,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.417,
@@ -4103,7 +4080,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "estimatedTwlMllwFt": 2.832,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.832,
@@ -4126,7 +4103,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "estimatedTwlMllwFt": 2.748,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.748,
@@ -4149,7 +4126,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "estimatedTwlMllwFt": 3.233,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.233,
@@ -4172,7 +4149,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "estimatedTwlMllwFt": 4.132,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.132,
@@ -4195,7 +4172,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "estimatedTwlMllwFt": 5.077,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.077,
@@ -4218,7 +4195,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "estimatedTwlMllwFt": 5.847,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.847,
@@ -4241,7 +4218,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "estimatedTwlMllwFt": 6.358,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.358,
@@ -4264,7 +4241,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "estimatedTwlMllwFt": 6.567,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.567,
@@ -4287,7 +4264,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "estimatedTwlMllwFt": 6.202,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.202,
@@ -4310,7 +4287,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "estimatedTwlMllwFt": 5.485,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.485,
@@ -4333,7 +4310,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "estimatedTwlMllwFt": 4.61,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.61,
@@ -4356,7 +4333,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "estimatedTwlMllwFt": 3.757,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.757,
@@ -4379,7 +4356,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "estimatedTwlMllwFt": 3.109,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.109,
@@ -4402,7 +4379,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "estimatedTwlMllwFt": 2.826,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.826,
@@ -4425,7 +4402,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "estimatedTwlMllwFt": 3.011,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.011,
@@ -4448,7 +4425,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "estimatedTwlMllwFt": 3.736,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.736,
@@ -4471,7 +4448,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "estimatedTwlMllwFt": 4.605,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.605,
@@ -4494,7 +4471,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "estimatedTwlMllwFt": 5.509,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.509,
@@ -4517,7 +4494,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "estimatedTwlMllwFt": 6.352,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.352,
@@ -4540,7 +4517,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "estimatedTwlMllwFt": 6.64,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.64,
@@ -4563,7 +4540,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "estimatedTwlMllwFt": 6.424,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.424,
@@ -4586,7 +4563,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "estimatedTwlMllwFt": 5.717,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.717,
@@ -4609,7 +4586,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "estimatedTwlMllwFt": 4.904,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.904,
@@ -4632,7 +4609,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "estimatedTwlMllwFt": 4.188,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.188,
@@ -4655,7 +4632,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "estimatedTwlMllwFt": 3.451,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.451,
@@ -4678,7 +4655,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "estimatedTwlMllwFt": 3.137,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.137,
@@ -4701,7 +4678,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "estimatedTwlMllwFt": 3.304,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.304,
@@ -4724,7 +4701,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "estimatedTwlMllwFt": 4.047,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.047,
@@ -4747,7 +4724,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "estimatedTwlMllwFt": 5.128,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.128,
@@ -4770,7 +4747,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "estimatedTwlMllwFt": 6.024,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.024,
@@ -4793,7 +4770,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "estimatedTwlMllwFt": 6.853,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.853,
@@ -4816,7 +4793,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.9",
           "wasClamped": false,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "estimatedTwlMllwFt": 7.306,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.306,
@@ -4839,7 +4816,7 @@
           "surgeFt": null,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "estimatedTwlMllwFt": 7.344,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.344,
@@ -4862,7 +4839,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.3",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "estimatedTwlMllwFt": 6.738,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.738,
@@ -4885,7 +4862,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "estimatedTwlMllwFt": 5.95,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.95,
@@ -4908,7 +4885,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "estimatedTwlMllwFt": 5.03,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.03,
@@ -4931,7 +4908,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "estimatedTwlMllwFt": 4.217,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.217,
@@ -4954,7 +4931,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "estimatedTwlMllwFt": 3.771,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.771,
@@ -4977,7 +4954,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "estimatedTwlMllwFt": 3.673,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.673,
@@ -5000,7 +4977,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "estimatedTwlMllwFt": 4.027,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.027,
@@ -5023,7 +5000,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "estimatedTwlMllwFt": 4.92,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.92,
@@ -5046,7 +5023,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "estimatedTwlMllwFt": 5.969,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.969,
@@ -5069,7 +5046,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "estimatedTwlMllwFt": 6.819,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.819,
@@ -5092,7 +5069,7 @@
           "surgeFt": null,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "estimatedTwlMllwFt": 7.428,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.428,
@@ -5115,7 +5092,7 @@
           "surgeFt": null,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "estimatedTwlMllwFt": 7.347,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 7.347,
@@ -5138,7 +5115,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "estimatedTwlMllwFt": 6.786,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.786,
@@ -5161,7 +5138,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "estimatedTwlMllwFt": 5.944,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.944,
@@ -5184,7 +5161,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "estimatedTwlMllwFt": 4.937,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.937,
@@ -5207,7 +5184,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "estimatedTwlMllwFt": 4.023,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.023,
@@ -5230,7 +5207,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "estimatedTwlMllwFt": 3.203,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.203,
@@ -5253,7 +5230,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "estimatedTwlMllwFt": 3.003,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.003,
@@ -5276,7 +5253,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "estimatedTwlMllwFt": 3.343,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.343,
@@ -5299,7 +5276,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "estimatedTwlMllwFt": 4.112,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.112,
@@ -5322,7 +5299,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "estimatedTwlMllwFt": 5.074,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.074,
@@ -5345,7 +5322,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "estimatedTwlMllwFt": 5.86,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.86,
@@ -5368,7 +5345,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "estimatedTwlMllwFt": 6.486,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.486,
@@ -5391,7 +5368,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "estimatedTwlMllwFt": 6.788,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.788,
@@ -5414,7 +5391,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "estimatedTwlMllwFt": 6.336,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.336,
@@ -5437,7 +5414,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "estimatedTwlMllwFt": 5.505,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.505,
@@ -5460,7 +5437,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "estimatedTwlMllwFt": 4.453,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.453,
@@ -5483,7 +5460,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "estimatedTwlMllwFt": 3.541,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.541,
@@ -5506,7 +5483,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "estimatedTwlMllwFt": 2.676,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.676,
@@ -5529,7 +5506,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "estimatedTwlMllwFt": 2.184,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.184,
@@ -5552,7 +5529,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "estimatedTwlMllwFt": 2.377,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.377,
@@ -5575,7 +5552,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "estimatedTwlMllwFt": 3.151,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.151,
@@ -5598,7 +5575,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "estimatedTwlMllwFt": 4.163,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.163,
@@ -5621,7 +5598,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "estimatedTwlMllwFt": 5.287,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.287,
@@ -5644,7 +5621,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.7",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "estimatedTwlMllwFt": 6.064,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.064,
@@ -5667,7 +5644,7 @@
           "surgeFt": null,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "estimatedTwlMllwFt": 6.458,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.458,
@@ -5690,7 +5667,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "estimatedTwlMllwFt": 6.222,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 6.222,
@@ -5713,7 +5690,7 @@
           "surgeFt": null,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "estimatedTwlMllwFt": 5.39,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.39,
@@ -5736,7 +5713,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "estimatedTwlMllwFt": 4.445,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.445,
@@ -5759,7 +5736,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "estimatedTwlMllwFt": 3.422,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.422,
@@ -5782,7 +5759,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "estimatedTwlMllwFt": 2.361,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.361,
@@ -5805,7 +5782,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "estimatedTwlMllwFt": 1.787,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.787,
@@ -5828,7 +5805,7 @@
           "surgeFt": null,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "estimatedTwlMllwFt": 1.837,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 1.837,
@@ -5851,7 +5828,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "estimatedTwlMllwFt": 2.431,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 2.431,
@@ -5874,7 +5851,7 @@
           "surgeFt": null,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "estimatedTwlMllwFt": 3.224,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 3.224,
@@ -5897,7 +5874,7 @@
           "surgeFt": null,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "estimatedTwlMllwFt": 4.212,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 4.212,
@@ -5920,7 +5897,7 @@
           "surgeFt": null,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "estimatedTwlMllwFt": 5.14,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.14,
@@ -5943,12 +5920,35 @@
           "surgeFt": null,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 84,
+          "hourIndex": 83,
           "estimatedTwlMllwFt": 5.758,
           "isEstimatedPercentile": true,
           "sourceMeanTwlMllwFt": 5.758,
           "sourceTwl90pMllwFt": 4.858,
           "sourceTwl10pMllwFt": 6.758
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "highEnd",
+          "product": "estimated_p50",
+          "percentile": "Estimated 50th percentile",
+          "rawPetssValue": 5.767,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 3.38,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 3.38,
+          "mllwStageFt": 5.77,
+          "twlMllwFt": 5.77,
+          "tideMllwFt": 4.055,
+          "surgeFt": null,
+          "matchedStageKey": "3.4",
+          "wasClamped": false,
+          "hourIndex": 84,
+          "estimatedTwlMllwFt": 5.767,
+          "isEstimatedPercentile": true,
+          "sourceMeanTwlMllwFt": 5.767,
+          "sourceTwl90pMllwFt": 4.867,
+          "sourceTwl10pMllwFt": 6.767
         }
       ]
     }
@@ -6002,24 +6002,6 @@
       "product": "mean",
       "hours": [
         {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "mean",
-          "product": "mean",
-          "percentile": "Mean",
-          "rawPetssValue": 5.525,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 3.14,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 3.14,
-          "mllwStageFt": 5.53,
-          "twlMllwFt": 5.53,
-          "tideMllwFt": 2.839,
-          "surgeFt": 2.2,
-          "matchedStageKey": "3.1",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
-        {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "mean",
           "product": "mean",
@@ -6035,7 +6017,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-24T15:00:00Z",
@@ -6053,7 +6035,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-24T16:00:00Z",
@@ -6071,7 +6053,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-24T17:00:00Z",
@@ -6089,7 +6071,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-24T18:00:00Z",
@@ -6107,7 +6089,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-24T19:00:00Z",
@@ -6125,7 +6107,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-24T20:00:00Z",
@@ -6143,7 +6125,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-24T21:00:00Z",
@@ -6161,7 +6143,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-24T22:00:00Z",
@@ -6179,7 +6161,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-24T23:00:00Z",
@@ -6197,7 +6179,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-25T00:00:00Z",
@@ -6215,7 +6197,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-25T01:00:00Z",
@@ -6233,7 +6215,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-25T02:00:00Z",
@@ -6251,7 +6233,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-25T03:00:00Z",
@@ -6269,7 +6251,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-25T04:00:00Z",
@@ -6287,7 +6269,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-25T05:00:00Z",
@@ -6305,7 +6287,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-25T06:00:00Z",
@@ -6323,7 +6305,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-25T07:00:00Z",
@@ -6341,7 +6323,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-25T08:00:00Z",
@@ -6359,7 +6341,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-25T09:00:00Z",
@@ -6377,7 +6359,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-25T10:00:00Z",
@@ -6395,7 +6377,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-25T11:00:00Z",
@@ -6413,7 +6395,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-25T12:00:00Z",
@@ -6431,7 +6413,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-25T13:00:00Z",
@@ -6449,7 +6431,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-25T14:00:00Z",
@@ -6467,7 +6449,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-25T15:00:00Z",
@@ -6485,7 +6467,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-25T16:00:00Z",
@@ -6503,7 +6485,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-25T17:00:00Z",
@@ -6521,7 +6503,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-25T18:00:00Z",
@@ -6539,7 +6521,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-25T19:00:00Z",
@@ -6557,7 +6539,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-25T20:00:00Z",
@@ -6575,7 +6557,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-25T21:00:00Z",
@@ -6593,7 +6575,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-25T22:00:00Z",
@@ -6611,7 +6593,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-25T23:00:00Z",
@@ -6629,7 +6611,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-26T00:00:00Z",
@@ -6647,7 +6629,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "4.9",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-26T01:00:00Z",
@@ -6665,7 +6647,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-26T02:00:00Z",
@@ -6683,7 +6665,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "4.3",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-26T03:00:00Z",
@@ -6701,7 +6683,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-26T04:00:00Z",
@@ -6719,7 +6701,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-26T05:00:00Z",
@@ -6737,7 +6719,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-26T06:00:00Z",
@@ -6755,7 +6737,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-26T07:00:00Z",
@@ -6773,7 +6755,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-26T08:00:00Z",
@@ -6791,7 +6773,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-26T09:00:00Z",
@@ -6809,7 +6791,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-26T10:00:00Z",
@@ -6827,7 +6809,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-26T11:00:00Z",
@@ -6845,7 +6827,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-26T12:00:00Z",
@@ -6863,7 +6845,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-26T13:00:00Z",
@@ -6881,7 +6863,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-26T14:00:00Z",
@@ -6899,7 +6881,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-26T15:00:00Z",
@@ -6917,7 +6899,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-26T16:00:00Z",
@@ -6935,7 +6917,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-26T17:00:00Z",
@@ -6953,7 +6935,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-26T18:00:00Z",
@@ -6971,7 +6953,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-26T19:00:00Z",
@@ -6989,7 +6971,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-26T20:00:00Z",
@@ -7007,7 +6989,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-26T21:00:00Z",
@@ -7025,7 +7007,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-26T22:00:00Z",
@@ -7043,7 +7025,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-26T23:00:00Z",
@@ -7061,7 +7043,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-27T00:00:00Z",
@@ -7079,7 +7061,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-27T01:00:00Z",
@@ -7097,7 +7079,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-27T02:00:00Z",
@@ -7115,7 +7097,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-27T03:00:00Z",
@@ -7133,7 +7115,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-27T04:00:00Z",
@@ -7151,7 +7133,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-27T05:00:00Z",
@@ -7169,7 +7151,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-27T06:00:00Z",
@@ -7187,7 +7169,7 @@
           "surgeFt": 2.0,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-27T07:00:00Z",
@@ -7205,7 +7187,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-27T08:00:00Z",
@@ -7223,7 +7205,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-27T09:00:00Z",
@@ -7241,7 +7223,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-27T10:00:00Z",
@@ -7259,7 +7241,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-27T11:00:00Z",
@@ -7277,7 +7259,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-27T12:00:00Z",
@@ -7295,7 +7277,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "3.7",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-27T13:00:00Z",
@@ -7313,7 +7295,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-27T14:00:00Z",
@@ -7331,7 +7313,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-27T15:00:00Z",
@@ -7349,7 +7331,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-27T16:00:00Z",
@@ -7367,7 +7349,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-27T17:00:00Z",
@@ -7385,7 +7367,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-27T18:00:00Z",
@@ -7403,7 +7385,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-27T19:00:00Z",
@@ -7421,7 +7403,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-27T20:00:00Z",
@@ -7439,7 +7421,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-27T21:00:00Z",
@@ -7457,7 +7439,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-27T22:00:00Z",
@@ -7475,7 +7457,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-27T23:00:00Z",
@@ -7493,7 +7475,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-28T00:00:00Z",
@@ -7511,7 +7493,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-28T01:00:00Z",
@@ -7529,6 +7511,24 @@
           "surgeFt": 1.4,
           "matchedStageKey": "3.4",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "mean",
+          "product": "mean",
+          "percentile": "Mean",
+          "rawPetssValue": 5.767,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 3.38,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 3.38,
+          "mllwStageFt": 5.77,
+          "twlMllwFt": 5.77,
+          "tideMllwFt": 4.055,
+          "surgeFt": 1.4,
+          "matchedStageKey": "3.4",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
@@ -7538,24 +7538,6 @@
       "percentile": "90p / e90",
       "product": "e90",
       "hours": [
-        {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "lowEnd",
-          "product": "e90",
-          "percentile": "90p / e90",
-          "rawPetssValue": 5.325,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 2.94,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 2.94,
-          "mllwStageFt": 5.33,
-          "twlMllwFt": 5.33,
-          "tideMllwFt": 2.839,
-          "surgeFt": 2.2,
-          "matchedStageKey": "2.9",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
         {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "lowEnd",
@@ -7572,7 +7554,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-24T15:00:00Z",
@@ -7590,7 +7572,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-24T16:00:00Z",
@@ -7608,7 +7590,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-24T17:00:00Z",
@@ -7626,7 +7608,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-24T18:00:00Z",
@@ -7644,7 +7626,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-24T19:00:00Z",
@@ -7662,7 +7644,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-24T20:00:00Z",
@@ -7680,7 +7662,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-24T21:00:00Z",
@@ -7698,7 +7680,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-24T22:00:00Z",
@@ -7716,7 +7698,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-24T23:00:00Z",
@@ -7734,7 +7716,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-25T00:00:00Z",
@@ -7752,7 +7734,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-25T01:00:00Z",
@@ -7770,7 +7752,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-25T02:00:00Z",
@@ -7788,7 +7770,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-25T03:00:00Z",
@@ -7806,7 +7788,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-25T04:00:00Z",
@@ -7824,7 +7806,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-25T05:00:00Z",
@@ -7842,7 +7824,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-25T06:00:00Z",
@@ -7860,7 +7842,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-25T07:00:00Z",
@@ -7878,7 +7860,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-25T08:00:00Z",
@@ -7896,7 +7878,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-25T09:00:00Z",
@@ -7914,7 +7896,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-25T10:00:00Z",
@@ -7932,7 +7914,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-25T11:00:00Z",
@@ -7950,7 +7932,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-25T12:00:00Z",
@@ -7968,7 +7950,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-25T13:00:00Z",
@@ -7986,7 +7968,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-25T14:00:00Z",
@@ -8004,7 +7986,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-25T15:00:00Z",
@@ -8022,7 +8004,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-25T16:00:00Z",
@@ -8040,7 +8022,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-25T17:00:00Z",
@@ -8058,7 +8040,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-25T18:00:00Z",
@@ -8076,7 +8058,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-25T19:00:00Z",
@@ -8094,7 +8076,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-25T20:00:00Z",
@@ -8112,7 +8094,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-25T21:00:00Z",
@@ -8130,7 +8112,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-25T22:00:00Z",
@@ -8148,7 +8130,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-25T23:00:00Z",
@@ -8166,7 +8148,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-26T00:00:00Z",
@@ -8184,7 +8166,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-26T01:00:00Z",
@@ -8202,7 +8184,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-26T02:00:00Z",
@@ -8220,7 +8202,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-26T03:00:00Z",
@@ -8238,7 +8220,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-26T04:00:00Z",
@@ -8256,7 +8238,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-26T05:00:00Z",
@@ -8274,7 +8256,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-26T06:00:00Z",
@@ -8292,7 +8274,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-26T07:00:00Z",
@@ -8310,7 +8292,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-26T08:00:00Z",
@@ -8328,7 +8310,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-26T09:00:00Z",
@@ -8346,7 +8328,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-26T10:00:00Z",
@@ -8364,7 +8346,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-26T11:00:00Z",
@@ -8382,7 +8364,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-26T12:00:00Z",
@@ -8400,7 +8382,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-26T13:00:00Z",
@@ -8418,7 +8400,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-26T14:00:00Z",
@@ -8436,7 +8418,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-26T15:00:00Z",
@@ -8454,7 +8436,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-26T16:00:00Z",
@@ -8472,7 +8454,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-26T17:00:00Z",
@@ -8490,7 +8472,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-26T18:00:00Z",
@@ -8508,7 +8490,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-26T19:00:00Z",
@@ -8526,7 +8508,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-26T20:00:00Z",
@@ -8544,7 +8526,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-26T21:00:00Z",
@@ -8562,7 +8544,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-26T22:00:00Z",
@@ -8580,7 +8562,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-26T23:00:00Z",
@@ -8598,7 +8580,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-27T00:00:00Z",
@@ -8616,7 +8598,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-27T01:00:00Z",
@@ -8634,7 +8616,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-27T02:00:00Z",
@@ -8652,7 +8634,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-27T03:00:00Z",
@@ -8670,7 +8652,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-27T04:00:00Z",
@@ -8688,7 +8670,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-27T05:00:00Z",
@@ -8706,7 +8688,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-27T06:00:00Z",
@@ -8724,7 +8706,7 @@
           "surgeFt": 2.0,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-27T07:00:00Z",
@@ -8742,7 +8724,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-27T08:00:00Z",
@@ -8760,7 +8742,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-27T09:00:00Z",
@@ -8778,7 +8760,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-27T10:00:00Z",
@@ -8796,7 +8778,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-27T11:00:00Z",
@@ -8814,7 +8796,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-27T12:00:00Z",
@@ -8832,7 +8814,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-27T13:00:00Z",
@@ -8850,7 +8832,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-27T14:00:00Z",
@@ -8868,7 +8850,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-27T15:00:00Z",
@@ -8886,7 +8868,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-27T16:00:00Z",
@@ -8904,7 +8886,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-27T17:00:00Z",
@@ -8922,7 +8904,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-27T18:00:00Z",
@@ -8940,7 +8922,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-27T19:00:00Z",
@@ -8958,7 +8940,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-27T20:00:00Z",
@@ -8976,7 +8958,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-27T21:00:00Z",
@@ -8994,7 +8976,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-27T22:00:00Z",
@@ -9012,7 +8994,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-27T23:00:00Z",
@@ -9030,7 +9012,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-28T00:00:00Z",
@@ -9048,7 +9030,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-28T01:00:00Z",
@@ -9066,6 +9048,24 @@
           "surgeFt": 1.4,
           "matchedStageKey": "2.5",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "lowEnd",
+          "product": "e90",
+          "percentile": "90p / e90",
+          "rawPetssValue": 4.867,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 2.48,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 2.48,
+          "mllwStageFt": 4.87,
+          "twlMllwFt": 4.87,
+          "tideMllwFt": 4.055,
+          "surgeFt": 1.4,
+          "matchedStageKey": "2.5",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
@@ -9075,24 +9075,6 @@
       "percentile": "10p / e10",
       "product": "e10",
       "hours": [
-        {
-          "timeUtc": "2026-09-24T13:00:00Z",
-          "scenario": "highEnd",
-          "product": "e10",
-          "percentile": "10p / e10",
-          "rawPetssValue": 5.725,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": 3.34,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": 3.34,
-          "mllwStageFt": 5.73,
-          "twlMllwFt": 5.73,
-          "tideMllwFt": 2.839,
-          "surgeFt": 2.2,
-          "matchedStageKey": "3.3",
-          "wasClamped": false,
-          "hourIndex": 0
-        },
         {
           "timeUtc": "2026-09-24T14:00:00Z",
           "scenario": "highEnd",
@@ -9109,7 +9091,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 1
+          "hourIndex": 0
         },
         {
           "timeUtc": "2026-09-24T15:00:00Z",
@@ -9127,7 +9109,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 2
+          "hourIndex": 1
         },
         {
           "timeUtc": "2026-09-24T16:00:00Z",
@@ -9145,7 +9127,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 3
+          "hourIndex": 2
         },
         {
           "timeUtc": "2026-09-24T17:00:00Z",
@@ -9163,7 +9145,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 4
+          "hourIndex": 3
         },
         {
           "timeUtc": "2026-09-24T18:00:00Z",
@@ -9181,7 +9163,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 5
+          "hourIndex": 4
         },
         {
           "timeUtc": "2026-09-24T19:00:00Z",
@@ -9199,7 +9181,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 6
+          "hourIndex": 5
         },
         {
           "timeUtc": "2026-09-24T20:00:00Z",
@@ -9217,7 +9199,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 7
+          "hourIndex": 6
         },
         {
           "timeUtc": "2026-09-24T21:00:00Z",
@@ -9235,7 +9217,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 8
+          "hourIndex": 7
         },
         {
           "timeUtc": "2026-09-24T22:00:00Z",
@@ -9253,7 +9235,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "3.7",
           "wasClamped": false,
-          "hourIndex": 9
+          "hourIndex": 8
         },
         {
           "timeUtc": "2026-09-24T23:00:00Z",
@@ -9271,7 +9253,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "4.3",
           "wasClamped": false,
-          "hourIndex": 10
+          "hourIndex": 9
         },
         {
           "timeUtc": "2026-09-25T00:00:00Z",
@@ -9289,7 +9271,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 11
+          "hourIndex": 10
         },
         {
           "timeUtc": "2026-09-25T01:00:00Z",
@@ -9307,7 +9289,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 12
+          "hourIndex": 11
         },
         {
           "timeUtc": "2026-09-25T02:00:00Z",
@@ -9325,7 +9307,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 13
+          "hourIndex": 12
         },
         {
           "timeUtc": "2026-09-25T03:00:00Z",
@@ -9343,7 +9325,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 14
+          "hourIndex": 13
         },
         {
           "timeUtc": "2026-09-25T04:00:00Z",
@@ -9361,7 +9343,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 15
+          "hourIndex": 14
         },
         {
           "timeUtc": "2026-09-25T05:00:00Z",
@@ -9379,7 +9361,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 16
+          "hourIndex": 15
         },
         {
           "timeUtc": "2026-09-25T06:00:00Z",
@@ -9397,7 +9379,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 17
+          "hourIndex": 16
         },
         {
           "timeUtc": "2026-09-25T07:00:00Z",
@@ -9415,7 +9397,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 18
+          "hourIndex": 17
         },
         {
           "timeUtc": "2026-09-25T08:00:00Z",
@@ -9433,7 +9415,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 19
+          "hourIndex": 18
         },
         {
           "timeUtc": "2026-09-25T09:00:00Z",
@@ -9451,7 +9433,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 20
+          "hourIndex": 19
         },
         {
           "timeUtc": "2026-09-25T10:00:00Z",
@@ -9469,7 +9451,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 21
+          "hourIndex": 20
         },
         {
           "timeUtc": "2026-09-25T11:00:00Z",
@@ -9487,7 +9469,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 22
+          "hourIndex": 21
         },
         {
           "timeUtc": "2026-09-25T12:00:00Z",
@@ -9505,7 +9487,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "4.8",
           "wasClamped": false,
-          "hourIndex": 23
+          "hourIndex": 22
         },
         {
           "timeUtc": "2026-09-25T13:00:00Z",
@@ -9523,7 +9505,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 24
+          "hourIndex": 23
         },
         {
           "timeUtc": "2026-09-25T14:00:00Z",
@@ -9541,7 +9523,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 25
+          "hourIndex": 24
         },
         {
           "timeUtc": "2026-09-25T15:00:00Z",
@@ -9559,7 +9541,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 26
+          "hourIndex": 25
         },
         {
           "timeUtc": "2026-09-25T16:00:00Z",
@@ -9577,7 +9559,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 27
+          "hourIndex": 26
         },
         {
           "timeUtc": "2026-09-25T17:00:00Z",
@@ -9595,7 +9577,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 28
+          "hourIndex": 27
         },
         {
           "timeUtc": "2026-09-25T18:00:00Z",
@@ -9613,7 +9595,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 29
+          "hourIndex": 28
         },
         {
           "timeUtc": "2026-09-25T19:00:00Z",
@@ -9631,7 +9613,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 30
+          "hourIndex": 29
         },
         {
           "timeUtc": "2026-09-25T20:00:00Z",
@@ -9649,7 +9631,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 31
+          "hourIndex": 30
         },
         {
           "timeUtc": "2026-09-25T21:00:00Z",
@@ -9667,7 +9649,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "3.6",
           "wasClamped": false,
-          "hourIndex": 32
+          "hourIndex": 31
         },
         {
           "timeUtc": "2026-09-25T22:00:00Z",
@@ -9685,7 +9667,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "4.5",
           "wasClamped": false,
-          "hourIndex": 33
+          "hourIndex": 32
         },
         {
           "timeUtc": "2026-09-25T23:00:00Z",
@@ -9703,7 +9685,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "5.3",
           "wasClamped": false,
-          "hourIndex": 34
+          "hourIndex": 33
         },
         {
           "timeUtc": "2026-09-26T00:00:00Z",
@@ -9721,7 +9703,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "5.8",
           "wasClamped": false,
-          "hourIndex": 35
+          "hourIndex": 34
         },
         {
           "timeUtc": "2026-09-26T01:00:00Z",
@@ -9739,7 +9721,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "5.8",
           "wasClamped": false,
-          "hourIndex": 36
+          "hourIndex": 35
         },
         {
           "timeUtc": "2026-09-26T02:00:00Z",
@@ -9757,7 +9739,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "5.2",
           "wasClamped": false,
-          "hourIndex": 37
+          "hourIndex": 36
         },
         {
           "timeUtc": "2026-09-26T03:00:00Z",
@@ -9775,7 +9757,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "4.4",
           "wasClamped": false,
-          "hourIndex": 38
+          "hourIndex": 37
         },
         {
           "timeUtc": "2026-09-26T04:00:00Z",
@@ -9793,7 +9775,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 39
+          "hourIndex": 38
         },
         {
           "timeUtc": "2026-09-26T05:00:00Z",
@@ -9811,7 +9793,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 40
+          "hourIndex": 39
         },
         {
           "timeUtc": "2026-09-26T06:00:00Z",
@@ -9829,7 +9811,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 41
+          "hourIndex": 40
         },
         {
           "timeUtc": "2026-09-26T07:00:00Z",
@@ -9847,7 +9829,7 @@
           "surgeFt": 3.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 42
+          "hourIndex": 41
         },
         {
           "timeUtc": "2026-09-26T08:00:00Z",
@@ -9865,7 +9847,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 43
+          "hourIndex": 42
         },
         {
           "timeUtc": "2026-09-26T09:00:00Z",
@@ -9883,7 +9865,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "3.9",
           "wasClamped": false,
-          "hourIndex": 44
+          "hourIndex": 43
         },
         {
           "timeUtc": "2026-09-26T10:00:00Z",
@@ -9901,7 +9883,7 @@
           "surgeFt": 3.1,
           "matchedStageKey": "4.9",
           "wasClamped": false,
-          "hourIndex": 45
+          "hourIndex": 44
         },
         {
           "timeUtc": "2026-09-26T11:00:00Z",
@@ -9919,7 +9901,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "5.7",
           "wasClamped": false,
-          "hourIndex": 46
+          "hourIndex": 45
         },
         {
           "timeUtc": "2026-09-26T12:00:00Z",
@@ -9937,7 +9919,7 @@
           "surgeFt": 3.0,
           "matchedStageKey": "6.4",
           "wasClamped": false,
-          "hourIndex": 47
+          "hourIndex": 46
         },
         {
           "timeUtc": "2026-09-26T13:00:00Z",
@@ -9955,7 +9937,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "6.5",
           "wasClamped": false,
-          "hourIndex": 48
+          "hourIndex": 47
         },
         {
           "timeUtc": "2026-09-26T14:00:00Z",
@@ -9973,7 +9955,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "5.9",
           "wasClamped": false,
-          "hourIndex": 49
+          "hourIndex": 48
         },
         {
           "timeUtc": "2026-09-26T15:00:00Z",
@@ -9991,7 +9973,7 @@
           "surgeFt": 2.9,
           "matchedStageKey": "5.0",
           "wasClamped": false,
-          "hourIndex": 50
+          "hourIndex": 49
         },
         {
           "timeUtc": "2026-09-26T16:00:00Z",
@@ -10009,7 +9991,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "4.2",
           "wasClamped": false,
-          "hourIndex": 51
+          "hourIndex": 50
         },
         {
           "timeUtc": "2026-09-26T17:00:00Z",
@@ -10027,7 +10009,7 @@
           "surgeFt": 2.8,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 52
+          "hourIndex": 51
         },
         {
           "timeUtc": "2026-09-26T18:00:00Z",
@@ -10045,7 +10027,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 53
+          "hourIndex": 52
         },
         {
           "timeUtc": "2026-09-26T19:00:00Z",
@@ -10063,7 +10045,7 @@
           "surgeFt": 2.7,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 54
+          "hourIndex": 53
         },
         {
           "timeUtc": "2026-09-26T20:00:00Z",
@@ -10081,7 +10063,7 @@
           "surgeFt": 2.6,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 55
+          "hourIndex": 54
         },
         {
           "timeUtc": "2026-09-26T21:00:00Z",
@@ -10099,7 +10081,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 56
+          "hourIndex": 55
         },
         {
           "timeUtc": "2026-09-26T22:00:00Z",
@@ -10117,7 +10099,7 @@
           "surgeFt": 2.5,
           "matchedStageKey": "3.7",
           "wasClamped": false,
-          "hourIndex": 57
+          "hourIndex": 56
         },
         {
           "timeUtc": "2026-09-26T23:00:00Z",
@@ -10135,7 +10117,7 @@
           "surgeFt": 2.4,
           "matchedStageKey": "4.6",
           "wasClamped": false,
-          "hourIndex": 58
+          "hourIndex": 57
         },
         {
           "timeUtc": "2026-09-27T00:00:00Z",
@@ -10153,7 +10135,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "5.3",
           "wasClamped": false,
-          "hourIndex": 59
+          "hourIndex": 58
         },
         {
           "timeUtc": "2026-09-27T01:00:00Z",
@@ -10171,7 +10153,7 @@
           "surgeFt": 2.3,
           "matchedStageKey": "5.6",
           "wasClamped": false,
-          "hourIndex": 60
+          "hourIndex": 59
         },
         {
           "timeUtc": "2026-09-27T02:00:00Z",
@@ -10189,7 +10171,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "5.2",
           "wasClamped": false,
-          "hourIndex": 61
+          "hourIndex": 60
         },
         {
           "timeUtc": "2026-09-27T03:00:00Z",
@@ -10207,7 +10189,7 @@
           "surgeFt": 2.2,
           "matchedStageKey": "4.3",
           "wasClamped": false,
-          "hourIndex": 62
+          "hourIndex": 61
         },
         {
           "timeUtc": "2026-09-27T04:00:00Z",
@@ -10225,7 +10207,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 63
+          "hourIndex": 62
         },
         {
           "timeUtc": "2026-09-27T05:00:00Z",
@@ -10243,7 +10225,7 @@
           "surgeFt": 2.1,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 64
+          "hourIndex": 63
         },
         {
           "timeUtc": "2026-09-27T06:00:00Z",
@@ -10261,7 +10243,7 @@
           "surgeFt": 2.0,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 65
+          "hourIndex": 64
         },
         {
           "timeUtc": "2026-09-27T07:00:00Z",
@@ -10279,7 +10261,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 66
+          "hourIndex": 65
         },
         {
           "timeUtc": "2026-09-27T08:00:00Z",
@@ -10297,7 +10279,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 67
+          "hourIndex": 66
         },
         {
           "timeUtc": "2026-09-27T09:00:00Z",
@@ -10315,7 +10297,7 @@
           "surgeFt": 1.9,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 68
+          "hourIndex": 67
         },
         {
           "timeUtc": "2026-09-27T10:00:00Z",
@@ -10333,7 +10315,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 69
+          "hourIndex": 68
         },
         {
           "timeUtc": "2026-09-27T11:00:00Z",
@@ -10351,7 +10333,7 @@
           "surgeFt": 1.8,
           "matchedStageKey": "4.1",
           "wasClamped": false,
-          "hourIndex": 70
+          "hourIndex": 69
         },
         {
           "timeUtc": "2026-09-27T12:00:00Z",
@@ -10369,7 +10351,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "4.9",
           "wasClamped": false,
-          "hourIndex": 71
+          "hourIndex": 70
         },
         {
           "timeUtc": "2026-09-27T13:00:00Z",
@@ -10387,7 +10369,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "5.1",
           "wasClamped": false,
-          "hourIndex": 72
+          "hourIndex": 71
         },
         {
           "timeUtc": "2026-09-27T14:00:00Z",
@@ -10405,7 +10387,7 @@
           "surgeFt": 1.7,
           "matchedStageKey": "4.9",
           "wasClamped": false,
-          "hourIndex": 73
+          "hourIndex": 72
         },
         {
           "timeUtc": "2026-09-27T15:00:00Z",
@@ -10423,7 +10405,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "4.0",
           "wasClamped": false,
-          "hourIndex": 74
+          "hourIndex": 73
         },
         {
           "timeUtc": "2026-09-27T16:00:00Z",
@@ -10441,7 +10423,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 75
+          "hourIndex": 74
         },
         {
           "timeUtc": "2026-09-27T17:00:00Z",
@@ -10459,7 +10441,7 @@
           "surgeFt": 1.6,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 76
+          "hourIndex": 75
         },
         {
           "timeUtc": "2026-09-27T18:00:00Z",
@@ -10477,7 +10459,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 77
+          "hourIndex": 76
         },
         {
           "timeUtc": "2026-09-27T19:00:00Z",
@@ -10495,7 +10477,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 78
+          "hourIndex": 77
         },
         {
           "timeUtc": "2026-09-27T20:00:00Z",
@@ -10513,7 +10495,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 79
+          "hourIndex": 78
         },
         {
           "timeUtc": "2026-09-27T21:00:00Z",
@@ -10531,7 +10513,7 @@
           "surgeFt": 1.5,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 80
+          "hourIndex": 79
         },
         {
           "timeUtc": "2026-09-27T22:00:00Z",
@@ -10549,7 +10531,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 81
+          "hourIndex": 80
         },
         {
           "timeUtc": "2026-09-27T23:00:00Z",
@@ -10567,7 +10549,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 82
+          "hourIndex": 81
         },
         {
           "timeUtc": "2026-09-28T00:00:00Z",
@@ -10585,7 +10567,7 @@
           "surgeFt": 1.4,
           "matchedStageKey": "3.8",
           "wasClamped": false,
-          "hourIndex": 83
+          "hourIndex": 82
         },
         {
           "timeUtc": "2026-09-28T01:00:00Z",
@@ -10603,30 +10585,30 @@
           "surgeFt": 1.4,
           "matchedStageKey": "4.4",
           "wasClamped": false,
+          "hourIndex": 83
+        },
+        {
+          "timeUtc": "2026-09-28T02:00:00Z",
+          "scenario": "highEnd",
+          "product": "e10",
+          "percentile": "10p / e10",
+          "rawPetssValue": 6.767,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": 4.38,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": 4.38,
+          "mllwStageFt": 6.77,
+          "twlMllwFt": 6.77,
+          "tideMllwFt": 4.055,
+          "surgeFt": 1.4,
+          "matchedStageKey": "4.4",
+          "wasClamped": false,
           "hourIndex": 84
         }
       ]
     }
   },
   "hours": [
-    {
-      "timeUtc": "2026-09-24T13:00:00Z",
-      "scenario": "mean",
-      "product": "mean",
-      "percentile": "Mean",
-      "rawPetssValue": 5.525,
-      "rawPetssScale": 1.0,
-      "sourceStageFt": 3.14,
-      "sourceDatum": "NAVD88",
-      "navd88StageFt": 3.14,
-      "mllwStageFt": 5.53,
-      "twlMllwFt": 5.53,
-      "tideMllwFt": 2.839,
-      "surgeFt": 2.2,
-      "matchedStageKey": "3.1",
-      "wasClamped": false,
-      "hourIndex": 0
-    },
     {
       "timeUtc": "2026-09-24T14:00:00Z",
       "scenario": "mean",
@@ -10643,7 +10625,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 1
+      "hourIndex": 0
     },
     {
       "timeUtc": "2026-09-24T15:00:00Z",
@@ -10661,7 +10643,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 2
+      "hourIndex": 1
     },
     {
       "timeUtc": "2026-09-24T16:00:00Z",
@@ -10679,7 +10661,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "1.0",
       "wasClamped": false,
-      "hourIndex": 3
+      "hourIndex": 2
     },
     {
       "timeUtc": "2026-09-24T17:00:00Z",
@@ -10697,7 +10679,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 4
+      "hourIndex": 3
     },
     {
       "timeUtc": "2026-09-24T18:00:00Z",
@@ -10715,7 +10697,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 5
+      "hourIndex": 4
     },
     {
       "timeUtc": "2026-09-24T19:00:00Z",
@@ -10733,7 +10715,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 6
+      "hourIndex": 5
     },
     {
       "timeUtc": "2026-09-24T20:00:00Z",
@@ -10751,7 +10733,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 7
+      "hourIndex": 6
     },
     {
       "timeUtc": "2026-09-24T21:00:00Z",
@@ -10769,7 +10751,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "2.7",
       "wasClamped": false,
-      "hourIndex": 8
+      "hourIndex": 7
     },
     {
       "timeUtc": "2026-09-24T22:00:00Z",
@@ -10787,7 +10769,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "3.5",
       "wasClamped": false,
-      "hourIndex": 9
+      "hourIndex": 8
     },
     {
       "timeUtc": "2026-09-24T23:00:00Z",
@@ -10805,7 +10787,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "4.0",
       "wasClamped": false,
-      "hourIndex": 10
+      "hourIndex": 9
     },
     {
       "timeUtc": "2026-09-25T00:00:00Z",
@@ -10823,7 +10805,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "4.2",
       "wasClamped": false,
-      "hourIndex": 11
+      "hourIndex": 10
     },
     {
       "timeUtc": "2026-09-25T01:00:00Z",
@@ -10841,7 +10823,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "3.8",
       "wasClamped": false,
-      "hourIndex": 12
+      "hourIndex": 11
     },
     {
       "timeUtc": "2026-09-25T02:00:00Z",
@@ -10859,7 +10841,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "3.1",
       "wasClamped": false,
-      "hourIndex": 13
+      "hourIndex": 12
     },
     {
       "timeUtc": "2026-09-25T03:00:00Z",
@@ -10877,7 +10859,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "2.2",
       "wasClamped": false,
-      "hourIndex": 14
+      "hourIndex": 13
     },
     {
       "timeUtc": "2026-09-25T04:00:00Z",
@@ -10895,7 +10877,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 15
+      "hourIndex": 14
     },
     {
       "timeUtc": "2026-09-25T05:00:00Z",
@@ -10913,7 +10895,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "0.7",
       "wasClamped": false,
-      "hourIndex": 16
+      "hourIndex": 15
     },
     {
       "timeUtc": "2026-09-25T06:00:00Z",
@@ -10931,7 +10913,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 17
+      "hourIndex": 16
     },
     {
       "timeUtc": "2026-09-25T07:00:00Z",
@@ -10949,7 +10931,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 18
+      "hourIndex": 17
     },
     {
       "timeUtc": "2026-09-25T08:00:00Z",
@@ -10967,7 +10949,7 @@
       "surgeFt": 2.3,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 19
+      "hourIndex": 18
     },
     {
       "timeUtc": "2026-09-25T09:00:00Z",
@@ -10985,7 +10967,7 @@
       "surgeFt": 2.3,
       "matchedStageKey": "2.2",
       "wasClamped": false,
-      "hourIndex": 20
+      "hourIndex": 19
     },
     {
       "timeUtc": "2026-09-25T10:00:00Z",
@@ -11003,7 +10985,7 @@
       "surgeFt": 2.3,
       "matchedStageKey": "3.1",
       "wasClamped": false,
-      "hourIndex": 21
+      "hourIndex": 20
     },
     {
       "timeUtc": "2026-09-25T11:00:00Z",
@@ -11021,7 +11003,7 @@
       "surgeFt": 2.4,
       "matchedStageKey": "4.0",
       "wasClamped": false,
-      "hourIndex": 22
+      "hourIndex": 21
     },
     {
       "timeUtc": "2026-09-25T12:00:00Z",
@@ -11039,7 +11021,7 @@
       "surgeFt": 2.4,
       "matchedStageKey": "4.2",
       "wasClamped": false,
-      "hourIndex": 23
+      "hourIndex": 22
     },
     {
       "timeUtc": "2026-09-25T13:00:00Z",
@@ -11057,7 +11039,7 @@
       "surgeFt": 2.5,
       "matchedStageKey": "4.0",
       "wasClamped": false,
-      "hourIndex": 24
+      "hourIndex": 23
     },
     {
       "timeUtc": "2026-09-25T14:00:00Z",
@@ -11075,7 +11057,7 @@
       "surgeFt": 2.5,
       "matchedStageKey": "3.3",
       "wasClamped": false,
-      "hourIndex": 25
+      "hourIndex": 24
     },
     {
       "timeUtc": "2026-09-25T15:00:00Z",
@@ -11093,7 +11075,7 @@
       "surgeFt": 2.5,
       "matchedStageKey": "2.5",
       "wasClamped": false,
-      "hourIndex": 26
+      "hourIndex": 25
     },
     {
       "timeUtc": "2026-09-25T16:00:00Z",
@@ -11111,7 +11093,7 @@
       "surgeFt": 2.6,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 27
+      "hourIndex": 26
     },
     {
       "timeUtc": "2026-09-25T17:00:00Z",
@@ -11129,7 +11111,7 @@
       "surgeFt": 2.6,
       "matchedStageKey": "1.1",
       "wasClamped": false,
-      "hourIndex": 28
+      "hourIndex": 27
     },
     {
       "timeUtc": "2026-09-25T18:00:00Z",
@@ -11147,7 +11129,7 @@
       "surgeFt": 2.7,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 29
+      "hourIndex": 28
     },
     {
       "timeUtc": "2026-09-25T19:00:00Z",
@@ -11165,7 +11147,7 @@
       "surgeFt": 2.7,
       "matchedStageKey": "0.9",
       "wasClamped": false,
-      "hourIndex": 30
+      "hourIndex": 29
     },
     {
       "timeUtc": "2026-09-25T20:00:00Z",
@@ -11183,7 +11165,7 @@
       "surgeFt": 2.7,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 31
+      "hourIndex": 30
     },
     {
       "timeUtc": "2026-09-25T21:00:00Z",
@@ -11201,7 +11183,7 @@
       "surgeFt": 2.8,
       "matchedStageKey": "2.7",
       "wasClamped": false,
-      "hourIndex": 32
+      "hourIndex": 31
     },
     {
       "timeUtc": "2026-09-25T22:00:00Z",
@@ -11219,7 +11201,7 @@
       "surgeFt": 2.8,
       "matchedStageKey": "3.6",
       "wasClamped": false,
-      "hourIndex": 33
+      "hourIndex": 32
     },
     {
       "timeUtc": "2026-09-25T23:00:00Z",
@@ -11237,7 +11219,7 @@
       "surgeFt": 2.9,
       "matchedStageKey": "4.5",
       "wasClamped": false,
-      "hourIndex": 34
+      "hourIndex": 33
     },
     {
       "timeUtc": "2026-09-26T00:00:00Z",
@@ -11255,7 +11237,7 @@
       "surgeFt": 2.9,
       "matchedStageKey": "4.9",
       "wasClamped": false,
-      "hourIndex": 35
+      "hourIndex": 34
     },
     {
       "timeUtc": "2026-09-26T01:00:00Z",
@@ -11273,7 +11255,7 @@
       "surgeFt": 3.0,
       "matchedStageKey": "5.0",
       "wasClamped": false,
-      "hourIndex": 36
+      "hourIndex": 35
     },
     {
       "timeUtc": "2026-09-26T02:00:00Z",
@@ -11291,7 +11273,7 @@
       "surgeFt": 3.0,
       "matchedStageKey": "4.3",
       "wasClamped": false,
-      "hourIndex": 37
+      "hourIndex": 36
     },
     {
       "timeUtc": "2026-09-26T03:00:00Z",
@@ -11309,7 +11291,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "3.6",
       "wasClamped": false,
-      "hourIndex": 38
+      "hourIndex": 37
     },
     {
       "timeUtc": "2026-09-26T04:00:00Z",
@@ -11327,7 +11309,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 39
+      "hourIndex": 38
     },
     {
       "timeUtc": "2026-09-26T05:00:00Z",
@@ -11345,7 +11327,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 40
+      "hourIndex": 39
     },
     {
       "timeUtc": "2026-09-26T06:00:00Z",
@@ -11363,7 +11345,7 @@
       "surgeFt": 3.2,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 41
+      "hourIndex": 40
     },
     {
       "timeUtc": "2026-09-26T07:00:00Z",
@@ -11381,7 +11363,7 @@
       "surgeFt": 3.2,
       "matchedStageKey": "1.3",
       "wasClamped": false,
-      "hourIndex": 42
+      "hourIndex": 41
     },
     {
       "timeUtc": "2026-09-26T08:00:00Z",
@@ -11399,7 +11381,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 43
+      "hourIndex": 42
     },
     {
       "timeUtc": "2026-09-26T09:00:00Z",
@@ -11417,7 +11399,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "2.5",
       "wasClamped": false,
-      "hourIndex": 44
+      "hourIndex": 43
     },
     {
       "timeUtc": "2026-09-26T10:00:00Z",
@@ -11435,7 +11417,7 @@
       "surgeFt": 3.1,
       "matchedStageKey": "3.6",
       "wasClamped": false,
-      "hourIndex": 45
+      "hourIndex": 44
     },
     {
       "timeUtc": "2026-09-26T11:00:00Z",
@@ -11453,7 +11435,7 @@
       "surgeFt": 3.0,
       "matchedStageKey": "4.4",
       "wasClamped": false,
-      "hourIndex": 46
+      "hourIndex": 45
     },
     {
       "timeUtc": "2026-09-26T12:00:00Z",
@@ -11471,7 +11453,7 @@
       "surgeFt": 3.0,
       "matchedStageKey": "5.0",
       "wasClamped": false,
-      "hourIndex": 47
+      "hourIndex": 46
     },
     {
       "timeUtc": "2026-09-26T13:00:00Z",
@@ -11489,7 +11471,7 @@
       "surgeFt": 2.9,
       "matchedStageKey": "5.0",
       "wasClamped": false,
-      "hourIndex": 48
+      "hourIndex": 47
     },
     {
       "timeUtc": "2026-09-26T14:00:00Z",
@@ -11507,7 +11489,7 @@
       "surgeFt": 2.9,
       "matchedStageKey": "4.4",
       "wasClamped": false,
-      "hourIndex": 49
+      "hourIndex": 48
     },
     {
       "timeUtc": "2026-09-26T15:00:00Z",
@@ -11525,7 +11507,7 @@
       "surgeFt": 2.9,
       "matchedStageKey": "3.5",
       "wasClamped": false,
-      "hourIndex": 50
+      "hourIndex": 49
     },
     {
       "timeUtc": "2026-09-26T16:00:00Z",
@@ -11543,7 +11525,7 @@
       "surgeFt": 2.8,
       "matchedStageKey": "2.5",
       "wasClamped": false,
-      "hourIndex": 51
+      "hourIndex": 50
     },
     {
       "timeUtc": "2026-09-26T17:00:00Z",
@@ -11561,7 +11543,7 @@
       "surgeFt": 2.8,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 52
+      "hourIndex": 51
     },
     {
       "timeUtc": "2026-09-26T18:00:00Z",
@@ -11579,7 +11561,7 @@
       "surgeFt": 2.7,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 53
+      "hourIndex": 52
     },
     {
       "timeUtc": "2026-09-26T19:00:00Z",
@@ -11597,7 +11579,7 @@
       "surgeFt": 2.7,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 54
+      "hourIndex": 53
     },
     {
       "timeUtc": "2026-09-26T20:00:00Z",
@@ -11615,7 +11597,7 @@
       "surgeFt": 2.6,
       "matchedStageKey": "0.9",
       "wasClamped": false,
-      "hourIndex": 55
+      "hourIndex": 54
     },
     {
       "timeUtc": "2026-09-26T21:00:00Z",
@@ -11633,7 +11615,7 @@
       "surgeFt": 2.5,
       "matchedStageKey": "1.7",
       "wasClamped": false,
-      "hourIndex": 56
+      "hourIndex": 55
     },
     {
       "timeUtc": "2026-09-26T22:00:00Z",
@@ -11651,7 +11633,7 @@
       "surgeFt": 2.5,
       "matchedStageKey": "2.7",
       "wasClamped": false,
-      "hourIndex": 57
+      "hourIndex": 56
     },
     {
       "timeUtc": "2026-09-26T23:00:00Z",
@@ -11669,7 +11651,7 @@
       "surgeFt": 2.4,
       "matchedStageKey": "3.5",
       "wasClamped": false,
-      "hourIndex": 58
+      "hourIndex": 57
     },
     {
       "timeUtc": "2026-09-27T00:00:00Z",
@@ -11687,7 +11669,7 @@
       "surgeFt": 2.3,
       "matchedStageKey": "4.1",
       "wasClamped": false,
-      "hourIndex": 59
+      "hourIndex": 58
     },
     {
       "timeUtc": "2026-09-27T01:00:00Z",
@@ -11705,7 +11687,7 @@
       "surgeFt": 2.3,
       "matchedStageKey": "4.4",
       "wasClamped": false,
-      "hourIndex": 60
+      "hourIndex": 59
     },
     {
       "timeUtc": "2026-09-27T02:00:00Z",
@@ -11723,7 +11705,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "4.0",
       "wasClamped": false,
-      "hourIndex": 61
+      "hourIndex": 60
     },
     {
       "timeUtc": "2026-09-27T03:00:00Z",
@@ -11741,7 +11723,7 @@
       "surgeFt": 2.2,
       "matchedStageKey": "3.1",
       "wasClamped": false,
-      "hourIndex": 62
+      "hourIndex": 61
     },
     {
       "timeUtc": "2026-09-27T04:00:00Z",
@@ -11759,7 +11741,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "2.1",
       "wasClamped": false,
-      "hourIndex": 63
+      "hourIndex": 62
     },
     {
       "timeUtc": "2026-09-27T05:00:00Z",
@@ -11777,7 +11759,7 @@
       "surgeFt": 2.1,
       "matchedStageKey": "1.1",
       "wasClamped": false,
-      "hourIndex": 64
+      "hourIndex": 63
     },
     {
       "timeUtc": "2026-09-27T06:00:00Z",
@@ -11795,7 +11777,7 @@
       "surgeFt": 2.0,
       "matchedStageKey": "0.3",
       "wasClamped": false,
-      "hourIndex": 65
+      "hourIndex": 64
     },
     {
       "timeUtc": "2026-09-27T07:00:00Z",
@@ -11813,7 +11795,7 @@
       "surgeFt": 1.9,
       "matchedStageKey": "-0.2",
       "wasClamped": false,
-      "hourIndex": 66
+      "hourIndex": 65
     },
     {
       "timeUtc": "2026-09-27T08:00:00Z",
@@ -11831,7 +11813,7 @@
       "surgeFt": 1.9,
       "matchedStageKey": "0.0",
       "wasClamped": false,
-      "hourIndex": 67
+      "hourIndex": 66
     },
     {
       "timeUtc": "2026-09-27T09:00:00Z",
@@ -11849,7 +11831,7 @@
       "surgeFt": 1.9,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 68
+      "hourIndex": 67
     },
     {
       "timeUtc": "2026-09-27T10:00:00Z",
@@ -11867,7 +11849,7 @@
       "surgeFt": 1.8,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 69
+      "hourIndex": 68
     },
     {
       "timeUtc": "2026-09-27T11:00:00Z",
@@ -11885,7 +11867,7 @@
       "surgeFt": 1.8,
       "matchedStageKey": "2.9",
       "wasClamped": false,
-      "hourIndex": 70
+      "hourIndex": 69
     },
     {
       "timeUtc": "2026-09-27T12:00:00Z",
@@ -11903,7 +11885,7 @@
       "surgeFt": 1.7,
       "matchedStageKey": "3.7",
       "wasClamped": false,
-      "hourIndex": 71
+      "hourIndex": 70
     },
     {
       "timeUtc": "2026-09-27T13:00:00Z",
@@ -11921,7 +11903,7 @@
       "surgeFt": 1.7,
       "matchedStageKey": "4.1",
       "wasClamped": false,
-      "hourIndex": 72
+      "hourIndex": 71
     },
     {
       "timeUtc": "2026-09-27T14:00:00Z",
@@ -11939,7 +11921,7 @@
       "surgeFt": 1.7,
       "matchedStageKey": "3.8",
       "wasClamped": false,
-      "hourIndex": 73
+      "hourIndex": 72
     },
     {
       "timeUtc": "2026-09-27T15:00:00Z",
@@ -11957,7 +11939,7 @@
       "surgeFt": 1.6,
       "matchedStageKey": "3.0",
       "wasClamped": false,
-      "hourIndex": 74
+      "hourIndex": 73
     },
     {
       "timeUtc": "2026-09-27T16:00:00Z",
@@ -11975,7 +11957,7 @@
       "surgeFt": 1.6,
       "matchedStageKey": "2.1",
       "wasClamped": false,
-      "hourIndex": 75
+      "hourIndex": 74
     },
     {
       "timeUtc": "2026-09-27T17:00:00Z",
@@ -11993,7 +11975,7 @@
       "surgeFt": 1.6,
       "matchedStageKey": "1.0",
       "wasClamped": false,
-      "hourIndex": 76
+      "hourIndex": 75
     },
     {
       "timeUtc": "2026-09-27T18:00:00Z",
@@ -12011,7 +11993,7 @@
       "surgeFt": 1.5,
       "matchedStageKey": "0.0",
       "wasClamped": false,
-      "hourIndex": 77
+      "hourIndex": 76
     },
     {
       "timeUtc": "2026-09-27T19:00:00Z",
@@ -12029,7 +12011,7 @@
       "surgeFt": 1.5,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 78
+      "hourIndex": 77
     },
     {
       "timeUtc": "2026-09-27T20:00:00Z",
@@ -12047,7 +12029,7 @@
       "surgeFt": 1.5,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 79
+      "hourIndex": 78
     },
     {
       "timeUtc": "2026-09-27T21:00:00Z",
@@ -12065,7 +12047,7 @@
       "surgeFt": 1.5,
       "matchedStageKey": "0.0",
       "wasClamped": false,
-      "hourIndex": 80
+      "hourIndex": 79
     },
     {
       "timeUtc": "2026-09-27T22:00:00Z",
@@ -12083,7 +12065,7 @@
       "surgeFt": 1.4,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 81
+      "hourIndex": 80
     },
     {
       "timeUtc": "2026-09-27T23:00:00Z",
@@ -12101,7 +12083,7 @@
       "surgeFt": 1.4,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 82
+      "hourIndex": 81
     },
     {
       "timeUtc": "2026-09-28T00:00:00Z",
@@ -12119,7 +12101,7 @@
       "surgeFt": 1.4,
       "matchedStageKey": "2.8",
       "wasClamped": false,
-      "hourIndex": 83
+      "hourIndex": 82
     },
     {
       "timeUtc": "2026-09-28T01:00:00Z",
@@ -12134,6 +12116,24 @@
       "mllwStageFt": 5.76,
       "twlMllwFt": 5.76,
       "tideMllwFt": 4.289,
+      "surgeFt": 1.4,
+      "matchedStageKey": "3.4",
+      "wasClamped": false,
+      "hourIndex": 83
+    },
+    {
+      "timeUtc": "2026-09-28T02:00:00Z",
+      "scenario": "mean",
+      "product": "mean",
+      "percentile": "Mean",
+      "rawPetssValue": 5.767,
+      "rawPetssScale": 1.0,
+      "sourceStageFt": 3.38,
+      "sourceDatum": "NAVD88",
+      "navd88StageFt": 3.38,
+      "mllwStageFt": 5.77,
+      "twlMllwFt": 5.77,
+      "tideMllwFt": 4.055,
       "surgeFt": 1.4,
       "matchedStageKey": "3.4",
       "wasClamped": false,
