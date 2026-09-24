@@ -40205,7 +40205,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v11">
+<script id="shorelysafe-responsive-fit-v12">
 (function () {
   'use strict';
   const owned = new Map();
@@ -40387,6 +40387,13 @@ html body #mapTitleBadge #mapTitleLogo{
     }
     if (compact) {
       fitShortLandscapeNavigation(shortLandscape);
+      // Reset desktop title coordinates retained by older mapper title fitters.
+      set(title, 'left', 'calc(8px + env(safe-area-inset-left))');
+      set(title, 'right', 'calc(8px + env(safe-area-inset-right))');
+      set(title, 'width', 'auto');
+      set(title, 'min-width', '0px');
+      set(title, 'max-width', 'calc(100vw - 16px - env(safe-area-inset-left) - env(safe-area-inset-right))');
+      set(title, 'transform', 'none');
       if (!right.children.length) set(right, 'display', 'none');
       else if (owned.get(right)?.has('display')) restore(right);
       clearStaleMobileTimeline();
@@ -40621,29 +40628,17 @@ html body #mapTitleBadge #mapTitleLogo{
     addEventListener('orientationchange', schedule, {passive:true});
     const ro = new ResizeObserver(schedule);
     nodes.forEach(el => ro.observe(el));
-    const lastClassValue = new WeakMap();
-    const mo = new MutationObserver(records => {
-      let layoutChanged = false;
-      for (const record of records) {
-        if (record.type !== 'attributes' || record.attributeName !== 'class') {
-          layoutChanged = true;
-          continue;
-        }
-        const value = record.target.getAttribute('class');
-        if (!lastClassValue.has(record.target) || lastClassValue.get(record.target) !== value) {
-          lastClassValue.set(record.target, value);
-          layoutChanged = true;
-        }
-      }
-      if (layoutChanged) schedule();
-    });
+    const mo = new MutationObserver(schedule);
     mo.observe(document.body, {attributes:true,attributeFilter:['class']});
-    // fit() writes styles on these panes; observing those writes loops every frame.
-    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['class'],childList:el.id==='rightRail'}));
+    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['style','class'],childList:el.id==='rightRail'}));
     const legend = document.getElementById('legendDock');
-    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['class']});
+    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['style','class']});
     const banner = document.getElementById('topBanner');
-    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['class']}); }
+    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['style','class']}); }
+    for (const selector of ['#timelineDock .timeline-top','#timelineDock .timeline-controls','#timelineFloodKey','#timelineDayTabs','#timelineDock .timeline-trackRow','#hourSlider','#playBtn']) {
+      const node = document.querySelector(selector);
+      if (node) mo.observe(node, {attributes:true,attributeFilter:['style']});
+    }
     const app = document.getElementById('app');
     if (app) mo.observe(app, {childList:true});
     mo.observe(document.getElementById('leftPanel'), {childList:true});
