@@ -40402,21 +40402,31 @@ html body #mapTitleBadge #mapTitleLogo{
     }
     if (compact) set(compact, 'display', 'none');
     const zr = zoom.getBoundingClientRect();
+    const rightPane = document.getElementById('rightRail');
+    const right = rightPane?.children.length && shown(rightPane) ? rightPane.getBoundingClientRect() : null;
+    const shiftX = right && zr.top < right.bottom - 6 && zr.bottom > right.top + 6 &&
+      zr.right > right.left - 8 && zr.left < right.right ? Math.floor(right.left - 8 - zr.right) : 0;
+    const candidateLeft = zr.left + shiftX;
+    const candidateRight = zr.right + shiftX;
     let blockerBottom = 0;
     for (const blocker of [title, banner]) {
       if (!shown(blocker)) continue;
       const r = blocker.getBoundingClientRect();
-      if (Math.min(r.right, zr.right) - Math.max(r.left, zr.left) > 6 &&
+      if (Math.min(r.right, candidateRight) - Math.max(r.left, candidateLeft) > 6 &&
           Math.min(r.bottom, zr.bottom) - Math.max(r.top, zr.top) > 6)
         blockerBottom = Math.max(blockerBottom, r.bottom);
     }
-    const offset = Math.ceil(blockerBottom + 8 - zr.top);
-    if (blockerBottom && offset > 0) {
-      if (timeline && zr.bottom + offset > timeline.getBoundingClientRect().top - 4) {
-        set(zoom, 'opacity', '0');
-        set(zoom, 'pointer-events', 'none');
-      } else set(zoom, 'translate', '0px ' + offset + 'px');
-    }
+    const shiftY = blockerBottom ? Math.max(0, Math.ceil(blockerBottom + 8 - zr.top)) : 0;
+    const leftPane = document.getElementById('leftPanel');
+    const left = shown(leftPane) ? leftPane.getBoundingClientRect() : null;
+    const candidateBottom = zr.bottom + shiftY;
+    const crossesLeft = left && candidateRight > left.left + 6 && candidateLeft < left.right - 6 &&
+      candidateBottom > left.top + 6 && zr.top + shiftY < left.bottom - 6;
+    if (candidateLeft < 4 || candidateRight > innerWidth - 4 || crossesLeft ||
+        (timeline && candidateBottom > timeline.getBoundingClientRect().top - 4)) {
+      set(zoom, 'opacity', '0');
+      set(zoom, 'pointer-events', 'none');
+    } else if (shiftX || shiftY) set(zoom, 'translate', shiftX + 'px ' + shiftY + 'px');
   }
   function fit() {
     pending = false;
