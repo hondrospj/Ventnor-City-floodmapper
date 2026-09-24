@@ -40202,7 +40202,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v10">
+<script id="shorelysafe-responsive-fit-v11">
 (function () {
   'use strict';
   const owned = new Map();
@@ -40291,7 +40291,11 @@ html body #mapTitleBadge #mapTitleLogo{
     ]) if (el?.hasAttribute('style')) el.removeAttribute('style');
   }
   function ensureDrawerClose(left) {
-    if (document.getElementById('mobileControlsClose')) return;
+    const nativeClose = document.getElementById('mobileControlsClose');
+    if (nativeClose) {
+      set(nativeClose, 'z-index', '10000');
+      return;
+    }
     let button = document.getElementById('shorelyResponsiveClose');
     if (!button) {
       button = document.createElement('button');
@@ -40375,6 +40379,7 @@ html body #mapTitleBadge #mapTitleLogo{
       restore(legend);
       restore(left);
       restore(right);
+      restore(document.getElementById('mobileControlsClose'));
       lastCompact = compact;
     }
     if (compact) {
