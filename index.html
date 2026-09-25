@@ -15252,6 +15252,7 @@ html.win-compact-ui #timelineDock #hourSlider{
       </div>
       <section id="exportLegendDock" class="export-stage-legend"></section>
       <div id="exportTimestampLabel" class="export-stage-timestamp">--</div>
+      <div id="exportMapAttribution" style="position:absolute;left:6px;bottom:6px;z-index:900;max-width:calc(100% - 12px);padding:2px 4px;background:rgba(255,255,255,.88);color:#263445;font:12px/1.2 Arial,sans-serif;pointer-events:none;">Map: Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors</div>
     </div>
   </div>
 
@@ -15905,8 +15906,8 @@ html.win-compact-ui #timelineDock #hourSlider{
     const ESRI_API_KEY = window.ESRI_API_KEY || "";
     const ESRI_OSM_VECTOR_TILE_URL = "https://basemaps.arcgis.com/arcgis/rest/services/OpenStreetMap_v2/VectorTileServer";
     const ESRI_WORLD_IMAGERY_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
-    const FALLBACK_BASEMAP_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
-    const ROAD_LABELS_URL = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png";
+    const FALLBACK_BASEMAP_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
+    const ROAD_LABELS_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}";
 
     const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     const NEW_YORK_TIME_ZONE = "America/New_York";
@@ -19885,7 +19886,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
             map.removeLayer(basemapColorLayer);
           }
           basemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-            attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+            attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
             minZoom: 11,
             maxZoom: 19,
             subdomains: "abc",
@@ -19899,7 +19900,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
         });
       } else {
         basemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-          attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+          attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
           minZoom: 11,
           maxZoom: 19,
           subdomains: "abc",
@@ -19922,8 +19923,9 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       });
 
       roadsLayer = L.tileLayer(ROAD_LABELS_URL, {
-        attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+        attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
         minZoom: 11,
+        maxNativeZoom: 19,
         maxZoom: 20,
         subdomains: "abcd",
         crossOrigin: true,
@@ -22337,7 +22339,7 @@ function updateExportSegmentedUI() {
             exportMap.removeLayer(exportBasemapColorLayer);
           }
           exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-            attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+            attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
             minZoom: 0,
             maxZoom: 24,
             maxNativeZoom: 19,
@@ -22351,7 +22353,7 @@ function updateExportSegmentedUI() {
         });
       } else {
         exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-          attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+          attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
           minZoom: 0,
           maxZoom: 24,
           maxNativeZoom: 19,
@@ -22377,10 +22379,10 @@ function updateExportSegmentedUI() {
       updateExportSatelliteLayer();
 
       exportRoadsLayer = L.tileLayer(ROAD_LABELS_URL, {
-        attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+        attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
         minZoom: 0,
         maxZoom: 24,
-        maxNativeZoom: 20,
+        maxNativeZoom: 19,
         subdomains: "abcd",
         crossOrigin: true,
         opacity: 0,
