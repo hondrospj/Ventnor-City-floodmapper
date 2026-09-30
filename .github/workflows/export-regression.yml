@@ -1,0 +1,29 @@
+name: Export regression
+on:
+  push:
+    paths: ["index.html", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
+  pull_request:
+    paths: ["index.html", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            index.html
+            tools/test_export*.mjs
+          sparse-checkout-cone-mode: false
+          lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify map export
+        run: |
+          node tools/test_export_syntax.mjs
+          node tools/test_export_recovery.mjs
+          node tools/test_export_streaming.mjs
+          node tools/test_export_history.mjs

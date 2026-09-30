@@ -15405,7 +15405,6 @@ html.win-compact-ui #timelineDock #hourSlider{
 
     const OPTIONAL_SCRIPT_URLS = {
       html2canvas: "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
-      gif: "https://cdn.jsdelivr.net/npm/gif.js.optimized/dist/gif.js",
       jszip: "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js",
       geotiff: "https://cdn.jsdelivr.net/npm/geotiff@2.1.3/dist-browser/geotiff.js"
     };
@@ -15437,7 +15436,6 @@ html.win-compact-ui #timelineDock #hourSlider{
     async function ensureExportLibraries(format, frameCount = 1) {
       document.body.dataset.exportLibraries = "loading";
       const loads = [loadOptionalScript("html2canvas", () => typeof window.html2canvas === "function")];
-      if (format === "gif") loads.push(loadOptionalScript("gif", () => typeof window.GIF === "function"));
       if (format === "png" && frameCount > 1) loads.push(loadOptionalScript("jszip", () => typeof window.JSZip === "function"));
       try {
         await Promise.all(loads);
@@ -15492,17 +15490,14 @@ html.win-compact-ui #timelineDock #hourSlider{
     const EXPORT_GIF_QUALITY = 1;
     const EXPORT_CAPTURE_SCALE = 1;
     const EXPORT_GIF_DITHER = false;
-    const EXPORT_GIF_MAX_WORKERS = 10;
     const EXPORT_PNG_SELECTION_LIMIT = EXPORT_INTERVALS["15min"].frameLimit;
-    const GIF_WORKER_CDN_URL = "https://cdn.jsdelivr.net/npm/gif.js.optimized/dist/gif.worker.js";
+    const GIF_WORKER_CDN_URL = "https://cdn.jsdelivr.net/npm/gif.js.optimized@1.0.1/dist/gif.worker.js";
     const EXPORT_GIF_ASPECTS = {
       "4:5": { value: "4:5", width: 1080, height: 1350, pngWidth: 2160, pngHeight: 2700, label: "Social 4:5" },
       "16:9": { value: "16:9", width: 1920, height: 1080, pngWidth: 3840, pngHeight: 2160, label: "Wide 16:9" },
       "9:16": { value: "9:16", width: 1080, height: 1920, pngWidth: 2160, pngHeight: 3840, label: "Story 9:16" },
       "1:1": { value: "1:1", width: 1200, height: 1200, pngWidth: 2160, pngHeight: 2160, label: "Square 1:1" }
     };
-    const FAST_GIF_EXPORT = true;
-    const EXPORT_PRELOAD_CONCURRENCY = 16;
     const EXPORT_PROGRESS_UPDATE_EVERY = 8;
 
 
@@ -20309,28 +20304,48 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       };
     }
 
-    function getDownloadFrameItemFromEntry(entry, fallbackIndex = 0) {
+    function getDownloadFrameItemFromEntry(entry, fallbackIndex = 0, sourceSeries = new Map()) {
       if (!entry) return null;
       const sourceMode = entry.exportSourceMode || currentDataMode;
-      if (sourceMode === "observed") {
-        return {
-          mode: "observed",
-          dateStr: entry.observedDate || selectedObservedDate || "",
-          entry
-        };
+      const dateStr = entry.observedDate || selectedObservedDate || "";
+      const key = sourceMode === "observed" ? `observed:${dateStr}` : sourceMode;
+      if (!sourceSeries.has(key)) {
+        let series;
+        if (sourceMode === "observed") {
+          series = buildObservedCanonicalSeries(getObservedDayRecord(dateStr), dateStr);
+        } else if (sourceMode === "return-interval") {
+          series = annotateHydraulicSeries(currentRawSeriesHours);
+        } else if (physicsForecastApplies()) {
+          series = annotateHydraulicSeries(getActivePhysicsManifest().frames.map(physicsFrameToForecastEntry));
+        } else {
+          series = buildForecastCanonicalSeries(getActiveForecastHours());
+        }
+        sourceSeries.set(key, series);
       }
-      if (sourceMode === "return-interval") {
-        return {
-          mode: "return-interval",
-          index: fallbackIndex,
-          entry,
-          series: currentRawSeriesHours
-        };
+      let series = sourceSeries.get(key);
+      let index = findClosestEntryIndex(series, entry);
+      let canonical = series[index];
+      if (!canonical || entryTimeMs(canonical) !== entryTimeMs(entry) ||
+          Math.abs(getStageValue(canonical) - getStageValue(entry)) > 0.0001) {
+        // Keep an off-grid measured peak at its actual time and water level.
+        series = annotateHydraulicSeries([
+          ...series.filter(row => entryTimeMs(row) !== entryTimeMs(entry)), entry
+        ].sort((a, b) => entryTimeMs(a) - entryTimeMs(b)));
+        index = findClosestEntryIndex(series, entry);
+        canonical = series[index];
       }
+      const resolvedEntry = { ...entry };
+      for (const field of ["hydraulicPhase", "hydraulicPhaseCanonical", "hydraulicCrestIndex",
+        "hydraulicCrestTimeUtc", "hydraulicCrestStageFt", "hydraulicElapsedMinutes"]) {
+        resolvedEntry[field] = canonical?.[field];
+      }
+      // Export cadence and the visible timeline must never replace tide history.
       return {
-        mode: "forecast",
-        index: fallbackIndex,
-        entry
+        mode: sourceMode,
+        ...(sourceMode === "observed" ? { dateStr } : {}),
+        index,
+        entry: resolvedEntry,
+        series
       };
     }
 
@@ -20887,6 +20902,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
         stageFrame.style.width = `${config.width}px`;
         stageFrame.style.height = `${config.height}px`;
         stageFrame.dataset.exportAspect = config.value;
+        stageFrame.dataset.exportCompact = String(config.width < 1000);
       }
       if (legendDock) {
         legendDock.style.width = `${config.value === "9:16" ? 176 : config.value === "1:1" ? 184 : 192}px`;
@@ -22166,7 +22182,31 @@ function updateExportSegmentedUI() {
         document.getElementById("exportTownLogo"),
         document.getElementById("exportPartnerLogo")
       ];
-      await Promise.all(images.map(img => waitForImageElementReady(img)));
+      await Promise.all(images.map(async img => {
+        if (!img?.src || !img.classList.contains("is-visible") || img.style.display === "none") return;
+        if (!img.src.startsWith("data:")) {
+          const source = await getExportImageElement(img.src);
+          throwIfExportCancelled();
+          if (!source) throw new Error("The export logo could not load. Please try again.");
+          const canvas = document.createElement("canvas");
+          try {
+            canvas.width = source.naturalWidth;
+            canvas.height = source.naturalHeight;
+            const context = canvas.getContext("2d");
+            if (!context) throw new Error("Could not prepare the export logo.");
+            context.drawImage(source, 0, 0);
+            // html2canvas otherwise fetches the remote logo again for every
+            // capture and silently omits it when that second request is slow.
+            img.src = canvas.toDataURL("image/png");
+          } finally {
+            canvas.width = 1;
+            canvas.height = 1;
+          }
+        }
+        if (typeof img.decode === "function") await img.decode();
+        else await waitForImageElementReady(img);
+        throwIfExportCancelled();
+      }));
     }
 
 
@@ -22205,6 +22245,26 @@ function updateExportSegmentedUI() {
         Promise.all(waits),
         wait(3800)
       ]).catch(() => null);
+      // Esri's vector layer load event precedes the underlying WebGL render.
+      // Capturing then can produce an empty canvas, especially on phones.
+      const vectorBasemap = exportBasemapColorLayer;
+      try {
+        await waitForExportVectorLayerReady(vectorBasemap);
+      } catch (error) {
+        if (isExportCancelledError(error)) throw error;
+        // A stalled vector worker is equivalent to the vector layer's error
+        // event. Use the existing raster fallback and verify its actual tiles.
+        useExportFallbackBasemap(vectorBasemap);
+      }
+      await Promise.all([
+        waitForExportRasterLayerReady(exportBasemapColorLayer),
+        exportSatelliteLayer && exportMap.hasLayer(exportSatelliteLayer)
+          ? waitForExportRasterLayerReady(exportSatelliteLayer) : null,
+        exportRoadsLayer && Number(exportRoadsLayer.options?.opacity || 0) > 0
+          ? waitForExportRasterLayerReady(exportRoadsLayer) : null,
+        exportBuildingsLayer && exportMap.hasLayer(exportBuildingsLayer)
+          ? waitForExportVectorLayerReady(exportBuildingsLayer) : null
+      ]);
       if (extraDelayMs > 0) await wait(extraDelayMs);
     }
 
@@ -22243,9 +22303,169 @@ function updateExportSegmentedUI() {
       return URL.createObjectURL(new Blob([scriptText], { type: "text/javascript" }));
     }
 
+    async function waitForExportVectorLayerReady(layer, timeoutMs = 15000) {
+      if (!layer || typeof layer._createMaplibreLayer !== "function") return;
+      const deadline = Date.now() + timeoutMs;
+      while (Date.now() < deadline) {
+        throwIfExportCancelled();
+        if (layer._map === null) return; // The layer's error handler installed a fallback.
+        const glMap = layer._maplibreGL?._glMap;
+        if (glMap?.loaded() && glMap.areTilesLoaded()) {
+          glMap.triggerRepaint();
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          return;
+        }
+        await wait(100);
+      }
+      throw new Error("The map background is still loading. Please try the export again.");
+    }
+
+    async function waitForExportRasterLayerReady(layer, timeoutMs = 30000) {
+      if (!layer || typeof layer.isLoading !== "function") return;
+      const deadline = Date.now() + timeoutMs;
+      while (Date.now() < deadline) {
+        throwIfExportCancelled();
+        const tiles = Array.from(layer.getContainer()?.querySelectorAll("img.leaflet-tile") || []);
+        if (tiles.some(tile => tile.complete && !tile.naturalWidth)) {
+          throw new Error("A map tile could not load. Please try the export again.");
+        }
+        if (!layer.isLoading() && tiles.length && tiles.every(tile => tile.complete && tile.naturalWidth > 0)) {
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          return;
+        }
+        await wait(100);
+      }
+      throw new Error("The map background is still loading. Please try the export again.");
+    }
+
+    function useExportFallbackBasemap(expectedLayer = exportBasemapColorLayer) {
+      if (expectedLayer !== exportBasemapColorLayer) return;
+      if (expectedLayer && exportMap.hasLayer(expectedLayer)) {
+        // Esri Leaflet 4.3.2 cannot remove a vector layer before its style is
+        // ready: onRemove assumes _maplibreGL exists, and its queued ready
+        // listener would otherwise re-add the abandoned layer later.
+        if (typeof expectedLayer._createMaplibreLayer === "function" && !expectedLayer._maplibreGL) {
+          expectedLayer.off("ready");
+          expectedLayer.onRemove = () => {};
+        }
+        exportMap.removeLayer(expectedLayer);
+      }
+      exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
+        attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
+        minZoom: 0, maxZoom: 24, maxNativeZoom: 19,
+        subdomains: "abc", crossOrigin: true, updateWhenIdle: true, keepBuffer: 1,
+        className: "basemap-color-layer", pane: "basemapColorPane"
+      }).addTo(exportMap);
+    }
+
+    function isOutsideExportStage(element) {
+      // html2canvas clones the document before capturing the requested element.
+      // Exclude the live application so its maps/images cannot delay the clone
+      // or allocate a second copy of the interactive map during an export.
+      const stage = document.getElementById("exportStage");
+      return element.parentElement === document.body && element !== stage && !element.contains(stage)
+        && !["STYLE", "LINK"].includes(element.tagName);
+    }
+
+    async function getExportFrameImage(item) {
+      const displayStage = getOverlayStage(getStageValue(item?.entry));
+      if (displayStage == null) throw new Error("Stage is not numeric for the selected hour.");
+      const phase = getHydraulicPhaseForEntry(item.entry, item.index, item.series);
+      // Resolve each frame before using the bounded URL cache. A rounded stage
+      // is not an identity for a retained-water or physics forecast raster.
+      const record = getPhysicsDisplayRecord(getPhysicsAssetForEntry(item.entry), currentOverlayMode)
+        || await getHydraulicOverlayRecord(currentOverlayMode, displayStage, phase, item.entry, item.series);
+      if (!record?.url) throw new Error("The flood image is unavailable for the selected time.");
+      const image = await getExportImageElement(record.url);
+      throwIfExportCancelled();
+      if (!image) throw new Error("The flood image could not load. Please try the export again.");
+      return image;
+    }
+
+    function createStreamingGifEncoder(options, frameCount) {
+      // The gif.js worker protocol emits a header for index 0 and a trailer for
+      // the last frame. Encode one transferred RGBA buffer at a time, retaining
+      // only compressed Blob parts instead of every full-resolution canvas.
+      const worker = new Worker(options.workerScript);
+      const parts = [];
+      let nextIndex = 0;
+      let globalPalette = options.globalPalette;
+      let pending = null;
+      let closed = false;
+      const dispose = (error = new Error("GIF export was aborted.")) => {
+        closed = true;
+        worker.terminate();
+        parts.length = 0;
+        if (pending) {
+          clearTimeout(pending.timer);
+          const reject = pending.reject;
+          pending = null;
+          reject(error);
+        }
+      };
+      worker.onerror = event => {
+        event.preventDefault();
+        dispose(new Error("GIF encoding failed. Please try the export again."));
+      };
+      worker.onmessageerror = () => dispose(new Error("Could not read the encoded GIF frame."));
+      worker.onmessage = event => {
+        if (!pending || closed) return;
+        const frame = event.data;
+        if (frame?.index !== nextIndex || !Array.isArray(frame.data) || !frame.data.length) {
+          dispose(new Error("The GIF encoder returned an invalid frame."));
+          return;
+        }
+        const pages = frame.data.map((page, index) => index === frame.data.length - 1
+          ? page.subarray(0, frame.cursor) : page);
+        parts.push(new Blob(pages));
+        if (globalPalette === true) globalPalette = frame.globalPalette;
+        nextIndex += 1;
+        clearTimeout(pending.timer);
+        const resolve = pending.resolve;
+        pending = null;
+        resolve();
+      };
+      return {
+        abort: dispose,
+        dispose,
+        getGlobalPalette: () => globalPalette,
+        async addFrame(canvas, { delay }) {
+          throwIfExportCancelled();
+          if (closed || pending || nextIndex >= frameCount) throw new Error("GIF encoder is not ready for another frame.");
+          const context = canvas.getContext("2d");
+          if (!context) throw new Error("Could not read the GIF frame.");
+          const data = context.getImageData(0, 0, options.width, options.height).data;
+          await new Promise((resolve, reject) => {
+            pending = { resolve, reject, timer: setTimeout(() => {
+              dispose(new Error("GIF encoding timed out. Please try the export again."));
+            }, 120000) };
+            try {
+              worker.postMessage({
+                index: nextIndex, last: nextIndex === frameCount - 1,
+                width: options.width, height: options.height,
+                quality: options.quality, dither: options.dither,
+                globalPalette, repeat: 0,
+                transparent: null, delay, canTransfer: true, data
+              }, [data.buffer]);
+            } catch (error) {
+              dispose(error);
+            }
+          });
+          throwIfExportCancelled();
+        },
+        finish() {
+          if (closed || pending || nextIndex !== frameCount) throw new Error("The GIF export is incomplete.");
+          return new Blob(parts, { type: "image/gif" });
+        }
+      };
+    }
+
     async function getGifWorkerUrl() {
       if (gifWorkerUrlPromise) return gifWorkerUrlPromise;
-      gifWorkerUrlPromise = getSameOriginWorkerUrl(GIF_WORKER_CDN_URL);
+      gifWorkerUrlPromise = getSameOriginWorkerUrl(GIF_WORKER_CDN_URL).catch(error => {
+        gifWorkerUrlPromise = null;
+        throw error;
+      });
       return gifWorkerUrlPromise;
     }
 
@@ -22334,36 +22554,10 @@ function updateExportSegmentedUI() {
       exportBasemapColorLayer = makeEsriBuildingBasemapLayer();
       if (exportBasemapColorLayer) {
         exportBasemapColorLayer.addTo(exportMap);
-        exportBasemapColorLayer.on("error", () => {
-          if (exportBasemapColorLayer && exportMap.hasLayer(exportBasemapColorLayer)) {
-            exportMap.removeLayer(exportBasemapColorLayer);
-          }
-          exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-            attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
-            minZoom: 0,
-            maxZoom: 24,
-            maxNativeZoom: 19,
-            subdomains: "abc",
-            crossOrigin: true,
-            updateWhenIdle: true,
-            keepBuffer: 1,
-            className: "basemap-color-layer",
-            pane: "basemapColorPane"
-          }).addTo(exportMap);
-        });
+        const vectorBasemap = exportBasemapColorLayer;
+        vectorBasemap.on("error load-error", () => useExportFallbackBasemap(vectorBasemap));
       } else {
-        exportBasemapColorLayer = L.tileLayer(FALLBACK_BASEMAP_URL, {
-          attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
-          minZoom: 0,
-          maxZoom: 24,
-          maxNativeZoom: 19,
-          subdomains: "abc",
-          crossOrigin: true,
-          updateWhenIdle: true,
-          keepBuffer: 1,
-          className: "basemap-color-layer",
-          pane: "basemapColorPane"
-        }).addTo(exportMap);
+        useExportFallbackBasemap();
       }
 
       exportSatelliteLayer = L.tileLayer(ESRI_WORLD_IMAGERY_URL, {
@@ -22568,7 +22762,10 @@ function updateExportSegmentedUI() {
         overlayUrl = match.url;
         await ensureOverlayBounds(overlayUrl);
       }
-      await preloadImage(overlayUrl);
+      if (!await preloadImage(overlayUrl)) {
+        throwIfExportCancelled();
+        throw new Error("The flood image could not load. Please try the export again.");
+      }
       if (exportFloodLayer && exportMap.hasLayer(exportFloodLayer)) {
         exportMap.removeLayer(exportFloodLayer);
       }
@@ -22593,10 +22790,32 @@ function updateExportSegmentedUI() {
             ? "return-interval-depth-overlay"
             : ""
         });
-      exportFloodLayer.addTo(exportMap);
-      await new Promise(resolve => {
-        exportFloodLayer.once("load", resolve);
-        exportFloodLayer.once("error", resolve);
+      await new Promise((resolve, reject) => {
+        const layer = exportFloodLayer;
+        let settled = false;
+        const finish = error => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          clearInterval(cancelTimer);
+          layer.off("load", loaded);
+          layer.off("error", failed);
+          error ? reject(error) : resolve();
+        };
+        const loaded = () => finish();
+        const failed = () => finish(new Error("The flood image could not load. Please try the export again."));
+        const timer = setTimeout(failed, 20000);
+        const cancelTimer = setInterval(() => {
+          try { throwIfExportCancelled(); } catch (error) { finish(error); }
+        }, 100);
+        // Subscribe before adding: cached images may finish synchronously.
+        layer.once("load", loaded);
+        layer.once("error", failed);
+        try {
+          layer.addTo(exportMap);
+          const img = layer.getElement();
+          if (img?.complete) img.naturalWidth > 0 ? loaded() : failed();
+        } catch (error) { finish(error); }
       });
     }
 
@@ -22686,7 +22905,8 @@ function updateExportSegmentedUI() {
         logging: false,
         removeContainer: true,
         foreignObjectRendering: false,
-        imageTimeout: 7000,
+        imageTimeout: 20000,
+        ignoreElements: isOutsideExportStage,
         scale: captureScale
       });
     }
@@ -22727,7 +22947,8 @@ function updateExportSegmentedUI() {
           logging: false,
           removeContainer: true,
           foreignObjectRendering: false,
-          imageTimeout: 7000,
+          imageTimeout: 20000,
+          ignoreElements: isOutsideExportStage,
           scale: captureScale
         });
       } finally {
@@ -22783,7 +23004,7 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
       return best;
     }
 
-    function buildHourlyRangeFrameItems(entries, range) {
+    function buildHourlyRangeFrameItems(entries, range, sourceSeries = new Map()) {
       if (!Array.isArray(entries) || !entries.length || !range) return [];
       const sorted = entries.slice().sort((a, b) => entryTimeMs(a) - entryTimeMs(b));
       const usedKeys = new Set();
@@ -22800,13 +23021,13 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
           exportInterval: "hourly"
         };
         const fallbackIndex = exportEntry.exportSourceMode === "observed" ? match.idx : findClosestEntryIndex(currentSeriesHours, exportEntry);
-        const item = getDownloadFrameItemFromEntry(exportEntry, fallbackIndex);
+        const item = getDownloadFrameItemFromEntry(exportEntry, fallbackIndex, sourceSeries);
         if (item) items.push(item);
       }
       return items;
     }
 
-    function buildQuarterHourRangeFrameItems(entries, range) {
+    function buildQuarterHourRangeFrameItems(entries, range, sourceSeries = new Map()) {
       if (!Array.isArray(entries) || !entries.length || !range) return [];
       const sourceMode = entries.find(entry => entry.exportSourceMode)?.exportSourceMode || "observed";
       const series = buildQuarterHourTimelineSeries(entries, {
@@ -22829,12 +23050,12 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
           const fallbackIndex = exportEntry.exportSourceMode === "observed"
             ? idx
             : findClosestEntryIndex(currentSeriesHours, exportEntry);
-          return getDownloadFrameItemFromEntry(exportEntry, fallbackIndex);
+          return getDownloadFrameItemFromEntry(exportEntry, fallbackIndex, sourceSeries);
         })
         .filter(Boolean);
     }
 
-    function buildDailyMaximumRangeFrameItems(entries, range) {
+    function buildDailyMaximumRangeFrameItems(entries, range, sourceSeries = new Map()) {
       if (!Array.isArray(entries) || !entries.length || !range) return [];
       const inRange = entries.filter(entry => {
         const time = entryTimeMs(entry);
@@ -22852,7 +23073,7 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
           const fallbackIndex = exportEntry.exportSourceMode === "observed"
             ? idx
             : findClosestEntryIndex(currentSeriesHours, exportEntry);
-          return getDownloadFrameItemFromEntry(exportEntry, fallbackIndex);
+          return getDownloadFrameItemFromEntry(exportEntry, fallbackIndex, sourceSeries);
         })
         .filter(Boolean);
     }
@@ -22863,86 +23084,15 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
       return buildHourlyRangeFrameItems(entries, range);
     }
 
-async function runExportLimited(items, limit, worker) {
-      const list = Array.isArray(items) ? items : [];
-      const max = Math.max(1, Math.min(Number(limit) || 1, list.length || 1));
-      let cursor = 0;
-      const results = new Array(list.length);
-      const runners = Array.from({ length: max }, async () => {
-        while (cursor < list.length) {
-          throwIfExportCancelled();
-          const index = cursor++;
-          results[index] = await worker(list[index], index);
-          throwIfExportCancelled();
-        }
-      });
-      await Promise.all(runners);
-      return results;
-    }
 
-    function getGifWorkerCount() {
-      const cores = Number(navigator.hardwareConcurrency) || 4;
-      if (FAST_GIF_EXPORT) {
-        return Math.min(EXPORT_GIF_MAX_WORKERS, Math.max(4, Math.ceil(cores * 0.75)));
-      }
-      return Math.min(EXPORT_GIF_MAX_WORKERS, Math.max(2, cores - 1));
-    }
 
-function getExportHydraulicAssetKey(item, phase, displayStage) {
-      const history = getDrainageRetentionMilestones(item?.entry, item?.series || currentRawSeriesHours);
-      const historyKey = history.length ? entryTimeMs(item?.entry) : "static";
-      return `${phase}:${stageToCode(displayStage)}:${historyKey}`;
-    }
 
-function getUniqueExportStages(frameItems) {
-      const byKey = new Map();
-      for (const item of (Array.isArray(frameItems) ? frameItems : [])) {
-        const rawStage = getStageValue(item?.entry);
-        const displayStage = getOverlayStage(rawStage);
-        if (displayStage == null) continue;
-        const phase = getHydraulicPhaseForEntry(item?.entry, item?.index, item?.series || currentSeriesHours);
-        const key = getExportHydraulicAssetKey(item, phase, displayStage);
-        if (!byKey.has(key)) byKey.set(key, { stage: displayStage, phase, item });
-      }
-      return Array.from(byKey.entries()).map(([key, value]) => ({ key, ...value }));
-    }
 
-    async function preloadExportFrameAssets(frameItems) {
-      const uniqueStages = getUniqueExportStages(frameItems);
-      if (!uniqueStages.length) return new Map();
-      throwIfExportCancelled();
 
-      const lookup = new Map();
-      let firstUrl = null;
-      const preloadConcurrency = uniqueStages.some(({ item }) => (
-        getDrainageRetentionMilestones(item?.entry, item?.series || currentRawSeriesHours).length
-      )) ? 1 : EXPORT_PRELOAD_CONCURRENCY;
 
-      await runExportLimited(uniqueStages, preloadConcurrency, async ({ key, stage, phase, item }, idx) => {
-        throwIfExportCancelled();
-        const record = await getHydraulicOverlayRecord(
-          currentOverlayMode,
-          stage,
-          phase,
-          item?.entry,
-          item?.series || currentRawSeriesHours
-        );
-        if (!record?.url) return;
-        if (!firstUrl) firstUrl = record.url;
-        const img = await getExportImageElement(record.url);
-        if (img) lookup.set(key, img);
-        throwIfExportCancelled();
-        if (idx % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
-          const pct = 2 + Math.min(10, (idx / Math.max(1, uniqueStages.length)) * 10);
-          setExportProgress(`Preloading ${idx + 1} of ${uniqueStages.length} unique overlay images...`, pct, false);
-        }
-      });
 
-      throwIfExportCancelled();
-      if (firstUrl) await ensureOverlayBounds(firstUrl).catch(() => null);
-      throwIfExportCancelled();
-      return lookup;
-    }
+
+
     async function withExportFrames(frameItems, onFrame, progressStart = 4, progressEnd = 82) {
       const total = Math.max(1, frameItems.length);
       exportFrameViewPrimed = false;
@@ -22961,11 +23111,14 @@ function getUniqueExportStages(frameItems) {
           throwIfExportCancelled();
         }
         const canvas = await captureExportCanvas();
-        throwIfExportCancelled();
-        await onFrame({ sequence: i, item, entry: item.entry, canvas });
-        throwIfExportCancelled();
-        canvas.width = 1;
-        canvas.height = 1;
+        try {
+          throwIfExportCancelled();
+          await onFrame({ sequence: i, item, entry: item.entry, canvas });
+          throwIfExportCancelled();
+        } finally {
+          canvas.width = 1;
+          canvas.height = 1;
+        }
         const donePct = progressStart + (((i + 1) / total) * (progressEnd - progressStart));
         setExportProgress(`Rendered frame ${i + 1} of ${frameItems.length}...`, donePct, false);
       }
@@ -23094,29 +23247,37 @@ function getUniqueExportStages(frameItems) {
       const previousTimestampVisibility = timestamp?.style.visibility || "";
       const previousLegendVisibility = legend?.style.visibility || "";
       const previousLogoVisibility = logoStrip?.style.visibility || "";
-      if (timestamp) timestamp.style.visibility = "hidden";
-      if (legend) legend.style.visibility = "hidden";
-      if (logoStrip) logoStrip.style.visibility = "hidden";
-      await waitForExportMapReady(80);
-      await waitForStableRender();
-      const baseCanvas = await captureExportCanvas();
-      if (timestamp) timestamp.style.visibility = previousTimestampVisibility;
-      if (legend) legend.style.visibility = previousLegendVisibility;
-      if (logoStrip) logoStrip.style.visibility = previousLogoVisibility;
-      const mapForegroundCanvas = await captureExportMapForegroundCanvas();
-      const roadLabelsCanvas = await captureExportRoadLabelsCanvas();
-      const chromeCanvas = await captureExportChromeCanvas();
-      updateExportTimestampLabel(firstItem?.entry || null);
-      return {
-        baseCanvas,
-        overlayRect: getExportOverlayRect(mapInstance),
-        mapForegroundCanvas,
-        roadLabelsCanvas,
-        chromeCanvas
-      };
+      let baseCanvas;
+      try {
+        if (timestamp) timestamp.style.visibility = "hidden";
+        if (legend) legend.style.visibility = "hidden";
+        if (logoStrip) logoStrip.style.visibility = "hidden";
+        await waitForExportMapReady(80);
+        await waitForStableRender();
+        baseCanvas = await captureExportCanvas();
+      } finally {
+        // A cancelled/failed capture must not hide chrome in later exports.
+        if (timestamp) timestamp.style.visibility = previousTimestampVisibility;
+        if (legend) legend.style.visibility = previousLegendVisibility;
+        if (logoStrip) logoStrip.style.visibility = previousLogoVisibility;
+      }
+      let mapForegroundCanvas, roadLabelsCanvas, chromeCanvas;
+      try {
+        mapForegroundCanvas = await captureExportMapForegroundCanvas();
+        roadLabelsCanvas = await captureExportRoadLabelsCanvas();
+        chromeCanvas = await captureExportChromeCanvas();
+        updateExportTimestampLabel(firstItem?.entry || null);
+        return { baseCanvas, overlayRect: getExportOverlayRect(mapInstance), mapForegroundCanvas, roadLabelsCanvas, chromeCanvas };
+      } catch (error) {
+        [baseCanvas, mapForegroundCanvas, roadLabelsCanvas, chromeCanvas].filter(Boolean).forEach(canvas => {
+          canvas.width = 1;
+          canvas.height = 1;
+        });
+        throw error;
+      }
     }
 
-    async function addFastCompositeGifFrames(gif, frameItems, progressStart = 4, progressEnd = 68, overlayImageLookup = null) {
+    async function addFastCompositeGifFrames(gif, frameItems, progressStart = 4, progressEnd = 96) {
       const total = Math.max(1, frameItems.length);
       throwIfExportCancelled();
       const {
@@ -23126,73 +23287,55 @@ function getUniqueExportStages(frameItems) {
         roadLabelsCanvas,
         chromeCanvas
       } = await captureFastGifBaseCanvas(frameItems[0]);
-      throwIfExportCancelled();
       const frameCanvas = document.createElement("canvas");
-      frameCanvas.width = baseCanvas.width;
-      frameCanvas.height = baseCanvas.height;
-      const ctx = frameCanvas.getContext("2d", { alpha: false, willReadFrequently: false });
-      if (ctx) { ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; }
-      if (!ctx || !overlayRect) {
-        await withExportFrames(frameItems, async ({ canvas }) => {
-          gif.addFrame(canvas, { delay: getGifFrameDelayMs(), copy: true });
-        }, progressStart, progressEnd);
-        return;
-      }
-      for (let i = 0; i < frameItems.length; i++) {
-        const item = frameItems[i];
+      try {
         throwIfExportCancelled();
-        const pct = progressStart + ((i / total) * (progressEnd - progressStart));
-        const message = `Compositing frame ${i + 1} of ${frameItems.length}...`;
-        if (i === 0 || i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
-          setDownloadStatus(message);
-          setExportProgress(message, pct, false);
+        frameCanvas.width = baseCanvas.width;
+        frameCanvas.height = baseCanvas.height;
+        const ctx = frameCanvas.getContext("2d", { alpha: false, willReadFrequently: false });
+        if (ctx) { ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; }
+        if (!ctx || !overlayRect) {
+          await withExportFrames(frameItems, async ({ canvas }) => {
+            await gif.addFrame(canvas, { delay: getGifFrameDelayMs() });
+          }, progressStart, progressEnd);
+          return;
         }
-        ctx.globalAlpha = 1;
-        ctx.globalCompositeOperation = "source-over";
-        ctx.drawImage(baseCanvas, 0, 0);
-        const rawStage = getStageValue(item.entry);
-        const displayStage = getOverlayStage(rawStage);
-        if (displayStage != null) {
-          const hydraulicPhase = getHydraulicPhaseForEntry(item.entry, item.index, item.series || currentSeriesHours);
-          const stageKey = getExportHydraulicAssetKey(item, hydraulicPhase, displayStage);
-          let overlayImg = overlayImageLookup?.get(stageKey) || null;
-          if (!overlayImg) {
-            const record = await getHydraulicOverlayRecord(
-              currentOverlayMode,
-              displayStage,
-              hydraulicPhase,
-              item.entry,
-              item.series || currentRawSeriesHours
-            );
-            overlayImg = record?.url ? await getExportImageElement(record.url) : null;
-            throwIfExportCancelled();
+        for (let i = 0; i < frameItems.length; i++) {
+          const item = frameItems[i];
+          throwIfExportCancelled();
+          const pct = progressStart + ((i / total) * (progressEnd - progressStart));
+          const message = `Encoding frame ${i + 1} of ${frameItems.length}...`;
+          if (i === 0 || i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
+            setDownloadStatus(message);
+            setExportProgress(message, pct, false);
           }
-          if (overlayImg) {
+          ctx.globalAlpha = 1;
+          ctx.globalCompositeOperation = "source-over";
+          ctx.drawImage(baseCanvas, 0, 0);
+          {
+            const overlayImg = await getExportFrameImage(item);
             ctx.globalAlpha = Math.max(0, Math.min(1, overlayOpacity));
             ctx.drawImage(overlayImg, overlayRect.x, overlayRect.y, overlayRect.width, overlayRect.height);
             ctx.globalAlpha = 1;
           }
+          if (mapForegroundCanvas) ctx.drawImage(mapForegroundCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
+          if (roadLabelsCanvas) ctx.drawImage(roadLabelsCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
+          if (chromeCanvas) ctx.drawImage(chromeCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
+          drawExportTimestampOnCanvas(ctx, frameCanvas, item.entry);
+          await gif.addFrame(frameCanvas, { delay: getGifFrameDelayMs() });
+          throwIfExportCancelled();
+          const donePct = progressStart + (((i + 1) / total) * (progressEnd - progressStart));
+          if (i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
+            setExportProgress(`Encoded frame ${i + 1} of ${frameItems.length}...`, donePct, false);
+          }
+          if (i % 8 === 7) await wait(0);
         }
-        if (mapForegroundCanvas) ctx.drawImage(mapForegroundCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
-        if (roadLabelsCanvas) ctx.drawImage(roadLabelsCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
-        if (chromeCanvas) ctx.drawImage(chromeCanvas, 0, 0, frameCanvas.width, frameCanvas.height);
-        drawExportTimestampOnCanvas(ctx, frameCanvas, item.entry);
-        gif.addFrame(frameCanvas, { delay: getGifFrameDelayMs(), copy: true });
-        throwIfExportCancelled();
-        const donePct = progressStart + (((i + 1) / total) * (progressEnd - progressStart));
-        if (i === frameItems.length - 1 || i % EXPORT_PROGRESS_UPDATE_EVERY === 0) {
-          setExportProgress(`Composited frame ${i + 1} of ${frameItems.length}...`, donePct, false);
-        }
-        if (i % 8 === 7) await wait(0);
+      } finally {
+        [baseCanvas, mapForegroundCanvas, roadLabelsCanvas, chromeCanvas, frameCanvas].filter(Boolean).forEach(canvas => {
+          canvas.width = 1;
+          canvas.height = 1;
+        });
       }
-      baseCanvas.width = 1;
-      baseCanvas.height = 1;
-      [mapForegroundCanvas, roadLabelsCanvas, chromeCanvas].filter(Boolean).forEach(canvas => {
-        canvas.width = 1;
-        canvas.height = 1;
-      });
-      frameCanvas.width = 1;
-      frameCanvas.height = 1;
     }
 
     async function buildStableExportGifPalette(firstItem, workerScript, aspectConfig, gifQuality) {
@@ -23205,42 +23348,27 @@ function getUniqueExportStages(frameItems) {
 
       const paletteCanvas = await captureExportCanvas();
       const exportScale = getExportCaptureScale();
-      const paletteGif = new GIF({
-        workers: 1,
-        quality: gifQuality,
-        workerScript,
-        width: Math.round(aspectConfig.width * exportScale),
-        height: Math.round(aspectConfig.height * exportScale),
-        dither: EXPORT_GIF_DITHER,
-        globalPalette: true,
-        repeat: 0,
-        background: "#0b1220"
-      });
-      activeGifExport = paletteGif;
-
+      let paletteGif;
       try {
-        paletteGif.addFrame(paletteCanvas, { delay: 1, copy: true });
-        await new Promise((resolve, reject) => {
-          paletteGif.on("finished", resolve);
-          paletteGif.on("abort", () => reject(new Error("GIF export was aborted.")));
-          try {
-            throwIfExportCancelled();
-            paletteGif.render();
-          } catch (err) {
-            reject(err);
-          }
-        });
+        paletteGif = createStreamingGifEncoder({
+          quality: gifQuality,
+          workerScript,
+          width: Math.round(aspectConfig.width * exportScale),
+          height: Math.round(aspectConfig.height * exportScale),
+          dither: EXPORT_GIF_DITHER,
+          globalPalette: true,
+        }, 1);
+        activeGifExport = paletteGif;
+        await paletteGif.addFrame(paletteCanvas, { delay: 1 });
         throwIfExportCancelled();
-        const palette = paletteGif.options?.globalPalette;
+        const palette = paletteGif.getGlobalPalette();
         if (!palette || typeof palette.length !== "number" || palette.length < 3) {
           throw new Error("Could not create a stable GIF color palette.");
         }
         return Array.from(palette);
       } finally {
         if (activeGifExport === paletteGif) activeGifExport = null;
-        [...(paletteGif.freeWorkers || []), ...(paletteGif.activeWorkers || [])].forEach(worker => {
-          try { worker.terminate(); } catch (_) {}
-        });
+        paletteGif?.dispose();
         paletteCanvas.width = 1;
         paletteCanvas.height = 1;
       }
@@ -23248,15 +23376,14 @@ function getUniqueExportStages(frameItems) {
 
     async function exportGif(frameItems) {
       throwIfExportCancelled();
-      if (typeof GIF === "undefined") {
-        throw new Error("GIF export library did not load.");
+      if (typeof Worker === "undefined") {
+        throw new Error("This browser cannot encode GIF images.");
       }
       const aspectConfig = applyExportStageAspect(getDownloadAspectValue());
       const items = frameItems.slice(0, getDownloadFrameLimit());
-      setDownloadStatus(`Preloading ${aspectConfig.label} GIF frames...`);
-      setExportProgress(`Preloading ${aspectConfig.label} GIF frames...`, 2, false);
-      const overlayImageLookup = await preloadExportFrameAssets(items);
-      throwIfExportCancelled();
+      if (!items.length) throw new Error("No frames are available for export.");
+      setDownloadStatus(`Preparing ${aspectConfig.label} GIF...`);
+      setExportProgress(`Preparing ${aspectConfig.label} GIF...`, 2, false);
       const workerScript = await getGifWorkerUrl();
       throwIfExportCancelled();
 
@@ -23265,8 +23392,7 @@ function getUniqueExportStages(frameItems) {
       const exportScale = getExportCaptureScale();
       const stableGlobalPalette = await buildStableExportGifPalette(items[0], workerScript, aspectConfig, gifQuality);
       throwIfExportCancelled();
-      const gif = new GIF({
-        workers: getGifWorkerCount(),
+      const gif = createStreamingGifEncoder({
         quality: gifQuality,
         workerScript,
         width: Math.round(aspectConfig.width * exportScale),
@@ -23275,36 +23401,18 @@ function getUniqueExportStages(frameItems) {
         // Use the same precomputed palette for every frame, including frame one. This keeps
         // static chrome—especially the flood-depth key—pixel-stable throughout the GIF.
         globalPalette: stableGlobalPalette,
-        repeat: 0,
-        background: "#0b1220"
-      });
+      }, items.length);
       activeGifExport = gif;
-      await addFastCompositeGifFrames(gif, items, 8, 58, overlayImageLookup);
-      throwIfExportCancelled();
-      setDownloadStatus("Encoding GIF...");
-      setExportProgress("Encoding GIF...", 60, false);
-      const blob = await new Promise((resolve, reject) => {
-        gif.on("progress", value => {
-          if (exportCancelRequested) {
-            try { gif.abort(); } catch (_) {}
-            return;
-          }
-          const pct = 60 + ((Number(value) || 0) * 38);
-          setExportProgress(`Encoding GIF... ${Math.round((Number(value) || 0) * 100)}%`, pct, false);
-        });
-        gif.on("finished", resolve);
-        gif.on("abort", () => reject(new Error("GIF export was aborted.")));
-        try {
-          throwIfExportCancelled();
-          gif.render();
-        } catch (err) {
-          reject(err);
-        }
-      });
-      throwIfExportCancelled();
-      setExportProgress("Starting GIF download...", 99, false);
-      downloadBlob(blob, `${getExportBaseName(items)}.gif`);
-      if (activeGifExport === gif) activeGifExport = null;
+      try {
+        await addFastCompositeGifFrames(gif, items, 8, 96);
+        throwIfExportCancelled();
+        const blob = gif.finish();
+        setExportProgress("Starting GIF download...", 99, false);
+        downloadBlob(blob, `${getExportBaseName(items)}.gif`);
+      } finally {
+        gif.dispose();
+        if (activeGifExport === gif) activeGifExport = null;
+      }
     }
 
     async function exportPng(frameItems) {
@@ -23313,7 +23421,6 @@ function getUniqueExportStages(frameItems) {
       const items = frameItems.slice(0, EXPORT_PNG_SELECTION_LIMIT);
       setDownloadStatus(`Preparing ${items.length} PNG frame${items.length === 1 ? "" : "s"}...`);
       setExportProgress(`Preparing ${aspectConfig.label} PNG export...`, 2, false);
-      await preloadExportFrameAssets(items);
 
       if (items.length === 1) {
         await withExportFrames(items, async ({ canvas, entry, sequence }) => {
@@ -23347,6 +23454,7 @@ function getUniqueExportStages(frameItems) {
 
     async function downloadCurrentSelection() {
       if (exportInProgress) return;
+      stopPlayback();
       if (getDownloadScopeValue() === "current" && floodFrameState !== "ready") {
         setDownloadStatus("Wait for a valid flood map before exporting this selection.", true);
         return;
@@ -40760,5 +40868,56 @@ html body #mapTitleBadge #mapTitleLogo{
 })();
 
 </script>
+<style id="floodmapper-mobile-export-20260930">
+  /* Map-view exports can be narrower than the fixed social-size canvases. */
+  #exportStageFrame[data-export-compact="true"] #exportLogoStrip{
+    top:18px !important;
+    left:18px !important;
+    right:auto !important;
+    width:40% !important;
+    max-width:40% !important;
+    min-height:0 !important;
+    padding:12px !important;
+    gap:8px !important;
+    justify-content:center;
+    border-radius:18px !important;
+    box-sizing:border-box;
+  }
+  #exportStageFrame[data-export-compact="true"] .export-stage-logo{
+    width:auto !important;
+    height:auto !important;
+    max-width:100% !important;
+    max-height:72px !important;
+  }
+  #exportStageFrame[data-export-compact="true"] #exportLegendDock{
+    top:18px !important;
+    right:18px !important;
+    left:auto !important;
+    width:calc(55% - 36px) !important;
+    min-width:0 !important;
+    max-width:none !important;
+    padding:12px !important;
+    border-radius:18px !important;
+    box-sizing:border-box;
+  }
+  #exportStageFrame[data-export-compact="true"] .export-depth-key-heading strong{
+    font-size:22px !important;
+    line-height:1.2 !important;
+  }
+  #exportStageFrame[data-export-compact="true"] .export-depth-key-gradient{height:20px !important;}
+  #exportStageFrame[data-export-compact="true"] .export-depth-key-ends{
+    font-size:10px !important;
+    grid-template-columns:max-content minmax(0,1fr) auto !important;
+    column-gap:8px !important;
+  }
+  #exportStageFrame[data-export-compact="true"] .export-depth-key-note{font-size:12px !important;}
+  #exportStageFrame[data-export-compact="true"] #exportTimestampLabel{
+    min-width:0 !important;
+    font-size:24px !important;
+    line-height:1.3 !important;
+    padding:12px 18px !important;
+    border-radius:18px !important;
+  }
+</style>
 </body>
 </html>
