@@ -2,6 +2,17 @@
 <!doctype html>
 <html lang="en">
 <head>
+<style id="floodmapper-road-labels-20261002">
+  /* Keep the road reference layer's light halos and natural gray lettering. */
+  html body .leaflet-pane.roads-dark img,
+  html body .leaflet-roads-pane img,
+  html body .leaflet-layer.roads-dark {
+    filter:none !important;
+    mix-blend-mode:normal !important;
+    opacity:1 !important;
+  }
+</style>
+
 <style>@layer avalon-mobile;</style>
 <link rel="stylesheet" href="assets/avalon-mobile.css?v=20260923-2">
 <script>document.documentElement.classList.add("avalon-mobile-ui");</script>
@@ -3442,12 +3453,7 @@
       margin-right:240px;
     }
 
-    .leaflet-pane.roads-dark img,
-    .leaflet-layer.roads-dark{
-      filter:grayscale(1) brightness(.16) contrast(3.1);
-      mix-blend-mode:multiply;
-      opacity:1;
-    }
+    
 
     /*
       Very rare modeled storms push most flooded land into the deepest raster
@@ -13442,12 +13448,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-    .leaflet-pane.roads-dark img,
-    .leaflet-layer.roads-dark{
-      filter:grayscale(1) brightness(.34) contrast(1.22) !important;
-      mix-blend-mode:multiply !important;
-      opacity:.88 !important;
-    }
+    
 
     #mobileControlsClose{
       display:none;
@@ -19917,7 +19918,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
         pane: "satellitePane"
       });
 
-      roadsLayer = L.tileLayer(ROAD_LABELS_URL, {
+      roadsLayer = createRoadLabelLayer(ROAD_LABELS_URL, {
         attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
         minZoom: 11,
         maxNativeZoom: 19,
@@ -20034,6 +20035,39 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       updateExportBuildingsLayer();
       toast("");
       ensureParcelAssets().catch(error => console.warn("Building parcel matching will retry when requested.", error));
+    }
+
+    // Render the road reference tiles in soft gray once. Canvas tiles keep the
+    // same appearance in the live map and in PNG/GIF captures.
+    function createRoadLabelLayer(url, options) {
+      const SoftRoadLayer = L.TileLayer.extend({
+        createTile(coords, done) {
+          const tile = document.createElement("canvas");
+          const size = this.getTileSize();
+          tile.width = size.x; tile.height = size.y;
+          tile.complete = false; tile.naturalWidth = 0;
+          const image = new Image();
+          image.crossOrigin = "anonymous";
+          image.onload = () => {
+            try {
+              const context = tile.getContext("2d");
+              if (!context) throw new Error("The road label canvas is unavailable.");
+              context.filter = "grayscale(1) contrast(.5) brightness(1.35)";
+              context.drawImage(image, 0, 0, size.x, size.y);
+              context.filter = "none";
+              tile.complete = true; tile.naturalWidth = size.x;
+              done(null, tile);
+            } catch (error) { tile.complete = true; done(error, tile); }
+          };
+          image.onerror = () => {
+            tile.complete = true;
+            done(new Error("The road reference tile could not load."), tile);
+          };
+          image.src = this.getTileUrl(coords);
+          return tile;
+        }
+      });
+      return new SoftRoadLayer(url, options);
     }
 
     function updateRoadLayerAppearance() {
@@ -22325,7 +22359,7 @@ function updateExportSegmentedUI() {
       const deadline = Date.now() + timeoutMs;
       while (Date.now() < deadline) {
         throwIfExportCancelled();
-        const tiles = Array.from(layer.getContainer()?.querySelectorAll("img.leaflet-tile") || []);
+        const tiles = Array.from(layer.getContainer()?.querySelectorAll("img.leaflet-tile, canvas.leaflet-tile") || []);
         if (tiles.some(tile => tile.complete && !tile.naturalWidth)) {
           throw new Error("A map tile could not load. Please try the export again.");
         }
@@ -22572,7 +22606,7 @@ function updateExportSegmentedUI() {
       });
       updateExportSatelliteLayer();
 
-      exportRoadsLayer = L.tileLayer(ROAD_LABELS_URL, {
+      exportRoadsLayer = createRoadLabelLayer(ROAD_LABELS_URL, {
         attribution: "Esri, HERE, Garmin, USGS, &copy; OpenStreetMap contributors",
         minZoom: 0,
         maxZoom: 24,
@@ -36583,7 +36617,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
 })();
 </script>
 
-<script src="./assets/3d/north-wildwood-3d.js?v=20260924-fleet-mobile-cache"></script>
+<script src="./assets/3d/north-wildwood-3d.js?v=20260924-fleet-mobile-cache&roads=20261002-soft-gray"></script>
 <script>
 const BUNNY_STORAGE_ZONE_ID = "5907481";
 const BUNNY_CDN_BASE_URL = "https://floodmapperv1.b-cdn.net";

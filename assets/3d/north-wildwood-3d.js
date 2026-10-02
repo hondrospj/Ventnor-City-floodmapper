@@ -1437,7 +1437,11 @@
       source: "nw-road-labels-source",
       minzoom: ROAD_LABEL_ZOOM,
       layout: { visibility: visibility(layerVisible("roadsToggle", true)) },
-      paint: { "raster-opacity": 0.98, "raster-fade-duration": 0 }
+      paint: {
+        "raster-opacity": 0.98, "raster-fade-duration": 0,
+        "raster-saturation": -1,
+        "raster-brightness-min": 0.3375, "raster-brightness-max": 1
+      }
     });
   }
 
