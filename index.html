@@ -17192,6 +17192,10 @@ function parseStoredLocalNyToDate(timeEST) {
         value: stage,
         sourceResolutionMinutes: options.sourceResolutionMinutes ?? detectSeriesResolutionMinutes(options.sourceEntries || []),
         isInterpolatedTimelineFrame: true,
+        isMissingObservedHour: false,
+        isMissingTimelineFrame: false,
+        isFittedCrestFrame: false,
+        isOfficialCrestFrame: false,
         isMeasuredQuarterHourArchive: false,
         observationQuality: "interpolated",
         interpolationSpanSeconds: (afterItem.t - beforeItem.t) / 1000,
@@ -17655,6 +17659,12 @@ function parseStoredLocalNyToDate(timeEST) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateStr || ""))) return false;
       const source = getObservedArchiveSourceForDate(dateStr);
       await ensureObservedArchiveYear(source, String(dateStr).slice(0, 4));
+      // December 31 needs the following year's real midnight endpoint.
+      const nextDate = addDaysToDateKey(dateStr, 1);
+      if (source === "lewes" && nextDate.slice(0, 4) !== dateStr.slice(0, 4)
+          && getObservedArchiveSourceForDate(nextDate) === source) {
+        await ensureObservedArchiveYear(source, nextDate.slice(0, 4));
+      }
       return true;
     }
 
@@ -17673,6 +17683,7 @@ function parseStoredLocalNyToDate(timeEST) {
         const [source, year] = key.split(":");
         return ensureObservedArchiveYear(source, year);
       }));
+      await ensureObservedArchiveForDate(finalKey);
     }
 
     function decodeLewesHourlyDay(dayRecord) {
@@ -17722,10 +17733,25 @@ function parseStoredLocalNyToDate(timeEST) {
     }
 
     function buildObservedCanonicalSeries(dayRecord, dateStr) {
-      const source = getObservedSourceHoursForDay(dayRecord);
+      let source = getObservedSourceHoursForDay(dayRecord);
       const start = parseStoredLocalNyToDate(`${dateStr}T00:00`);
       const end = parseStoredLocalNyToDate(`${dateStr}T23:45`);
       const sourceResolutionMinutes = detectSeriesResolutionMinutes(source);
+      // A real next-day midnight observation completes the last three frames.
+      // Never extrapolate or borrow an endpoint from a different gauge archive.
+      if (dayRecord?.isLewesSurrogate) {
+        const nextDate = addDaysToDateKey(dateStr, 1);
+        const nextDay = getObservedDayRecord(nextDate);
+        const nextMidnight = parseStoredLocalNyToDate(`${nextDate}T00:00`);
+        if (nextDay?.isLewesSurrogate && nextMidnight) {
+          const endpoint = getObservedSourceHoursForDay(nextDay).find(entry =>
+            !entry.isDailyPeakOnly && entry.observationInterval !== "daily"
+            && !entry.isMissingObservedHour && !entry.isMissingTimelineFrame
+            && entryTimeMs(entry) === nextMidnight.getTime()
+            && Number.isFinite(getStageValue(entry)));
+          if (endpoint) source = [...source, endpoint];
+        }
+      }
       const series = buildQuarterHourTimelineSeries(source, {
         kind: "observed",
         observedDate: dateStr,
@@ -17733,7 +17759,7 @@ function parseStoredLocalNyToDate(timeEST) {
         endMs: end ? end.getTime() : null,
         sourceResolutionMinutes,
         fillMissingSlots: true,
-        maxGapMinutes: 30
+        maxGapMinutes: dayRecord?.isLewesSurrogate ? 60 : 30
       });
 
       return annotateHydraulicSeries(series.map((entry, idx) => ({
