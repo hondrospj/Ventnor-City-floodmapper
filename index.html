@@ -25122,7 +25122,7 @@ function formatSelectedObservedDate(dateStr) {
       }
       document.body.dataset.floodFrame = floodFrameState;
       if (floodFrameState !== "ready") toast("");
-      setFloodFrameStatus(floodFrameState === "ready" ? currentSelectionQualityNote
+      setFloodFrameStatus(floodFrameState === "ready" ? ""
         : "Flood map unavailable for this selection. Retry with Reload.", floodFrameState === "ready" ? "info" : "error");
       if (initialFramePending) scheduleOverlayCatalogWarmup(index);
       else preloadAroundHour(index);
