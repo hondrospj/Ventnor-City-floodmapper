@@ -1,9 +1,9 @@
 name: Export regression
 on:
   push:
-    paths: ["index.html", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
+    paths: ["index.html", "assets/export-area.js", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
   pull_request:
-    paths: ["index.html", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
+    paths: ["index.html", "assets/export-area.js", "tools/test_export*.mjs", ".github/workflows/export-regression.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,6 +15,7 @@ jobs:
         with:
           sparse-checkout: |
             index.html
+            assets/export-area.js
             tools/test_export*.mjs
           sparse-checkout-cone-mode: false
           lfs: false
@@ -23,6 +24,7 @@ jobs:
           node-version: "22"
       - name: Verify map export
         run: |
+          node --check assets/export-area.js
           node tools/test_export_syntax.mjs
           node tools/test_export_recovery.mjs
           node tools/test_export_streaming.mjs
