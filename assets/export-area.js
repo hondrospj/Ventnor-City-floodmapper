@@ -188,7 +188,7 @@
   }
 
   function openPicker() {
-    if (exportInProgress) return;
+    if (exportInProgress || !document.getElementById("exportAreaModal").hidden) return;
     const seed = selectedBounds || activeBounds();
     if (!validBounds(seed)) {
       setDownloadStatus("The map is still loading. Try choosing an area in a moment.", true);
@@ -303,6 +303,14 @@
     button.setAttribute("aria-haspopup", "dialog");
     button.setAttribute("aria-controls", "exportAreaModal");
     button.textContent = "Choose area";
+    // Safari can suppress the synthetic click after this button changes its label.
+    // Handle a completed touch directly; openPicker also ignores duplicate activation.
+    button.addEventListener("pointerup", event => {
+      if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      openPicker();
+    });
     button.addEventListener("click", event => {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -353,7 +361,7 @@
   }
 
   window.FLOODMAPPER_EXPORT_AREA = {
-    version: "20261008", ready: false,
+    version: "20261008-2", ready: false,
     getBounds: () => copyBounds(selectedBounds),
     getJobBounds: () => copyBounds(jobBounds)
   };
