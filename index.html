@@ -14773,7 +14773,7 @@ html body #mobileRailMount .layers-card .layer-item.shorelysafe-camera-item {
 .shorelysafe-camera-item #webcamsBrowse { width:auto !important; min-width:0 !important; height:24px !important; min-height:24px !important; margin:0 !important; padding:2px 6px !important; font-size:10px !important; line-height:1.1 !important; white-space:nowrap !important; }
 </style>
 </head>
-<body data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
+<body data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
   <div id="nwSiteLoader" role="status" aria-live="polite" aria-label="Loading Ventnor City Flood Mapper">
     <div class="nw-loader-card">
@@ -18567,7 +18567,7 @@ function setDatumHelpOpen(isOpen) {
         if (exportInProgress) cancelTimer = window.setInterval(cancelIfRequested, 80);
         img.decoding = "async";
         img.fetchPriority = priority === "high" ? "high" : "low";
-        img.onload = () => done(url);
+        img.onload = async () => done(await decodeFloodFrameImage(img) ? url : null);
         img.onerror = () => done(null);
         timeoutTimer = window.setTimeout(() => done(null), 20000);
         img.src = url;
@@ -23717,6 +23717,14 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
       status.hidden = !message;
     }
 
+    async function decodeFloodFrameImage(image) {
+      if (!image || !image.complete || !image.naturalWidth) return false;
+      if (typeof image.decode === "function") {
+        try { await image.decode(); } catch (_) { return false; }
+      }
+      return image.complete && image.naturalWidth > 0;
+    }
+
     function clearFloodLayer() {
       floodFrameState = "unavailable";
       document.body.dataset.floodFrame = floodFrameState;
@@ -24981,9 +24989,22 @@ function formatSelectedObservedDate(dateStr) {
 
       pendingFloodLayer = nextLayer;
       return await new Promise(resolve => {
-        nextLayer.once("load", () => {
+        nextLayer.once("load", async () => {
           if (token !== lastRenderToken) {
             if (map.hasLayer(nextLayer)) map.removeLayer(nextLayer);
+            resolve(false);
+            return;
+          }
+
+          // Keep the displayed frame until the replacement pixels are ready.
+          if (!await decodeFloodFrameImage(nextLayer.getElement()) || token !== lastRenderToken) {
+            if (map.hasLayer(nextLayer)) map.removeLayer(nextLayer);
+            if (pendingFloodLayer === nextLayer) pendingFloodLayer = null;
+            if (token === lastRenderToken) {
+              clearFloodLayer();
+              toast("The selected flood image could not load. Please try again.");
+              if (typeof markInitialFloodFrameFailed === "function") markInitialFloodFrameFailed();
+            }
             resolve(false);
             return;
           }
@@ -25023,6 +25044,7 @@ function formatSelectedObservedDate(dateStr) {
           resolve(false);
         });
 
+        nextLayer.once("remove", () => resolve(false));
         nextLayer.addTo(map);
       });
     }
@@ -25061,12 +25083,25 @@ function formatSelectedObservedDate(dateStr) {
       });
       pendingFloodLayer = nextLayer;
       return await new Promise(resolve => {
-        nextLayer.once("load", () => {
+        nextLayer.once("load", async () => {
           if (token !== lastRenderToken) {
             if (map.hasLayer(nextLayer)) map.removeLayer(nextLayer);
             resolve(false);
             return;
           }
+          // Keep the displayed frame until the replacement pixels are ready.
+          if (!await decodeFloodFrameImage(nextLayer.getElement()) || token !== lastRenderToken) {
+            if (map.hasLayer(nextLayer)) map.removeLayer(nextLayer);
+            if (pendingFloodLayer === nextLayer) pendingFloodLayer = null;
+            if (token === lastRenderToken) {
+              clearFloodLayer();
+              toast("The selected flood image could not load. Please try again.");
+              if (typeof markInitialFloodFrameFailed === "function") markInitialFloodFrameFailed();
+            }
+            resolve(false);
+            return;
+          }
+
           nextLayer.setOpacity(overlayOpacity);
           currentFloodLayer = nextLayer;
           floodFrameState = "ready";
@@ -25094,6 +25129,7 @@ function formatSelectedObservedDate(dateStr) {
           }
           resolve(false);
         });
+        nextLayer.once("remove", () => resolve(false));
         nextLayer.addTo(map);
       });
     }
@@ -25106,9 +25142,9 @@ function formatSelectedObservedDate(dateStr) {
 
       currentHourIndex = index;
       const token = ++lastRenderToken;
-      clearFloodLayer();
+      // Keep the last displayed frame visible while its replacement loads.
       floodFrameState = "loading";
-      setFloodFrameStatus("Loading flood map…", "loading");
+      setFloodFrameStatus(currentFloodLayer ? "Loading the next flood map… Previous frame shown." : "Loading flood map…", "loading");
       document.body.dataset.floodFrame = floodFrameState;
 
       const rawStage = getStageValue(entry);
@@ -25116,15 +25152,14 @@ function formatSelectedObservedDate(dateStr) {
       const hydraulicPhase = getHydraulicPhaseForEntry(entry, index, currentSeriesHours);
 
       updatePersistentDepthQueryPopup({ useRenderedFlood: false });
-      renderSelectionMeta(entry, rawStage, displayStage);
-      renderTimelineMeta(entry);
-      updateNsiStructureImpactLayer();
 
       const slider = document.getElementById("hourSlider");
       slider.value = String(index);
       updateSliderProgress();
 
       if (displayStage == null) {
+        renderSelectionMeta(entry, rawStage, displayStage);
+        renderTimelineMeta(entry);
         toast(currentDataMode === "observed" && hasDisplayedLongGaugeOutage(currentSeriesHours)
           ? `Gauge inoperable: more than ${GAUGE_OUTAGE_THRESHOLD_HOURS} consecutive hours are unavailable.`
           : "No observed record for this time.");
@@ -25174,6 +25209,12 @@ function formatSelectedObservedDate(dateStr) {
         document.getElementById("stageSubText").textContent = "Flood map unavailable for this selection. Retry with Reload.";
         toast(error.message);
         markInitialFloodFrameFailed();
+      }
+      renderSelectionMeta(entry, rawStage, displayStage);
+      renderTimelineMeta(entry);
+      updateNsiStructureImpactLayer();
+      if (floodFrameState !== "ready") {
+        document.getElementById("stageSubText").textContent = "Flood map unavailable for this selection. Retry with Reload.";
       }
       document.body.dataset.floodFrame = floodFrameState;
       if (floodFrameState !== "ready") toast("");
