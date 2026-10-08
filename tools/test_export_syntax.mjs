@@ -9,7 +9,7 @@ for (const match of html.matchAll(scriptPattern)) {
   const attributes = match[1];
   const source = match[2];
   if (/\bsrc\s*=/.test(attributes)) continue;
-  if (/\btype\s*=\s*["']application\/ld\+json["']/.test(attributes)) continue;
+  if (/\btype\s*=\s*["']application\/(?:ld\+)?json["']/.test(attributes)) { JSON.parse(source); continue; }
   new vm.Script(source, { filename: `index.html:inline-${compiled + 1}` });
   compiled += 1;
 }
