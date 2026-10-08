@@ -14722,6 +14722,56 @@ html.win-compact-ui #timelineDock #hourSlider{
     @media (prefers-reduced-motion:reduce){#nwSiteLoader::before,#nwSiteLoader::after,.nw-loader-spinner,.nw-loader-spinner::before{animation-duration:1ms;animation-iteration-count:1}body.nw-app-ready #app,body.nw-app-ready #topBanner{animation:none}}
   </style>
   <link rel="stylesheet" href="./assets/map-status.css" />
+<style id="shorelysafeWebcamsStyle">
+#webcamsBrowse[hidden], #webcamPanel[hidden], #webcamRetry[hidden] { display: none !important; }
+#webcamsBrowse { margin-top: 6px; padding: 6px 9px; border: 1px solid #5da3ff; border-radius: 7px; background: #1b2a40; color: #dce9ff; font: inherit; font-size: 12px; cursor: pointer; }
+.webcam-map-marker { box-sizing: border-box; width: 40px; height: 40px; padding: 8px; background: #12495a; color: #fff; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 2px 7px #0006; cursor: pointer; }
+.webcam-map-marker svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.webcam-map-marker:focus-visible, #webcamPanel button:focus-visible, #webcamPanel a:focus-visible, #webcamsBrowse:focus-visible { outline: 3px solid #e49b24; outline-offset: 3px; }
+#webcamPanel { position: fixed; top: 16px; right: 16px; z-index: 24000; box-sizing: border-box; width: min(430px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; overscroll-behavior: contain; padding: 16px; border: 1px solid #41516a; border-radius: 14px; background: #111b2b; color: #e6efff; box-shadow: 0 8px 30px #0006; font: 13px/1.45 system-ui, sans-serif; text-align: left; }
+#webcamPanel .webcam-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+#webcamPanel .webcam-eyebrow { margin: 0 0 5px; color: #9fc4e5; font-size: 10px; font-weight: 700; letter-spacing: .09em; }
+#webcamPanel h2 { margin: 0; font-size: 19px; line-height: 1.2; }
+#webcamPanel #webcamClose { flex: 0 0 36px; width: 36px; height: 36px; border: 1px solid #41516a; border-radius: 50%; background: #1d2a40; color: #e6efff; font-size: 25px; line-height: 1; cursor: pointer; }
+#webcamPanel .webcam-choices { display: flex; gap: 6px; margin-top: 14px; }
+#webcamPanel .webcam-choices button, #webcamPanel #webcamRetry { min-height: 36px; padding: 7px 10px; border: 1px solid #41516a; border-radius: 7px; background: #1d2a40; color: #e6efff; font: inherit; cursor: pointer; }
+#webcamPanel .webcam-choices button[aria-pressed="true"] { background: #203f60; color: #fff; border-color: #5da3ff; }
+#webcamPanel .webcam-location { margin: 10px 0; color: #b1c3d9; font-size: 11px; }
+#webcamPanel .webcam-frame { width: 100%; aspect-ratio: 16 / 9; background: #102535; border-radius: 8px; overflow: hidden; }
+#webcamPanel iframe { display: block; width: 100%; height: 100%; border: 0; }
+#webcamPanel .webcam-external { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px; text-align: center; }
+#webcamPanel .webcam-external p { margin: 0 0 12px; }
+#webcamPanel .webcam-external a { display: inline-block; padding: 10px 14px; border: 1px solid #5da3ff; border-radius: 7px; background: #203f60; color: #fff; font-weight: 600; }
+#webcamPanel #webcamStatus { font-size: 11px; color: #b1c3d9; margin: 8px 0 12px; }
+#webcamPanel[data-player-state="unconfirmed"] #webcamStatus { color: #ffc67b; }
+#webcamPanel .webcam-time-note { padding: 10px; background: #1d3048; border-left: 3px solid #5da3ff; border-radius: 4px; }
+#webcamPanel .webcam-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+#webcamPanel a { color: #8dc3ff; text-decoration: underline; }
+#webcamPanel .webcam-credit { margin-bottom: 0; font-size: 11px; color: #b1c3d9; }
+@media (max-width: 900px), (max-height: 560px) and (pointer: coarse) {
+  #webcamPanel { position: fixed; top: auto; left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); width: auto; max-height: calc(100dvh - 80px); z-index: 24000; padding: 12px; }
+  #webcamPanel .webcam-heading { position: sticky; top: -12px; padding-top: 8px; padding-bottom: 8px; background: #111b2b; z-index: 1; }
+  #webcamPanel .webcam-choices button, #webcamPanel #webcamRetry, #webcamPanel #webcamClose { min-height: 44px; }
+  #webcamPanel .webcam-frame { max-height: 36dvh; }
+}
+body.exporting .webcam-map-marker, body.exporting #webcamPanel, .export-stage .webcam-map-marker { display: none !important; }
+@media print { .webcam-map-marker, #webcamPanel { display: none !important; } }
+
+/* The camera row can expand without clipping the other layer controls. */
+html body:not(.mobile-optimized) #rightRail > .layers-card:has(.shorelysafe-camera-item) {
+  height:auto !important; min-height:0 !important; max-height:none !important; flex-shrink:0 !important;
+}
+html body #rightRail .layers-card .layer-item.shorelysafe-camera-item,
+html body #mobileRailMount .layers-card .layer-item.shorelysafe-camera-item {
+  height:auto !important; max-height:none !important;
+}
+.shorelysafe-camera-item .layer-meta { display:flex !important; flex-wrap:wrap; align-items:center; gap:6px !important; }
+.shorelysafe-camera-item #webcamsBrowse { margin:0; padding:4px 6px; font-size:10px; min-height:24px; white-space:nowrap; }
+#webcamPanel .webcam-choices { flex-wrap:wrap; }
+/* Give the camera label and viewer button a full row in compact layer grids. */
+.shorelysafe-camera-item { grid-column:1 / -1 !important; }
+.shorelysafe-camera-item #webcamsBrowse { width:auto !important; min-width:0 !important; height:24px !important; min-height:24px !important; margin:0 !important; padding:2px 6px !important; font-size:10px !important; line-height:1.1 !important; white-space:nowrap !important; }
+</style>
 </head>
 <body data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
@@ -14979,6 +15029,13 @@ html.win-compact-ui #timelineDock #hourSlider{
             </div>
           </div>
           <div class="layer-list">
+            <div class="layer-item shorelysafe-camera-item" data-html2canvas-ignore="true">
+              <div id="webcamsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show cameras"></div>
+              <div class="layer-meta">
+                <div class="layer-name">Cameras</div>
+                <button id="webcamsBrowse" type="button" aria-controls="webcamPanel" aria-expanded="false" hidden>View cameras</button>
+              </div>
+            </div>
             <div class="layer-item">
               <div id="satelliteToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show satellite imagery"></div>
               <div class="layer-meta">
@@ -41169,5 +41226,240 @@ html body #mapTitleBadge #mapTitleLogo{
 })();
 </script>
 
+<div id="shorelysafeWebcamConfig" hidden>{"town":"Ventnor City","cameras":[{"id":"ventnor","name":"Ventnor City Fishing Pier Looking East","short":"Ventnor City Fishing Pier Looking East","url":"https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east","sourceUrl":"https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east","source":"AtTheShore / camera host","location":"South Cambridge Avenue and Boardwalk · Ventnor","external":true,"description":"View current conditions on the camera provider’s website.","relation":"local"}]}</div>
+<script id="shorelysafeWebcamsScript">
+/* Verified town and nearby camera links. Video loads only after a camera is opened. */
+(() => {
+  "use strict";
+  const configNode = document.getElementById("shorelysafeWebcamConfig");
+  if (!configNode) return;
+  const config = JSON.parse(configNode.textContent);
+  const cameras = config.cameras;
+  const locatedCameras = cameras.filter(camera => Number.isFinite(camera.lat) && Number.isFinite(camera.lng));
+  if (!cameras.length) return;
+  const icon = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg>';
+  const toggle = document.getElementById("webcamsToggle");
+  const browse = document.getElementById("webcamsBrowse");
+  if (!toggle || !browse) return;
+
+  const panel = document.createElement("section");
+  panel.id = "webcamPanel";
+  panel.hidden = true;
+  panel.setAttribute("role", "region");
+  panel.setAttribute("aria-labelledby", "webcamTitle");
+  panel.setAttribute("data-html2canvas-ignore", "true");
+  panel.innerHTML = `
+    <div class="webcam-heading"><div><p class="webcam-eyebrow">CAMERAS</p><h2 id="webcamTitle"></h2></div>
+      <button type="button" id="webcamClose" aria-label="Close camera viewer">×</button></div>
+    <div class="webcam-choices" role="group" aria-label="Choose camera"></div>
+    <p id="webcamLocation" class="webcam-location"></p>
+    <div id="webcamFrame" class="webcam-frame"></div>
+    <p id="webcamStatus" role="status" aria-live="polite"></p>
+    <p class="webcam-time-note"><strong>Current camera view</strong> — independent of the map’s selected time. Check the timestamp in the video; footage may be delayed or unavailable.</p>
+    <p id="webcamDescription"></p>
+    <div class="webcam-actions"><button type="button" id="webcamRetry">Reload camera</button>
+      <a id="webcamSourceLink" target="_blank" rel="noopener noreferrer">Open camera website ↗</a></div>
+    <p id="webcamCredit" class="webcam-credit"></p>`;
+  document.body.append(panel);
+
+  let enabled = false;
+  let selected = null;
+  let returnFocus = null;
+  let frame = null;
+  let timeout = null;
+  let leafletLayer = null;
+  let leafletMap = null;
+  let glMap = null;
+  let glMarkers = [];
+  const status = panel.querySelector("#webcamStatus");
+  const frameHost = panel.querySelector("#webcamFrame");
+  const closeButton = panel.querySelector("#webcamClose");
+
+  function clearPlayer() {
+    clearTimeout(timeout);
+    timeout = null;
+    if (frame) { frame.onload = frame.onerror = null; frame.remove(); frame = null; }
+    frameHost.replaceChildren();
+  }
+
+  function loadPlayer(camera) {
+    clearPlayer();
+    panel.querySelector("#webcamRetry").hidden = Boolean(camera.external);
+    if (camera.external) {
+      // Link to the provider when an embeddable player has not been verified.
+      panel.dataset.playerState = "external";
+      status.textContent = "This camera opens on the provider’s website.";
+      const notice = document.createElement("div");
+      notice.className = "webcam-external";
+      const message = document.createElement("p");
+      message.textContent = camera.relation === "nearby" ? "This view is in a nearby community." : camera.relation === "regional" ? "Choose a camera near your town on the regional camera map." : "Open this camera on its provider’s website.";
+      const link = document.createElement("a");
+      link.href = camera.sourceUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Open camera ↗";
+      notice.append(message, link);
+      frameHost.append(notice);
+      return;
+    }
+    status.textContent = "Opening camera player…";
+    panel.dataset.playerState = "loading";
+    const player = document.createElement("iframe");
+    player.title = `${camera.name} — current camera view`;
+    player.allow = "autoplay; fullscreen; picture-in-picture";
+    player.allowFullscreen = true;
+    player.referrerPolicy = "strict-origin-when-cross-origin";
+    const unavailable = () => {
+      if (frame !== player) return;
+      panel.dataset.playerState = "unconfirmed";
+      status.textContent = "Unable to confirm the feed. Reload or open the camera website if the player is blank or offline.";
+    };
+    player.onload = () => {
+      if (frame !== player) return;
+      clearTimeout(timeout);
+      // Cross-origin load only confirms the player document, never camera freshness.
+      panel.dataset.playerState = "player-open";
+      status.textContent = "Player opened · press Play if needed. Stream availability and timestamp are shown by the provider.";
+    };
+    player.onerror = unavailable;
+    frame = player;
+    player.src = camera.url;
+    timeout = setTimeout(unavailable, 15000);
+    frameHost.append(player);
+  }
+
+  function showCamera(camera, trigger) {
+    if (panel.hidden) returnFocus = trigger || document.activeElement;
+    selected = camera;
+    panel.querySelector("#webcamTitle").textContent = camera.name;
+    panel.querySelector("#webcamLocation").textContent = camera.location;
+    panel.querySelector("#webcamDescription").textContent = camera.description;
+    panel.querySelector(".webcam-eyebrow").textContent = `${config.town.toUpperCase()} CAMERAS`;
+    panel.querySelector("#webcamSourceLink").href = camera.sourceUrl;
+    panel.querySelector("#webcamCredit").textContent = `Camera source: ${camera.source}`;
+
+    for (const button of panel.querySelectorAll("[data-camera]")) {
+      button.setAttribute("aria-pressed", String(button.dataset.camera === camera.id));
+    }
+    panel.hidden = false;
+    browse.setAttribute("aria-expanded", "true");
+    // Close the mobile controls before moving focus to the camera viewer.
+    if (document.body.classList.contains("mobile-controls-open")) document.getElementById("mobileControlsClose")?.click();
+    loadPlayer(camera);
+    requestAnimationFrame(() => { if (!panel.hidden) closeButton.focus({ preventScroll: true }); });
+  }
+
+  function closeCamera(restoreFocus = true) {
+    clearPlayer();
+    panel.hidden = true;
+    selected = null;
+    browse.setAttribute("aria-expanded", "false");
+    if (restoreFocus) {
+      const visible = element => element?.isConnected && element.getClientRects().length && !element.closest("[inert],[hidden]") && getComputedStyle(element).visibility !== "hidden";
+      const target = visible(returnFocus) ? returnFocus : visible(browse) ? browse : document.getElementById("mobileControlsToggle");
+      target?.focus({ preventScroll: true });
+    }
+  }
+
+  for (const camera of cameras) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.camera = camera.id;
+    button.textContent = camera.short;
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => showCamera(camera, button));
+    panel.querySelector(".webcam-choices").append(button);
+  }
+  closeButton.addEventListener("click", () => closeCamera());
+  panel.querySelector("#webcamRetry").addEventListener("click", () => { if (selected) loadPlayer(selected); });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeCamera(); }
+  });
+
+  function syncMarkers() {
+    const currentMap = typeof map !== "undefined" ? map : null;
+    const currentGl = window.NORTH_WILDWOOD_3D?.getMap?.();
+    const useGl = Boolean(currentGl && document.body.classList.contains("map-3d-ready"));
+    if (leafletMap !== currentMap) {
+      leafletLayer?.remove();
+      leafletLayer = null;
+      leafletMap = currentMap;
+    }
+    if (enabled && currentMap && !useGl) {
+      if (!leafletLayer) {
+        if (!currentMap.getPane("webcamsPane")) {
+          currentMap.createPane("webcamsPane");
+          currentMap.getPane("webcamsPane").style.zIndex = "760";
+        }
+        leafletLayer = L.layerGroup(locatedCameras.map(camera => {
+          const marker = L.marker([camera.lat, camera.lng], {
+            pane: "webcamsPane", title: `Open ${camera.name}`, alt: camera.name,
+            bubblingMouseEvents: false, keyboard: true,
+            icon: L.divIcon({ className: "webcam-map-marker", html: icon, iconSize: [40, 40], iconAnchor: [20, 20] })
+          });
+          marker.on("click", () => showCamera(camera, marker.getElement()));
+          marker.on("add", () => {
+            const element = marker.getElement();
+            element.setAttribute("role", "button");
+            element.setAttribute("aria-label", `Open ${camera.name}`);
+            element.setAttribute("data-webcam-marker", camera.id);
+            element.setAttribute("data-html2canvas-ignore", "true");
+            element.addEventListener("keydown", event => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                event.stopPropagation();
+                showCamera(camera, element);
+              }
+            });
+          });
+          return marker;
+        }));
+      }
+      if (!currentMap.hasLayer(leafletLayer)) leafletLayer.addTo(currentMap);
+    } else if (leafletLayer && leafletMap?.hasLayer(leafletLayer)) leafletLayer.remove();
+
+    if (glMap !== currentGl || !enabled || !useGl) {
+      glMarkers.forEach(marker => marker.remove());
+      glMarkers = [];
+      glMap = currentGl;
+    }
+    if (enabled && useGl && !glMarkers.length && window.maplibregl) {
+      glMarkers = locatedCameras.map(camera => {
+        const element = document.createElement("button");
+        element.type = "button";
+        element.className = "webcam-map-marker";
+        element.innerHTML = icon;
+        element.dataset.webcamMarker = camera.id;
+        element.setAttribute("data-html2canvas-ignore", "true");
+        element.setAttribute("aria-label", `Open ${camera.name}`);
+        element.title = camera.name;
+        element.addEventListener("click", event => { event.stopPropagation(); showCamera(camera, element); });
+        element.addEventListener("dblclick", event => event.stopPropagation());
+        return new maplibregl.Marker({ element, anchor: "center" }).setLngLat([camera.lng, camera.lat]).addTo(currentGl);
+      });
+    }
+  }
+
+  function setEnabled(value) {
+    enabled = Boolean(value);
+    toggle.classList.toggle("on", enabled);
+    toggle.setAttribute("aria-checked", String(enabled));
+    browse.hidden = !enabled;
+    document.body.dataset.webcamsEnabled = String(enabled);
+    if (!enabled) closeCamera(false);
+    syncMarkers();
+  }
+  toggle.addEventListener("click", () => setEnabled(!enabled));
+  toggle.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setEnabled(!enabled); }
+  });
+  browse.addEventListener("click", () => showCamera(cameras[0], browse));
+  new MutationObserver(syncMarkers).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  window.addEventListener("load", syncMarkers);
+  window.addEventListener("pagehide", () => closeCamera(false));
+  window.addEventListener("pageshow", event => { if (event.persisted) setEnabled(false); });
+  setEnabled(false);
+})();
+</script>
 </body>
 </html>
