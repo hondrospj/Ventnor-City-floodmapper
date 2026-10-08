@@ -14760,7 +14760,7 @@ body.exporting .webcam-map-marker, body.exporting #webcamPanel, .export-stage .w
 
 </style>
 </head>
-<body data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
+<body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
   <div id="nwSiteLoader" role="status" aria-live="polite" aria-label="Loading Ventnor City Flood Mapper">
     <div class="nw-loader-card">
@@ -18567,6 +18567,12 @@ function setDatumHelpOpen(isOpen) {
       return promise;
     }
 
+    // Retain encoded composites for replay; decoded raster caches stay small.
+    const FLOOD_COMPOSITE_CACHE_COMPACT = Boolean(window.matchMedia?.("(max-width: 900px), (max-height: 560px)")?.matches);
+    const FLOOD_COMPOSITE_CACHE_ENTRY_LIMIT = FLOOD_COMPOSITE_CACHE_COMPACT ? 16 : 48;
+    const FLOOD_COMPOSITE_CACHE_BYTE_LIMIT = (FLOOD_COMPOSITE_CACHE_COMPACT ? 24 : 128) * 1024 * 1024;
+    const floodCompositeBlobSizes = new Map();
+
     const RASTER_IMAGE_CACHE_LIMIT = isCompactFloodmapperLayout() ? 2 : 4;
     function getExportImageElement(url) {
       if (!url) return Promise.resolve(null);
@@ -18664,8 +18670,8 @@ function setDatumHelpOpen(isOpen) {
       [244, 167, 66], [231, 76, 60], [125, 60, 152]
     ];
     const DRAINAGE_RASTER_IMAGE_CACHE_LIMIT = 4;
-    const FILLING_COMPOSITE_CACHE_LIMIT = 4;
-    const DRAINAGE_COMPOSITE_CACHE_LIMIT = 4;
+    const FILLING_COMPOSITE_CACHE_LIMIT = FLOOD_COMPOSITE_CACHE_ENTRY_LIMIT;
+    const DRAINAGE_COMPOSITE_CACHE_LIMIT = FLOOD_COMPOSITE_CACHE_ENTRY_LIMIT;
 
     function isDisconnectedRasterPixel(values, offset) {
       return values[offset + 3] > 0 &&
@@ -19033,7 +19039,15 @@ function setDatumHelpOpen(isOpen) {
       return new Promise((resolve, reject) => {
         canvas.toBlob(blob => {
           if (!blob) reject(new Error("Could not encode the retained drainage raster."));
-          else resolve(URL.createObjectURL(blob));
+          else {
+            const url = URL.createObjectURL(blob);
+            floodCompositeBlobSizes.set(url, blob.size);
+            // Some palette converters also use this encoder; bound bookkeeping.
+            while (floodCompositeBlobSizes.size > 256) {
+              floodCompositeBlobSizes.delete(floodCompositeBlobSizes.keys().next().value);
+            }
+            resolve(url);
+          }
         }, "image/png");
       });
     }
@@ -19111,8 +19125,17 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function cacheDrainageComposite(key, record) {
+      if (typeof floodCompositeBlobSizes !== "undefined" && record?.url && floodCompositeBlobSizes.has(record.url)) {
+        record.compositeByteLength = floodCompositeBlobSizes.get(record.url);
+        floodCompositeBlobSizes.delete(record.url);
+      }
       drainageCompositeCache.set(key, record);
-      while (drainageCompositeCache.size > DRAINAGE_COMPOSITE_CACHE_LIMIT) {
+      while (
+        drainageCompositeCache.size > DRAINAGE_COMPOSITE_CACHE_LIMIT ||
+        (drainageCompositeCache.size > 1 &&
+          Array.from(drainageCompositeCache.values()).reduce((bytes, item) => bytes + (item?.compositeByteLength || 0), 0) >
+            (typeof FLOOD_COMPOSITE_CACHE_BYTE_LIMIT === "number" ? FLOOD_COMPOSITE_CACHE_BYTE_LIMIT : 128 * 1024 * 1024))
+      ) {
         const oldestKey = drainageCompositeCache.keys().next().value;
         const oldest = drainageCompositeCache.get(oldestKey);
         if (oldest?.url?.startsWith("blob:")) URL.revokeObjectURL(oldest.url);
@@ -19122,8 +19145,17 @@ function setDatumHelpOpen(isOpen) {
     }
 
     function cacheFillingComposite(key, record) {
+      if (typeof floodCompositeBlobSizes !== "undefined" && record?.url && floodCompositeBlobSizes.has(record.url)) {
+        record.compositeByteLength = floodCompositeBlobSizes.get(record.url);
+        floodCompositeBlobSizes.delete(record.url);
+      }
       fillingCompositeCache.set(key, record);
-      while (fillingCompositeCache.size > FILLING_COMPOSITE_CACHE_LIMIT) {
+      while (
+        fillingCompositeCache.size > FILLING_COMPOSITE_CACHE_LIMIT ||
+        (fillingCompositeCache.size > 1 &&
+          Array.from(fillingCompositeCache.values()).reduce((bytes, item) => bytes + (item?.compositeByteLength || 0), 0) >
+            (typeof FLOOD_COMPOSITE_CACHE_BYTE_LIMIT === "number" ? FLOOD_COMPOSITE_CACHE_BYTE_LIMIT : 128 * 1024 * 1024))
+      ) {
         const oldestKey = fillingCompositeCache.keys().next().value;
         const oldest = fillingCompositeCache.get(oldestKey);
         if (oldest?.url?.startsWith("blob:")) URL.revokeObjectURL(oldest.url);
@@ -19153,7 +19185,12 @@ function setDatumHelpOpen(isOpen) {
         stageToCode(lowerStageFt),
         stageToCode(upperStageFt)
       ].join("|");
-      if (fillingCompositeCache.has(key)) return fillingCompositeCache.get(key);
+      if (fillingCompositeCache.has(key)) {
+        const cached = fillingCompositeCache.get(key);
+        fillingCompositeCache.delete(key);
+        fillingCompositeCache.set(key, cached);
+        return cached;
+      }
 
       const request = (async () => {
         const upperRequest = getOverlayRecord(mode, upperStageFt, normalizedPhase);
@@ -19246,10 +19283,15 @@ function setDatumHelpOpen(isOpen) {
         mode,
         stageToCode(stageValue),
         normalizeHydraulicPhase(phase),
-        entryTimeMs(entry),
-        ...milestones.map(item => `${entryTimeMs(item)}:${normalizeHydraulicPhase(item.hydraulicPhase)}:${stageToCode(getOverlayStage(getStageValue(item)))}`)
+        entryTimeMs(entry), getStageValue(entry),
+        ...milestones.map(item => `${entryTimeMs(item)}:${normalizeHydraulicPhase(item.hydraulicPhase)}:${stageToCode(getOverlayStage(getStageValue(item)))}:${getStageValue(item)}`)
       ].join("|");
-      if (drainageCompositeCache.has(key)) return drainageCompositeCache.get(key);
+      if (drainageCompositeCache.has(key)) {
+        const cached = drainageCompositeCache.get(key);
+        drainageCompositeCache.delete(key);
+        drainageCompositeCache.set(key, cached);
+        return cached;
+      }
 
       const request = (async () => {
         const historicalRecords = (await Promise.all(milestones.map(item => {
