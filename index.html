@@ -14985,12 +14985,6 @@ html.win-compact-ui #timelineDock #hourSlider{
               </div>
             </div>
             <div class="layer-item">
-              <div id="boundaryToggle" class="toggle on" role="switch" tabindex="0" aria-checked="true" aria-label="Show simulation extent"></div>
-              <div class="layer-meta">
-                <div class="layer-name">Simulation Extent</div>
-              </div>
-            </div>
-            <div class="layer-item">
               <div id="roadsToggle" class="toggle on" role="switch" tabindex="0" aria-checked="true" aria-label="Show road names"></div>
               <div class="layer-meta">
                 <div class="layer-name">Road names</div>
@@ -19738,8 +19732,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
     }
 
     function isTownBoundaryEnabled() {
-      const toggle = document.getElementById("boundaryToggle");
-      return !toggle || toggle.classList.contains("on");
+      return true;
     }
 
     function applyTownBoundaryVisibility() {
@@ -27432,14 +27425,13 @@ function startPlayback() {
     function wireLayerToggles() {
       document.getElementById("mapClickBuildingBtn")?.addEventListener("click", () => setMapClickMode("building"));
       document.getElementById("mapClickDepthBtn")?.addEventListener("click", () => setMapClickMode("depth"));
-      ["boundaryToggle", "roadsToggle"].forEach(id => {
+      ["roadsToggle"].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         const toggleLayer = () => {
           el.classList.toggle("on");
           el.setAttribute("aria-checked", String(el.classList.contains("on")));
           if (id === "roadsToggle") updateRoadLayerAppearance();
-          if (id === "boundaryToggle") applyTownBoundaryVisibility();
         };
         el.addEventListener("click", toggleLayer);
         el.addEventListener("keydown", event => {
