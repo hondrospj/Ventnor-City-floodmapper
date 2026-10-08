@@ -41284,6 +41284,7 @@ html body #mapTitleBadge #mapTitleLogo{
   setEnabled(false);
 })();
 </script>
+<script src="assets/export-area.js?v=20261008" id="floodmapper-export-area"></script>
 <style id="shorelysafe-fleet-ui-20261008">
 @layer shorely-fleet-ui {
   html body[data-shorelysafe-ui] {
@@ -41403,6 +41404,14 @@ html body #mapTitleBadge #mapTitleLogo{
     border-radius:18px !important;background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
   }
   @media (min-width:901px) and (min-height:561px) {
+    /* Keep the first slider thumb outside the play button's column. */
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow {
+      box-sizing:border-box !important;min-width:0 !important;padding:0 !important;
+      margin-left:64px !important;width:calc(100% - 64px) !important;
+    }
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow #hourSlider {
+      box-sizing:border-box !important;min-width:0 !important;width:100% !important;margin:0 !important;
+    }
     body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
       width:356px !important;max-width:calc(100vw - 520px) !important;
       top:16px !important;left:16px !important;bottom:180px !important;
@@ -41466,6 +41475,5 @@ html body #mapTitleBadge #mapTitleLogo{
 })();
 </script>
 
-<script src="assets/export-area.js?v=20261008" id="floodmapper-export-area"></script>
 </body>
 </html>
