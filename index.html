@@ -41225,7 +41225,7 @@ html body #mapTitleBadge #mapTitleLogo{
     const currentMap = typeof map !== "undefined" ? map : null;
     const currentGl = window.NORTH_WILDWOOD_3D?.getMap?.();
     const useGl = Boolean(currentGl && document.body.classList.contains("map-3d-ready"));
-    const container = (useGl ? currentGl.getContainer?.() : currentMap?.getContainer?.()) || document.getElementById("map");
+    const container = document.getElementById("mapWrap") || (useGl ? currentGl.getContainer?.() : currentMap?.getContainer?.()) || document.getElementById("map");
     if (container && panel.parentElement !== container) {
       container.append(panel);
       if (window.L?.DomEvent) {
