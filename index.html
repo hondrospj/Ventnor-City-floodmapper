@@ -14758,6 +14758,13 @@ html body:not(.mobile-optimized) #rightRail > .layers-card:has(.shorelysafe-came
 body.exporting .webcam-map-marker, body.exporting #webcamPanel, .export-stage .webcam-map-marker, .export-stage #webcamPanel { display:none !important; }
 @media print { .webcam-map-marker, #webcamPanel { display:none !important; } }
 
+
+#webcamPanel .webcam-disclaimer { margin:10px 0 0; color:#b8cbe1; font-size:10px; line-height:1.4; }
+/* Town layouts that hid the old mobile Layers card must expose its Cameras switch. */
+html body.mobile-optimized #mobileRailMount > .layers-card:has(.shorelysafe-camera-item) {
+  display:block !important; visibility:visible !important; opacity:1 !important; pointer-events:auto !important;
+  height:auto !important; min-height:0 !important; max-height:none !important; flex-shrink:0 !important;
+}
 </style>
 </head>
 <body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading">
@@ -41122,7 +41129,7 @@ html body #mapTitleBadge #mapTitleLogo{
 </style>
 <div id="shorelysafeWebcamConfig" hidden>{"town":"Ventnor City","cameras":[{"id":"ventnor","name":"Ventnor City Fishing Pier Looking East","short":"Ventnor City Fishing Pier Looking East","url":"https://api.igotview.com/images/cams/ventnor555/18.jpg","sourceUrl":"https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east","source":"AtTheShore / camera host","location":"South Cambridge Avenue and Boardwalk · Ventnor","external":false,"description":"View current conditions on the camera provider’s website.","kind":"image","lat":39.3361371,"lng":-74.4775285,"relation":"local"}],"otherSources":[{"name":"Ventnor City Fishing Pier Looking East","sourceUrl":"https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east"}]}</div>
 <script id="shorelysafeWebcamsScript">
-/* Camera switch opens a map viewer; only the selected feed is loaded. */
+/* The Cameras layer shows locations. Only clicking a camera loads its feed. */
 (() => {
   "use strict";
   const configNode = document.getElementById("shorelysafeWebcamConfig");
@@ -41133,19 +41140,20 @@ html body #mapTitleBadge #mapTitleLogo{
   if (!cameras.length) return;
   document.getElementById("webcamPanel")?.remove();
   const located = cameras.filter(c => Number.isFinite(c.lat) && Number.isFinite(c.lng));
-  const icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg>';
+  const icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="4"/><circle cx="12" cy="10" r="4"/><path d="M12 17v4M7 21h10"/></svg>';
   const panel = document.createElement("section");
   panel.id = "webcamPanel";
   panel.hidden = true;
   panel.setAttribute("role", "region");
   panel.setAttribute("aria-labelledby", "webcamTitle");
   panel.setAttribute("data-html2canvas-ignore", "true");
-  panel.innerHTML = `<div class="webcam-heading"><div><h2 id="webcamTitle"></h2><p id="webcamLocation"></p></div><button type="button" id="webcamClose" aria-label="Close camera and turn Cameras off">×</button></div>
+  panel.innerHTML = `<div class="webcam-heading"><div><h2 id="webcamTitle"></h2><p id="webcamLocation"></p></div><button type="button" id="webcamClose" aria-label="Close webcam viewer">×</button></div>
     <select id="webcamChoice" aria-label="Choose camera"></select>
     <div id="webcamFrame" class="webcam-frame"></div>
     <div class="webcam-footer"><span id="webcamStatus" role="status" aria-live="polite"></span><button type="button" id="webcamLocate">Show location</button></div>
     <div class="webcam-source"><span>Current view · independent of map time</span><a id="webcamSourceLink" target="_blank" rel="noopener noreferrer">Camera source ↗</a><button type="button" id="webcamRetry" aria-label="Reload camera">↻</button></div>
-    <details id="webcamOtherSources"><summary>More camera websites</summary><div></div></details>`;
+    <details id="webcamOtherSources"><summary>More camera websites</summary><div></div></details>
+    <p class="webcam-disclaimer">Camera views do not establish water depth or whether a road is safe.</p>`;
   document.body.append(panel);
   const choice = panel.querySelector("#webcamChoice");
   const frameHost = panel.querySelector("#webcamFrame");
@@ -41233,6 +41241,20 @@ html body #mapTitleBadge #mapTitleLogo{
         L.DomEvent.disableScrollPropagation(panel);
       }
     }
+    if (container) {
+      const rect = container.getBoundingClientRect();
+      let top = innerWidth <= 900 ? 120 : 140;
+      for (const id of ["topBanner", "topBar", "mapTitleBadge", "mobileControlsToggle"]) {
+        const element = document.getElementById(id);
+        if (!element || !element.getClientRects().length || getComputedStyle(element).visibility === "hidden") continue;
+        const box = element.getBoundingClientRect();
+        if (box.height && box.top < rect.top + rect.height / 2) top = Math.max(top, box.bottom - rect.top + 12);
+      }
+      const dock = document.getElementById("timelineDock")?.getBoundingClientRect();
+      const bottom = dock?.height && dock.top > rect.top + top ? Math.min(rect.bottom, dock.top) : rect.bottom;
+      panel.style.top = `${top}px`;
+      panel.style.maxHeight = `${Math.max(0, bottom - rect.top - top - 12)}px`;
+    }
   }
 
   function syncCameraRow() {
@@ -41247,6 +41269,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 
   function showCamera(camera, trigger) {
+    if (!enabled || !camera) return;
     if (panel.hidden) returnFocus = trigger || toggle;
     selected = camera;
     const relation = camera.relation === "nearby" ? "Nearby · " : camera.relation === "regional" ? "Regional · " : "";
@@ -41258,10 +41281,7 @@ html body #mapTitleBadge #mapTitleLogo{
     choice.value = camera.id;
     mountPanel();
     panel.hidden = false;
-    if (document.body.classList.contains("mobile-controls-open")) {
-      if (typeof setMobileControlsOpen === "function") setMobileControlsOpen(false);
-      else document.getElementById("mobileControlsToggle")?.click();
-    }
+    dismissMobileControls();
     loadPlayer(camera);
     requestAnimationFrame(() => { if (!panel.hidden) closeButton.focus({ preventScroll: true }); });
   }
@@ -41295,9 +41315,10 @@ html body #mapTitleBadge #mapTitleLogo{
             element.setAttribute("aria-label", `Open ${camera.name}`);
             element.setAttribute("data-webcam-marker", camera.id);
             element.setAttribute("data-html2canvas-ignore", "true");
-            element.addEventListener("keydown", event => {
-              if (event.key === "Enter" || event.key === " ") { event.preventDefault(); event.stopPropagation(); showCamera(camera, element); }
-            });
+            // Handle activation once, including layouts with their own key bridges.
+            element.onkeydown = event => {
+              if (event.key === "Enter" || event.key === " ") { event.preventDefault(); event.stopImmediatePropagation(); showCamera(camera, element); }
+            };
           });
           return marker;
         }));
@@ -41323,22 +41344,71 @@ html body #mapTitleBadge #mapTitleLogo{
     if (enabled) mountPanel();
   }
 
+  function dismissMobileControls() {
+    if (!document.body.classList.contains("mobile-controls-open")) return;
+    if (typeof setMobileControlsOpen === "function") setMobileControlsOpen(false);
+    else document.getElementById("mobileControlsToggle")?.click();
+    document.getElementById("mobileControlsToggle")?.focus({ preventScroll: true });
+  }
+
+  function revealLocations() {
+    if (!enabled || !located.length) return;
+    const useGl = glMap && document.body.classList.contains("map-3d-ready");
+    const activeMap = useGl ? glMap : leafletMap;
+    if (!activeMap) return;
+    const rect = activeMap.getContainer().getBoundingClientRect();
+    const padding = { top: 120, right: 25, bottom: 150, left: 25 };
+    if (innerWidth > 900) {
+      for (const id of ["leftPanel", "rightRail"]) {
+        const element = document.getElementById(id);
+        if (!element || !element.getClientRects().length || getComputedStyle(element).visibility === "hidden") continue;
+        const box = element.getBoundingClientRect();
+        if (box.left < rect.left + rect.width / 2) padding.left = Math.max(padding.left, box.right - rect.left + 25);
+        else padding.right = Math.max(padding.right, rect.right - box.left + 25);
+      }
+    }
+    const banner = document.getElementById("topBanner");
+    if (banner?.getClientRects().length && getComputedStyle(banner).visibility !== "hidden") {
+      const box = banner.getBoundingClientRect();
+      if (box.height) padding.top = Math.max(padding.top, box.bottom - rect.top + 25);
+    }
+    const visible = camera => {
+      const point = useGl ? glMap.project([camera.lng, camera.lat]) : leafletMap.latLngToContainerPoint([camera.lat, camera.lng]);
+      return point.x >= padding.left + 18 && point.x <= rect.width - padding.right - 18 && point.y >= padding.top + 18 && point.y <= rect.height - padding.bottom - 18;
+    };
+    if (located.every(visible)) return;
+    // Keep the town in view while bringing offscreen/covered cameras into clear map space.
+    if (useGl) {
+      const bounds = glMap.getBounds();
+      located.forEach(c => bounds.extend([c.lng, c.lat]));
+      glMap.fitBounds(bounds, { padding, maxZoom: glMap.getZoom(), duration: 0 });
+    } else if (leafletMap) {
+      const bounds = leafletMap.getBounds();
+      located.forEach(c => bounds.extend([c.lat, c.lng]));
+      leafletMap.fitBounds(bounds, { paddingTopLeft: [padding.left, padding.top], paddingBottomRight: [padding.right, padding.bottom], maxZoom: leafletMap.getZoom(), animate: false });
+    }
+  }
+
   function setEnabled(value, restoreFocus = false) {
     enabled = Boolean(value);
     toggle.classList.toggle("on", enabled);
     toggle.setAttribute("aria-checked", String(enabled));
-    toggle.setAttribute("aria-expanded", String(enabled));
     document.body.dataset.webcamsEnabled = String(enabled);
     if (!enabled) closeCamera(restoreFocus);
     syncMarkers();
-    if (enabled) showCamera(selected || cameras[0], toggle);
+    if (enabled) {
+      dismissMobileControls();
+      requestAnimationFrame(revealLocations);
+    }
   }
-  toggle.setAttribute("aria-controls", "webcamPanel");
+  toggle.setAttribute("aria-label", "Show webcam locations");
+  toggle.setAttribute("aria-controls", document.getElementById("mapWrap") ? "mapWrap" : "map");
+  toggle.removeAttribute("aria-expanded");
   toggle.addEventListener("click", () => setEnabled(!enabled));
   toggle.addEventListener("keydown", event => {
-    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setEnabled(!enabled); }
-  });
-  closeButton.addEventListener("click", () => setEnabled(false, true));
+    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); event.stopImmediatePropagation(); setEnabled(!enabled); }
+  }, true);
+  closeButton.addEventListener("click", () => closeCamera(true));
   choice.addEventListener("change", () => showCamera(cameras.find(c => c.id === choice.value), choice));
   panel.querySelector("#webcamRetry").addEventListener("click", () => { if (selected) loadPlayer(selected); });
   locateButton.addEventListener("click", () => {
@@ -41348,16 +41418,17 @@ html body #mapTitleBadge #mapTitleLogo{
     else if (leafletMap) leafletMap.setView([selected.lat, selected.lng], Math.max(leafletMap.getZoom(), 15));
   });
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && enabled) { event.preventDefault(); setEnabled(false, true); }
+    if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeCamera(true); }
   });
   new MutationObserver(syncMarkers).observe(document.body, { attributes: true, attributeFilter: ["class"] });
   window.addEventListener("load", syncMarkers);
-  window.addEventListener("resize", syncCameraRow);
+  window.addEventListener("resize", () => { syncCameraRow(); if (!panel.hidden) mountPanel(); });
+  const layoutObserver = new ResizeObserver(() => { if (!panel.hidden) mountPanel(); });
+  [document.getElementById("topBanner"), document.getElementById("timelineDock")].filter(Boolean).forEach(el => layoutObserver.observe(el));
   window.addEventListener("pagehide", () => setEnabled(false));
   window.addEventListener("pageshow", event => { if (event.persisted) setEnabled(false); });
   setEnabled(false);
 })();
-
 </script>
 <script src="assets/export-area.js?v=20261008-2" id="floodmapper-export-area"></script>
 <style id="shorelysafe-fleet-ui-20261008">
