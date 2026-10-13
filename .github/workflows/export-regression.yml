@@ -29,3 +29,4 @@ jobs:
           node tools/test_export_recovery.mjs
           node tools/test_export_streaming.mjs
           node tools/test_export_history.mjs
+          node tools/test_export_frame_recovery.mjs
