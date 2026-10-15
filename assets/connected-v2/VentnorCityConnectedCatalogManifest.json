@@ -1,6 +1,6 @@
 {
   "schema": "floodmapper-connected-catalog-v1",
-  "generatedUtc": "2026-08-15T16:08:19Z",
+  "generatedUtc": "2026-10-15T01:00:11Z",
   "town": "Ventnor City",
   "model": "four-neighbour connectivity-first depth-penalized bathtub",
   "sourceDem": "/tmp/floodmapper-dem.tif",
