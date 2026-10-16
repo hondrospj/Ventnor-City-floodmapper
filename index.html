@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-nww-avalon-timeline data-nww-mobile-layout>
 <head>
 <style id="shorely-depth-pill-20261016">
 /* Shared click-depth card. Keep the existing heading, depth, units and query states. */
@@ -172,6 +172,1575 @@
   }
 }
 </style>
+<style id="floodmapper-reference-ui-20261016">@layer floodmapper-reference-polish,floodmapper-reference-ui;
+
+@layer floodmapper-reference-ui {
+  html body[data-shorelysafe-ui] {
+    --fleet-panel:rgba(11,18,32,.94);
+    --fleet-line:rgba(191,219,254,.16);
+    --fleet-text:#eaf0ff;
+    --fleet-accent:#60a5fa;
+    color:var(--fleet-text) !important;
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  }
+  body[data-shorelysafe-ui] .brick-nav {display:none !important;}
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) {
+    gap:8px !important;overflow-x:hidden !important;scrollbar-width:thin !important;
+    scrollbar-color:rgba(125,249,255,.5) transparent !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) > :is(.panel-card,.rail-card) {
+    box-sizing:border-box !important;background:var(--fleet-panel) !important;
+    color:var(--fleet-text) !important;border:1px solid var(--fleet-line) !important;
+    border-radius:16px !important;padding:10px 12px !important;margin:0 !important;
+    min-width:0 !important;box-shadow:0 12px 24px rgba(15,23,42,.20) !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) :is(h2,h3,.section-title) {
+    font-size:14px !important;line-height:1.25 !important;letter-spacing:0 !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) .section-title {
+    margin:0 0 8px !important;gap:8px !important;align-items:center !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) .title-with-help {
+    gap:7px !important;min-width:0 !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) :is(.button-grid-2,.button-grid-3,.segmented-control,.data-source-options) {
+    gap:6px !important;min-width:0 !important;
+  }
+  body[data-shorelysafe-ui] #leftPanel :is(.button-grid-2,.segmented-control) {display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  body[data-shorelysafe-ui] #leftPanel .data-source-options:has(#returnIntervalDataBtn) {grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) button:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {
+    box-sizing:border-box !important;min-height:40px !important;border-radius:12px !important;
+    font-size:12px !important;line-height:1.15 !important;font-weight:750 !important;
+    background:rgba(255,255,255,.06) !important;color:var(--fleet-text) !important;
+    white-space:normal !important;overflow-wrap:normal !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) button.active:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {
+    color:var(--fleet-accent) !important;border-color:var(--fleet-accent) !important;
+    background:rgba(96,165,250,.16) !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) .help-btn {
+    width:26px !important;min-width:26px !important;height:26px !important;min-height:26px !important;
+    border-radius:50% !important;font-size:16px !important;display:grid !important;place-items:center !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) .pill {
+    max-width:58% !important;padding:3px 9px !important;font-size:13px !important;
+    line-height:1.1 !important;border-radius:999px !important;white-space:normal !important;
+    background:#29576c !important;color:#eafaff !important;border:1px solid #84d9ee !important;
+  }
+  body[data-shorelysafe-ui] #leftPanel > .data-source-card {order:1 !important;}
+  body[data-shorelysafe-ui] #leftPanel > :is(#calendarCard,.return-interval-card) {order:2 !important;}
+  body[data-shorelysafe-ui] #leftPanel > .overlay-card {order:3 !important;}
+  body[data-shorelysafe-ui] #leftPanel > .datum-card {order:4 !important;}
+  body[data-shorelysafe-ui] #leftPanel > .opacity-card {order:5 !important;}
+  body[data-shorelysafe-ui] #leftPanel > :is(.overlay-card,.datum-card) {
+    --pj-equal-card-h:auto !important;
+    height:auto !important;min-height:0 !important;max-height:none !important;flex:0 0 auto !important;
+  }
+  body[data-shorelysafe-ui] #leftPanel > #timelineIntervalCard {order:6 !important;}
+  body[data-shorelysafe-ui] #leftPanel > #legendDock {order:7 !important;}
+  body[data-shorelysafe-ui] #leftPanel > .snapshot-card {order:8 !important;}
+  body[data-shorelysafe-ui] #leftPanel > .mobile-top-tides-card {order:9 !important;}
+  body[data-shorelysafe-ui] #leftPanel > #mobileRailMount {order:10 !important;}
+  body[data-shorelysafe-ui] #rightRail > .layers-card {order:1 !important;}
+  body[data-shorelysafe-ui] #rightRail > .top-tides-card {order:2 !important;}
+  body[data-shorelysafe-ui] #rightRail > #downloadCard {order:3 !important;}
+  body[data-shorelysafe-ui] #rightRail > :is(.town-address-card,.penns-grove-address-card) {order:4 !important;}
+  body[data-shorelysafe-ui] #rightRail > #mapperTutorialBtn {order:5 !important;}
+  body[data-shorelysafe-ui] #leftPanel > #legendDock {
+    position:static !important;inset:auto !important;transform:none !important;width:100% !important;
+    max-width:none !important;min-height:0 !important;flex:0 0 auto !important;
+  }
+  body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) .layer-list {
+    display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:6px !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .layer-item {
+    display:grid !important;grid-template-columns:34px minmax(0,1fr) !important;gap:6px !important;align-items:center !important;
+    min-width:0 !important;min-height:40px !important;height:auto !important;
+    padding:7px !important;border-radius:12px !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .layer-name {
+    font-size:10.5px !important;line-height:1.1 !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:normal !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .layer-item:has(#nsiStructuresToggle) {grid-column:1 / -1 !important;}
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .layer-meta {min-width:0 !important;}
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .toggle {
+    width:34px !important;min-width:34px !important;height:20px !important;border-radius:999px !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .toggle::after {
+    width:14px !important;height:14px !important;top:3px !important;left:3px !important;transform:none !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .toggle.on::after {left:17px !important;transform:none !important;}
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .top-tide-item {
+    display:grid !important;grid-template-columns:20px minmax(0,1fr) auto !important;gap:5px !important;
+    align-items:center !important;min-height:34px !important;padding:6px 7px !important;text-align:left !important;
+  }
+  body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) .top-tide-item > * {
+    grid-row:1 !important;font-size:11px !important;line-height:1.2 !important;margin:0 !important;
+  }
+  body[data-shorelysafe-ui] #downloadCard :is(.rail-head,.download-launch-meta) {display:none !important;}
+  body[data-shorelysafe-ui] #downloadCard {height:auto !important;min-height:0 !important;max-height:none !important;}
+  body[data-shorelysafe-ui] #openDownloadModalBtn {width:100% !important;margin:0 !important;}
+  body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn {
+    background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
+    border:1px solid var(--fleet-line) !important;
+  }
+  body[data-shorelysafe-ui] :is(button,input,select,a):focus-visible {
+    outline:3px solid #7df9ff !important;outline-offset:3px !important;
+  }
+  body[data-shorelysafe-ui] :is(#downloadModal,#infoModal,#datumModal) .modal-card {
+    border-radius:18px !important;background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
+  }
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+    /* Keep the first slider thumb outside the play button's column. */
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow {
+      box-sizing:border-box !important;min-width:0 !important;padding:0 !important;
+      margin-left:64px !important;width:calc(100% - 64px) !important;
+    }
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow #hourSlider {
+      box-sizing:border-box !important;min-width:0 !important;width:100% !important;margin:0 !important;
+    }
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
+      width:356px !important;max-width:calc(100vw - 520px) !important;
+      top:16px !important;left:16px !important;bottom:180px !important;
+      padding:0 4px 8px 0 !important;overflow-y:auto !important;
+    }
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {
+      width:260px !important;top:16px !important;right:16px !important;left:auto !important;
+      bottom:156px !important;max-height:calc(100dvh - 172px) !important;overflow-y:auto !important;
+    }
+  }
+  @media (min-width:901px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) {
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {width:286px !important;max-width:286px !important;}
+    body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {width:224px !important;}
+  }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    body[data-shorelysafe-ui].mobile-optimized #leftPanel {
+      gap:8px !important;overflow-y:auto !important;overflow-x:hidden !important;
+    }
+    body[data-shorelysafe-ui].mobile-optimized :is(#leftPanel,#mobileRailMount) > :is(.panel-card,.rail-card) {
+      border-radius:18px !important;box-shadow:none !important;
+    }
+    body[data-shorelysafe-ui].mobile-optimized :is(#leftPanel,#mobileRailMount) button:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {
+      min-height:44px !important;font-size:13px !important;
+    }
+    body[data-shorelysafe-ui].mobile-optimized :is(#townAddressInput,#observedDateInput,#calendarPopover select) {font-size:16px !important;}
+  }
+  @media (prefers-reduced-motion:reduce) {
+    body[data-shorelysafe-ui] :is(.panel-card,.rail-card,button) {transition:none !important;}
+  }
+}
+
+/* Avalon timeline layout, scoped to North Wildwood. Share the WordPress layer
+   so old inline stylesheets cannot split the day strip from the native range. */
+@layer floodmapper-reference-ui {
+  html[data-nww-avalon-timeline] body #timelineDock {
+    display:block !important; position:fixed !important; left:16px !important; right:16px !important; bottom:16px !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+    height:112px !important; min-height:112px !important; max-height:112px !important;
+    padding:0 !important; margin:0 !important; transform:none !important;
+    border-radius:16px !important; background:rgba(11,18,32,.97) !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-top,
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-controls { display:contents !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn {
+    position:absolute !important; top:34px !important; bottom:auto !important; left:20px !important; right:auto !important;
+    display:grid !important; place-items:center !important; width:42px !important; height:42px !important;
+    min-width:42px !important; max-width:42px !important; min-height:42px !important; max-height:42px !important;
+    padding:0 !important; margin:0 !important; border:1px solid #e2e8f0 !important; border-radius:12px !important;
+    background:linear-gradient(#fff,#edf2f7) !important; color:#ef4444 !important;
+    transform:none !important; touch-action:manipulation !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .playTriangle { border-left-color:#ef4444 !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .pauseIcon::before,
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .pauseIcon::after { background:#ef4444 !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey {
+    display:flex !important; visibility:visible !important; opacity:1 !important;
+    flex-direction:row !important; flex-wrap:nowrap !important; align-items:center !important; justify-content:center !important;
+    gap:12px !important; pointer-events:none !important;
+    position:absolute !important; left:84px !important; right:20px !important; top:12px !important; bottom:auto !important;
+    width:auto !important; max-width:none !important; height:20px !important; min-height:20px !important; max-height:20px !important;
+    padding:0 !important; margin:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-item {
+    display:flex !important; flex:0 0 auto !important; align-items:center !important; gap:4px !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-label {
+    display:inline !important; visibility:visible !important; color:#f1f5f9 !important;
+    font-size:11px !important; line-height:16px !important; white-space:nowrap !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-swatch {
+    display:block !important; width:9px !important; height:9px !important; flex:0 0 9px !important; border-radius:50% !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-item::after { content:none !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs {
+    position:absolute !important; left:97px !important; right:33px !important; top:42px !important; bottom:auto !important;
+    display:flex !important; width:auto !important; min-width:0 !important; max-width:none !important;
+    height:20px !important; min-height:20px !important; max-height:20px !important;
+    padding:0 !important; margin:0 !important; border:0 !important; gap:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-day {
+    min-width:0 !important; padding:0 !important; margin:0 !important; border:0 !important;
+    height:20px !important; min-height:20px !important; max-height:20px !important; font-size:12px !important; line-height:20px !important;
+    box-sizing:border-box !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs .timeline-day {
+    background-image:var(--timeline-day-gradient,none) !important;
+    background-size:100% 100% !important;
+    text-shadow:0 1px 3px #000,0 0 6px #000 !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-trackRow {
+    position:absolute !important; left:84px !important; right:20px !important; top:70px !important; bottom:auto !important;
+    display:block !important; grid-area:auto !important; align-self:stretch !important; justify-self:stretch !important; grid-template-columns:minmax(0,1fr) !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+    height:24px !important; min-height:24px !important; max-height:24px !important;
+    padding:0 !important; margin:0 !important; gap:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider {
+    --nww-thumb-size:26px;
+    position:relative !important; inset:auto !important; display:block !important;
+    width:100% !important; min-width:0 !important; max-width:100% !important;
+    height:24px !important; min-height:24px !important; max-height:24px !important;
+    padding:0 !important; margin:0 !important; border:0 !important; transform:none !important;
+    background:var(--nww-stage-gradient,linear-gradient(#94a3b8,#94a3b8)) center / calc(100% - 26px) 5px no-repeat !important;
+    touch-action:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-webkit-slider-runnable-track {
+    height:5px !important; border:0 !important; background:transparent !important; box-shadow:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-track,
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-progress {
+    height:5px !important; border:0 !important; background:transparent !important; box-shadow:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-webkit-slider-thumb {
+    box-sizing:border-box !important; width:26px !important; height:26px !important;
+    margin-top:-10.5px !important; border:2px solid white !important; background:#2563eb !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-thumb {
+    box-sizing:border-box !important; width:26px !important; height:26px !important;
+    border:2px solid white !important; background:#2563eb !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineStart,
+  html[data-nww-avalon-timeline] body #timelineDock #timelineEnd,
+  html[data-nww-avalon-timeline] body #timelineDock #pjBlueSliderExactTrackLine { display:none !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineTimeBounds { display:none !important; }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html[data-nww-avalon-timeline] body #timelineDock {
+      left:8px !important; right:8px !important; bottom:calc(8px + env(safe-area-inset-bottom)) !important;
+      height:188px !important; min-height:188px !important; max-height:188px !important;
+      background:#152132 !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #playBtn {
+      top:8px !important; left:8px !important; width:44px !important; height:44px !important;
+      min-width:44px !important; max-width:44px !important; min-height:44px !important; max-height:44px !important;
+      border-radius:50% !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble {
+      position:absolute !important; left:62px !important; right:8px !important; top:8px !important; bottom:auto !important;
+      width:auto !important; min-width:0 !important; max-width:none !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+      padding:0 !important; margin:0 !important; border:0 !important; border-radius:0 !important;
+      background:transparent !important; box-shadow:none !important; transform:none !important;
+      display:flex !important; align-items:center !important; justify-content:space-between !important; gap:8px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-current { font-size:15px !important; white-space:nowrap !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-stage {
+      font-size:15px !important; white-space:nowrap !important; color:white !important;
+      padding:1px 6px !important; background:#0b1220 !important; border:1px solid #526277 !important; border-radius:999px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs {
+      top:58px !important; left:86px !important; right:86px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-day { height:44px !important; min-height:44px !important; max-height:44px !important; font-size:15px !important; line-height:44px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-day-arrow {
+      position:absolute !important; top:58px !important; bottom:auto !important; width:72px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+      padding:4px !important; margin:0 !important; transform:none !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelinePreviousDay { top:58px !important; left:8px !important; right:auto !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineNextDay { top:58px !important; left:auto !important; right:8px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey {
+      top:108px !important; left:8px !important; right:8px !important;
+      height:14px !important; min-height:14px !important; max-height:14px !important; gap:8px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-label { font-size:9px !important; line-height:12px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-swatch { width:7px !important; height:7px !important; flex-basis:7px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-trackRow {
+      top:122px !important; left:8px !important; right:8px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #hourSlider { height:44px !important; min-height:44px !important; max-height:44px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineTimeBounds {
+      position:absolute !important; top:166px !important; left:21px !important; right:21px !important;
+      display:flex !important; justify-content:space-between !important; height:14px !important;
+      color:#cbd5e1 !important; font-size:10px !important; line-height:14px !important;
+      pointer-events:none !important;
+    }
+    /* A daily peak has no hours to scrub; the day arrows remain available. */
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] {
+      height:132px !important; min-height:132px !important; max-height:132px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] .timeline-trackRow,
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] #timelineTimeBounds { display:none !important; }
+  }
+  @media (max-width:360px) {
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-current,
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-stage { font-size:13px !important; }
+  }
+  @media (max-width:600px) {
+    html[data-nww-avalon-timeline] body:not(.mobile-legend-open) #legendDock {
+      top:60px !important; left:8px !important; right:auto !important;
+      width:88px !important; min-width:88px !important; max-width:88px !important;
+    }
+  }
+  html[data-nww-avalon-timeline] body #mapTitlePartnerLogo,
+  html[data-nww-avalon-timeline] body #rightRailLogo,
+  html[data-nww-avalon-timeline] body #exportPartnerLogo,
+  html[data-nww-avalon-timeline] body #topBanner { display:none !important; }
+  html[data-nww-avalon-timeline] body #toastCloseBtn {
+    --centered-close-x-color:#78350f !important;
+    --centered-close-x-size:18px !important;
+    width:44px !important; min-width:44px !important; max-width:44px !important;
+    height:44px !important; min-height:44px !important; max-height:44px !important;
+    border:1px solid #92400e !important; background:#fef3c7 !important;
+    flex:0 0 44px !important; touch-action:manipulation !important;
+  }
+  html[data-nww-avalon-timeline] body #toastCloseBtn:focus-visible {
+    outline:3px solid #78350f !important; outline-offset:2px !important;
+  }
+
+}
+
+/* North Wildwood phone layout. Share the hosting layer so one stylesheet owns
+   mobile geometry without fighting the older global styles or desktop fitter. */
+@layer floodmapper-reference-ui {
+  #nwwMobileControlHeader { display:none !important; }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html[data-nww-mobile-layout] body { --nww-key-extra:0px; --nww-mobile-timeline:calc(168px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body #mapTitleBadge {
+      position:fixed !important; top:calc(8px + env(safe-area-inset-top)) !important;
+      left:calc(8px + env(safe-area-inset-left)) !important; right:calc(8px + env(safe-area-inset-right)) !important;
+      width:auto !important; min-width:0 !important; max-width:none !important; height:52px !important; min-height:52px !important;
+      padding:7px 174px 7px 12px !important; margin:0 !important; transform:none !important;
+      display:flex !important; align-items:center !important; justify-content:flex-start !important;
+      background:rgba(11,18,32,.88) !important; border:1px solid var(--line) !important; border-radius:14px !important; z-index:6100 !important;
+    }
+    html[data-nww-mobile-layout] body #mapTitleBadge #mapTitleText {
+      width:100% !important; min-width:0 !important; max-width:none !important; margin:0 !important;
+      white-space:normal !important; text-align:left !important; font:750 15px/1.18 system-ui !important; max-width:156px !important;
+      overflow:visible !important; text-overflow:clip !important;
+    }
+    html[data-nww-mobile-layout] body #mapTitleLogo { display:none !important; }
+    html[data-nww-mobile-layout] body #mobileControlsToggle,
+    html[data-nww-mobile-layout] body:not(.mobile-legend-open) #legendDock {
+      position:fixed !important; top:calc(12px + env(safe-area-inset-top)) !important;
+      left:auto !important; bottom:auto !important; height:44px !important; min-height:44px !important; max-height:44px !important;
+      margin:0 !important; padding:0 !important; transform:none !important; border-radius:10px !important;
+      background:rgba(255,255,255,.05) !important; border:1px solid var(--line) !important; z-index:6200 !important;
+    }
+    html[data-nww-mobile-layout] body #mobileControlsToggle { right:calc(12px + env(safe-area-inset-right)) !important; width:94px !important; min-width:94px !important; max-width:94px !important; }
+    html[data-nww-mobile-layout] body #mobileControlsToggle::after { font:700 14px/44px system-ui !important; }
+    html[data-nww-mobile-layout] body:not(.mobile-legend-open) #legendDock { right:calc(112px + env(safe-area-inset-right)) !important; width:62px !important; min-width:62px !important; max-width:62px !important; }
+    html[data-nww-mobile-layout] body:not(.mobile-legend-open) #legendDock::after { content:'Key' !important; font:700 14px/44px system-ui !important; }
+    html[data-nww-mobile-layout] body.mobile-legend-open #legendDock {
+      position:fixed !important; top:calc(68px + env(safe-area-inset-top)) !important;
+      left:calc(8px + env(safe-area-inset-left)) !important; right:calc(8px + env(safe-area-inset-right)) !important;
+      width:auto !important; min-width:0 !important; max-width:none !important; height:auto !important;
+      max-height:calc(100dvh - 252px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+      padding:14px !important; margin:0 !important; overflow:auto !important; z-index:6250 !important;
+    }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl {
+      position:fixed !important; top:calc(68px + env(safe-area-inset-top)) !important; right:calc(8px + env(safe-area-inset-right)) !important;
+      left:auto !important; bottom:auto !important; width:60px !important; height:auto !important; max-height:none !important;
+      display:flex !important; flex-direction:column !important; gap:6px !important; overflow:visible !important; transform:none !important;
+    }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-direction-wheel { width:60px !important; height:60px !important; border-width:2px !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-wheel-cardinal { font-size:8px !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-wheel-knob { width:22px !important; height:22px !important; margin:-11px 0 0 -11px !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-simple-view { width:44px !important; height:44px !important; min-height:44px !important; border-radius:12px !important; font-size:13px !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-simple-zoom { width:44px !important; height:88px !important; flex-direction:column !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-simple-zoom-button { width:44px !important; height:44px !important; min-height:44px !important; font-size:24px !important; }
+    html[data-nww-mobile-layout] body #timelineDock {
+      left:calc(8px + env(safe-area-inset-left)) !important; right:calc(8px + env(safe-area-inset-right)) !important;
+      bottom:calc(8px + env(safe-area-inset-bottom)) !important; width:auto !important; min-width:0 !important; max-width:none !important;
+      height:var(--nww-mobile-timeline) !important; min-height:var(--nww-mobile-timeline) !important; max-height:var(--nww-mobile-timeline) !important;
+      padding:0 !important; border:1px solid rgba(191,219,254,.38) !important; border-radius:16px !important; background:rgba(11,18,32,.97) !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble { top:6px !important; left:62px !important; right:10px !important; width:auto !important; height:44px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #playBtn { top:6px !important; left:8px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelinePreviousDay,
+    html[data-nww-mobile-layout] body #timelineDock #timelineNextDay,
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs { top:52px !important; height:44px !important; min-height:44px !important; max-height:44px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { top:99px !important; height:calc(16px + var(--nww-key-extra)) !important; min-height:16px !important; max-height:none !important; gap:0 10px !important; }
+    html[data-nww-mobile-layout] body:has(#roadImpactsKey:not([hidden])) { --nww-key-extra:20px; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey:has(#roadImpactsKey:not([hidden])) { flex-wrap:wrap !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey #roadImpactsKey:not([hidden]) { flex:0 0 100% !important; justify-content:center !important; font-size:11px !important; height:16px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey .timeline-key-label { font:500 11px/16px system-ui !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey .timeline-key-swatch { width:8px !important; height:8px !important; flex-basis:8px !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-trackRow { top:calc(112px + var(--nww-key-extra)) !important; left:8px !important; right:8px !important; height:44px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds { top:calc(148px + var(--nww-key-extra)) !important; font:500 10px/14px system-ui !important; }
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] { --nww-mobile-timeline:calc(122px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body .leaflet-bottom { bottom:calc(var(--nww-mobile-timeline) + 16px + env(safe-area-inset-bottom)) !important; }
+    html[data-nww-mobile-layout] body #toast { bottom:calc(var(--nww-mobile-timeline) + 20px + env(safe-area-inset-bottom)) !important; }
+    html[data-nww-mobile-layout] body #mapClickModeControl:not([hidden]) { bottom:calc(var(--nww-mobile-timeline) + 18px + env(safe-area-inset-bottom)) !important; }
+    html[data-nww-mobile-layout] body.mobile-controls-open #leftPanel {
+      position:fixed !important; top:calc(8px + env(safe-area-inset-top)) !important; bottom:calc(8px + env(safe-area-inset-bottom)) !important;
+      left:calc(8px + env(safe-area-inset-left)) !important; right:calc(8px + env(safe-area-inset-right)) !important;
+      width:auto !important; min-width:0 !important; max-width:none !important; height:auto !important; min-height:0 !important; max-height:none !important;
+      display:flex !important; flex-direction:column !important; gap:8px !important; padding:12px !important; margin:0 !important; transform:none !important;
+      overflow-x:hidden !important; overflow-y:auto !important; overscroll-behavior:contain !important;
+      background:var(--bg) !important; border:1px solid rgba(191,219,254,.38) !important; border-radius:18px !important; z-index:7100 !important; scroll-padding-top:124px;
+    }
+    html[data-nww-mobile-layout] body.mobile-controls-open #mobileControlsToggle { visibility:hidden !important; pointer-events:none !important; }
+    html[data-nww-mobile-layout] body.mobile-controls-open #mapTitleBadge { visibility:hidden !important; }
+    html[data-nww-mobile-layout] body.mobile-controls-open #timelineDock { opacity:0 !important; pointer-events:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel #mobileControlsClose {
+      position:fixed !important; top:calc(20px + env(safe-area-inset-top)) !important; right:calc(20px + env(safe-area-inset-right)) !important;
+      left:auto !important; bottom:auto !important; width:44px !important; height:44px !important; margin:0 !important;
+      display:block !important; border:1px solid rgba(255,255,255,.18) !important; border-radius:12px !important; background:rgba(255,255,255,.075) !important; z-index:12 !important;
+    }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader {
+      position:sticky !important; top:-12px !important; order:-100 !important; flex:0 0 auto !important; display:block !important;
+      margin:-12px -12px 0 !important; padding:12px !important; background:var(--bg) !important; border-bottom:1px solid var(--line) !important; z-index:10 !important;
+    }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader .nww-drawer-heading { min-height:44px; padding-right:56px; }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader h2 { margin:0 !important; font:750 19px/24px system-ui !important; }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader p { margin:2px 0 0; color:var(--muted); font:500 12px/16px system-ui; }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader .nww-control-tabs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:12px; }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader button { min-width:0 !important; height:44px !important; padding:6px !important; font:650 14px/1.2 system-ui !important; background:rgba(255,255,255,.05) !important; border:1px solid var(--line) !important; border-radius:10px !important; }
+    html[data-nww-mobile-layout] body #nwwMobileControlHeader button[aria-selected="true"] { color:var(--nw-ui-blue) !important; background:var(--accent-soft) !important; border-color:var(--nw-ui-blue) !important; box-shadow:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel:is(#leftPanel)[data-nww-section="forecast"] [data-nww-group]:not([data-nww-group="forecast"]),
+    html[data-nww-mobile-layout] body #leftPanel:is(#leftPanel)[data-nww-section="map"] [data-nww-group]:not([data-nww-group="map"]),
+    html[data-nww-mobile-layout] body #leftPanel:is(#leftPanel)[data-nww-section="tools"] [data-nww-group]:not([data-nww-group="tools"]) { display:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel .panel-card,
+    html[data-nww-mobile-layout] body #leftPanel .rail-card { padding:10px !important; border-radius:12px !important; gap:8px !important; }
+    html[data-nww-mobile-layout] body #leftPanel .section-title { min-height:36px !important; margin:0 !important; gap:6px !important; }
+    html[data-nww-mobile-layout] body #leftPanel .section-title .title-with-help { flex:1 1 auto !important; min-width:0 !important; }
+    html[data-nww-mobile-layout] body #leftPanel .section-title .pill { display:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel .data-source-options { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+    html[data-nww-mobile-layout] body #leftPanel .data-source-options button { grid-column:auto !important; white-space:normal !important; padding:6px 4px !important; font-size:14px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #forecastScenarioCard { order:2 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #returnIntervalCard { order:3 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalCard { order:4 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #calendarCard { order:5 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #mobileRailMount { gap:8px !important; order:6 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #mobileRailMount:empty { display:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layer-item { min-height:48px !important; padding:4px 0 !important; }
+    html[data-nww-mobile-layout] body #leftPanel .toggle { min-width:44px !important; min-height:28px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #townAddressCard { order:-1 !important; }
+    html[data-nww-mobile-layout] body #leftPanel #townAddressInput { width:100% !important; min-width:0 !important; font-size:16px !important; }
+    html[data-nww-mobile-layout] body #leftPanel button:focus-visible { outline:2px solid var(--nw-ui-blue) !important; outline-offset:2px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalCard { display:flex !important; flex-direction:column !important; gap:8px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalCard .section-title { flex:0 0 44px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #dayNavCenter { display:flex !important; align-items:center !important; height:44px !important; min-height:44px !important; max-height:none !important; overflow:visible !important; }
+    html[data-nww-mobile-layout] body #leftPanel #observedDateInput { box-sizing:border-box !important; height:44px !important; min-height:44px !important; max-height:44px !important; padding:6px !important; font:600 16px/1.2 system-ui !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalToggle { display:flex !important; position:static !important; width:100% !important; height:44px !important; min-height:44px !important; max-height:none !important; padding:0 !important; gap:6px !important; overflow:visible !important; border:0 !important; background:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalToggle button { position:static !important; flex:1 1 0 !important; min-width:0 !important; height:44px !important; margin:0 !important; padding:4px !important; border-radius:10px !important; font-size:14px !important; }
+    html[data-nww-mobile-layout] body:not(.tutorial-active) #leftPanel .snapshot-card { display:none !important; }
+    html[data-nww-mobile-layout] body #leftPanel .datum-card .segmented-control { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:6px !important; height:auto !important; padding:0 !important; background:none !important; border:0 !important; }
+    html[data-nww-mobile-layout] body #leftPanel .datum-card .segmented-control button { width:100% !important; border-radius:10px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #opacityText { display:inline-flex !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layer-item:has(#nsiStructuresToggle) { grid-column:1 / -1 !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layer-item .layer-meta { min-width:0 !important; overflow-wrap:normal !important; word-break:normal !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layer-item .layer-meta * { overflow-wrap:normal !important; word-break:normal !important; }
+    /* Reuse the desktop palette; older shared mobile rules supplied teal states. */
+    html[data-nww-mobile-layout] body #mapTitleBadge,
+    html[data-nww-mobile-layout] body #mapTitleBadge #mapTitleText { color:#dbeafe !important; }
+    html[data-nww-mobile-layout] body #leftPanel button,
+    html[data-nww-mobile-layout] body #mobileControlsToggle,
+    html[data-nww-mobile-layout] body #mobileControlsToggle::after,
+    html[data-nww-mobile-layout] body:not(.mobile-legend-open) #legendDock::after { color:var(--text) !important; -webkit-text-fill-color:currentColor !important; }
+    html[data-nww-mobile-layout] body #leftPanel button.active { color:var(--nw-ui-blue) !important; background:var(--accent-soft) !important; border-color:var(--nw-ui-blue) !important; }
+    html[data-nww-mobile-layout] body #leftPanel #timelineIntervalToggle button.active { color:white !important; border-color:transparent !important; }
+    html[data-nww-mobile-layout] body #leftPanel .help-btn { color:white !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layers-card { background:rgba(11,18,32,.97) !important; border-color:rgba(191,219,254,.38) !important; }
+    html[data-nww-mobile-layout] body #leftPanel .layer-item { background:rgba(255,255,255,.05) !important; }
+    html[data-nww-mobile-layout] body.mobile-legend-open #legendDock { color:var(--text) !important; background:rgba(11,18,32,.94) !important; border-color:rgba(191,219,254,.16) !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble .timeline-bubble-stage { background:rgba(var(--nw-ui-blue-rgb),.26) !important; border-color:rgba(191,219,254,.64) !important; box-shadow:inset 0 1px rgba(255,255,255,.16),0 7px 16px rgba(0,0,0,.18) !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-day-arrow { color:var(--text) !important; background:rgba(255,255,255,.05) !important; border-color:var(--line) !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs .timeline-day.active { background-color:var(--accent-soft) !important; color:#f8fbff !important; border-color:#f8fbff !important; }
+    html[data-nww-mobile-layout] body #leftPanel #calendarGrid { gap:3px !important; }
+    html[data-nww-mobile-layout] body #leftPanel #calendarGrid button { min-width:0 !important; padding:2px !important; }
+  }
+  @media (max-width:360px) {
+    html[data-nww-mobile-layout] body #mapTitleBadge { padding-right:157px !important; padding-left:8px !important; }
+    html[data-nww-mobile-layout] body #mapTitleBadge #mapTitleText { font-size:13px !important; }
+    html[data-nww-mobile-layout] body #mobileControlsToggle { width:84px !important; min-width:84px !important; max-width:84px !important; }
+    html[data-nww-mobile-layout] body:not(.mobile-legend-open) #legendDock { right:102px !important; width:54px !important; min-width:54px !important; max-width:54px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { gap:7px !important; }
+    html[data-nww-mobile-layout] body #leftPanel .button-grid-3 button { font-size:14px !important; padding:4px !important; }
+  }
+  @media (max-width:900px) and (max-height:560px) and (orientation:landscape) {
+    html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(120px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble { width:calc(43% - 76px) !important; right:auto !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelinePreviousDay { top:6px !important; left:43% !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineNextDay { top:6px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs { top:6px !important; left:calc(43% + 78px) !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { top:52px !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-trackRow { top:calc(64px + var(--nww-key-extra)) !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds { top:calc(102px + var(--nww-key-extra)) !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl { width:158px !important; display:grid !important; grid-template-columns:60px 44px 44px !important; align-items:start !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-direction-wheel { grid-area:auto !important; }
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-simple-view,
+    html[data-nww-mobile-layout] body #nwDefaultNavControl .nw-simple-zoom { grid-area:auto !important; }
+    html[data-nww-mobile-layout] body.mobile-controls-open #leftPanel { left:auto !important; width:min(460px, calc(100vw - 32px)) !important; }
+    html[data-nww-mobile-layout] body.mobile-legend-open #legendDock { right:auto !important; width:min(430px,calc(100vw - 24px)) !important; max-height:calc(100dvh - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important; }
+  }
+}
+
+/* Full-width time rail, direct day navigation, and a separate transport row. */
+@layer floodmapper-reference-ui {
+  html[data-nww-mobile-layout] body #timelineDock .timeline-step { display:none !important; }
+  html[data-nww-mobile-layout] body #timelineDock .timeline-sr-date { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; clip-path:inset(50%) !important; white-space:nowrap !important; }
+  html[data-nww-mobile-layout] body #timelineDock #hourSlider:focus-visible { outline:2px solid var(--nw-ui-blue) !important; outline-offset:3px !important; border-radius:8px !important; }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(180px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body:has(#timelineDock[data-single-timeline-time="true"]) { --nww-mobile-timeline:calc(126px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] {
+      --nww-mobile-timeline:calc(126px + var(--nww-key-extra));
+      height:var(--nww-mobile-timeline) !important; min-height:var(--nww-mobile-timeline) !important; max-height:var(--nww-mobile-timeline) !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble {
+      top:6px !important; left:12px !important; right:158px !important; width:auto !important;
+      flex-direction:column !important; align-items:flex-start !important; justify-content:center !important; gap:2px !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble .timeline-bubble-current { font:750 18px/22px system-ui !important; font-variant-numeric:tabular-nums !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble .timeline-bubble-stage { font:650 12px/16px system-ui !important; padding:0 6px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #playBtn { left:auto !important; right:58px !important; top:6px !important; border-radius:12px !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-step {
+      position:absolute !important; top:6px !important; bottom:auto !important; left:auto !important;
+      display:grid !important; place-items:center !important;
+      width:44px !important; min-width:44px !important; max-width:44px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+      padding:0 !important; margin:0 !important; border-radius:10px !important;
+      color:var(--text) !important; background:rgba(255,255,255,.05) !important; border:1px solid var(--line) !important;
+      font:700 13px/1 system-ui !important; font-variant-numeric:tabular-nums !important;
+      touch-action:manipulation !important; user-select:none !important; transform:none !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineStepBack { right:108px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineStepForward { right:8px !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-step:disabled { opacity:.35 !important; cursor:default !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-step:active:not(:disabled) { background:var(--accent-soft) !important; border-color:var(--nw-ui-blue) !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-step:focus-visible,
+    html[data-nww-mobile-layout] body #timelineDock .timeline-day:focus-visible { outline:2px solid var(--nw-ui-blue) !important; outline-offset:-3px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelinePreviousDay,
+    html[data-nww-mobile-layout] body #timelineDock #timelineNextDay { display:none !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs {
+      left:8px !important; right:8px !important; top:54px !important; height:44px !important;
+      display:flex !important; gap:5px !important; border-radius:0 !important; overflow-x:auto !important; overflow-y:hidden !important;
+      justify-content:flex-start !important; scrollbar-width:none !important; touch-action:pan-x !important; overscroll-behavior-x:contain !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs::-webkit-scrollbar { display:none; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs .timeline-day {
+      position:relative !important; display:block !important; flex:1 0 52px !important;
+      min-width:52px !important; height:44px !important; border-radius:9px !important;
+      padding:0 4px 3px !important; font:650 13px/39px system-ui !important;
+      background:rgba(255,255,255,.05) !important; color:var(--text) !important;
+      border:1px solid var(--line) !important; overflow:hidden !important; box-shadow:none !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs .timeline-day::after {
+      content:'' !important; position:absolute !important; bottom:0 !important; left:0 !important; right:0 !important;
+      height:4px !important; width:auto !important; transform:none !important; opacity:1 !important;
+      background:var(--timeline-day-gradient,#94a3b8) !important; border:0 !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs .timeline-day.active {
+      background:var(--accent-soft) !important; border-color:var(--nw-ui-blue) !important; color:#f8fbff !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-trackRow {
+      display:block !important; top:100px !important; left:8px !important; right:8px !important; height:44px !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider {
+      --nww-thumb-size:30px;
+      background-size:calc(100% - 30px) 8px !important; cursor:ew-resize !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider::-webkit-slider-runnable-track { height:8px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider::-moz-range-track,
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider::-moz-range-progress { height:8px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider::-webkit-slider-thumb {
+      width:30px !important; height:30px !important; margin-top:-11px !important; box-shadow:0 0 0 4px rgba(96,165,250,.14) !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #hourSlider::-moz-range-thumb {
+      width:30px !important; height:30px !important; box-shadow:0 0 0 4px rgba(96,165,250,.14) !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds {
+      display:block !important; top:138px !important; left:23px !important; right:23px !important; font-size:11px !important;
+    }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds span { position:absolute; white-space:nowrap; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFirstTime { left:0; transform:translateX(-50%); }
+    html[data-nww-mobile-layout] body #timelineDock #timelineMiddleTime { transform:translateX(-50%); }
+    html[data-nww-mobile-layout] body #timelineDock #timelineLastTime { right:0; transform:translateX(50%); }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds span::before { content:''; position:absolute; left:50%; top:-8px; height:4px; width:1px; background:var(--muted); opacity:.6; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { top:156px !important; }
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] #timelineFloodKey { top:102px !important; }
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] .timeline-trackRow,
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] #timelineTimeBounds { display:none !important; }
+  }
+  @media (max-width:360px) {
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble .timeline-bubble-current { font-size:16px !important; }
+  }
+  @media (max-width:900px) and (max-height:560px) and (orientation:landscape) {
+    html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(126px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body:has(#timelineDock[data-single-timeline-time="true"]),
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] { --nww-mobile-timeline:calc(80px + var(--nww-key-extra)); }
+    html[data-nww-mobile-layout] body #timelineDock #timelineBubble { width:142px !important; right:auto !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineStepBack { left:160px !important; right:auto !important; }
+    html[data-nww-mobile-layout] body #timelineDock #playBtn { left:210px !important; right:auto !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineStepForward { left:260px !important; right:auto !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineDayTabs { left:314px !important; top:6px !important; }
+    html[data-nww-mobile-layout] body #timelineDock .timeline-trackRow { top:50px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineTimeBounds { top:88px !important; }
+    html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { top:106px !important; }
+    html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] #timelineFloodKey { top:56px !important; }
+  }
+}
+
+/* App-owned layer controls, identical on standalone and hosted pages. */
+@layer floodmapper-reference-ui {
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card {
+    padding:12px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .rail-head {
+    margin:0 0 6px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-list {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-item {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 36px !important;
+    grid-column:1 / -1 !important;
+    align-items:center !important;
+    gap:12px !important;
+    height:auto !important;
+    min-height:34px !important;
+    max-height:none !important;
+    padding:6px 6px !important;
+    margin:0 !important;
+    border:0 !important;
+    border-bottom:1px solid rgba(191,219,254,.10) !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    overflow:visible !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-item:last-child {
+    border-bottom:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-meta {
+    grid-area:1 / 1 !important;
+    min-width:0 !important;
+    gap:2px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-name {
+    font-size:12px !important;
+    font-weight:650 !important;
+    line-height:1.25 !important;
+    letter-spacing:0 !important;
+    white-space:normal !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .nww-layer-detail {
+    color:#b6c4d6;
+    font-size:10px;
+    font-weight:450;
+    line-height:1.3;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle {
+    grid-area:1 / 2 !important;
+    justify-self:end !important;
+    width:36px !important;
+    min-width:36px !important;
+    height:22px !important;
+    min-height:22px !important;
+    flex:none !important;
+    margin:0 !important;
+    border:0 !important;
+    border-radius:999px !important;
+    background:rgba(148,163,184,.36) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle::before {
+    content:"";
+    position:absolute;
+    inset:-6px;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle::after {
+    width:16px !important;
+    height:16px !important;
+    top:3px !important;
+    left:3px !important;
+    transform:none !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle.on {
+    background:var(--nw-ui-blue,#60a5fa) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle.on::after {
+    left:17px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle:focus-visible {
+    outline:2px solid #bfdbfe !important;
+    outline-offset:3px !important;
+  }
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+    html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card { padding:9px !important; }
+    html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-item { min-height:26px !important; padding:1px 6px !important; }
+    html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-name { font-size:11px !important; }
+    html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle::before { inset:-2px -6px; }
+  }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card { padding:12px !important; }
+    html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .layer-item { min-height:48px !important; padding:8px 6px !important; }
+    html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .layer-name { font-size:15px !important; }
+    html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .nww-layer-detail { font-size:12px; }
+    html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .toggle::before { inset:-13px -6px; }
+  }
+}
+
+/* Desktop control cards share one spacing system. Mobile drawer visibility and
+   geometry remain in north-wildwood-mobile.css. The unified layer owns app UI
+   on both standalone and hosted pages. */
+@layer floodmapper-reference-ui {
+  /* Forecast scenarios belong only to Forecast mode, including in the drawer. */
+  html body[data-shorelysafe-ui] #leftPanel #forecastScenarioCard[hidden] {
+    display:none !important;
+  }
+  /* Active buttons communicate the selection without duplicate header badges. */
+  html body[data-shorelysafe-ui] #leftPanel .nww-status-value[hidden] {
+    display:none !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel .opacity-card .control-row.opacity-control {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    grid-template-rows:20px auto !important;
+    justify-items:center !important;
+    align-items:center !important;
+    gap:2px !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel .opacity-control #opacityText {
+    display:block !important;
+    position:static !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    background:none !important;
+    color:var(--fleet-text) !important;
+    font-size:var(--nww-pane-font) !important;
+    font-weight:600 !important;
+    line-height:1.25 !important;
+    text-align:center !important;
+    font-variant-numeric:tabular-nums !important;
+  }
+  /* An uncertainty swatch is separate from the three discrete severity bands. */
+  html body[data-shorelysafe-ui]:not(.mobile-optimized) #legendDock[data-legend-mode="dynamic"] :is(#legendBody,#legendList),
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] :is(#legendBody,#legendList),
+  html body[data-shorelysafe-ui] #exportLegendDock[data-export-legend-mode="dynamic"] .legend-list {
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-scale {
+    display:flex !important;
+    align-items:end !important;
+    gap:10px !important;
+    width:100% !important;
+    font-size:var(--nww-pane-detail) !important;
+    line-height:1.25 !important;
+    font-weight:600 !important;
+    letter-spacing:0 !important;
+    text-transform:none !important;
+    color:var(--fleet-text) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-uncertainty {
+    flex:0 0 25% !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-levels {
+    flex:1 1 auto !important;
+    min-width:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-labels {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    text-align:center !important;
+    gap:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) :is(.stage-legend-green,.stage-legend-gradient) {
+    box-sizing:border-box !important;
+    height:12px !important;
+    margin-top:4px !important;
+    border:1px solid rgba(255,255,255,.48) !important;
+    border-radius:999px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-green {
+    background:#63d471 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-gradient {
+    background:linear-gradient(90deg,#f4a742 0%,#f4a742 33.333333%,#e74c3c 33.333333%,#e74c3c 66.666667%,#7d3c98 66.666667%,#7d3c98 100%) !important;
+  }
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] #legendHeader {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:8px !important;
+    height:auto !important;
+    min-height:28px !important;
+    margin:0 0 8px !important;
+  }
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] :is(.legend-header-text,.legend-header-actions,#legendTitle) {
+    position:static !important;
+    flex:0 1 auto !important;
+    width:auto !important;
+    margin:0 !important;
+  }
+  /* A scrollable rail must not clip its last button into a second pill shape.
+     Card shadows otherwise accumulate in the gaps as a gray rectangular strip. */
+  html body[data-shorelysafe-ui] #rightRail {
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    filter:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) > .rail-card {
+    box-shadow:none !important;
+    filter:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch {
+    box-sizing:border-box !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex:0 0 auto !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:44px !important;
+    max-height:none !important;
+    padding:10px 14px !important;
+    margin:0 !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:12px !important;
+    background:var(--fleet-panel) !important;
+    box-shadow:none !important;
+    font-size:13px !important;
+    font-weight:600 !important;
+    line-height:1.3 !important;
+    letter-spacing:0 !important;
+    text-align:center !important;
+    text-transform:none !important;
+    white-space:normal !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch:hover {
+    background:#12213a !important;
+    border-color:var(--fleet-accent) !important;
+  }
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+    html {
+      --nww-left-width:356px;
+      --nww-right-width:288px;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #nwDefaultNavControl {
+      right:calc(var(--nww-right-width) + 28px) !important;
+    }
+    @media (max-width:1120px) and (max-height:560px) {
+      html body[data-shorelysafe-ui]:not(.mobile-optimized) #nwDefaultNavControl {
+        top:clamp(82px, calc(100dvh - 348px), 96px) !important;
+      }
+    }
+    /* Reveal the title once its available lane, including the compass, is known. */
+    html body[data-shorelysafe-ui] #mapTitleBadge:not([data-viewport-contained]) {
+      visibility:hidden !important;
+    }
+    /* CSS owns pane geometry from the first paint. Only the timeline-aware
+       fitter may adjust available height when the viewport changes. */
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {
+      position:fixed !important;
+      top:16px !important;
+      display:flex !important;
+      flex-direction:column !important;
+      box-sizing:border-box !important;
+      min-height:0 !important;
+      height:auto !important;
+      margin:0 !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+      zoom:1 !important;
+      transition:none !important;
+      animation:none !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
+      left:16px !important;
+      right:auto !important;
+      bottom:188px !important;
+      width:var(--nww-left-width) !important;
+      min-width:var(--nww-left-width) !important;
+      max-width:var(--nww-left-width) !important;
+      max-height:calc(100dvh - 204px) !important;
+      gap:6px !important;
+      padding:0 4px 0 0 !important;
+      scrollbar-gutter:auto !important;
+      overflow-anchor:none !important;
+      overscroll-behavior:contain !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel > .data-source-card {
+      position:sticky !important;
+      top:0 !important;
+      z-index:3 !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {
+      left:auto !important;
+      right:16px !important;
+      bottom:auto !important;
+      width:var(--nww-right-width) !important;
+      min-width:var(--nww-right-width) !important;
+      max-width:var(--nww-right-width) !important;
+      max-height:calc(100dvh - 156px) !important;
+      gap:8px !important;
+      padding:0 !important;
+      scrollbar-gutter:auto !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail > .right-logo-card {
+      display:none !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail > .top-tides-card {
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+    }
+    /* Reserve the two flood rows and Show More button while archive data loads. */
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #topTideList {
+      min-height:116px !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel #legendDock {
+      position:static !important;
+      inset:auto !important;
+      width:100% !important;
+      max-width:100% !important;
+      transform:none !important;
+      margin:0 !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel :is(.day-nav-center,.observed-date-input) {
+      min-width:0 !important;
+      width:100% !important;
+      max-width:100% !important;
+      overflow:hidden !important;
+      text-overflow:ellipsis !important;
+      white-space:nowrap !important;
+      box-sizing:border-box !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel {
+      --nww-control-padding:12px;
+      --nww-control-gap:10px;
+      --nww-control-header:24px;
+      --nww-control-button:40px;
+      --nww-control-slider:20px;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,.opacity-card,#timelineIntervalCard,#calendarCard,#legendDock):not([hidden]) {
+      box-sizing:border-box !important;
+      display:flex !important;
+      flex-direction:column !important;
+      flex:0 0 auto !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      padding:var(--nww-control-padding) 12px !important;
+      gap:var(--nww-control-gap) !important;
+      overflow:visible !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,.opacity-card,#timelineIntervalCard,#calendarCard) > .section-title,
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader {
+      display:flex !important;
+      align-items:center !important;
+      justify-content:space-between !important;
+      flex:0 0 auto !important;
+      height:var(--nww-control-header) !important;
+      min-height:var(--nww-control-header) !important;
+      max-height:none !important;
+      padding:0 !important;
+      margin:0 !important;
+      gap:8px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel :is(.section-title,.legend-header) :is(h2,.legend-header-text) {
+      margin:0 !important;
+      padding:0 !important;
+      font-size:14px !important;
+      font-weight:700 !important;
+      line-height:20px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .title-with-help {
+      display:flex !important;
+      align-items:center !important;
+      gap:8px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .help-btn {
+      box-sizing:border-box !important;
+      flex:0 0 24px !important;
+      width:24px !important;
+      min-width:24px !important;
+      height:24px !important;
+      min-height:24px !important;
+      padding:0 !important;
+      margin:0 !important;
+      font-size:14px !important;
+      line-height:1 !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .section-title > .pill {
+      box-sizing:border-box !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      flex:0 0 auto !important;
+      height:24px !important;
+      min-height:24px !important;
+      padding:0 9px !important;
+      margin:0 !important;
+      font-size:12px !important;
+      font-weight:600 !important;
+      line-height:1 !important;
+      white-space:nowrap !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) {
+      display:grid !important;
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      align-items:stretch !important;
+      flex:0 0 auto !important;
+      width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      gap:6px !important;
+      padding:0 !important;
+      margin:0 !important;
+      border:0 !important;
+      border-radius:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      overflow:visible !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,#timelineIntervalCard) > :is(.data-source-options,.button-grid-3,#timelineIntervalToggle) {
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      box-sizing:border-box !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      width:100% !important;
+      min-width:0 !important;
+      height:var(--nww-control-button) !important;
+      min-height:var(--nww-control-button) !important;
+      max-height:none !important;
+      margin:0 !important;
+      padding:4px !important;
+      border:1px solid var(--fleet-line) !important;
+      border-radius:10px !important;
+      font-size:12px !important;
+      font-weight:650 !important;
+      line-height:1.2 !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button.active {
+      border-color:var(--fleet-accent) !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,#timelineIntervalCard) > :is(.data-source-options,.button-grid-3,#timelineIntervalToggle) > button {
+      font-size:11.5px !important;
+      white-space:nowrap !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .opacity-card .control-row {
+      flex:0 0 auto !important;
+      height:var(--nww-control-slider) !important;
+      min-height:0 !important;
+      padding:0 !important;
+      margin:0 !important;
+      display:flex !important;
+      align-items:center !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #opacitySlider {
+      width:100% !important;
+      margin:0 !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader { justify-content:flex-start !important; }
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader .legend-header-actions { margin:0 !important; }
+    html body[data-shorelysafe-ui] #leftPanel #legendBody,
+    html body[data-shorelysafe-ui] #leftPanel #legendList { margin:0 !important; padding:0 !important; }
+    html body[data-shorelysafe-ui] #leftPanel .depth-legend-labels {
+      font-size:10px !important;
+      font-weight:600 !important;
+      line-height:14px !important;
+      letter-spacing:.04em !important;
+    }
+  }
+  @media (min-width:901px) and (max-width:1320px) and (min-height:561px), (min-width:901px) and (max-width:1320px) and (pointer:fine), (min-width:901px) and (max-width:1320px) and (pointer:none) {
+    html { --nww-left-width:340px; --nww-right-width:272px; }
+  }
+  @media (min-width:901px) and (max-width:1120px) and (min-height:561px), (min-width:901px) and (max-width:1120px) and (pointer:fine), (min-width:901px) and (max-width:1120px) and (pointer:none) {
+    html { --nww-left-width:320px; --nww-right-width:256px; }
+  }
+  @media (min-width:901px) and (min-height:561px) and (max-height:800px), (min-width:901px) and (pointer:fine) and (max-height:800px), (min-width:901px) and (pointer:none) and (max-height:800px) {
+    html body[data-shorelysafe-ui] #leftPanel {
+      --nww-control-padding:6px;
+      --nww-control-gap:4px;
+      --nww-control-button:36px;
+      --nww-control-slider:16px;
+    }
+  }
+}
+
+/* Keep the selected date in the rail; the month grid has its own bounded dialog. */
+@layer floodmapper-reference-ui {
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard:not(.active),
+  html body[data-shorelysafe-ui] #observedCalendarModal[hidden] {
+    display:none !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard .day-nav {
+    display:grid !important;
+    grid-template-columns:36px minmax(0,1fr) 36px !important;
+    gap:6px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard :is(.calendar-nav-btn,.day-nav-center,.observed-date-input) {
+    position:static !important;
+    box-sizing:border-box !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:var(--nww-control-button,44px) !important;
+    min-height:0 !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    border-radius:10px !important;
+    transform:none !important;
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard .observed-date-input {
+    padding:0 4px !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedCalendarOpenBtn {
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:6px !important;
+    min-width:0 !important;
+    height:28px !important;
+    min-height:28px !important;
+    padding:2px 10px !important;
+    border:1px solid var(--fleet-accent) !important;
+    border-radius:8px !important;
+    background:var(--accent-soft) !important;
+    color:var(--fleet-text) !important;
+    font-weight:600 !important;
+    white-space:nowrap !important;
+    cursor:pointer !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarOpenBtn .nww-calendar-icon {
+    width:16px;
+    height:16px;
+    flex:0 0 16px;
+    fill:none;
+    stroke:var(--fleet-accent);
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal {
+    position:fixed !important;
+    inset:0 !important;
+    z-index:11000 !important;
+    display:grid !important;
+    place-items:center !important;
+    box-sizing:border-box !important;
+    padding:16px !important;
+    background:rgba(3,9,18,.55) !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-dialog {
+    box-sizing:border-box !important;
+    width:min(420px,100%) !important;
+    min-width:0 !important;
+    max-height:calc(100dvh - 32px) !important;
+    overflow:auto !important;
+    overscroll-behavior:contain !important;
+    display:grid !important;
+    gap:12px !important;
+    padding:16px !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:18px !important;
+    background:#0b1220 !important;
+    color:var(--fleet-text) !important;
+    box-shadow:0 16px 60px rgba(0,0,0,.35) !important;
+    font:var(--nww-pane-font)/1.25 Inter,system-ui,sans-serif !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-heading {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal h2 {
+    margin:0 !important;
+    font-size:18px !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal button {
+    box-sizing:border-box !important;
+    min-width:0 !important;
+    min-height:44px !important;
+    padding:4px !important;
+    border-radius:10px !important;
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+    transform:none !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarCloseBtn {
+    flex:0 0 44px !important;
+    width:44px !important;
+    font-size:24px !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-toolbar {
+    display:grid !important;
+    grid-template-columns:44px minmax(0,1fr) 44px !important;
+    gap:6px !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal :is(.calendar-head,.calendar-grid) {
+    position:static !important;
+    display:grid !important;
+    grid-template-columns:repeat(7,minmax(0,1fr)) !important;
+    gap:6px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-head div {
+    font-size:var(--nww-pane-detail) !important;
+    text-align:center !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-day {
+    height:44px !important;
+    min-height:44px !important;
+    max-height:none !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-key {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-key-item {
+    min-width:0 !important;
+    gap:5px !important;
+    padding:6px 2px !important;
+    font-size:var(--nww-pane-detail) !important;
+    white-space:nowrap !important;
+  }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard.calendar-card { order:2 !important; }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard .day-nav {
+      grid-template-columns:44px minmax(0,1fr) 44px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedCalendarOpenBtn {
+      height:44px !important;
+      min-height:44px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedDateInput {
+      font-size:16px !important;
+    }
+    html body[data-shorelysafe-ui] #observedCalendarModal { padding:8px !important; }
+    html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-dialog {
+      padding:12px !important;
+      max-height:calc(100dvh - 16px) !important;
+    }
+  }
+}
+
+/* One text scale in the same canonical layer on every host. */
+html {
+  --nww-pane-font:14px;
+  --nww-pane-heading:15px;
+  --nww-pane-detail:13px;
+}
+@media (min-width:1400px) {
+  html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
+}
+@media (min-width:1800px) {
+  html { --nww-pane-font:16px; --nww-pane-heading:17px; --nww-pane-detail:15px; }
+}
+@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
+}
+
+@layer floodmapper-reference-ui {
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(.section-title h2,.legend-header-text,.legend-title,.rail-head h3) {
+    font-size:var(--nww-pane-heading) !important;
+    line-height:1.25 !important;
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(button:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn),.pill,.layer-name,.top-tide-main,.top-tide-sub,.top-tide-rank,.town-address-input,.town-address-label,select,.observed-date-input) {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+    letter-spacing:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(.nww-layer-detail,.right-rail-note,.town-address-status,.depth-legend-labels,.legend-row,.legend-label) {
+    font-size:var(--nww-pane-detail) !important;
+    line-height:1.25 !important;
+    letter-spacing:0 !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) section.nww-layers-card.layers-card .layer-name {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-item {
+    grid-template-columns:2.2ch minmax(0,1fr) auto !important;
+    gap:4px !important;
+  }
+  /* Keep the disclosure as compact as the flood rows above it. */
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-more-btn {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:6px !important;
+    box-sizing:border-box !important;
+    height:auto !important;
+    min-height:34px !important;
+    padding:4px 10px !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:10px !important;
+    background:rgba(255,255,255,.055) !important;
+    color:var(--fleet-text) !important;
+    font-weight:600 !important;
+    box-shadow:none !important;
+    transform:none !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-more-btn:hover:not(:disabled) {
+    border-color:var(--fleet-accent) !important;
+    background:rgba(96,165,250,.12) !important;
+  }
+  html body[data-shorelysafe-ui] .top-tide-more-icon {
+    display:block !important;
+    width:14px !important;
+    height:14px !important;
+    flex:0 0 14px !important;
+    color:var(--fleet-accent) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-main {
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .town-address-actions > * {
+    height:auto !important;
+    min-height:36px !important;
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .town-address-input {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+    html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-list { gap:0 !important; }
+    html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-item {
+      min-height:34px !important;
+      padding:4px 6px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel { --nww-control-button:44px; }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      font-size:var(--nww-pane-font) !important;
+      white-space:normal !important;
+      overflow-wrap:normal !important;
+      word-break:normal !important;
+    }
+    @media (max-height:800px) {
+      /* Short desktop windows keep the same text size with less empty padding. */
+      html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
+        --nww-control-padding:3px;
+        --nww-control-gap:2px;
+        --nww-control-button:36px;
+        gap:4px !important;
+      }
+    }
+    html body[data-shorelysafe-ui] #leftPanel .section-title > .pill {
+      font-size:var(--nww-pane-font) !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel .depth-legend-labels {
+      font-size:var(--nww-pane-detail) !important;
+      line-height:1.25 !important;
+    }
+  }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      height:auto !important;
+      min-height:48px !important;
+      padding:4px !important;
+      white-space:normal !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel .top-tide-more-btn { min-height:44px !important; }
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel .town-address-input {
+      font-size:16px !important;
+    }
+  }
+}
+
+@layer floodmapper-reference-polish {
+/* Reference: approved Highlands desktop interface, with responsive town labels. */
+html body[data-floodmapper-reference] {--fleet-panel:rgba(17,24,38,.97);--fleet-text:#eaf0ff;--fleet-line:rgba(191,219,254,.22);--fleet-accent:#60a5fa;--nw-ui-blue:#60a5fa;--nw-ui-blue-rgb:96,165,250;--accent-soft:rgba(96,165,250,.16);--text:#eaf0ff;--bg:#0b1220;--line:rgba(191,219,254,.22);}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) {background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;filter:none!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) > :is(.panel-card,.rail-card,#legendDock),
+html body[data-floodmapper-reference] #legendDock {background:var(--fleet-panel)!important;border:1px solid var(--fleet-line)!important;border-radius:16px!important;box-shadow:none!important;backdrop-filter:none!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) .right-logo-card {display:none!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail) .section-title>.pill:not(#opacityText) {display:none!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) button:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {color:var(--fleet-text)!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) button.active {color:var(--fleet-accent)!important;border-color:var(--fleet-accent)!important;background:var(--accent-soft)!important;}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail) .snapshot-card {display:none!important;}
+html body[data-floodmapper-reference] #mapTitleBadge {visibility:visible!important;opacity:1!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;background:#171f2e!important;border:1px solid var(--fleet-line)!important;border-radius:999px!important;box-shadow:0 12px 26px rgba(2,6,23,.15)!important;z-index:1100!important;overflow:hidden!important;box-sizing:border-box!important;}
+html body[data-floodmapper-reference] #mapTitleBadge #mapTitleText {display:block!important;min-width:0!important;max-width:100%!important;white-space:normal!important;text-align:center!important;font:850 clamp(19px,2.4vw,36px)/1.08 system-ui!important;letter-spacing:-1px!important;color:#dbeafe!important;overflow-wrap:normal!important;}
+html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo[src]:not([src=""]) {display:block!important;width:46px!important;height:46px!important;min-width:46px!important;object-fit:contain!important;background:#fff!important;border-radius:50%!important;padding:3px!important;}
+html body[data-floodmapper-reference] #mapTitleBadge #mapTitlePartnerLogo {display:block!important;width:104px!important;min-width:104px!important;max-width:104px!important;height:42px!important;max-height:42px!important;object-fit:contain!important;background:white!important;border-radius:6px!important;padding:3px 5px!important;}
+html body[data-floodmapper-reference] #leftPanel>.data-source-card .button-grid-2 {grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+html body[data-floodmapper-reference] #leftPanel>.data-source-card .button-grid-2:has(>button:nth-child(3)) {grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+html body[data-floodmapper-reference] #leftPanel #forecastScenarioCard[hidden],html body[data-floodmapper-reference] #leftPanel #calendarCard:not(.active) {display:none!important;}
+html body[data-floodmapper-reference] .opacity-card .control-row {display:grid!important;grid-template-columns:minmax(0,1fr)!important;justify-items:center!important;}
+html body[data-floodmapper-reference] #opacityText {position:static!important;display:block!important;align-self:center!important;text-align:center!important;background:none!important;border:0!important;width:100%!important;padding:0!important;}
+html body[data-floodmapper-reference] #timelineBubble {translate:none!important;scale:none!important;transform:none!important;}
+html body[data-floodmapper-reference] #timelineBubble .timeline-bubble-stage {background:rgba(96,165,250,.25)!important;border:1px solid #bfdbfe!important;border-radius:999px!important;color:#f8fbff!important;white-space:nowrap!important;}
+html body[data-floodmapper-reference] #timelineDock .timeline-day {background-image:var(--fleet-day-gradient,var(--timeline-day-gradient,var(--county-day-gradient,none)))!important;background-size:100% 100%!important;text-shadow:0 1px 3px #000,0 0 6px #000!important;}
+html body[data-floodmapper-reference] #timelineDock .timeline-key-item::after {content:none!important;}
+html body[data-floodmapper-reference] #timelineDock .timeline-key-label {color:#eaf0ff!important;}
+html body[data-floodmapper-reference] #timelineDock :is(#stopBtn,#reloadBtn,#timelineMeta) {display:none!important;}
+html body[data-floodmapper-reference] #timelineDock :is(.timeline-top,.timeline-controls) {display:contents!important;}
+html body[data-floodmapper-reference] #rightRail #downloadCard :is(.rail-head,.download-launch-meta) {display:none!important;}
+html body[data-floodmapper-reference] :is(#mapperTutorialBtn,#avalonTourBtn) {background:var(--fleet-panel)!important;border:1px solid var(--fleet-line)!important;border-radius:12px!important;color:#eaf0ff!important;min-height:44px!important;width:100%!important;box-sizing:border-box!important;}
+html body[data-floodmapper-reference] :is(button,input,select,[role="switch"]):focus-visible {outline:2px solid #7dd3fc!important;outline-offset:3px!important;}
+html body[data-floodmapper-reference] #nwDefaultNavControl {filter:drop-shadow(0 8px 12px rgba(2,6,23,.2))!important;}
+html body[data-floodmapper-reference] #nwDefaultNavControl .nw-direction-wheel {background:#142238!important;border-color:#60a5fa!important;}
+html body[data-floodmapper-reference] #nwDefaultNavControl :is(.nw-simple-view,.nw-simple-zoom) {background:#142238!important;border-color:#60a5fa!important;color:#60a5fa!important;}
+@media(min-width:901px){
+ html body[data-floodmapper-reference] :is(#leftPanel,#rightRail){position:absolute!important;display:flex!important;flex-direction:column!important;gap:6px!important;padding:0!important;margin:0!important;border:0!important;}
+ html body[data-floodmapper-reference] #leftPanel {width:300px!important;left:16px;top:16px;}
+ html body[data-floodmapper-reference] #rightRail {width:280px!important;right:16px;top:16px;}
+ html body[data-floodmapper-reference] #leftPanel>#legendDock {position:relative!important;inset:auto!important;width:100%!important;transform:none!important;}
+ html body[data-floodmapper-reference] #leftPanel>.mobile-top-tides-card {display:none!important;}
+ html body[data-floodmapper-reference] #rightRail .top-tide-list {max-height:180px!important;overflow:auto!important;}
+ html body[data-floodmapper-reference] #rightRail .top-tide-item:nth-child(n+3) {display:none!important;}
+ html body[data-floodmapper-reference] #timelineBubble {position:absolute!important;top:auto!important;bottom:120px!important;left:24px!important;right:auto!important;width:max-content!important;min-width:0!important;max-width:calc(100vw - 48px)!important;height:auto!important;min-height:44px!important;margin:0!important;padding:9px 14px!important;display:flex!important;align-items:center!important;gap:6px!important;background:#111827!important;border:1px solid #7594ad!important;border-radius:999px!important;box-sizing:border-box!important;}
+ html body[data-floodmapper-reference] #timelineBubble .timeline-bubble-current {font:800 23px/1.1 system-ui!important;white-space:nowrap!important;}
+ html body[data-floodmapper-reference] #timelineBubble .timeline-bubble-stage {font:800 22px/1.1 system-ui!important;padding:3px 8px!important;}
+ html body[data-floodmapper-reference] #timelineDock .timeline-day {flex:1 1 0!important;width:0!important;max-width:none!important;}
+ html body[data-floodmapper-reference] #mobileControlsClose {display:none!important;}
+ html body[data-floodmapper-reference] #townAddressCard {height:auto!important;min-height:0!important;max-height:none!important;}
+}
+@media(max-width:1100px) and (min-width:901px){html body[data-floodmapper-reference] #mapTitleBadge #mapTitlePartnerLogo {width:64px!important;min-width:64px!important;height:28px!important;}html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo[src]:not([src=""]){width:30px!important;min-width:30px!important;height:30px!important;}}
+@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ html body[data-floodmapper-reference] #mapTitleBadge {z-index:6100!important;gap:5px!important;}
+ html body[data-floodmapper-reference] #mapTitleBadge #mapTitleText {font:750 14px/1.15 system-ui!important;letter-spacing:0!important;text-align:left!important;}
+ html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo {display:none!important;}
+ html body[data-floodmapper-reference] #mapTitleBadge #mapTitlePartnerLogo {display:none!important;}
+ html body[data-floodmapper-reference].mobile-controls-open #mobileControlsToggle {display:none!important;}
+ html body[data-floodmapper-reference] #leftPanel #mobileControlsClose {position:fixed!important;top:calc(var(--cm-top,8px) + 12px)!important;right:calc(var(--cm-right,8px) + 12px)!important;left:auto!important;bottom:auto!important;transform:none!important;margin:0!important;z-index:100005!important;}
+ html body[data-floodmapper-reference] #leftPanel #nwwMobileControlHeader {top:0!important;margin:0!important;padding:14px 12px 12px!important;}
+ html body[data-floodmapper-reference] #nwwMobileControlHeader .nww-drawer-heading {padding-right:52px!important;}
+ html body[data-floodmapper-reference] #timelineDock #timelineBubble {left:62px!important;right:106px!important;width:auto!important;min-width:0!important;max-width:none!important;height:44px!important;min-height:44px!important;padding:0 3px!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:5px!important;overflow:hidden!important;}
+ html body[data-floodmapper-reference] #timelineDock #timelineBubble .timeline-bubble-current {min-width:0!important;white-space:normal!important;text-align:center!important;font:700 12px/15px system-ui!important;}
+ html body[data-floodmapper-reference] #timelineDock #timelineBubble .timeline-bubble-stage {flex:0 0 auto!important;font:650 12px/16px system-ui!important;padding:3px 5px!important;margin:0!important;}
+ html body[data-floodmapper-reference] #timelineDock #timelineStepBack {left:auto!important;right:54px!important;top:8px!important;width:38px!important;height:44px!important;}
+ html body[data-floodmapper-reference] #timelineDock #timelineStepForward {left:auto!important;right:8px!important;top:8px!important;width:38px!important;height:44px!important;}
+}
+html body[data-floodmapper-reference] #mapTitleLogo[hidden] {display:none!important;}
+html body[data-floodmapper-reference] #rightRail .top-tide-item {height:auto!important;min-height:34px!important;max-height:none!important;padding:7px 8px!important;}
+html body[data-floodmapper-reference] #rightRail .top-tide-list {min-height:0!important;gap:5px!important;}
+html body[data-floodmapper-reference] #rightRail .top-tide-more-btn {height:auto!important;min-height:34px!important;padding:6px!important;}
+@media(min-width:901px){
+html body[data-floodmapper-reference] #leftPanel>.data-source-card{order:1!important;}
+html body[data-floodmapper-reference] #leftPanel>#forecastScenarioCard{order:2!important;}
+html body[data-floodmapper-reference] #leftPanel>#calendarCard{order:3!important;}
+html body[data-floodmapper-reference] #leftPanel>#returnIntervalCard{order:3!important;}
+html body[data-floodmapper-reference] #leftPanel>.overlay-card{order:4!important;}
+html body[data-floodmapper-reference] #leftPanel>.datum-card{order:5!important;}
+html body[data-floodmapper-reference] #leftPanel>.opacity-card{order:6!important;}
+html body[data-floodmapper-reference] #leftPanel>#timelineIntervalCard{order:7!important;}
+html body[data-floodmapper-reference] #leftPanel>#legendDock{order:8!important;}
+html body[data-floodmapper-reference] #timelineDock .timeline-day{background-image:var(--fleet-day-gradient,var(--timeline-day-gradient,var(--county-day-gradient,none)))!important;}
+html body[data-floodmapper-reference] .leaflet-control-zoom {overflow:hidden!important;border:1px solid #60a5fa!important;border-radius:10px!important;box-shadow:0 8px 18px #0003!important;}
+html body[data-floodmapper-reference] .leaflet-control-zoom a {width:38px!important;height:38px!important;line-height:38px!important;background:#142238!important;color:#60a5fa!important;border-color:#60a5fa!important;}
+}
+@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ html body[data-floodmapper-reference].mobile-controls-open #leftPanel {background:#0b1220!important;border:1px solid #7594ad!important;border-radius:18px!important;box-shadow:0 18px 60px #0008!important;}
+ html body[data-floodmapper-reference] #leftPanel #nwwMobileControlHeader {background:#0b1220!important;}
+ html body[data-floodmapper-reference] #leftPanel .snapshot-card {display:none!important;}
+ html body[data-floodmapper-reference] #leftPanel .data-source-card{order:1!important;}
+ html body[data-floodmapper-reference] #leftPanel #forecastScenarioCard{order:2!important;}
+ html body[data-floodmapper-reference] #leftPanel #timelineIntervalCard{order:4!important;}
+}
+html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) button.active:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {color:#60a5fa!important;}
+html body[data-floodmapper-reference] #rightRail #downloadCard #openDownloadModalBtn {color:#60a5fa!important;}
+@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ html body[data-floodmapper-reference]:not(.observed-mode):not(.return-interval-mode) #leftPanel[data-nww-section="forecast"] #forecastScenarioCard:not([hidden]) {display:flex!important;}
+}
+html body[data-floodmapper-reference] #timelineDock .timeline-trackRow {width:auto!important;}
+html body[data-floodmapper-reference] #timelineDock #hourSlider {width:100%!important;box-sizing:border-box!important;}
+html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start,.timeline-bubble-end,.timeline-bubble-first,.timeline-bubble-last) {display:none!important;}
+@media(min-width:901px){html body[data-floodmapper-reference] #timelineDock :is(#timelinePreviousDay,#timelineNextDay){display:none!important;}}
+@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ html body[data-floodmapper-reference] #timelineDock #timelineDayTabs .timeline-day:not(.active){display:none!important;}
+ html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock {position:fixed!important;top:calc(12px + env(safe-area-inset-top))!important;right:calc(112px + env(safe-area-inset-right))!important;left:auto!important;bottom:auto!important;width:62px!important;min-width:62px!important;max-width:62px!important;height:44px!important;min-height:44px!important;max-height:44px!important;padding:0!important;margin:0!important;border-radius:10px!important;z-index:6200!important;overflow:hidden!important;cursor:pointer!important;}
+ html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock>* {display:none!important;}
+ html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock::after {content:'Key'!important;position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;font:700 14px/1 system-ui!important;color:#eaf0ff!important;}
+ html body[data-floodmapper-reference].mobile-controls-open #legendDock {visibility:hidden!important;}
+}
+@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #timelineBubble {left:12px!important;right:66px!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #playBtn {left:auto!important;right:8px!important;top:8px!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock :is(#timelinePreviousDay,#timelineNextDay) {position:absolute!important;top:60px!important;display:flex!important;align-items:center!important;justify-content:center!important;width:64px!important;min-width:64px!important;max-width:64px!important;height:44px!important;margin:0!important;padding:4px!important;background:#172336!important;color:#eaf0ff!important;border:1px solid #64748b!important;border-radius:10px!important;z-index:4!important;font:600 12px system-ui!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #timelinePreviousDay {left:8px!important;right:auto!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #timelineNextDay {left:auto!important;right:8px!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #timelineDayTabs {left:80px!important;right:80px!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineBubble .timeline-bubble-edge {display:none!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] .leaflet-top.leaflet-right {top:76px!important;right:8px!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #mobileControlsToggle {font-size:0!important;}
+ html body[data-floodmapper-reference][data-fleet-legacy-phone] #mobileControlsToggle::after {content:'Controls'!important;font:650 14px/44px system-ui!important;}
+}
+@media(min-width:901px){
+ html body[data-floodmapper-reference] #timelineDock .timeline-trackRow {position:absolute!important;left:84px!important;right:20px!important;top:70px!important;bottom:auto!important;width:auto!important;height:24px!important;padding:0!important;margin:0!important;}
+ html body[data-floodmapper-reference] #timelineDock #hourSlider {position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;padding:0!important;margin:0!important;transform:none!important;height:24px!important;background:var(--nww-stage-gradient,linear-gradient(#94a3b8,#94a3b8)) center / calc(100% - 26px) 5px no-repeat!important;}
+ html body[data-floodmapper-reference] #timelineDock #hourSlider::-webkit-slider-runnable-track {height:5px!important;background:transparent!important;box-shadow:none!important;border:0!important;}
+ html body[data-floodmapper-reference] #timelineDock #hourSlider::-moz-range-track {height:5px!important;background:transparent!important;box-shadow:none!important;border:0!important;}
+}
+
+}</style>
+
 <style id="shorelysafe-visible-brand-20261015">
 @layer shorelysafe-brand;
 @layer shorelysafe-brand {
@@ -14946,7 +16515,7 @@ html body.mobile-optimized #mobileRailMount > .layers-card:has(.shorelysafe-came
 }
 </style>
 </head>
-<body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013">
+<body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261016" data-county-viewport="20261015">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
   <div id="nwSiteLoader" role="status" aria-live="polite" aria-label="Loading Ventnor City Flood Mapper">
     <div class="nw-loader-card">
@@ -31901,6 +33470,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
   }
 
   function stableLayoutFix(){
+      if(document.body.hasAttribute("data-floodmapper-reference")) return;
     if (window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse)').matches) return;
     var left = document.getElementById('leftPanel');
     var legend = document.getElementById('legendDock');
@@ -35629,6 +37199,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 
   function applyObservedPaneFit(){
+      if(document.body.hasAttribute("data-floodmapper-reference")) return;
 
     return;
 
@@ -36282,6 +37853,7 @@ html body #timelineDock #hourSlider{
   }
 
   function applyStablePaneSizes(){
+      if(document.body.hasAttribute("data-floodmapper-reference")) return;
     var desktop = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 900;
     if (!desktop) {
       clearStableDesktopPaneSizes();
@@ -36466,6 +38038,7 @@ html body #timelineDock #hourSlider{
   }
 
   function watchLeftPaneStyle(){
+      if(document.body.hasAttribute("data-floodmapper-reference")) return;
     var left = document.getElementById("leftPanel");
     if (!left || left.dataset.pjStablePaneStyleWatch === "1") return;
     left.dataset.pjStablePaneStyleWatch = "1";
@@ -40719,535 +42292,7 @@ html body #mapTitleBadge #mapTitleLogo{
 
 
 <script src="assets/avalon-mobile.js?v=20260923-2"></script>
-<script id="shorelysafe-responsive-fit-v14">
-(function () {
-  'use strict';
-  const owned = new Map();
-  let legendOrigin = null;
-  let compactLegendWidth = null;
-  let pending = false;
-  let lastCompact = null;
-  let lastCompactWidth = null;
-  let shortLandscapeApplied = false;
-  const drawerLegend = /\/(avalon-test|highlands-beta|salem-beta)\/?$/.test(location.pathname);
-  function set(el, name, value) {
-    if (!el) return;
-    let props = owned.get(el);
-    if (!props) { props = new Map(); owned.set(el, props); }
-    if (!props.has(name)) props.set(name, [el.style.getPropertyValue(name), el.style.getPropertyPriority(name)]);
-    if (el.style.getPropertyValue(name) !== value || el.style.getPropertyPriority(name) !== 'important')
-      el.style.setProperty(name, value, 'important');
-  }
-  function restore(el) {
-    const props = owned.get(el);
-    if (!props) return;
-    for (const [name, [value, priority]] of props) {
-      if (value) el.style.setProperty(name, value, priority);
-      else el.style.removeProperty(name);
-    }
-    owned.delete(el);
-  }
-  function release(el, name) {
-    const props = owned.get(el);
-    if (!props?.has(name)) return;
-    const [value, priority] = props.get(name);
-    if (value) el.style.setProperty(name, value, priority);
-    else el.style.removeProperty(name);
-    props.delete(name);
-    if (!props.size) owned.delete(el);
-  }
-  function shown(el) {
-    if (!el) return false;
-    const s = getComputedStyle(el);
-    return s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0' && el.getBoundingClientRect().width > 0;
-  }
-  function fitTitleContent(title, label, resetLabel = true) {
-    if (!shown(title)) return;
-    const overflow = () => {
-      const box = title.getBoundingClientRect();
-      const children = [...title.children].filter(shown).map(el => el.getBoundingClientRect());
-      if (!children.length) return Math.max(0, title.scrollWidth - title.clientWidth);
-      return Math.max(0, box.left - Math.min(...children.map(r => r.left))) +
-        Math.max(0, Math.max(...children.map(r => r.right)) - box.right) +
-        (label ? Math.max(0, label.scrollWidth - label.clientWidth) : 0);
-    };
-    if (label && resetLabel) restore(label);
-    if (overflow() <= 2) return;
-    if (label) {
-      set(title, 'gap', '4px');
-      for (let i = 0; i < 20 && overflow() > 2; i++) {
-        const size = parseFloat(getComputedStyle(label).fontSize) || 16;
-        if (size <= 11) break;
-        set(label, 'font-size', Math.max(11, size - 1) + 'px');
-      }
-      set(label, 'min-width', '0px');
-      set(label, 'overflow', 'hidden');
-      set(label, 'text-overflow', 'ellipsis');
-    } else {
-      for (let i = 0; i < 20 && overflow() > 2; i++) {
-        const size = parseFloat(getComputedStyle(title).fontSize) || 24;
-        if (size <= 12) break;
-        set(title, 'font-size', Math.max(12, size - 1) + 'px');
-      }
-    }
-    set(title, 'overflow', 'hidden');
-  }
-  function clearStaleMobileTimeline() {
-    const tabs = document.getElementById('timelineDayTabs');
-    const key = document.getElementById('timelineFloodKey');
-    const track = document.querySelector('#timelineDock .timeline-trackRow');
-    if (tabs?.style.getPropertyValue('position') !== 'relative' &&
-        key?.style.getPropertyValue('display') !== 'flex' &&
-        track?.style.getPropertyValue('position') !== 'relative') return;
-    for (const el of [
-      document.querySelector('#timelineDock .timeline-top'),
-      document.querySelector('#timelineDock .timeline-controls'),
-      key, tabs, track,
-      document.getElementById('hourSlider'),
-      document.getElementById('playBtn')
-    ]) if (el?.hasAttribute('style')) el.removeAttribute('style');
-  }
-  function ensureDrawerClose(left) {
-    const nativeClose = document.getElementById('mobileControlsClose');
-    if (nativeClose) {
-      set(nativeClose, 'z-index', '10000');
-      return;
-    }
-    let button = document.getElementById('shorelyResponsiveClose');
-    if (!button) {
-      button = document.createElement('button');
-      button.id = 'shorelyResponsiveClose';
-      button.type = 'button';
-      button.textContent = '×';
-      button.setAttribute('aria-label', 'Close controls');
-      button.addEventListener('click', () => {
-        document.getElementById('mobileControlsToggle')?.click();
-      });
-      left.prepend(button);
-    }
-    const styles = {
-      display: document.body.classList.contains('mobile-controls-open') ? 'grid' : 'none',
-      'place-items': 'center', position: 'sticky', top: '0px', 'z-index': '9000',
-      'align-self': 'flex-end', order: '-100', flex: '0 0 auto',
-      width: '36px', height: '36px', 'min-width': '36px',
-      margin: '0 0 8px auto', padding: '0px', 'border-radius': '10px',
-      border: '1px solid rgba(255,255,255,.2)', background: '#263449',
-      color: '#fff', 'font-size': '26px', 'line-height': '1', cursor: 'pointer'
-    };
-    for (const [name, value] of Object.entries(styles)) set(button, name, value);
-  }
-  function fitShortLandscapeNavigation(active) {
-    const source = document.getElementById('nwDefaultNavControl');
-    if (!source) return;
-    let compact = document.getElementById('shorelyCompactMapNav');
-    if (!compact) {
-      compact = document.createElement('div');
-      compact.id = 'shorelyCompactMapNav';
-      compact.setAttribute('aria-label', 'Map navigation');
-      for (const [text, label, selector] of [
-        ['+', 'Zoom in', '.nw-simple-zoom-in, .nw-earth-zoom-in'],
-        ['−', 'Zoom out', '.nw-simple-zoom-out, .nw-earth-zoom-out'],
-        ['2D', 'Switch map view', '.nw-simple-view']
-      ]) {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = text;
-        button.setAttribute('aria-label', label);
-        button.addEventListener('click', () => source.querySelector(selector)?.click());
-        compact.appendChild(button);
-      }
-      document.body.appendChild(compact);
-    }
-    if (!active) { restore(source); restore(compact); for (const child of compact.children) restore(child); compact.style.display = 'none'; return; }
-    set(source, 'display', 'none');
-    for (const [name, value] of Object.entries({display:'grid',position:'fixed',top:'60px',right:'8px',width:'36px',gap:'3px','z-index':'2000','pointer-events':'auto'})) set(compact,name,value);
-    for (const button of compact.children) for (const [name, value] of Object.entries({width:'36px',height:'32px','min-width':'36px','min-height':'32px',padding:'0px',border:'1px solid rgba(164,205,255,.5)','border-radius':'8px',background:'#1d3c65',color:'#fff','font-size':'15px','font-weight':'800','line-height':'1',cursor:'pointer'})) set(button,name,value);
-  }
-  function fitLeafletNavigation(title, banner, timeline) {
-    const zoom = document.querySelector('.leaflet-top.leaflet-right .leaflet-control-zoom');
-    let compact = document.getElementById('shorelyCompactLeafletZoom');
-    if (!zoom) { if (compact) set(compact, 'display', 'none'); return; }
-    // Town layout setters rewrite top, margin and transform; translate remains independent.
-    release(zoom, 'translate');
-    release(zoom, 'opacity');
-    release(zoom, 'pointer-events');
-    if (!shown(zoom)) { if (compact) set(compact, 'display', 'none'); return; }
-    const landscape = innerWidth <= 900 && innerWidth > innerHeight && innerHeight <= 500;
-    if (landscape && !document.getElementById('nwDefaultNavControl')) {
-      const blockerBottom = Math.max(...[title, banner].filter(shown).map(el => el.getBoundingClientRect().bottom), 52);
-      const timelineTop = timeline?.getBoundingClientRect().top ?? innerHeight;
-      const top = Math.ceil(blockerBottom + 6);
-      if (top + 36 <= timelineTop - 5) {
-        if (!compact) {
-          compact = document.createElement('div');
-          compact.id = 'shorelyCompactLeafletZoom';
-          compact.setAttribute('aria-label', 'Map zoom');
-          for (const [symbol, label, selector] of [
-            ['+', 'Zoom in', '.leaflet-control-zoom-in'],
-            ['−', 'Zoom out', '.leaflet-control-zoom-out']
-          ]) {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.textContent = symbol;
-            button.setAttribute('aria-label', label);
-            button.addEventListener('click', () => zoom.querySelector(selector)?.click());
-            compact.appendChild(button);
-          }
-          document.body.appendChild(compact);
-        }
-        for (const [name, value] of Object.entries({display:'flex',position:'fixed',top:top+'px',right:'8px',width:'78px',height:'34px',gap:'4px','z-index':'4000','pointer-events':'auto'})) set(compact,name,value);
-        for (const button of compact.children) for (const [name, value] of Object.entries({width:'37px',height:'34px','min-width':'37px','min-height':'34px',padding:'0px',border:'1px solid rgba(164,205,255,.5)','border-radius':'8px',background:'#1d3c65',color:'#fff','font-size':'19px','font-weight':'800','line-height':'1',cursor:'pointer'})) set(button,name,value);
-      } else if (compact) set(compact, 'display', 'none');
-      set(zoom, 'opacity', '0');
-      set(zoom, 'pointer-events', 'none');
-      return;
-    }
-    if (compact) set(compact, 'display', 'none');
-    const zr = zoom.getBoundingClientRect();
-    const rightPane = document.getElementById('rightRail');
-    const right = rightPane?.children.length && shown(rightPane) ? rightPane.getBoundingClientRect() : null;
-    const shiftX = right && zr.top < right.bottom - 6 && zr.bottom > right.top + 6 &&
-      zr.right > right.left - 8 && zr.left < right.right ? Math.floor(right.left - 8 - zr.right) : 0;
-    const candidateLeft = zr.left + shiftX;
-    const candidateRight = zr.right + shiftX;
-    let blockerBottom = 0;
-    for (const blocker of [title, banner]) {
-      if (!shown(blocker)) continue;
-      const r = blocker.getBoundingClientRect();
-      if (Math.min(r.right, candidateRight) - Math.max(r.left, candidateLeft) > 6 &&
-          Math.min(r.bottom, zr.bottom) - Math.max(r.top, zr.top) > 6)
-        blockerBottom = Math.max(blockerBottom, r.bottom);
-    }
-    const shiftY = blockerBottom ? Math.max(0, Math.ceil(blockerBottom + 8 - zr.top)) : 0;
-    const leftPane = document.getElementById('leftPanel');
-    const left = shown(leftPane) ? leftPane.getBoundingClientRect() : null;
-    const candidateBottom = zr.bottom + shiftY;
-    const crossesLeft = left && candidateRight > left.left + 6 && candidateLeft < left.right - 6 &&
-      candidateBottom > left.top + 6 && zr.top + shiftY < left.bottom - 6;
-    if (candidateLeft < 4 || candidateRight > innerWidth - 4 || crossesLeft ||
-        (timeline && candidateBottom > timeline.getBoundingClientRect().top - 4)) {
-      set(zoom, 'opacity', '0');
-      set(zoom, 'pointer-events', 'none');
-    } else if (shiftX || shiftY) set(zoom, 'translate', shiftX + 'px ' + shiftY + 'px');
-  }
-  function fit() {
-    pending = false;
-    const left = document.getElementById('leftPanel');
-    const right = document.getElementById('rightRail');
-    const timeline = document.getElementById('timelineDock');
-    const title = document.getElementById('mapTitleBadge');
-    const legend = document.getElementById('legendDock');
-    const banner = document.getElementById('topBanner');
-    if (!left || !right || !timeline || !title) return;
-    const compact = matchMedia('(max-width: 900px)').matches || document.body.classList.contains('mobile-optimized');
-    const switched = lastCompact !== compact;
-    const tabs = document.getElementById('timelineDayTabs');
-    const track = timeline.querySelector('.timeline-trackRow');
-    const play = document.getElementById('playBtn');
-    const slider = document.getElementById('hourSlider');
-    const toggle = document.getElementById('mobileControlsToggle');
-    const shortLandscape = compact && !!tabs && !!track && innerWidth > innerHeight && innerHeight <= 500 &&
-      getComputedStyle(tabs).position === 'absolute' && getComputedStyle(track).position === 'absolute';
-    if (!shortLandscape && shortLandscapeApplied) {
-      for (const el of [toggle,banner,timeline,tabs,track,slider,play]) restore(el);
-      shortLandscapeApplied = false;
-    }
-    const partnerLogo = document.getElementById('mapTitlePartnerLogo');
-    if (compact && innerWidth <= 360) set(partnerLogo, 'display', 'none');
-    else restore(partnerLogo);
-    if (switched) {
-      restore(title);
-      restore(document.getElementById('mapTitleText'));
-      restore(banner);
-      restore(banner?.querySelector('.banner-text'));
-      restore(legend);
-      restore(left);
-      restore(right);
-      restore(document.getElementById('mobileControlsClose'));
-      lastCompact = compact;
-    }
-    if (compact) {
-      fitShortLandscapeNavigation(shortLandscape);
-      // Reset desktop title coordinates retained by older mapper title fitters.
-      set(title, 'left', 'calc(8px + env(safe-area-inset-left))');
-      set(title, 'right', 'calc(8px + env(safe-area-inset-right))');
-      set(title, 'width', 'auto');
-      set(title, 'min-width', '0px');
-      set(title, 'max-width', 'calc(100vw - 16px - env(safe-area-inset-left) - env(safe-area-inset-right))');
-      set(title, 'transform', 'none');
-      if (!right.children.length) set(right, 'display', 'none');
-      else if (owned.get(right)?.has('display')) restore(right);
-      clearStaleMobileTimeline();
-      ensureDrawerClose(left);
-      set(timeline, 'left', 'calc(8px + env(safe-area-inset-left))');
-      set(timeline, 'right', 'calc(8px + env(safe-area-inset-right))');
-      set(timeline, 'width', 'auto');
-      set(timeline, 'min-width', '0px');
-      set(timeline, 'max-width', 'calc(100vw - 16px)');
-      set(timeline, 'transform', 'none');
-      if (document.body.classList.contains('mobile-controls-open') && shown(left)) {
-        const lr = left.getBoundingClientRect();
-        const tr = timeline.getBoundingClientRect();
-        if (tr.top > lr.top + 80) {
-          const room = Math.floor(tr.top - lr.top - 8);
-          set(left, 'bottom', Math.ceil(innerHeight - tr.top + 8) + 'px');
-          set(left, 'max-height', room + 'px');
-          set(left, 'min-height', '0px');
-          set(left, 'overflow-y', 'auto');
-          set(left, 'overscroll-behavior-y', 'contain');
-        }
-      }
-      if (drawerLegend && legend) {
-        if (!left.contains(legend)) {
-          if (!legendOrigin) legendOrigin = {parent:legend.parentNode,next:legend.nextSibling};
-          left.appendChild(legend);
-        }
-        set(legend, 'position', 'static');
-        set(legend, 'inset', 'auto');
-        set(legend, 'left', 'auto');
-        set(legend, 'right', 'auto');
-        set(legend, 'top', 'auto');
-        set(legend, 'bottom', 'auto');
-        set(legend, 'display', 'block');
-        set(legend, 'width', '100%');
-        set(legend, 'min-width', '0px');
-        set(legend, 'max-width', '100%');
-        set(legend, 'height', 'auto');
-        set(legend, 'max-height', 'none');
-        set(legend, 'transform', 'none');
-        set(legend, 'margin', '0px');
-        set(legend, 'flex', '0 0 auto');
-        set(legend, 'order', '20');
-        set(legend, 'overflow', 'visible');
-      } else if (legendOrigin && legend?.parentNode === left) legendOrigin.parent.insertBefore(legend, legendOrigin.next?.parentNode === legendOrigin.parent ? legendOrigin.next : null);
-      if (!drawerLegend && innerWidth > 360 && owned.get(legend)?.has('top')) restore(legend);
-      if (!drawerLegend && legend && shown(legend)) {
-        const r = legend.getBoundingClientRect();
-        if (compactLegendWidth === null && (r.right > innerWidth - 8 || r.left < 8)) compactLegendWidth = r.width;
-        if (compactLegendWidth !== null) {
-          const room = Math.max(120, Math.floor(innerWidth - Math.max(r.left, 8) - 8));
-          const width = Math.floor(Math.min(compactLegendWidth, room));
-          set(legend, 'max-width', width + 'px');
-          set(legend, 'width', width + 'px');
-          if (r.left < 8) set(legend, 'left', '8px');
-        }
-        if (innerWidth <= 360 && legend.getBoundingClientRect().right < document.getElementById('mobileControlsToggle')?.getBoundingClientRect().left)
-          set(legend, 'top', '60px');
-      } else if (!drawerLegend) restore(legend);
-      const compactLabel = document.getElementById('mapTitleText');
-      if (compactLabel) {
-        if (lastCompactWidth !== innerWidth) {
-          for (const name of ['max-width', 'overflow', 'text-overflow']) release(compactLabel, name);
-          lastCompactWidth = innerWidth;
-        }
-        set(compactLabel, 'font-size', (innerWidth <= 360 ? 13 : innerWidth <= 430 ? 15 : 17) + 'px');
-        set(compactLabel, 'white-space', 'nowrap');
-      }
-      fitTitleContent(title, compactLabel, false);
-      if (compactLabel && shown(toggle)) {
-        const overlapsToggle = () => {
-          const a = compactLabel.getBoundingClientRect();
-          const b = toggle.getBoundingClientRect();
-          return a.top < b.bottom - 2 && a.bottom > b.top + 2 &&
-            a.right > b.left - 8 && a.left < b.right - 8;
-        };
-        for (let i = 0; i < 8 && overlapsToggle(); i++) {
-          const size = parseFloat(getComputedStyle(compactLabel).fontSize) || 17;
-          if (size <= 11) break;
-          set(compactLabel, 'font-size', Math.max(11, size - 1) + 'px');
-        }
-        if (overlapsToggle()) {
-          const room = Math.max(40, Math.floor(toggle.getBoundingClientRect().left -
-            compactLabel.getBoundingClientRect().left - 10));
-          set(compactLabel, 'max-width', room + 'px');
-          set(compactLabel, 'overflow', 'hidden');
-          set(compactLabel, 'text-overflow', 'ellipsis');
-        }
-      }
-      if (banner && shown(banner) && shown(title)) {
-        const tb = title.getBoundingClientRect();
-        const bb = banner.getBoundingClientRect();
-        if ((bb.top < tb.bottom + 6 && bb.bottom > tb.top && bb.left < tb.right && bb.right > tb.left) || owned.get(banner)?.has('top'))
-          set(banner, 'top', Math.ceil(tb.bottom + 8) + 'px');
-      }
-      if (shortLandscape) {
-        set(toggle, 'left', 'auto');
-        set(toggle, 'right', '8px');
-        set(toggle, 'top', '8px');
-        set(toggle, 'width', '118px');
-        set(toggle, 'min-width', '118px');
-        set(toggle, 'max-width', '118px');
-        set(banner, 'top', '60px');
-        set(banner, 'left', '112px');
-        set(banner, 'right', '104px');
-        set(banner, 'width', 'auto');
-        set(banner, 'transform', 'none');
-        set(banner, 'max-width', 'none');
-        for (const name of ['height','min-height','max-height']) set(timeline, name, '122px');
-        set(timeline, 'padding', '5px 8px');
-        set(tabs, 'top', '52px');
-        for (const name of ['height','min-height','max-height']) set(tabs, name, '30px');
-        set(track, 'top', '86px');
-        for (const name of ['height','min-height','max-height']) set(track, name, '28px');
-        for (const name of ['height','min-height','max-height']) set(slider, name, '28px');
-        for (const name of ['height','min-height','max-height','width','min-width','max-width']) set(play, name, '34px');
-        shortLandscapeApplied = true;
-      }
-      fitLeafletNavigation(title, banner, timeline);
-      return;
-    }
-    fitShortLandscapeNavigation(false);
-    restore(timeline);
-    set(document.getElementById('shorelyResponsiveClose'), 'display', 'none');
-    if (compactLegendWidth !== null) { restore(legend); compactLegendWidth = null; }
-
-    const tr = timeline.getBoundingClientRect();
-    if (legend && shown(legend)) {
-      const lr = left.getBoundingClientRect();
-      const gr = legend.getBoundingClientRect();
-      const br = title.getBoundingClientRect();
-      const collidesWithTitle = gr.left < br.right - 8 && gr.right > br.left + 8 && gr.top < br.bottom - 8 && gr.bottom > br.top + 8;
-      const escapesLeft = left.contains(legend) && (gr.left < lr.left - 4 || gr.right > lr.right + 4);
-      const offscreenLegend = gr.top < 0 || gr.bottom > tr.top - 8 || gr.left < 8 || gr.right > innerWidth - 8;
-      if ((legendOrigin && legend.dataset.userMoved !== '1') || collidesWithTitle || escapesLeft || offscreenLegend) {
-        if (!left.contains(legend)) {
-          if (!legendOrigin) legendOrigin = {parent:legend.parentNode,next:legend.nextSibling};
-          left.appendChild(legend);
-        }
-        set(legend, 'position', 'static');
-        set(legend, 'inset', 'auto');
-        set(legend, 'left', 'auto');
-        set(legend, 'right', 'auto');
-        set(legend, 'top', 'auto');
-        set(legend, 'bottom', 'auto');
-        set(legend, 'width', '100%');
-        set(legend, 'max-width', '100%');
-        set(legend, 'transform', 'none');
-        set(legend, 'margin', '0px');
-        set(legend, 'flex', '0 0 auto');
-        set(legend, 'order', '20');
-      }
-    }
-    for (const pane of [left, right]) {
-      if (!shown(pane)) continue;
-      const r = pane.getBoundingClientRect();
-      const room = Math.max(96, Math.floor(Math.min(innerHeight - 8, tr.top - 8) - r.top));
-      set(pane, 'max-height', room + 'px');
-      set(pane, 'min-height', '0px');
-      set(pane, 'overflow', 'auto');
-      set(pane, 'overflow-x', 'hidden');
-      set(pane, 'overflow-y', 'auto');
-      set(pane, 'overscroll-behavior-y', 'contain');
-      set(pane, 'scrollbar-width', 'thin');
-      set(pane, 'scrollbar-color', '#91a8c9 #182234');
-      if (!pane.hasAttribute('tabindex')) pane.setAttribute('tabindex', '0');
-    }
-
-    if (!shown(title)) { restore(title); restore(document.getElementById('mapTitleText')); fitLeafletNavigation(null, banner, timeline); return; }
-    const lr = shown(left) ? left.getBoundingClientRect() : null;
-    const rr = shown(right) && right.children.length ? right.getBoundingClientRect() : null;
-    const laneLeft = Math.max(8, lr ? lr.right + 12 : 8);
-    const laneRight = Math.min(innerWidth - 8, rr ? rr.left - 12 : innerWidth - 8);
-    const lane = Math.max(120, laneRight - laneLeft);
-    set(title, 'left', 'calc(50vw + ' + Math.round((laneLeft + laneRight - innerWidth) / 2) + 'px)');
-    set(title, 'right', 'auto');
-    set(title, 'transform', 'translateX(-50%)');
-    set(title, 'max-width', 'max(120px, calc(100vw - ' + Math.ceil(innerWidth - lane + 12) + 'px))');
-    set(title, 'min-width', '0px');
-    set(title, 'width', 'max-content');
-
-    const label = document.getElementById('mapTitleText');
-    fitTitleContent(title, label);
-    if (lane < 340 && label) {
-      set(title, 'white-space', 'normal');
-      set(label, 'white-space', 'normal');
-      set(label, 'overflow', 'visible');
-      set(label, 'text-overflow', 'clip');
-      set(label, 'line-height', '1.05');
-    } else {
-      for (const name of ['white-space','overflow','text-overflow','line-height']) {
-        if (owned.get(label)?.has(name)) {
-          const [value,priority]=owned.get(label).get(name);
-          if (value) label.style.setProperty(name,value,priority);
-          else label.style.removeProperty(name);
-          owned.get(label).delete(name);
-        }
-      }
-      if (owned.get(title)?.has('white-space')) {
-        const [value,priority]=owned.get(title).get('white-space');
-        if (value) title.style.setProperty('white-space',value,priority);
-        else title.style.removeProperty('white-space');
-        owned.get(title).delete('white-space');
-      }
-    }
-    if (banner && shown(banner)) {
-      set(banner, 'left', Math.round((laneLeft + laneRight) / 2) + 'px');
-      set(banner, 'right', 'auto');
-      set(banner, 'transform', 'translateX(-50%)');
-      set(banner, 'box-sizing', 'border-box');
-      set(banner, 'width', 'max-content');
-      set(banner, 'min-width', '0px');
-      set(banner, 'max-width', Math.floor(lane) + 'px');
-      set(banner?.querySelector('.banner-text'), 'min-width', '0px');
-      const tb = title.getBoundingClientRect();
-      const bb = banner.getBoundingClientRect();
-      if (bb.top < tb.bottom + 8 && bb.bottom > tb.top)
-        set(banner, 'top', Math.ceil(tb.bottom + 8) + 'px');
-    }
-    const nav = document.getElementById('nwDefaultNavControl');
-    if (nav && banner && shown(nav) && shown(banner)) {
-      const nr = nav.getBoundingClientRect();
-      const br = banner.getBoundingClientRect();
-      if (nr.left < br.right - 8 && nr.right > br.left + 8 && nr.top < br.bottom - 8 && nr.bottom > br.top + 8)
-        set(nav, 'top', Math.ceil(br.bottom + 8) + 'px');
-    }
-    fitLeafletNavigation(title, banner, timeline);
-  }
-  function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
-  function init() {
-    const nodes = ['leftPanel','rightRail','timelineDock','mapTitleBadge'].map(id => document.getElementById(id)).filter(Boolean);
-    if (nodes.length < 4) return;
-    addEventListener('resize', schedule, {passive:true});
-    addEventListener('orientationchange', schedule, {passive:true});
-    const ro = new ResizeObserver(schedule);
-    nodes.filter(el => el.id === 'timelineDock' || el.id === 'mapTitleBadge').forEach(el => ro.observe(el));
-    const lastClassValue = new WeakMap();
-    const mo = new MutationObserver(records => {
-      let layoutChanged = false;
-      for (const record of records) {
-        if (record.type !== 'attributes' || record.attributeName !== 'class') {
-          layoutChanged = true;
-          continue;
-        }
-        const value = record.target.getAttribute('class');
-        if (!lastClassValue.has(record.target) || lastClassValue.get(record.target) !== value) {
-          lastClassValue.set(record.target, value);
-          layoutChanged = true;
-        }
-      }
-      if (layoutChanged) schedule();
-    });
-    mo.observe(document.body, {attributes:true,attributeFilter:['class']});
-    // fit() writes styles on these panes; observing those writes loops every frame.
-    nodes.forEach(el => mo.observe(el, {attributes:true,attributeFilter:['class'],childList:el.id==='rightRail'}));
-    const legend = document.getElementById('legendDock');
-    if (legend) mo.observe(legend, {attributes:true,attributeFilter:['class']});
-    const banner = document.getElementById('topBanner');
-    if (banner) { ro.observe(banner); mo.observe(banner, {attributes:true,attributeFilter:['class']}); }
-    const leafletNavAnchor = document.querySelector('.leaflet-top.leaflet-right');
-    if (leafletNavAnchor) mo.observe(leafletNavAnchor, {attributes:true,attributeFilter:['style','class']});
-    const app = document.getElementById('app');
-    if (app) mo.observe(app, {childList:true});
-    mo.observe(document.getElementById('leftPanel'), {childList:true});
-    schedule();
-    setTimeout(schedule, 400);
-    setTimeout(schedule, 1800);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
-  else init();
-})();
-
-</script>
+<!-- Presentation superseded by the shared reference viewport. -->
 <style id="floodmapper-mobile-export-20260930">
   /* Map-view exports can be narrower than the fixed social-size canvases. */
   #exportStageFrame[data-export-compact="true"] #exportLogoStrip{
@@ -41796,5 +42841,154 @@ html body #mapTitleBadge #mapTitleLogo{
 <script id="shorelysafe-visible-brand-controller-20261015">
 (()=>{const src="data:image/webp;base64,UklGRtARAABXRUJQVlA4IMQRAACQTQCdASrwAF8APjEWiUMiISET6L5oIAMEoA1PxkUsfIec1aX8j/QuLLLd64+8H7/+5e3r9bvab+ffYD/YDzjvVZ+3n4gfAD9gP2U90L/J/sN7n/7N6gH8q/zfpK+xp+3PsC/yn/Qf//15v21+EX91P3U9pz/55xn/XO0j+ufjh+8HmR+kfrn5D/uB0Kumf9N6GfxT67/Yf7H+0P9r/7v+/+SP9P+MHoX8Yf4z1Avxf+Rf3n8nfzZ5FSyPoF+wfzj/R/2v+/f8L/C+j5+3flh7o/kn92/0fuAfyL+gf4b8u/79///eA/0fkBcjvtA+wL+O/1n/Y/4b8kfpi/lf+H/i/8J+4nuJ/Lv7j/xf8h+8/0Gfyn+i/6n+3fvP/o///4v/Rb/axCoku7TkdkddhKHx2frwp2hK16+z2g1bDCqXygYPQWQvYLjorf16j56yVn4r+1OmArhHVL/0+UVn76M7QCR2w+igAr+7VuEqNBvG1feqdYPR7bynNW45Xn1EjKCyvkNZhWaXeAclxHCp5YYtT/XCbLLgBwUoTrU1YFXSgEYpCGMR6b1ZAouV3453Ynh2qsSl8tPmgdO3zgy4jx1+eHzT0otXtlJJH5l/pZcAXSG31+HJHKUqa2GpKHSY+CZHP4SfF62l7UbAguLLLLD9noSw/H2JNalsVZ9Gm6/nma2OzP9AfdIHFDDifBDdTidM5ZQ9f//d8I+cJJGAULVs74svRl/CDJxguzinL3s3AQc7mzOnxMJKdjlmnmH7RGT+I58AS2mDnp3FB3TVQ5ieeJngjeBSmto0sX+dtpobEK4FTmfn9DRiaYgZTmPPP6QzKC6VAAD+/t14/vbIGcdFhOzd0Avm3tf2YY374UTJpaMStGmy+Bbu4jJ72Zu6bcnvJxi1OxgzvxA/j7e0/1G32J2mKQF5ZR+wGDdxajLYtKD5xrQlnbNumEgrA5/Qp/vDbXF+q6egS8VOfCAuVrEQPf8/ovyh0QBx5RRBqxx9mtuu475DHPnfIbt3uuvXjjj1ILEkksYzhV8kJhF1Psx08Sr2Z3gGJupPVkKBC6cGHGMIOrN09nj5UAabUNmsL4v+jETrLUPWH7BlHy+hpjuvzky6864cEsFmVSLfYHeRGdW7rfA/U7XITOBFNuAdW7BSYWsfyEzgmiWCkNidaBCERwRhG9TbxQ+KW3bdCZYWGG98/j9zGTOTC0Rr52u57MLvODFPo9XizqKbTS7Lbwocs2NQMir9gif/yIipljXyWAiE5d4rmvO1AU9oKQxWA+E9/AvlyPBNio5R1Ncp35mZ5jbMg+TScsZQM6dwP/hfvGIWVYMlxcucnYLNM72IKBxaTEg/VrLsQ0cqBVktD0r3CItUt87iUAF9X/7DzB2h9dXkP/iy1sdEe5dTWX+f1b97plkoPB2bsRt01mcDH3LSaPy1tqWRfh+l5raqweBrVhBjWPPYBum0na6GG+KG+tS9MkqGl36X+POwSI7o7xcPfR22KzmD6G8wHxvEG5yhuX3d5V9cEGfiu3uPgT9e/jiQY55qc6yNIipnhS8VhBi+q948fItJC1LIrw39+sWOoTcSa+t1h5x+uWboS8qkjUK4XWhd20v//QNqhY3lauQc5bKJqjjFJYe25WxT2taIuEFuibhdWsxS+5sh+2/xQgpgPSDgWnNQh0adr0Fmm9O5ISERK7pIdUGgVweBt5pdrunVxSoFmHalNPiA1C8wpMgyy6fmbxJzeRAg6XsGHzp7oJtx4mubijJnwCLcs7djsDBrUNgucnegBf6zPc2DRTxXbirgcWM+9XaLNHaRilsmi+5LvExYEM55XE98Q7hPw0BC1N9C4llsPXTlGdsSanYY3fNYIY+nJ0DVo9MIeTN1YGq4pVeeXRZGhKDxZT1upH3g8IL4BGHNunlnvrtrEKr4NCCktmPoqNWCDHi913KEcoOEbgB9FvkhWERQ2EqVuIFb6BR4ocOAnikwMcCvUoF/TuxYhZGSS2SWeG6HeHTZxJqHJLWqC9GM9c4KvOT9X3+b389lGhHooTAcGNbK4CkMpAvkDEmwPkScAO+Tsg1lCmIT/aQo5B20A859iA6ELlq4WTzPi6Lb2FGf8MmAsBgTCS7ouaJxbYbagybo3+xxyei4UKVGBtp/3s6oOF98d17Xc+zLGtNfdJoB5+FkbF0QImHhtPkMIvMqJ00IQGzD8x2Jfbx1ZKnhSSZ7WY3J4NHcYKguWYrtBX+8KTCJ8WMbmKfWBxwDSgCz+SK8SuVq5KZVZZ4S4z0LTq1yG74/emd1prxR6QvqxdojOWSmrjYXsii+K2lxtndoFR5iN306A9bmj9GKfxf6Yn0D0YdNi8P8rWHfGGT0fE6z+gM3hGzygn0z8oz69XPJB0Z3u0qIg9pWMhOoaftHb8cq+LaCN7cEOM9Bdj1BNizygOeayXV8+6WnGm7i/1h5+sYdh3eDeayF9tOGaRJkmIGWsfxPmW5Hl9/ZVn9JjVi8Tq1JdmRhobX31IF8DOw2n+M7Bs5FlJHxtCYey/hfmbq/gJgHYn/QK2zgnrvhLGkgzzinGjTOsVic4zH+ZiDbHI5pge6yvhb2l4HkNnIxu5ic4bmD+wIwDJySYUaBHGuz6OwTGBN1VwuSi2qnRdYRWuOtPvFznKYA8hcUhVb+TJgQ5vjc+ivowYpZO8IxypQl8lYati0uodWthA8oEDAXQFAtIyt4E+4LF0a6zyrBKrikV3/Icr44kEJPhKFKg0wfB2T1oGum6ZCYOyo8jrIVnf0aAOnbxs/wVTyaMhHs7yk8fwhpgQe0QeXwrsAvYCXMx4rgDh20AhaAWxlhU+Gskt89LfsfxeSgL/JhgDSpgxaFPpAuwF1W8X84V3kzwrGJhrflF+XLvoSBcwTP+tEPm4iAjZ42koVEZQXvOUiFGKdzpOoG1cz2CqkH3EeIkG9kEtE+Zwye+YcjymVNg4EOUL+/5scKtPb6zvDNLWCQvXtDu6qH2975NpKSEzBkRtYrV5De8mqKj3Z8xC2pLYXFo1Sk4/HJriNXhNYyfqEQM4cF8qxAHGFGnDym2/+WKNB43Sv43nNnd6e+UG2wosE7G7vNZgkxrhHh/QTm1sDVx3dUehTMw/ZXvv3pEzJSMT2cTePBzgVdw+61bJDiSeDbr+QfeiOq6oeglq1W6AuEIYE4AgmRyWJUDKNTujjeWT26o5+OBvx6Xq9IWACKWjSRty9I3ReLBn8uaXB68zYf6fl2V1sisXUzqdJ6aXNzlkQ3wpuVf6cHpNbk/VfPAOXoqLerX7ZqweTaVxjUD6wmiZ6K7h5yv01fEd9mQLssM7oEW38SAmRYvlfK7lPyvqmdlPBiR7hMWJGWH9GyQ6D5UD2ExL1+FEtsXNq2zGF9BU5q6XtJvGmwBvV5IDkyQVkYU8maFf/JNa09Den21RfYu5agEb61XoWLs3f3p54R+r5QOaB2rNsvfp3MLF5oTSj4yYOCMObHKMeEjEUt9bFDEf/5Uv+cUsqvMYNvkln9pF217zdZAvD8lGx2t4Fm1SHFEJ4DNVhlV8jwz+oo9ATkhNKUZ4zESTX7t1DR9h7b1BQHqTenNrl7qqpcyI161PRVTlmZASjH+T5g3A93uOl2vHIbNEywGhFT/hAfINglOuzzIgX+gWg1q74V8rV5hLjwNbJsTSzMQFF3uK68malW+sMNMDCYtvP5C4iIFKxCunUN5SOACCp2JFeloF6yELAABH/E5N2DLffNJpXJFyEmuj6eH5DfvjB63sgzB+RcWZqdGZeC6cmRJ2ngeWCu8e6Dn7ijhHCcQAvJx1yZcQ3UnJN94f6dt7FjROnUnKN3ptdHg6LY1/tosRvToplaskGzZYvs9f5Qx07DD0E7aaE6RzNAs8bu49drgsvpBCi69a3T9y97s6LECu8LkFFYOiPna3cJP/fL36GvGkjnZWLyuMwTR1wQLSHhAZUzsx03E3BP/1WgHftJQ8Sq+cdevpf6fZf5CFHOQW6HROIuYAMJkQfD2/HsPIjg0rn449OuXEqOGmxI1jOtYOftjv6+7AGIz/wyvswPG2Z0piqjz9mcU0xk8VayLsaaq0wggXae/BhHE7FENuzc7W2lMV4QAWHPQufF5IrZPLUYleuUe//0hLIO7JbvDcyU0erldXOqNdVmHmjubQTOakz/id6s74WCgS7dZ7ISrz1LBE+qVFenRtWNRJjuiiy+K7iNfnEmN0SeB4k3eDRYsUjBYOIMoBKUcFAZVvRT7MJwOil3ZWGeDEJVDudC6TF05oE9wT4NDIJmtOfFuMzVlV3rnZuyxy67SBzxaP2MzqG9MhIukCo7pjdtvE2XAij6PSL2FRaHGH/zhkeHheHv/r5yVRJ2Hg/lKZHgfAR+6tykTh4FLLolvJCrAKrVngV5GLIeM63xvly0QQ2x8z6QcA5ctMQUS3Rwf/yG1YnbBSndPLlCd7zCS8/S8Oa4d/J0SOv7qkEncdHHr/PWz1e6bGfrhvpmAmy8sMpjXE+zCp8LpTItGj3+vrGXt5j4XfT02iqDIgF70honDd5reV7rVI267pmpXTxzMXTV6i9V/La4FXT3m0w2VSMvAszHOQcH+oIA8RLj+Ktu5uTyTZlLtgqJC1K6ePdCYXm3eh9ryi7HK3klulR1o5910KUJmEA8AME6xQknfWuq3G3zdKYfGFqI/H4pjMot7qIDppFBtnh0aC2urai0RZI5EIolmdCGTXx5ObcoEuylEdDwAC69G/rnyPuWCrF7uACooB2vbcna/pjX1dftUHN73re0h+TZbz/s4FCgW+wsydxWqwHlVLvFBMxrs7QJ0Bcp05pV+QQN1XN/eYiHnOWbfZ9W9PJ8siJPeIDQJ3B/rSuna5TVCoHdngwqql+pdo5BOPvVCHlJ2S6vSAuKOvgOtAx6uupIUcvU6wzrIwONRiq/LcJgtHT5n/R9GuVgIWmYQZ5dUOD0Cwd6afz5KJBIm3bkjW4vxEEH7CNdeDWOsTzq1ax8H96qfFv1udssSVOYjz+o8CdrOjElY3el9hNXrZjevjKjsMsF6km/QSCVE9CRiLhohtgfNyPkwxklKZLEaWrWzUUE/Qamm7DLKlrtjRmcelJ6Fz04kb2xJtbZcwtKjx1684k3u7wp8B5LraSRMCu/1A/8h/RuE7CkUMlbpduWBedsPM9z7bAl69mWT9u6h8dK5E8o36jz2feKJuwIXd0Uu0Uw0zv7PTm1ZAahFnp/XRRKvhw3op+hgkAlf7U49V8OO16z089gcdVBFL9PVtQpJ+AVebe8Z2F9RAHTtpUKrAya8iTwD4045zb5UHsaf1qa9brbbF2G/hTbwqjLlGW5h+AIFnJz+1CBENdXiPnhmdR64ClA0gQbb5ERPwYiImC+n0+frBDh/nN+p+2dEtWcwbfYnzMKQHH4ndnw0aOlrhgwG0EtP5Gx1FQzAkRivxSjM8hZgktyB3PPdicqxNx9gAAHIUOiBhg31wz0fi5+7ROpcioDpFVRQJJFgR4LNkWt3azGg2bgdFDpvYAvJKH+OyaXsUHG5natW3Jmrw/KpVnNru3zHrOz1Ap7OEHshA6ap8ZsRDyvClaxqKgEpsY49kDBq2yl6lOinGRSNjKvv3TMLpDkswoF5o+A0IEZbBkT4eq1N7JNGRfE7TL/Pfc89/KD2RQHGDoIZsPl2zDeyrfWgsJtU5eSTMHDwsGIsmUO3/lmw9kbUnItwf3W4LkZC2MhZrJ6ThxkisUw0MgjmzfWNwtkSkS87DPfi7iDwEYcSqIERBCtF5vv2enfpfg/+RrXKo3PTluKIiT+vnoX91sNqzEzywrhka62dx685QnuovA/Zqweyg2rzb4BbS5TGjfN8PcMbv8zd+pbeBE0DxOHqp7U616H1MBq/ZlYolqk0SvNnvdZn3UMkgUFNp86ADFDm7B3eti4gxNvzwbCSMITN3dtWSooqOYRCAigj/bo4BEBBvzYzMPngnUgc83PpAD1psUXUmweNvKcvBeZmvied6JK1PGYfGngfx0goKaUO/GdHwUc8S41eA335yNITibz1zhyrhGF0eJFKLQtIAAAAAA=";function keep(){const host=document.getElementById('mapTitleBadge');if(!host)return;let image=document.getElementById('mapTitlePartnerLogo');if(!image){image=document.createElement('img');image.id='mapTitlePartnerLogo';image.className='shorely-title-logo shorely-title-logo-shorelysafe';host.append(image);}image.alt='ShorelySafe';if(image.getAttribute('src')!==src)image.src=src;image.onload=()=>{if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();};if(!image.dataset.persistentBrand){image.dataset.persistentBrand='true';new MutationObserver(keep).observe(image,{attributes:true,attributeFilter:['src']});}if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',keep,{once:true});else keep();})();
 </script>
+<script id="floodmapper-reference-controller-20261016">/* Shared presentation only. Town data, handlers and flood calculations remain app-owned. */
+(() => {
+ const body=document.body,panel=document.getElementById('leftPanel'),rail=document.getElementById('rightRail');
+ if(!panel||!rail)return;
+ document.querySelectorAll('.layers-card').forEach(e=>e.classList.add('nww-layers-card'));
+ const source=panel.querySelector('.data-source-card .button-grid-2');source?.classList.add('data-source-options');
+ const scenarioHeading=panel.querySelector('#forecastScenarioCard h2');if(scenarioHeading)scenarioHeading.textContent='Forecast range';
+ const logo=document.getElementById('mapTitleLogo');if(logo){const check=()=>{logo.hidden=!logo.naturalWidth;};logo.addEventListener('load',check);logo.addEventListener('error',check);if(logo.complete)check();}
+ for(const card of document.querySelectorAll('.layers-card')){const list=card.querySelector('.layer-list');if(list){for(const id of ['satelliteToggle','roadImpactsToggle','buildingsToggle','parcelsToggle','nsiStructuresToggle','roadsToggle','webcamsToggle']){const e=document.getElementById(id)?.closest('.layer-item');if(e&&e.parentElement===list)list.append(e);}}}
+ const row=panel.querySelector('.opacity-card .control-row'),text=document.getElementById('opacityText');
+ if(row&&text){row.classList.add('opacity-control');if(text.parentElement!==row)row.append(text);}
+ const title=panel.querySelector('.data-source-card h2');if(title)title.textContent='Flood Data';
+ for(const b of panel.querySelectorAll('#forecastScenarioCard button')){if(/^(minimum|lower end)$/i.test(b.textContent.trim()))b.textContent='Lower end';if(/^(maximum|upper end)$/i.test(b.textContent.trim()))b.textContent='Upper end';}
+ for(const [id,label]of [['forecastDataBtn','Forecast'],['observedDataBtn','Past'],['returnIntervalDataBtn','Modeled Floods']]){const e=document.getElementById(id);if(e)e.textContent=label;}
+ const order=['.data-source-card','#forecastScenarioCard','#calendarCard','#returnIntervalCard','.overlay-card','.datum-card','.opacity-card','#timelineIntervalCard','#legendDock','.snapshot-card','.mobile-top-tides-card','#mobileRailMount'];
+ order.forEach(selector=>{const e=[...panel.children].find(n=>n.matches(selector));if(e)panel.append(e);});
+ const mobile=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse)');
+ const timelineDays=document.getElementById('timelineDayTabs');
+ const legacy=!document.querySelector('script[src*="avalon-mobile.js"],#county-mobile-controller')&&!document.body.hasAttribute('data-fleet-viewport-existing');
+ if(legacy)body.dataset.fleetLegacyPhone='true';
+ if(legacy&&timelineDays){
+  for(const [id,delta,label]of [['timelinePreviousDay',-1,'Previous'],['timelineNextDay',1,'Next']])if(!document.getElementById(id)){
+   const b=document.createElement('button');b.id=id;b.type='button';b.className='timeline-day-arrow';b.textContent=label;b.setAttribute('aria-label',label+' day');timelineDays.parentElement.insertBefore(b,timelineDays);
+   const update=()=>{const days=[...timelineDays.querySelectorAll('.timeline-day')];const i=days.findIndex(e=>e.classList.contains('active'));b.disabled=!days[i+delta];};
+   b.addEventListener('click',()=>{const days=[...timelineDays.querySelectorAll('.timeline-day')];days[days.findIndex(e=>e.classList.contains('active'))+delta]?.click();});
+   new MutationObserver(update).observe(timelineDays,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});update();
+  }
+  const key=document.getElementById('legendDock');
+  if(key){key.setAttribute('role','button');key.tabIndex=0;key.setAttribute('aria-label','Flood map legend');const act=event=>{if(!mobile.matches||event.target.closest('button'))return;event.preventDefault();event.stopImmediatePropagation();const open=!body.classList.contains('mobile-legend-open');body.classList.toggle('mobile-legend-open',open);key.setAttribute('aria-expanded',String(open));};key.addEventListener('click',act,true);key.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')act(event);if(event.key==='Escape'){body.classList.remove('mobile-legend-open');key.setAttribute('aria-expanded','false');}},true);}
+ }
+ const groups={forecast:'.data-source-card,#forecastScenarioCard,#returnIntervalCard,#timelineIntervalCard,#calendarCard,.mobile-top-tides-card',map:'.overlay-card,.datum-card,.opacity-card,.layers-card',tools:'#townAddressCard,#downloadCard,#mapperTutorialBtn,#avalonTourBtn,.top-tides-card'};
+ let mobileHeader;
+ function ensureHeader(){
+  if(document.getElementById('nwwMobileControlHeader'))return;
+  const header=document.createElement('div');header.id='nwwMobileControlHeader';
+  header.innerHTML='<div class="nww-drawer-heading"><h2 id="nwwControlsTitle">Map controls</h2><p></p></div><div class="nww-control-tabs" role="tablist" aria-label="Control sections"><button type="button" role="tab" data-group="forecast">Flood data</button><button type="button" role="tab" data-group="map">Map layers</button><button type="button" role="tab" data-group="tools">Tools</button></div>';
+  header.querySelector('p').textContent=document.getElementById('mapTitleText')?.textContent||'';
+  panel.prepend(header);mobileHeader=header;
+  const tabs=[...header.querySelectorAll('[role="tab"]')];
+  function select(group,focus=false){panel.dataset.nwwSection=group;for(const t of tabs){const on=t.dataset.group===group;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;if(on&&focus)t.focus({preventScroll:true});}panel.scrollTop=0;}
+  tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>select(tab.dataset.group));tab.addEventListener('keydown',event=>{const j=event.key==='ArrowRight'?(i+1)%3:event.key==='ArrowLeft'?(i+2)%3:event.key==='Home'?0:event.key==='End'?2:null;if(j!==null){event.preventDefault();select(tabs[j].dataset.group,true);}});});
+  document.addEventListener('nww:reveal-control',event=>{if(mobile.matches&&typeof event.detail==='string'){const group=document.querySelector(event.detail)?.closest('[data-nww-group]')?.dataset.nwwGroup;if(group)select(group);}});
+  select('forecast');
+ }
+ let scheduled=false;
+ function sync(){
+  scheduled=false;ensureHeader();
+  if(legacy){const open=mobile.matches&&body.classList.contains('mobile-controls-open');panel.inert=mobile.matches&&!open;if(open){panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');}else{panel.removeAttribute('role');panel.removeAttribute('aria-modal');}for(const id of ['map','timelineDock']){const e=document.getElementById(id);if(e)e.inert=open;}}
+  Object.entries(groups).forEach(([group,selector])=>document.querySelectorAll(selector).forEach(e=>{if(e.dataset.nwwGroup!==group)e.dataset.nwwGroup=group;}));
+  const legend=document.getElementById('legendDock');
+  if(!body.hasAttribute('data-fleet-viewport-existing')){
+   if(mobile.matches){
+    let mount=document.getElementById('mobileRailMount');if(!mount){mount=document.createElement('div');mount.id='mobileRailMount';panel.append(mount);}
+    for(const e of [...rail.children])mount.append(e);
+    if(legend&&legend.parentElement!==body)body.append(legend);
+   }else{
+    const mount=document.getElementById('mobileRailMount');if(mount)for(const e of [...mount.children])rail.append(e);
+    if(legend&&legend.parentElement!==panel)panel.append(legend);
+   }
+  }
+  // Reuse each mapper's own computed severity gradient; never change a stage or threshold.
+  for(const day of document.querySelectorAll('#timelineDayTabs .timeline-day')){
+   const gradient=day.style.backgroundImage;
+   if(gradient&&day.style.getPropertyValue('--fleet-day-gradient')!==gradient)day.style.setProperty('--fleet-day-gradient',gradient);
+  }
+  for(const item of document.querySelectorAll('#timelineFloodKey .timeline-key-item')){
+   for(const node of [...item.childNodes])if(node.nodeType===Node.TEXT_NODE&&node.textContent.trim()){const label=document.createElement('span');label.className='timeline-key-label';label.textContent=node.textContent.trim().replace(/^No flooding$/i,'No Flooding').replace(/^(Minor|Moderate|Major) flooding$/i,'$1');node.replaceWith(label);}
+  }
+  const bubble=document.getElementById('timelineBubble');if(bubble&&bubble.style.getPropertyValue('translate')!=='none')bubble.style.setProperty('translate','none','important');
+ }
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(sync);}}
+ for(const e of [panel,rail,document.getElementById('timelineDock')])if(e)new MutationObserver(schedule).observe(e,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
+ new MutationObserver(schedule).observe(body,{attributes:true,attributeFilter:['class']});
+ mobile.addEventListener('change',schedule);addEventListener('load',schedule,{once:true});schedule();
+})();
+
+if(!document.body.hasAttribute("data-fleet-viewport-existing")){
+/* One viewport owner on GitHub and Cup A Joe. Fit complete cards above the timeline. */
+(() => {
+  document.body.dataset.countyViewport='20261015';
+  const left=document.getElementById('leftPanel'),right=document.getElementById('rightRail'),timeline=document.getElementById('timelineDock');
+  if(!left||!right||!timeline)return;
+  let frame,mobileApplied=false;const expectedStyles=new WeakMap();
+  const probe=document.createElement('div');probe.id='countySafeAreaProbe';probe.setAttribute('aria-hidden','true');document.body.append(probe);
+  function viewportGeometry(width,height,viewport,safe){
+    const vv=viewport&&Math.abs((viewport.scale||1)-1)<.01?viewport:{width,height,offsetTop:0,offsetLeft:0};
+    const top=Math.max(0,vv.offsetTop||0),left=Math.max(0,vv.offsetLeft||0);
+    const visibleWidth=Math.min(width,Math.max(1,vv.width||width)),visibleHeight=Math.min(height,Math.max(1,vv.height||height));
+    return {top:top+safe.top+8,left:left+safe.left+8,right:Math.max(0,width-left-visibleWidth)+safe.right+8,bottom:Math.max(0,height-top-visibleHeight)+safe.bottom+8,height:Math.max(1,visibleHeight-safe.top-safe.bottom-16)};
+  }
+  function fitMobile(){
+    mobileApplied=true;
+    for(const id of ['mapTitleBadge','nwDefaultNavControl','countyStandaloneView']){const e=document.getElementById(id);if(e)for(const p of ['left','right','top','max-width','transform'])e.style.removeProperty(p);}
+    const computed=getComputedStyle(probe),safe={top:parseFloat(computed.paddingTop)||0,right:parseFloat(computed.paddingRight)||0,bottom:parseFloat(computed.paddingBottom)||0,left:parseFloat(computed.paddingLeft)||0};
+    const g=viewportGeometry(innerWidth,innerHeight,window.visualViewport,safe);
+    for(const [key,value] of Object.entries(g)){const name='--cm-'+key,text=value.toFixed(2)+'px';if(document.body.style.getPropertyValue(name)!==text)document.body.style.setProperty(name,text);}
+    for(const pane of [left,right])pane.style.removeProperty('zoom');
+    for(const [p,v] of Object.entries({top:g.top+'px',bottom:g.bottom+'px',left:g.left+'px',right:g.right+'px',width:'auto','max-width':'none',height:'auto','min-height':'0px','max-height':'none','overflow-x':'hidden','overflow-y':'auto'}))set(left,p,v);
+    for(const [p,v] of Object.entries({left:g.left+'px',right:g.right+'px',bottom:g.bottom+'px'}))set(timeline,p,v);
+    const legend=document.getElementById('legendDock');
+    if(legend&&document.body.classList.contains('mobile-legend-open'))for(const [p,v] of Object.entries({top:(g.top+60)+'px',left:g.left+'px',right:g.right+'px','max-height':Math.max(80,g.height-260)+'px'}))set(legend,p,v);
+    else if(legend)for(const p of ['top','left','right','max-height'])legend.style.removeProperty(p);
+    for(const pane of [left,right,timeline])expectedStyles.set(pane,pane.getAttribute('style'));
+    document.body.dataset.countyViewportFit='mobile-visible-viewport';
+    const focused=document.activeElement;
+    if(document.body.classList.contains('mobile-controls-open')&&focused?.matches('input,textarea,select')&&left.contains(focused)){const r=focused.getBoundingClientRect(),p=left.getBoundingClientRect();if(r.top<p.top+136||r.bottom>p.bottom-20)requestAnimationFrame(()=>focused.scrollIntoView({block:'nearest',inline:'nearest'}));}
+  }
+  const compact=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse)');
+  function set(e,p,v){if(e.style.getPropertyValue(p)!==v||e.style.getPropertyPriority(p)!=='important')e.style.setProperty(p,v,'important');}
+  function update(){
+    frame=null;if(compact.matches){fitMobile();return;}
+    if(mobileApplied){for(const pane of [left,right])for(const p of ['left','right','width','max-width','top','bottom','height','max-height','min-height','overflow-x','overflow-y'])pane.style.removeProperty(p);for(const p of ['left','right','bottom'])timeline.style.removeProperty(p);mobileApplied=false;}
+    const available=Math.max(200,timeline.getBoundingClientRect().top-84);
+    let natural=1;
+    for(const pane of [left,right]){
+      set(pane,'zoom','1');set(pane,'min-width','0px');set(pane,'width',pane===left?'300px':'280px');set(pane,'max-width',pane===left?'300px':'280px');
+      set(pane,'height','auto');set(pane,'min-height','0px');set(pane,'max-height','none');set(pane,'bottom','auto');set(pane,'top','16px');set(pane,'overflow','visible');
+      natural=Math.max(natural,pane.scrollHeight,pane.getBoundingClientRect().height);
+    }
+    const scale=Math.min(1,Math.max(.55,available/natural));
+    for(const pane of [left,right]){
+      set(pane,'zoom',scale.toFixed(4));set(pane,'top',`${16/scale}px`);
+      set(pane,pane===left?'left':'right',`${16/scale}px`);
+      set(pane,'max-height',`${available/scale}px`);set(pane,'overflow-y','auto');set(pane,'overflow-x','hidden');
+      pane.dataset.countyFitScale=scale.toFixed(4);
+    }
+    for(const day of document.querySelectorAll('#timelineDayTabs .timeline-day')){set(day,'flex','1 1 0');set(day,'width','0px');set(day,'max-width','none');}
+    // county-pill-anchor-20261015: reset independent CSS translate as well as transform.
+    const bubble=document.getElementById('timelineBubble');if(bubble){set(bubble,'left','24px');set(bubble,'right','auto');set(bubble,'translate','none');set(bubble,'transform','none');set(bubble,'scale','none');}
+    const l=left.getBoundingClientRect(),r=right.getBoundingClientRect();
+    const title=document.getElementById('mapTitleBadge');if(title){set(title,'visibility',document.body.classList.contains('top-tides-modal-open')?'hidden':'visible');set(title,'background','#171f2e');set(title,'width','max-content');set(title,'height','auto');set(title,'padding','10px 14px');set(title,'top','16px');set(title,'left',`${(l.right+r.left)/2}px`);set(title,'max-width',`${Math.max(140,r.left-l.right-140)}px`);set(title,'transform','translateX(-50%)');}
+    const nav=document.getElementById('nwDefaultNavControl');if(nav)set(nav,'right',`${innerWidth-r.left+16}px`);
+    const standalone=document.getElementById('countyStandaloneView');if(standalone)set(standalone,'right',`${innerWidth-r.left+16}px`);
+    document.body.style.setProperty('--county-nav-right',`${innerWidth-r.left+6}px`);
+    const zoom=document.querySelector('.leaflet-control-zoom');if(zoom){const host=zoom.parentElement;set(host,'position','absolute');set(host,'left','auto');set(host,'right',`${innerWidth-r.left+16}px`);set(host,'top','150px');set(host,'width','auto');set(zoom,'position','relative');set(zoom,'left','auto');set(zoom,'right','0px');set(zoom,'top','0px');set(zoom,'margin','0px');set(zoom,'transform','none');}
+    for(const pane of [left,right,timeline])expectedStyles.set(pane,pane.getAttribute('style'));
+    document.body.dataset.countyViewportFit='complete';
+  }
+  function schedule(){if(!frame)frame=requestAnimationFrame(update);}
+  new ResizeObserver(schedule).observe(timeline);
+  for(const pane of [left,right])new MutationObserver(schedule).observe(pane,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
+  for(const pane of [left,right,timeline])new MutationObserver(()=>{if(pane.getAttribute('style')!==expectedStyles.get(pane))schedule();}).observe(pane,{attributes:true,attributeFilter:['style']});
+  new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});
+  window.visualViewport?.addEventListener('resize',schedule,{passive:true});window.visualViewport?.addEventListener('scroll',schedule,{passive:true});
+  addEventListener('orientationchange',schedule,{passive:true});addEventListener('pageshow',schedule);document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
+  addEventListener('resize',schedule,{passive:true});compact.addEventListener('change',schedule);addEventListener('load',schedule);schedule();
+})();
+
+}</script>
 </body>
 </html>
