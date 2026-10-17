@@ -172,9 +172,10 @@
   }
 }
 </style>
-<style id="floodmapper-reference-ui-20261016">@layer floodmapper-reference-polish,floodmapper-reference-ui;
+<style id="floodmapper-unified-ui-20261017" data-ui-sha256="f4ef3b98e9a736a68080bbee81395c317f654c9096c16af6b805990ac6e168b9">@layer floodmapper-unified-polish,floodmapper-unified-base-polish,floodmapper-unified-base;
+@layer floodmapper-unified-base-polish,floodmapper-unified-base;
 
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html body[data-shorelysafe-ui] {
     --fleet-panel:rgba(11,18,32,.94);
     --fleet-line:rgba(191,219,254,.16);
@@ -332,7 +333,7 @@
 
 /* Avalon timeline layout, scoped to North Wildwood. Share the WordPress layer
    so old inline stylesheets cannot split the day strip from the native range. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html[data-nww-avalon-timeline] body #timelineDock {
     display:block !important; position:fixed !important; left:16px !important; right:16px !important; bottom:16px !important;
     width:auto !important; min-width:0 !important; max-width:none !important;
@@ -496,7 +497,6 @@
   }
   html[data-nww-avalon-timeline] body #mapTitlePartnerLogo,
   html[data-nww-avalon-timeline] body #rightRailLogo,
-  html[data-nww-avalon-timeline] body #exportPartnerLogo,
   html[data-nww-avalon-timeline] body #topBanner { display:none !important; }
   html[data-nww-avalon-timeline] body #toastCloseBtn {
     --centered-close-x-color:#78350f !important;
@@ -514,7 +514,7 @@
 
 /* North Wildwood phone layout. Share the hosting layer so one stylesheet owns
    mobile geometry without fighting the older global styles or desktop fitter. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   #nwwMobileControlHeader { display:none !important; }
   @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html[data-nww-mobile-layout] body { --nww-key-extra:0px; --nww-mobile-timeline:calc(168px + var(--nww-key-extra)); }
@@ -690,7 +690,7 @@
 }
 
 /* Full-width time rail, direct day navigation, and a separate transport row. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html[data-nww-mobile-layout] body #timelineDock .timeline-step { display:none !important; }
   html[data-nww-mobile-layout] body #timelineDock .timeline-sr-date { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; clip-path:inset(50%) !important; white-space:nowrap !important; }
   html[data-nww-mobile-layout] body #timelineDock #hourSlider:focus-visible { outline:2px solid var(--nw-ui-blue) !important; outline-offset:3px !important; border-radius:8px !important; }
@@ -796,7 +796,7 @@
 }
 
 /* App-owned layer controls, identical on standalone and hosted pages. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card {
     padding:12px !important;
   }
@@ -902,7 +902,7 @@
 /* Desktop control cards share one spacing system. Mobile drawer visibility and
    geometry remain in north-wildwood-mobile.css. The unified layer owns app UI
    on both standalone and hosted pages. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   /* Forecast scenarios belong only to Forecast mode, including in the drawer. */
   html body[data-shorelysafe-ui] #leftPanel #forecastScenarioCard[hidden] {
     display:none !important;
@@ -1312,7 +1312,7 @@
 }
 
 /* Keep the selected date in the rail; the month grid has its own bounded dialog. */
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html body[data-shorelysafe-ui] #leftPanel #calendarCard:not(.active),
   html body[data-shorelysafe-ui] #observedCalendarModal[hidden] {
     display:none !important;
@@ -1497,7 +1497,7 @@ html {
   html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
 }
 
-@layer floodmapper-reference-ui {
+@layer floodmapper-unified-base {
   html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(.section-title h2,.legend-header-text,.legend-title,.rail-head h3) {
     font-size:var(--nww-pane-heading) !important;
     line-height:1.25 !important;
@@ -1614,7 +1614,7 @@ html {
   }
 }
 
-@layer floodmapper-reference-polish {
+@layer floodmapper-unified-base-polish {
 /* Reference: approved Highlands desktop interface, with responsive town labels. */
 html body[data-floodmapper-reference] {--fleet-panel:rgba(17,24,38,.97);--fleet-text:#eaf0ff;--fleet-line:rgba(191,219,254,.22);--fleet-accent:#60a5fa;--nw-ui-blue:#60a5fa;--nw-ui-blue-rgb:96,165,250;--accent-soft:rgba(96,165,250,.16);--text:#eaf0ff;--bg:#0b1220;--line:rgba(191,219,254,.22);}
 html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) {background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;filter:none!important;}
@@ -1739,7 +1739,101 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
  html body[data-floodmapper-reference] #timelineDock #hourSlider::-moz-range-track {height:5px!important;background:transparent!important;box-shadow:none!important;border:0!important;}
 }
 
-}</style>
+}
+/* One ordering and one set of dimensions for every renderer. */
+@layer floodmapper-unified-polish {
+ html body[data-floodmapper-unified] :is(#leftPanel,#rightRail,#mobileRailMount) > :is(.panel-card,.rail-card,#legendDock) {background:#171e2a!important;backdrop-filter:none!important;isolation:isolate;}
+ html body[data-floodmapper-unified] #leftPanel>.data-source-card {order:10!important;}
+ html body[data-floodmapper-unified] #leftPanel>#forecastScenarioCard {order:20!important;}
+ html body[data-floodmapper-unified] #leftPanel>:is(#calendarCard,#returnIntervalCard,.return-interval-card) {order:30!important;}
+ html body[data-floodmapper-unified] #leftPanel>.overlay-card {order:40!important;}
+ html body[data-floodmapper-unified] #leftPanel>.datum-card {order:50!important;}
+ html body[data-floodmapper-unified] #leftPanel>.opacity-card {order:60!important;}
+ html body[data-floodmapper-unified] #leftPanel>#timelineIntervalCard {order:70!important;}
+ html body[data-floodmapper-unified] #leftPanel>#legendDock {order:80!important;}
+ html body[data-floodmapper-unified] #leftPanel>.mobile-top-tides-card {order:80!important;}
+ html body[data-floodmapper-unified] #leftPanel>#mobileRailMount {order:90!important;}
+ html body[data-floodmapper-unified] #rightRail>.layers-card {order:10!important;}
+ html body[data-floodmapper-unified] #rightRail>.top-tides-card {order:20!important;}
+ html body[data-floodmapper-unified] #rightRail>#downloadCard {order:30!important;}
+ html body[data-floodmapper-unified] #rightRail>#townAddressCard {order:40!important;}
+ html body[data-floodmapper-unified] #rightRail>:is(#mapperTutorialBtn,#avalonTourBtn) {order:50!important;}
+ html body[data-floodmapper-unified] :is(#leftPanel,#rightRail,#mobileRailMount) .layers-card .layer-list {display:flex!important;flex-direction:column!important;gap:0!important;}
+ html body[data-floodmapper-unified] :is(#leftPanel,#rightRail,#mobileRailMount) .layers-card .layer-item {display:grid!important;grid-template-columns:minmax(0,1fr) 40px!important;min-height:36px!important;gap:10px!important;padding:6px 0!important;margin:0!important;border:0!important;border-bottom:1px solid rgba(191,219,254,.12)!important;border-radius:0!important;}
+ html body[data-floodmapper-unified] .layers-card .layer-item:last-child {border-bottom:0!important;}
+ html body[data-floodmapper-unified] .layers-card .layer-meta {grid-column:1!important;grid-row:1!important;}
+ html body[data-floodmapper-unified] .layers-card .toggle {grid-column:2!important;grid-row:1!important;justify-self:end!important;}
+ html body[data-floodmapper-unified] .layers-card .layer-name {font-size:14px!important;line-height:1.2!important;overflow-wrap:normal!important;}
+ html body[data-floodmapper-unified] .layers-card .ui-unavailable .toggle {opacity:.45!important;cursor:default!important;}
+ html body[data-floodmapper-unified] .layers-card .ui-unavailable .layer-name {color:#b0bccc!important;}
+ html body[data-floodmapper-unified] .layers-card .ui-locked .toggle {opacity:.65!important;cursor:default!important;}
+ html body[data-floodmapper-unified] .unified-layer-note {display:block!important;color:#94a8bf!important;font:500 10px/1.2 system-ui!important;margin-top:2px!important;}
+ html body[data-floodmapper-unified] .unified-layer-note[hidden],html body[data-floodmapper-unified] #nativeRoadNamesHint {display:none!important;}
+ html body[data-floodmapper-unified] .layers-card [aria-disabled="true"]:focus-visible {outline:2px solid #94a8bf!important;outline-offset:3px!important;}
+ html body[data-floodmapper-unified] #exportPartnerLogo[src]:not([src=""]) {display:block!important;}
+ html body[data-floodmapper-unified] :is(#leftPanel,#rightRail) {scroll-behavior:auto!important;}
+ html body[data-floodmapper-unified] :is(#map,#map3d,#countyStandalone3d) .leaflet-image-layer {animation:none!important;transition:none!important;}
+ html body[data-floodmapper-unified] #mapTitleBadge #mapTitleText {min-width:0!important;overflow-wrap:normal!important;}
+ html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-control-zoom {position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;float:none!important;margin:0!important;display:block!important;}
+ @media(min-width:901px){
+  html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-top.leaflet-right {position:absolute!important;left:auto!important;right:var(--county-nav-right,310px)!important;top:16px!important;margin:0!important;}
+  html body[data-floodmapper-unified]:has(#countyStandaloneView) .leaflet-top.leaflet-right {top:140px!important;}
+
+  html body[data-floodmapper-unified] #nwwMobileControlHeader {display:none!important;}
+  html body[data-floodmapper-unified] #leftPanel,html body[data-floodmapper-unified] #rightRail {zoom:1!important;gap:6px!important;scrollbar-gutter:stable;}
+  html body[data-floodmapper-unified] #leftPanel>:is(.panel-card,#legendDock),html body[data-floodmapper-unified] #rightRail>.rail-card {flex:0 0 auto!important;}
+  html body[data-floodmapper-unified] #timelineDock {position:fixed!important;left:16px!important;right:16px!important;bottom:16px!important;height:112px!important;min-height:112px!important;max-height:112px!important;margin:0!important;padding:0!important;}
+  html body[data-floodmapper-unified] #timelineBubble {left:24px!important;right:auto!important;top:auto!important;bottom:120px!important;width:max-content!important;max-width:calc(100vw - 48px)!important;}
+  html body[data-floodmapper-unified] #timelineDock :is(#timelinePreviousDay,#timelineNextDay) {display:none!important;}
+ }
+ @media(min-width:901px) and (max-width:1200px){
+  html body[data-floodmapper-unified] #mapTitleBadge #mapTitleText {font-size:22px!important;line-height:1.15!important;letter-spacing:-.5px!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge {gap:6px!important;padding:8px!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge #mapTitleLogo {width:28px!important;min-width:28px!important;height:28px!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge #mapTitlePartnerLogo {width:58px!important;min-width:58px!important;height:28px!important;}
+ }
+ @media(max-width:900px),(max-height:560px) and (pointer:coarse){
+  html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-top.leaflet-right {position:absolute!important;left:auto!important;right:var(--cm-right,8px)!important;top:calc(var(--cm-top,8px) + 60px)!important;}
+  html body[data-floodmapper-unified]:has(#countyStandaloneView) .leaflet-top.leaflet-right {top:calc(var(--cm-top,8px) + 112px)!important;}
+  html body[data-floodmapper-unified] #mobileControlsToggle {position:fixed!important;top:var(--cm-top,8px)!important;right:var(--cm-right,8px)!important;left:auto!important;bottom:auto!important;width:96px!important;height:44px!important;min-height:44px!important;padding:0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;z-index:8000!important;font:650 14px system-ui!important;background:#142238!important;color:#eaf0ff!important;border:1px solid #60a5fa!important;border-radius:10px!important;}
+  html body[data-floodmapper-unified].mobile-controls-open #mobileControlsToggle {display:none!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge :is(#mapTitleLogo,#mapTitlePartnerLogo) {display:none!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge #mapTitleText {font:700 14px/1.2 system-ui!important;letter-spacing:0!important;white-space:normal!important;}
+  html body[data-floodmapper-unified] #mapTitleBadge {display:flex!important;padding:6px 10px!important;position:fixed!important;left:var(--cm-left,8px)!important;top:var(--cm-top,8px)!important;right:196px!important;max-width:calc(100vw - 204px)!important;min-height:44px!important;height:auto!important;transform:none!important;}
+  html body[data-floodmapper-unified] #leftPanel {position:fixed!important;flex-direction:column!important;gap:8px!important;padding:0 12px 16px!important;box-sizing:border-box!important;border-radius:16px!important;z-index:10000!important;background:#101827!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  html body[data-floodmapper-unified]:not(.mobile-controls-open) #leftPanel {display:none!important;visibility:hidden!important;pointer-events:none!important;}
+  html body[data-floodmapper-unified].mobile-controls-open #leftPanel {display:flex!important;visibility:visible!important;pointer-events:auto!important;}
+  html body[data-floodmapper-unified] #mobileRailMount {display:contents!important;}
+  html body[data-floodmapper-unified] #nwwMobileControlHeader {position:sticky!important;top:0!important;order:0!important;z-index:10!important;display:block!important;background:#101827!important;padding:14px 0 10px!important;flex:0 0 auto!important;}
+  html body[data-floodmapper-unified] #leftPanel>#nwwMobileControlHeader .nww-drawer-heading {padding-right:48px!important;}
+  html body[data-floodmapper-unified] #mobileControlsClose {position:fixed!important;top:calc(var(--cm-top,8px) + 10px)!important;right:calc(var(--cm-right,8px) + 10px)!important;left:auto!important;bottom:auto!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;z-index:10020!important;}
+  html body[data-floodmapper-unified] #leftPanel[data-nww-section="forecast"] [data-nww-group]:not([data-nww-group="forecast"]),html body[data-floodmapper-unified] #leftPanel[data-nww-section="map"] [data-nww-group]:not([data-nww-group="map"]),html body[data-floodmapper-unified] #leftPanel[data-nww-section="tools"] [data-nww-group]:not([data-nww-group="tools"]) {display:none!important;}
+  html body[data-floodmapper-unified] #leftPanel [data-nww-group] {flex:0 0 auto!important;}
+  html body[data-floodmapper-unified] #timelineDock {position:fixed!important;height:180px!important;min-height:180px!important;max-height:180px!important;margin:0!important;padding:0!important;}
+  html body[data-floodmapper-unified] #timelineTimeBounds {display:none!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineBubble {position:absolute!important;left:12px!important;right:66px!important;top:8px!important;bottom:auto!important;width:auto!important;max-width:none!important;height:44px!important;min-height:44px!important;display:flex!important;flex-direction:row!important;justify-content:center!important;align-items:center!important;gap:6px!important;}
+  html body[data-floodmapper-unified]:has(#timelineStepBack) #timelineDock #timelineBubble {right:160px!important;}
+  html body[data-floodmapper-unified] #timelineDock :is(#timelineStepBack,#timelineStepForward) {position:absolute!important;left:auto!important;top:8px!important;bottom:auto!important;width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;padding:2px!important;font-size:12px!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineStepBack {right:108px!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineStepForward {right:58px!important;}
+  html body[data-floodmapper-unified] #timelineDock #playBtn {position:absolute!important;left:auto!important;right:8px!important;top:8px!important;width:44px!important;height:44px!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineDayTabs {position:absolute!important;left:80px!important;right:80px!important;top:60px!important;bottom:auto!important;height:44px!important;display:flex!important;}
+  html body[data-floodmapper-unified] #timelineDock .timeline-day {height:44px!important;min-height:44px!important;}
+  html body[data-floodmapper-unified] #timelineDock .timeline-day:not(.active) {display:none!important;}
+  html body[data-floodmapper-unified] #timelineDock :is(#timelinePreviousDay,#timelineNextDay) {position:absolute!important;display:flex!important;align-items:center!important;justify-content:center!important;top:60px!important;bottom:auto!important;width:64px!important;min-width:64px!important;height:44px!important;min-height:44px!important;padding:4px!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelinePreviousDay {left:8px!important;right:auto!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineNextDay {left:auto!important;right:8px!important;}
+  html body[data-floodmapper-unified] #timelineDock #timelineFloodKey {position:absolute!important;left:8px!important;right:8px!important;top:112px!important;bottom:auto!important;height:16px!important;min-height:16px!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:8px!important;}
+  html body[data-floodmapper-unified] #timelineDock .timeline-trackRow {position:absolute!important;left:8px!important;right:8px!important;top:132px!important;bottom:auto!important;width:auto!important;height:36px!important;}
+  html body[data-floodmapper-unified] #timelineDock #hourSlider {width:100%!important;height:36px!important;min-height:36px!important;margin:0!important;}
+  html body[data-floodmapper-unified] #timelineDock .timeline-key-label {font-size:10px!important;white-space:nowrap!important;}
+  html body[data-floodmapper-unified] #nwDefaultNavControl {right:calc(var(--cm-right,8px))!important;left:auto!important;top:calc(var(--cm-top,8px) + 60px)!important;}
+  html body[data-floodmapper-unified] #countyStandaloneView {right:calc(var(--cm-right,8px))!important;left:auto!important;top:calc(var(--cm-top,8px) + 60px)!important;}
+ }
+}
+</style>
+
+
 
 <style id="shorelysafe-visible-brand-20261015">
 @layer shorelysafe-brand;
@@ -16515,7 +16609,7 @@ html body.mobile-optimized #mobileRailMount > .layers-card:has(.shorelysafe-came
 }
 </style>
 </head>
-<body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261008-v1" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261016" data-county-viewport="20261015">
+<body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-county-viewport="20261017" data-floodmapper-unified="20261017.1">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
   <div id="nwSiteLoader" role="status" aria-live="polite" aria-label="Loading Ventnor City Flood Mapper">
     <div class="nw-loader-card">
@@ -18404,6 +18498,7 @@ function cloneStyleObject(value) {
       if (!FORECAST_SCENARIOS[scenario]) return;
       if (scenario === currentForecastScenario && currentDataMode === "forecast") return;
       stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
       toast("");
       currentForecastScenario = scenario;
       currentDataMode = "forecast";
@@ -18411,8 +18506,9 @@ function cloneStyleObject(value) {
       currentTopTideIndex = null;
       updateForecastScenarioButtons();
       updateDataModeButtons();
-      clearFloodLayer();
+      cancelPendingFloodFrame(false);
       await loadForecast();
+      if (floodSelectionToken !== lastRenderToken) return false;
       renderTopTides();
       await renderHour(currentHourIndex);
     }
@@ -18489,6 +18585,7 @@ function cloneStyleObject(value) {
     }
 
     async function loadReturnInterval(preferredEntry = null, options = {}) {
+      const floodSelectionToken = lastRenderToken;
       const generation = options.generation ?? ++selectionGeneration;
       if (!returnIntervalData || options.forceRefresh) {
         const payload = await fetchJson(withFreshJsonUrl(RETURN_INTERVALS_URL));
@@ -18500,6 +18597,7 @@ function cloneStyleObject(value) {
         throw new Error(`${getReturnIntervalLabel()} synthetic storm is unavailable.`);
       }
 
+      if (floodSelectionToken !== lastRenderToken) return false;
       clearExportAvailabilityCache();
       currentRawSeriesHours = annotateHydraulicSeries(record.series15min);
       currentSeriesHours = buildReturnIntervalDisplaySeries(currentRawSeriesHours);
@@ -18527,13 +18625,15 @@ function cloneStyleObject(value) {
       if (!RETURN_INTERVAL_OPTIONS.includes(requested)) return;
       if (requested === currentReturnIntervalYears && currentDataMode === "return-interval") return;
       stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
       toast("");
       currentReturnIntervalYears = requested;
       currentDataMode = "return-interval";
       currentViewType = "return-interval";
       updateDataModeButtons();
-      clearFloodLayer();
+      cancelPendingFloodFrame(false);
       await loadReturnInterval();
+      if (floodSelectionToken !== lastRenderToken) return false;
       await renderHour(currentHourIndex);
     }
 
@@ -21664,6 +21764,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
     }
 
     function syncLeftPanelLayout() {
+      if(document.body.hasAttribute("data-floodmapper-unified")) return;
       const panel = document.getElementById("leftPanel");
       if (!panel) return;
 
@@ -25585,6 +25686,20 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
       });
     }
 
+    function cancelPendingFloodFrame(invalidate = true) {
+      if (invalidate) ++lastRenderToken;
+      const pending = pendingFloodLayer;
+      pendingFloodLayer = null;
+      if (pending && pending !== currentFloodLayer && map?.hasLayer(pending)) {
+        if (typeof disposeFloodLayer === "function") disposeFloodLayer(pending);
+        else map.removeLayer(pending);
+      }
+      if (typeof floodFrameState !== "undefined") floodFrameState = "loading";
+      document.body.dataset.floodFrame = "loading";
+      if (typeof setFloodFrameStatus === "function") setFloodFrameStatus(currentFloodLayer ? "Loading the next flood map… Previous frame shown." : "Loading flood map…", "loading");
+      return lastRenderToken;
+    }
+
     function clearFloodLayer() {
       floodFrameState = "unavailable";
       document.body.dataset.floodFrame = floodFrameState;
@@ -26792,6 +26907,10 @@ function formatSelectedObservedDate(dateStr) {
     }
 
     async function setFloodLayer(mode, stageValue, phase, token, entry = null, series = currentRawSeriesHours) {
+      const frameEntry = typeof entry !== "undefined" && entry ? entry : currentSeriesHours[currentHourIndex];
+      const frameStage = normalizeStageValue(getStageValue(frameEntry));
+      const frameMetadata = { entry: frameEntry, stage: Number.isFinite(frameStage) ? frameStage : (typeof stageValue !== "undefined" ? stageValue : null), phase: typeof phase !== "undefined" ? phase : "slack", dataMode: currentDataMode };
+
       toast("");
       ensureMap();
 
@@ -26844,6 +26963,7 @@ function formatSelectedObservedDate(dateStr) {
       pendingFloodLayer = nextLayer;
       return await waitForRecoveryFloodLayer(nextLayer, token, () => {
         nextLayer.setOpacity(overlayOpacity);
+        nextLayer._floodmapperFrame = frameMetadata;
         currentFloodLayer = nextLayer;
         floodFrameState = "ready";
         document.body.dataset.floodFrame = "ready";
@@ -26867,7 +26987,11 @@ function formatSelectedObservedDate(dateStr) {
       });
     }
 
-    async function setPhysicsFloodLayer(asset, token) {
+    async function setPhysicsFloodLayer(asset, token, entry = null, phase = "slack") {
+      const frameEntry = typeof entry !== "undefined" && entry ? entry : currentSeriesHours[currentHourIndex];
+      const frameStage = normalizeStageValue(getStageValue(frameEntry));
+      const frameMetadata = { entry: frameEntry, stage: Number.isFinite(frameStage) ? frameStage : (typeof stageValue !== "undefined" ? stageValue : null), phase: typeof phase !== "undefined" ? phase : "slack", dataMode: currentDataMode };
+
       toast("");
       ensureMap();
       const overlayUrl = getPhysicsDisplayRecord(asset)?.url;
@@ -26898,6 +27022,7 @@ function formatSelectedObservedDate(dateStr) {
       pendingFloodLayer = nextLayer;
       return await waitForRecoveryFloodLayer(nextLayer, token, () => {
         nextLayer.setOpacity(overlayOpacity);
+        nextLayer._floodmapperFrame = frameMetadata;
         currentFloodLayer = nextLayer;
         floodFrameState = "ready";
         document.body.dataset.floodFrame = "ready";
@@ -26976,7 +27101,7 @@ function formatSelectedObservedDate(dateStr) {
       toast(note);
 
       const ready = await renderFloodFrameWithRetry(() => physicsAsset
-        ? setPhysicsFloodLayer(physicsAsset, token)
+        ? setPhysicsFloodLayer(physicsAsset, token, entry, hydraulicPhase)
         : setFloodLayer(currentOverlayMode, displayStage, hydraulicPhase, token, entry, currentRawSeriesHours), token);
       if (token !== lastRenderToken || requestedSeries !== currentSeriesHours) return false;
       if (!ready) {
@@ -27019,6 +27144,7 @@ function formatSelectedObservedDate(dateStr) {
     }
 
     async function loadForecast(preferredEntry = null, options = {}) {
+      const floodSelectionToken = lastRenderToken;
       const generation = options.generation ?? ++selectionGeneration;
       if (!forecastData || options.forceRefresh) {
         const payload = await fetchJson(withFreshJsonUrl(FORECAST_URL));
@@ -27032,6 +27158,7 @@ function formatSelectedObservedDate(dateStr) {
         });
       }
       if (generation !== selectionGeneration) return;
+      if (floodSelectionToken !== lastRenderToken) return false;
       clearExportAvailabilityCache();
       const physicsSeries = getPhysicsForecastDisplaySeries();
       if (physicsSeries) {
@@ -27503,12 +27630,14 @@ function populateCalendarSelectors() {
     async function loadObservedDay(dateStr, preferredHourIndex = null, preferredEntry = null, options = {}) {
       const generation = ++selectionGeneration;
       await ensureObservedArchiveForDate(dateStr);
+      if (floodSelectionToken !== lastRenderToken) return false;
       if (generation !== selectionGeneration) return;
       const dayRecord = getObservedDayRecord(dateStr);
       if (!dayRecord) throw new Error(`Observed day not found: ${dateStr}`);
 
       const preservePlayback = Boolean(options && options.preservePlayback);
       if (!preservePlayback) stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
       currentDataMode = "observed";
       updateDataModeButtons();
 
@@ -27547,6 +27676,7 @@ function populateCalendarSelectors() {
       document.getElementById("hourSlider").value = String(currentHourIndex);
 
       await renderCalendar();
+      if (floodSelectionToken !== lastRenderToken) return false;
       if (generation !== selectionGeneration) return;
       await renderHour(currentHourIndex);
       renderTopTides();
@@ -27556,11 +27686,13 @@ function populateCalendarSelectors() {
       const generation = ++selectionGeneration;
       if (!topTideEvents[index]) throw new Error("Top 10 flood crest not available.");
       stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
 
       currentBaseModeBeforeTopTide = currentDataMode;
       currentDataMode = "observed";
       updateDataModeButtons();
       if (!observedData) await warmBackgroundData();
+      if (floodSelectionToken !== lastRenderToken) return false;
 
       if (generation !== selectionGeneration) return;
       let event = topTideEvents[index];
@@ -27634,6 +27766,7 @@ function populateCalendarSelectors() {
       document.getElementById("hourSlider").value = String(currentHourIndex);
 
       await renderCalendar();
+      if (floodSelectionToken !== lastRenderToken) return false;
       await renderHour(currentHourIndex);
       renderTopTides();
       scheduleHistoricalTopTideWarmup();
@@ -27697,6 +27830,7 @@ function populateCalendarSelectors() {
       if (mode === currentOverlayMode && !forceForecastForImpact) return;
 
       stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
       toast("");
       currentOverlayMode = mode;
       updateModeButtons();
@@ -27706,8 +27840,9 @@ function populateCalendarSelectors() {
         currentViewType = "forecast";
         currentTopTideIndex = null;
         updateDataModeButtons();
-        clearFloodLayer();
+        cancelPendingFloodFrame(false);
         await loadForecast();
+      if (floodSelectionToken !== lastRenderToken) return false;
         renderTopTides();
         await renderHour(currentHourIndex);
         return;
@@ -27720,14 +27855,16 @@ function populateCalendarSelectors() {
       if (mode === currentDataMode && currentViewType !== "top-tide") return;
       const generation = ++selectionGeneration;
       ++lastRenderToken;
-      clearFloodLayer();
+      cancelPendingFloodFrame(false);
       stopPlayback();
+      const floodSelectionToken = cancelPendingFloodFrame();
       toast("");
 
       if (mode === "forecast") {
         currentDataMode = "forecast";
         updateDataModeButtons();
         await loadForecast(null, { generation });
+      if (floodSelectionToken !== lastRenderToken) return false;
         if (generation !== selectionGeneration) return;
         renderTopTides();
         await renderHour(currentHourIndex);
@@ -27738,8 +27875,9 @@ function populateCalendarSelectors() {
         currentDataMode = "return-interval";
         currentViewType = "return-interval";
         updateDataModeButtons();
-        clearFloodLayer();
+        cancelPendingFloodFrame(false);
         await loadReturnInterval(null, { generation });
+      if (floodSelectionToken !== lastRenderToken) return false;
         if (generation !== selectionGeneration) return;
         renderTopTides();
         await renderHour(currentHourIndex);
@@ -27749,8 +27887,10 @@ function populateCalendarSelectors() {
       currentDataMode = "observed";
       updateDataModeButtons();
       await warmBackgroundData();
+      if (floodSelectionToken !== lastRenderToken) return false;
       if (generation !== selectionGeneration) return;
       await renderCalendar();
+      if (floodSelectionToken !== lastRenderToken) return false;
       if (generation !== selectionGeneration) return;
 
       const defaultDate = (currentViewType === "top-tide" ? null : selectedObservedDate) || getLatestObservedDate();
@@ -27857,7 +27997,8 @@ function populateCalendarSelectors() {
       ++archiveGeneration;
       ++lastRenderToken;
       stopPlayback();
-      clearFloodLayer();
+      const floodSelectionToken = cancelPendingFloodFrame();
+      cancelPendingFloodFrame(false);
       toast("");
       imageExistsCache = new Map();
       overlayRecordCache = new Map();
@@ -27899,6 +28040,7 @@ function populateCalendarSelectors() {
       updateDataModeButtons();
       renderTopTides();
       await loadForecast(null, { selectCurrent: true, forceRefresh: true, deferPhysicsCatalog: true, generation });
+      if (floodSelectionToken !== lastRenderToken) return false;
       if (generation !== selectionGeneration) return;
       try {
         await renderHour(currentHourIndex);
@@ -28454,6 +28596,8 @@ function startPlayback() {
     }
 
     function getSelectedStageNavd88() {
+      const committedStage = normalizeStageValue(currentFloodLayer?._floodmapperFrame?.stage);
+      if (Number.isFinite(committedStage)) return committedStage;
       const entry = currentSeriesHours[currentHourIndex];
       const stage = normalizeStageValue(getStageValue(entry));
       return Number.isFinite(stage) ? stage : null;
@@ -29180,8 +29324,9 @@ function startPlayback() {
     }
 
     function getDepthQueryPopupHeading() {
-      if (currentDataMode === "forecast") return "Forecast Water Depth";
-      if (currentDataMode === "observed") return "Water Depth";
+      const displayedMode = currentFloodLayer?._floodmapperFrame?.dataMode || currentDataMode;
+      if (displayedMode === "forecast") return "Forecast Water Depth";
+      if (displayedMode === "observed") return "Water Depth";
       return "Modeled Water Depth";
     }
 
@@ -29201,7 +29346,8 @@ function startPlayback() {
       const context = persistentDepthQueryContext;
       const popup = persistentFloodPopup;
       if (!context || !popup || context.popup !== popup || !map?.hasLayer(popup)) return;
-      const stage = getStageValue(currentSeriesHours[currentHourIndex]);
+      const displayedFrame = currentFloodLayer?._floodmapperFrame;
+      const stage = displayedFrame ? displayedFrame.stage : getStageValue(currentSeriesHours[currentHourIndex]);
       if (floodFrameState !== "ready") {
         popup.setContent(buildDepthQueryPopupHtml(null));
         popup.update();
@@ -29210,7 +29356,7 @@ function startPlayback() {
       const renderedFlood = options.useRenderedFlood === false
         ? null
         : sampleRenderedFloodPixel(context.latlng.lat, context.latlng.lng);
-      const phase = getHydraulicPhaseForEntry(
+      const phase = displayedFrame?.phase || getHydraulicPhaseForEntry(
         currentSeriesHours[currentHourIndex],
         currentHourIndex,
         currentSeriesHours
@@ -29221,11 +29367,12 @@ function startPlayback() {
     }
 
     function openDepthQueryPopup(latlng, sample) {
-      const stage = getStageValue(currentSeriesHours[currentHourIndex]);
+      const displayedFrame = currentFloodLayer?._floodmapperFrame;
+      const stage = displayedFrame ? displayedFrame.stage : getStageValue(currentSeriesHours[currentHourIndex]);
       const renderedFlood = sample
         ? sampleRenderedFloodPixel(latlng.lat, latlng.lng)
         : null;
-      const phase = getHydraulicPhaseForEntry(
+      const phase = displayedFrame?.phase || getHydraulicPhaseForEntry(
         currentSeriesHours[currentHourIndex],
         currentHourIndex,
         currentSeriesHours
@@ -33470,6 +33617,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
   }
 
   function stableLayoutFix(){
+      if(document.body.hasAttribute("data-floodmapper-unified")) return;
       if(document.body.hasAttribute("data-floodmapper-reference")) return;
     if (window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse)').matches) return;
     var left = document.getElementById('leftPanel');
@@ -37199,6 +37347,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 
   function applyObservedPaneFit(){
+      if(document.body.hasAttribute("data-floodmapper-unified")) return;
       if(document.body.hasAttribute("data-floodmapper-reference")) return;
 
     return;
@@ -37853,6 +38002,7 @@ html body #timelineDock #hourSlider{
   }
 
   function applyStablePaneSizes(){
+      if(document.body.hasAttribute("data-floodmapper-unified")) return;
       if(document.body.hasAttribute("data-floodmapper-reference")) return;
     var desktop = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 900;
     if (!desktop) {
@@ -38038,6 +38188,7 @@ html body #timelineDock #hourSlider{
   }
 
   function watchLeftPaneStyle(){
+      if(document.body.hasAttribute("data-floodmapper-unified")) return;
       if(document.body.hasAttribute("data-floodmapper-reference")) return;
     var left = document.getElementById("leftPanel");
     if (!left || left.dataset.pjStablePaneStyleWatch === "1") return;
@@ -38572,7 +38723,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
 })();
 </script>
 
-<script src="./assets/3d/north-wildwood-3d.js?v=20260924-fleet-mobile-cache&roads=20261002-soft-gray"></script>
+<script src="./assets/3d/north-wildwood-3d.js?v=20260924-fleet-mobile-cache&roads=20261002-soft-gray&stability=20261017.1"></script>
 <script>
 const BUNNY_STORAGE_ZONE_ID = "5907481";
 const BUNNY_CDN_BASE_URL = "https://floodmapperv1.b-cdn.net";
@@ -42806,189 +42957,219 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 }
 </style>
-<script id="shorelysafe-fleet-ui-controller-20261008">
-(() => {
-  function normalizeMapperUi() {
-    const panel = document.getElementById('leftPanel');
-    if (!panel) return;
-    panel.setAttribute('aria-label', 'Flood map controls');
-    const heading = panel.querySelector('.data-source-card h2');
-    if (heading) heading.textContent = 'Flood Data';
-    const past = document.getElementById('observedDataBtn');
-    if (past) past.textContent = 'Past';
-    const legend = document.getElementById('legendDock');
-    if (legend && legend.parentElement !== panel) {
-      legend.classList.add('panel-card', 'compact-card', 'left-lower-legend-card');
-      legend.classList.remove('map-floating');
-      legend.dataset.userMoved = '1';
-      panel.appendChild(legend);
-    }
-    const opacity = document.getElementById('opacitySlider');
-    if (opacity && !opacity.hasAttribute('aria-label')) opacity.setAttribute('aria-label', 'Flood overlay opacity');
-    const exportButton = document.getElementById('openDownloadModalBtn');
-    if (exportButton) exportButton.textContent = 'Export Map';
-    const order = ['.data-source-card','#calendarCard','.return-interval-card','.overlay-card','.datum-card','.opacity-card','#timelineIntervalCard','#legendDock','.snapshot-card','.mobile-top-tides-card','#mobileRailMount'];
-    for (const selector of order) {
-      const card = [...panel.children].find(child => child.matches(selector));
-      if (card) panel.appendChild(card);
-    }
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeMapperUi, {once:true});
-  else normalizeMapperUi();
-})();
-</script>
+
 
 <script id="shorelysafe-visible-brand-controller-20261015">
 (()=>{const src="data:image/webp;base64,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";function keep(){const host=document.getElementById('mapTitleBadge');if(!host)return;let image=document.getElementById('mapTitlePartnerLogo');if(!image){image=document.createElement('img');image.id='mapTitlePartnerLogo';image.className='shorely-title-logo shorely-title-logo-shorelysafe';host.append(image);}image.alt='ShorelySafe';if(image.getAttribute('src')!==src)image.src=src;image.onload=()=>{if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();};if(!image.dataset.persistentBrand){image.dataset.persistentBrand='true';new MutationObserver(keep).observe(image,{attributes:true,attributeFilter:['src']});}if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',keep,{once:true});else keep();})();
 </script>
-<script id="floodmapper-reference-controller-20261016">/* Shared presentation only. Town data, handlers and flood calculations remain app-owned. */
+
+<script id="floodmapper-unified-controller-20261017" data-ui-sha256="6d7ce6d41ffce500860d32e4fdc5bb644dcf10847208ba7dbbf2cb5ded0376a0">/* Shared FloodMapper presentation. Each town retains its own model and data handlers. */
 (() => {
- const body=document.body,panel=document.getElementById('leftPanel'),rail=document.getElementById('rightRail');
- if(!panel||!rail)return;
- document.querySelectorAll('.layers-card').forEach(e=>e.classList.add('nww-layers-card'));
- const source=panel.querySelector('.data-source-card .button-grid-2');source?.classList.add('data-source-options');
- const scenarioHeading=panel.querySelector('#forecastScenarioCard h2');if(scenarioHeading)scenarioHeading.textContent='Forecast range';
- const logo=document.getElementById('mapTitleLogo');if(logo){const check=()=>{logo.hidden=!logo.naturalWidth;};logo.addEventListener('load',check);logo.addEventListener('error',check);if(logo.complete)check();}
- for(const card of document.querySelectorAll('.layers-card')){const list=card.querySelector('.layer-list');if(list){for(const id of ['satelliteToggle','roadImpactsToggle','buildingsToggle','parcelsToggle','nsiStructuresToggle','roadsToggle','webcamsToggle']){const e=document.getElementById(id)?.closest('.layer-item');if(e&&e.parentElement===list)list.append(e);}}}
- const row=panel.querySelector('.opacity-card .control-row'),text=document.getElementById('opacityText');
- if(row&&text){row.classList.add('opacity-control');if(text.parentElement!==row)row.append(text);}
- const title=panel.querySelector('.data-source-card h2');if(title)title.textContent='Flood Data';
- for(const b of panel.querySelectorAll('#forecastScenarioCard button')){if(/^(minimum|lower end)$/i.test(b.textContent.trim()))b.textContent='Lower end';if(/^(maximum|upper end)$/i.test(b.textContent.trim()))b.textContent='Upper end';}
- for(const [id,label]of [['forecastDataBtn','Forecast'],['observedDataBtn','Past'],['returnIntervalDataBtn','Modeled Floods']]){const e=document.getElementById(id);if(e)e.textContent=label;}
- const order=['.data-source-card','#forecastScenarioCard','#calendarCard','#returnIntervalCard','.overlay-card','.datum-card','.opacity-card','#timelineIntervalCard','#legendDock','.snapshot-card','.mobile-top-tides-card','#mobileRailMount'];
- order.forEach(selector=>{const e=[...panel.children].find(n=>n.matches(selector));if(e)panel.append(e);});
+ 'use strict';
+ const VERSION='20261017.1',body=document.body,root=document.documentElement;
+ const panel=document.getElementById('leftPanel'),rail=document.getElementById('rightRail'),timeline=document.getElementById('timelineDock'),app=document.getElementById('app');
+ if(!panel||!rail||!timeline||body.dataset.unifiedUiReady===VERSION)return;
+ body.dataset.unifiedUiReady=VERSION;body.dataset.floodmapperUnified=VERSION;body.dataset.countyViewport=VERSION;
  const mobile=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse)');
- const timelineDays=document.getElementById('timelineDayTabs');
- const legacy=!document.querySelector('script[src*="avalon-mobile.js"],#county-mobile-controller')&&!document.body.hasAttribute('data-fleet-viewport-existing');
- if(legacy)body.dataset.fleetLegacyPhone='true';
- if(legacy&&timelineDays){
-  for(const [id,delta,label]of [['timelinePreviousDay',-1,'Previous'],['timelineNextDay',1,'Next']])if(!document.getElementById(id)){
-   const b=document.createElement('button');b.id=id;b.type='button';b.className='timeline-day-arrow';b.textContent=label;b.setAttribute('aria-label',label+' day');timelineDays.parentElement.insertBefore(b,timelineDays);
-   const update=()=>{const days=[...timelineDays.querySelectorAll('.timeline-day')];const i=days.findIndex(e=>e.classList.contains('active'));b.disabled=!days[i+delta];};
-   b.addEventListener('click',()=>{const days=[...timelineDays.querySelectorAll('.timeline-day')];days[days.findIndex(e=>e.classList.contains('active'))+delta]?.click();});
-   new MutationObserver(update).observe(timelineDays,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});update();
-  }
-  const key=document.getElementById('legendDock');
-  if(key){key.setAttribute('role','button');key.tabIndex=0;key.setAttribute('aria-label','Flood map legend');const act=event=>{if(!mobile.matches||event.target.closest('button'))return;event.preventDefault();event.stopImmediatePropagation();const open=!body.classList.contains('mobile-legend-open');body.classList.toggle('mobile-legend-open',open);key.setAttribute('aria-expanded',String(open));};key.addEventListener('click',act,true);key.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')act(event);if(event.key==='Escape'){body.classList.remove('mobile-legend-open');key.setAttribute('aria-expanded','false');}},true);}
- }
+ const owned=new WeakMap(),bound=new WeakSet(),nativeLayers=new Map(),satelliteMaps=new WeakMap();
+ const layerOrder=[['satelliteToggle','Satellite'],['roadImpactsToggle','Road Impacts'],['buildingsToggle','Buildings'],['parcelsToggle','Parcels'],['nsiStructuresToggle','Structural Impacts'],['roadsToggle','Road names'],['webcamsToggle','Cameras']];
  const groups={forecast:'.data-source-card,#forecastScenarioCard,#returnIntervalCard,#timelineIntervalCard,#calendarCard,.mobile-top-tides-card',map:'.overlay-card,.datum-card,.opacity-card,.layers-card',tools:'#townAddressCard,#downloadCard,#mapperTutorialBtn,#avalonTourBtn,.top-tides-card'};
- let mobileHeader;
- function ensureHeader(){
-  if(document.getElementById('nwwMobileControlHeader'))return;
-  const header=document.createElement('div');header.id='nwwMobileControlHeader';
-  header.innerHTML='<div class="nww-drawer-heading"><h2 id="nwwControlsTitle">Map controls</h2><p></p></div><div class="nww-control-tabs" role="tablist" aria-label="Control sections"><button type="button" role="tab" data-group="forecast">Flood data</button><button type="button" role="tab" data-group="map">Map layers</button><button type="button" role="tab" data-group="tools">Tools</button></div>';
-  header.querySelector('p').textContent=document.getElementById('mapTitleText')?.textContent||'';
-  panel.prepend(header);mobileHeader=header;
-  const tabs=[...header.querySelectorAll('[role="tab"]')];
-  function select(group,focus=false){panel.dataset.nwwSection=group;for(const t of tabs){const on=t.dataset.group===group;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;if(on&&focus)t.focus({preventScroll:true});}panel.scrollTop=0;}
-  tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>select(tab.dataset.group));tab.addEventListener('keydown',event=>{const j=event.key==='ArrowRight'?(i+1)%3:event.key==='ArrowLeft'?(i+2)%3:event.key==='Home'?0:event.key==='End'?2:null;if(j!==null){event.preventDefault();select(tabs[j].dataset.group,true);}});});
-  document.addEventListener('nww:reveal-control',event=>{if(mobile.matches&&typeof event.detail==='string'){const group=document.querySelector(event.detail)?.closest('[data-nww-group]')?.dataset.nwwGroup;if(group)select(group);}});
-  select('forecast');
+ const safeProbe=document.createElement('div');safeProbe.id='unifiedSafeAreaProbe';safeProbe.setAttribute('aria-hidden','true');safeProbe.style.cssText='position:fixed;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';body.append(safeProbe);
+ let chosenSection=panel.dataset.nwwSection||'forecast';
+ let frame=0,layoutPasses=0,satelliteLayer=null,satelliteEnabled=false,drawerOpener=null;
+ const visible=e=>!!e&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none';
+ function set(e,key,value){if(e&&e.style.getPropertyValue(key)!==value)e.style.setProperty(key,value,'important');else if(e&&e.style.getPropertyPriority(key)!=='important')e.style.setProperty(key,value,'important');}
+ function saveStyle(e){if(e)owned.set(e,e.getAttribute('style'));}
+ function text(e,value){if(e&&e.textContent!==value)e.textContent=value;}
+ function attr(e,key,value){if(e&&e.getAttribute(key)!==value)e.setAttribute(key,value);}
+ function flag(e,name,value){if(e&&e.classList.contains(name)!==!!value)e.classList.toggle(name,!!value);}
+ function leaflet(){return typeof map!=='undefined'?map:null;}
+ function standalone(){return window.COUNTY_STANDALONE_3D?.getMap?.()||null;}
+ function selectSection(group,focus=false){
+  if(!Object.hasOwn(groups,group))group='forecast';chosenSection=group;
+  if(panel.dataset.nwwSection!==group)panel.dataset.nwwSection=group;
+  for(const tab of panel.querySelectorAll('#nwwMobileControlHeader [role="tab"]')){const on=tab.dataset.group===group;attr(tab,'aria-selected',String(on));tab.tabIndex=on?0:-1;if(on&&focus)tab.focus({preventScroll:true});}
  }
- let scheduled=false;
- function sync(){
-  scheduled=false;ensureHeader();
-  if(legacy){const open=mobile.matches&&body.classList.contains('mobile-controls-open');panel.inert=mobile.matches&&!open;if(open){panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');}else{panel.removeAttribute('role');panel.removeAttribute('aria-modal');}for(const id of ['map','timelineDock']){const e=document.getElementById(id);if(e)e.inert=open;}}
-  Object.entries(groups).forEach(([group,selector])=>document.querySelectorAll(selector).forEach(e=>{if(e.dataset.nwwGroup!==group)e.dataset.nwwGroup=group;}));
-  const legend=document.getElementById('legendDock');
-  if(!body.hasAttribute('data-fleet-viewport-existing')){
-   if(mobile.matches){
-    let mount=document.getElementById('mobileRailMount');if(!mount){mount=document.createElement('div');mount.id='mobileRailMount';panel.append(mount);}
-    for(const e of [...rail.children])mount.append(e);
-    if(legend&&legend.parentElement!==body)body.append(legend);
-   }else{
-    const mount=document.getElementById('mobileRailMount');if(mount)for(const e of [...mount.children])rail.append(e);
-    if(legend&&legend.parentElement!==panel)panel.append(legend);
+ function ensureControlButtons(){
+  for(const [id,label]of [['mobileControlsToggle','Controls'],['mobileControlsClose','×']]){const copies=[...document.querySelectorAll('[id="'+id+'"]')];let button=copies.shift();for(const duplicate of copies)duplicate.remove();if(!button){button=document.createElement('button');button.id=id;button.type='button';button.textContent=label;(id==='mobileControlsClose'?panel:body).append(button);}attr(button,'aria-label',id==='mobileControlsClose'?'Close controls':'Open map controls');if(id==='mobileControlsToggle'){attr(button,'aria-controls','leftPanel');attr(button,'aria-expanded',String(body.classList.contains('mobile-controls-open')));}}
+ }
+ function ensureHeader(){
+  const headers=[...document.querySelectorAll('[id="nwwMobileControlHeader"]')];let header=headers.shift();
+  for(const duplicate of headers)duplicate.remove();
+  if(!header){header=document.createElement('div');header.id='nwwMobileControlHeader';header.innerHTML='<div class="nww-drawer-heading"><h2 id="nwwControlsTitle">Map controls</h2><p></p></div><div class="nww-control-tabs" role="tablist" aria-label="Control sections"><button type="button" role="tab" data-group="forecast">Flood data</button><button type="button" role="tab" data-group="map">Map layers</button><button type="button" role="tab" data-group="tools">Tools</button></div>';panel.prepend(header);}
+  if(header.parentElement!==panel)panel.prepend(header);
+  text(header.querySelector('p'),document.getElementById('mapTitleText')?.textContent||'');
+  if(!bound.has(header)){
+   const tabs=[...header.querySelectorAll('[role="tab"]')];
+   tabs.forEach((tab,i)=>{tab.addEventListener('click',event=>{event.stopImmediatePropagation();selectSection(tab.dataset.group);schedule();},true);tab.addEventListener('keydown',event=>{const next=event.key==='ArrowRight'?(i+1)%tabs.length:event.key==='ArrowLeft'?(i+tabs.length-1)%tabs.length:event.key==='Home'?0:event.key==='End'?tabs.length-1:null;if(next!==null){event.preventDefault();event.stopImmediatePropagation();selectSection(tabs[next].dataset.group,true);schedule();}},true);});bound.add(header);
+  }
+  selectSection(chosenSection);
+ }
+ function ensureDays(){
+  const days=document.getElementById('timelineDayTabs');if(!days)return;
+  const buttons=[...days.querySelectorAll('.timeline-day')],active=Math.max(0,buttons.findIndex(e=>e.classList.contains('active')||e.getAttribute('aria-current')==='date'));
+  for(const [id,delta,label]of [['timelinePreviousDay',-1,'Previous'],['timelineNextDay',1,'Next']]){
+   const copies=[...document.querySelectorAll('[id="'+id+'"]')];let button=copies.shift();for(const duplicate of copies)duplicate.remove();
+   if(!button){button=document.createElement('button');button.id=id;button.className='timeline-day-arrow';button.type='button';days.parentElement.insertBefore(button,delta<0?days:days.nextSibling);}
+   const neighbor=buttons[active+delta];button.disabled=!neighbor;
+   const labelText=neighbor?.textContent?.trim()||label;attr(button,'aria-label',neighbor?label+' day: '+labelText:'No '+(delta<0?'earlier':'later')+' day available');
+   const span=button.querySelector('.neighbor-day');if(span)text(span,labelText);else text(button,labelText);
+   if(!bound.has(button)){button.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();const current=[...days.querySelectorAll('.timeline-day')],i=current.findIndex(e=>e.classList.contains('active')||e.getAttribute('aria-current')==='date');current[Math.max(0,i)+delta]?.click();},true);bound.add(button);}
+  }
+ }
+ function syncSatellite3d(){
+  const gl=standalone();if(!gl)return;if(!gl.isStyleLoaded?.()){if(!gl.__unifiedSatelliteWaiting){gl.__unifiedSatelliteWaiting=true;gl.once('idle',()=>{gl.__unifiedSatelliteWaiting=false;syncSatellite3d();});}return;}
+  let state=satelliteMaps.get(gl);
+  if(!state){state={visibility:new Map()};satelliteMaps.set(gl,state);}
+  const id='unified-satellite';
+  if(satelliteEnabled&&!gl.getSource(id)){
+   gl.addSource(id,{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,maxzoom:19,attribution:'Imagery © Esri and contributors'});
+   gl.addLayer({id,type:'raster',source:id,paint:{'raster-fade-duration':0}},gl.getStyle().layers?.[0]?.id);
+  }
+  for(const layer of gl.getStyle().layers||[]){if((layer.source==='esri'&&layer.type!=='symbol')||layer.type==='background'){
+   if(satelliteEnabled){if(!state.visibility.has(layer.id))state.visibility.set(layer.id,gl.getLayoutProperty(layer.id,'visibility')||'visible');if(gl.getLayoutProperty(layer.id,'visibility')!=='none')gl.setLayoutProperty(layer.id,'visibility','none');}
+   else if(state.visibility.has(layer.id)){gl.setLayoutProperty(layer.id,'visibility',state.visibility.get(layer.id));state.visibility.delete(layer.id);}
+  }}
+  if(gl.getLayer(id))gl.setLayoutProperty(id,'visibility',satelliteEnabled?'visible':'none');
+ }
+ async function setAddedSatellite(value){
+  const toggle=document.getElementById('satelliteToggle');
+  try{
+   let target=leaflet();if(!target&&typeof ensureMap==='function'){ensureMap();target=leaflet();}
+   if(!target||!window.L)throw Error('The map is still loading. Please try again.');
+   satelliteEnabled=!!value;
+   if(!satelliteLayer){if(!target.getPane('unifiedSatellitePane')){target.createPane('unifiedSatellitePane');target.getPane('unifiedSatellitePane').style.zIndex='200';}satelliteLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{pane:'unifiedSatellitePane',maxNativeZoom:19,maxZoom:24,crossOrigin:true,updateWhenIdle:true,keepBuffer:1,attribution:'Imagery © Esri and contributors'});}
+   if(satelliteEnabled&&!target.hasLayer(satelliteLayer))satelliteLayer.addTo(target);if(!satelliteEnabled&&target.hasLayer(satelliteLayer))target.removeLayer(satelliteLayer);
+   flag(toggle,'on',satelliteEnabled);attr(toggle,'aria-checked',String(satelliteEnabled));body.dataset.unifiedSatellite=satelliteEnabled?'on':'off';syncSatellite3d();
+  }catch(error){satelliteEnabled=false;flag(toggle,'on',false);attr(toggle,'aria-checked','false');if(typeof toast==='function')toast(error.message);}
+ }
+ function layerAvailability(id,native){
+  if(id==='satelliteToggle')return {available:native||!!window.L};
+  if(id==='parcelsToggle')return {available:native&&typeof PARCELS_URL!=='undefined'&&!!PARCELS_URL};
+  if(id==='nsiStructuresToggle')return {available:native&&typeof NSI_STRUCTURES_URL!=='undefined'&&!!NSI_STRUCTURES_URL};
+  if(id==='roadsToggle'&&body.classList.contains('basemap-includes-labels')&&!body.classList.contains('county-standalone-3d'))return {available:false,locked:true,reason:'Road names are part of this town’s basemap.'};
+  return {available:native};
+ }
+ function ensureLayers(){
+  const card=document.querySelector('.layers-card');if(!card)return;flag(card,'nww-layers-card',true);
+  let list=card.querySelector('.layer-list');if(!list){list=document.createElement('div');list.className='layer-list';card.append(list);}
+  for(const [id,label]of layerOrder){
+   let toggle=document.getElementById(id),row=toggle?.closest('.layer-item');
+   if(!nativeLayers.has(id))nativeLayers.set(id,!!toggle&&toggle.dataset.uiAdded!=='true');
+   if(!toggle){row=document.createElement('div');row.className='layer-item';toggle=document.createElement('div');toggle.id=id;toggle.className='toggle';toggle.dataset.uiAdded='true';toggle.setAttribute('role','switch');toggle.tabIndex=0;toggle.setAttribute('aria-checked','false');const meta=document.createElement('div');meta.className='layer-meta';const name=document.createElement('div');name.className='layer-name';name.textContent=label;meta.append(name);row.append(toggle,meta);list.append(row);}
+   if(row.parentElement!==list)list.append(row);
+   text(row.querySelector('.layer-name'),label);attr(toggle,'aria-label','Show '+label.toLowerCase());
+   const status=layerAvailability(id,nativeLayers.get(id)),disabled=!status.available;
+   attr(toggle,'aria-disabled',String(disabled));flag(row,'ui-unavailable',disabled&&!status.locked);flag(row,'ui-locked',!!status.locked);
+   const noteId=id+'Availability';let note=row.querySelector('.unified-layer-note');if(!note){note=document.createElement('small');note.id=noteId;note.className='unified-layer-note';row.querySelector('.layer-meta').append(note);}
+   const reason=status.reason||label+' data is not available for this town.';
+   if(note.hidden!==!disabled)note.hidden=!disabled;text(note,status.locked?'Always shown':'Unavailable');
+   if(disabled){attr(toggle,'aria-describedby',noteId);attr(row,'title',reason);attr(note,'title',reason);if(status.locked){flag(toggle,'on',true);attr(toggle,'aria-checked','true');}else{flag(toggle,'on',false);attr(toggle,'aria-checked','false');}}
+   else {if(toggle.getAttribute('aria-describedby')===noteId)toggle.removeAttribute('aria-describedby');if(row.getAttribute('title')===reason)row.removeAttribute('title');}
+   if(!bound.has(toggle)){
+    toggle.addEventListener('click',event=>{if(toggle.getAttribute('aria-disabled')==='true'){event.preventDefault();event.stopImmediatePropagation();return;}if(id==='satelliteToggle'&&toggle.dataset.uiAdded==='true'){event.preventDefault();event.stopImmediatePropagation();setAddedSatellite(!satelliteEnabled);}},true);
+    toggle.addEventListener('keydown',event=>{if(event.key!=='Enter'&&event.key!==' ')return;if(toggle.getAttribute('aria-disabled')==='true'||(id==='satelliteToggle'&&toggle.dataset.uiAdded==='true')){event.preventDefault();event.stopImmediatePropagation();if(toggle.getAttribute('aria-disabled')!=='true')setAddedSatellite(!satelliteEnabled);}},true);bound.add(toggle);
    }
   }
-  // Reuse each mapper's own computed severity gradient; never change a stage or threshold.
-  for(const day of document.querySelectorAll('#timelineDayTabs .timeline-day')){
-   const gradient=day.style.backgroundImage;
-   if(gradient&&day.style.getPropertyValue('--fleet-day-gradient')!==gradient)day.style.setProperty('--fleet-day-gradient',gradient);
-  }
-  for(const item of document.querySelectorAll('#timelineFloodKey .timeline-key-item')){
-   for(const node of [...item.childNodes])if(node.nodeType===Node.TEXT_NODE&&node.textContent.trim()){const label=document.createElement('span');label.className='timeline-key-label';label.textContent=node.textContent.trim().replace(/^No flooding$/i,'No Flooding').replace(/^(Minor|Moderate|Major) flooding$/i,'$1');node.replaceWith(label);}
-  }
-  const bubble=document.getElementById('timelineBubble');if(bubble&&bubble.style.getPropertyValue('translate')!=='none')bubble.style.setProperty('translate','none','important');
+  const desired=layerOrder.map(([id])=>document.getElementById(id)?.closest('.layer-item')).filter(Boolean);for(let i=0;i<desired.length;i++)if(list.children[i]!==desired[i])list.insertBefore(desired[i],list.children[i]||null);
+  const hint=document.getElementById('nativeRoadNamesHint');if(hint&&!hint.hidden)hint.hidden=true;
  }
- function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(sync);}}
- for(const e of [panel,rail,document.getElementById('timelineDock')])if(e)new MutationObserver(schedule).observe(e,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
- new MutationObserver(schedule).observe(body,{attributes:true,attributeFilter:['class']});
- mobile.addEventListener('change',schedule);addEventListener('load',schedule,{once:true});schedule();
+ function setDrawer(open,returnFocus=true){
+  if(!mobile.matches)open=false;
+  if(open){drawerOpener=document.activeElement;body.classList.remove('mobile-legend-open');}
+  flag(body,'mobile-controls-open',open);attr(document.getElementById('mobileControlsToggle'),'aria-expanded',String(open));
+  syncDrawer();schedule();
+  if(open)requestAnimationFrame(()=>panel.querySelector('#nwwMobileControlHeader [aria-selected="true"]')?.focus({preventScroll:true}));
+  else if(returnFocus)requestAnimationFrame(()=>(drawerOpener?.isConnected?drawerOpener:document.getElementById('mobileControlsToggle'))?.focus({preventScroll:true}));
+ }
+ function syncDrawer(){
+  const open=mobile.matches&&body.classList.contains('mobile-controls-open');
+  const childModal=[...document.querySelectorAll('[aria-modal="true"],dialog[open]')].some(e=>e!==panel&&!panel.contains(e)&&visible(e));
+  panel.inert=mobile.matches&&(!open||childModal);
+  if(open){attr(panel,'role','dialog');if(childModal)panel.removeAttribute('aria-modal');else attr(panel,'aria-modal','true');attr(panel,'aria-label','Map controls');}
+  else {panel.removeAttribute('role');panel.removeAttribute('aria-modal');attr(panel,'aria-label','Flood map controls');}
+  for(const id of ['map','map3d','countyStandalone3d','timelineDock']){const e=document.getElementById(id);if(e)e.inert=open;}
+  attr(document.getElementById('mobileControlsToggle'),'aria-expanded',String(open));
+ }
+ function normalize(){
+  ensureControlButtons();ensureHeader();ensureDays();ensureLayers();
+  const title=panel.querySelector('.data-source-card h2');text(title,'Flood Data');
+  for(const [id,label]of [['forecastDataBtn','Forecast'],['observedDataBtn','Past'],['returnIntervalDataBtn','Modeled Floods'],['forecastLowBtn','Lower end'],['forecastMeanBtn','Mean'],['forecastHighBtn','Upper end'],['openDownloadModalBtn','Export Map']])text(document.getElementById(id),label);
+  text(panel.querySelector('#forecastScenarioCard h2'),'Forecast range');
+  for(const id of ['mapperTutorialBtn','avalonTourBtn'])text(document.getElementById(id),'Take the FloodMapper tour');
+  const opacity=panel.querySelector('.opacity-card .control-row'),opacityText=document.getElementById('opacityText');if(opacity&&opacityText&&opacityText.parentElement!==opacity)opacity.append(opacityText);
+  attr(document.getElementById('opacitySlider'),'aria-label','Flood overlay opacity');attr(document.getElementById('hourSlider'),'aria-label','Flood forecast time');
+  Object.entries(groups).forEach(([group,selector])=>document.querySelectorAll(selector).forEach(e=>{if(e.dataset.nwwGroup!==group)e.dataset.nwwGroup=group;}));
+  for(const item of timeline.querySelectorAll('.timeline-key-item'))for(const node of [...item.childNodes])if(node.nodeType===Node.TEXT_NODE&&node.textContent.trim()){const span=document.createElement('span');span.className='timeline-key-label';span.textContent=node.textContent.trim().replace(/^No flooding$/i,'No Flooding').replace(/^(Minor|Moderate|Major) flooding$/i,'$1');node.replaceWith(span);}
+  const bubble=document.getElementById('timelineBubble');if(bubble&&bubble.style.getPropertyValue('translate')!=='none')set(bubble,'translate','none');
+  const legend=document.getElementById('legendDock');if(legend){attr(legend,'role','button');legend.tabIndex=0;attr(legend,'aria-label','Flood map legend');attr(legend,'aria-expanded',String(body.classList.contains('mobile-legend-open')));}
+ }
+ function reparent(){
+  const compact=mobile.matches,legend=document.getElementById('legendDock');let mount=document.getElementById('mobileRailMount');
+  if(compact){
+   if(panel.parentElement!==body)body.append(panel);if(!mount){mount=document.createElement('div');mount.id='mobileRailMount';panel.append(mount);}
+   for(const card of [...rail.children])mount.append(card);if(legend&&legend.parentElement!==body)body.append(legend);
+  }else{
+   if(app&&panel.parentElement!==app)app.insertBefore(panel,app.firstChild);
+   if(mount)for(const card of [...mount.children])rail.append(card);if(legend&&legend.parentElement!==panel)panel.append(legend);
+  }
+  flag(root,'county-compact',compact);syncDrawer();
+ }
+ function layout(){
+  frame=0;normalize();reparent();layoutPasses++;
+  const compact=mobile.matches;
+  for(const pane of [panel,rail]){set(pane,'zoom','1');set(pane,'transform','none');set(pane,'min-width','0px');}
+  if(compact){
+   const vv=window.visualViewport,viewport=vv&&Math.abs((vv.scale||1)-1)<.01?vv:{height:innerHeight,width:innerWidth,offsetTop:0,offsetLeft:0};
+   const computed=getComputedStyle(safeProbe),safe={top:parseFloat(computed.paddingTop)||0,right:parseFloat(computed.paddingRight)||0,bottom:parseFloat(computed.paddingBottom)||0,left:parseFloat(computed.paddingLeft)||0};
+   const top=Math.max(0,viewport.offsetTop||0)+safe.top+8,left=Math.max(0,viewport.offsetLeft||0)+safe.left+8,right=Math.max(0,innerWidth-(viewport.offsetLeft||0)-(viewport.width||innerWidth))+safe.right+8,bottom=Math.max(0,innerHeight-(viewport.offsetTop||0)-(viewport.height||innerHeight))+safe.bottom+8;
+   for(const [key,value]of Object.entries({top,left,right,bottom,height:Math.max(1,(viewport.height||innerHeight)-16)})){const valueText=value.toFixed(2)+'px';if(body.style.getPropertyValue('--cm-'+key)!==valueText)body.style.setProperty('--cm-'+key,valueText);}
+   for(const [key,value]of Object.entries({position:'fixed',left:left+'px',right:right+'px',top:top+'px',bottom:bottom+'px',width:'auto','max-width':'none',height:'auto','max-height':'none','min-height':'0px','overflow-y':'auto','overflow-x':'hidden'}))set(panel,key,value);
+   set(panel,'display',body.classList.contains('mobile-controls-open')?'flex':'none');set(rail,'display','none');set(timeline,'bottom',bottom+'px');set(timeline,'left',left+'px');set(timeline,'right',right+'px');set(timeline,'height','180px');set(timeline,'min-height','180px');set(timeline,'max-height','180px');
+   for(const e of [document.getElementById('nwDefaultNavControl'),document.getElementById('countyStandaloneView')])if(e)for(const key of ['left','right','top'])e.style.removeProperty(key);
+   const title=document.getElementById('mapTitleBadge');for(const key of ['left','right','top','max-width','transform'])title?.style.removeProperty(key);
+   const focused=document.activeElement;if(body.classList.contains('mobile-controls-open')&&focused?.matches('input,textarea,select')&&panel.contains(focused)){const r=focused.getBoundingClientRect(),p=panel.getBoundingClientRect();if(r.bottom>p.bottom-20||r.top<p.top+130)requestAnimationFrame(()=>focused.scrollIntoView({block:'nearest',inline:'nearest'}));}
+  }else{
+   for(const key of ['top','left','right','bottom','height'])body.style.removeProperty('--cm-'+key);
+   set(timeline,'position','fixed');set(timeline,'left','16px');set(timeline,'right','16px');set(timeline,'bottom','16px');set(timeline,'height','112px');set(timeline,'min-height','112px');set(timeline,'max-height','112px');
+   const available=Math.max(180,timeline.getBoundingClientRect().top-28);
+   for(const [pane,width]of [[panel,300],[rail,280]])for(const [key,value]of Object.entries({position:'absolute',top:'16px',bottom:'auto',left:pane===panel?'16px':'auto',right:pane===rail?'16px':'auto',width:width+'px','max-width':width+'px',height:'auto','max-height':available+'px','min-height':'0px','overflow-y':'auto','overflow-x':'hidden',display:'flex'}))set(pane,key,value);
+   const navWidth=document.getElementById('nwDefaultNavControl')?.getBoundingClientRect().width||document.getElementById('countyStandaloneView')?.getBoundingClientRect().width||48;
+   const title=document.getElementById('mapTitleBadge'),l=panel.getBoundingClientRect().right+20,r=rail.getBoundingClientRect().left-navWidth-28;if(title){set(title,'left',((l+r)/2)+'px');set(title,'right','auto');set(title,'top','16px');set(title,'max-width',Math.max(100,r-l)+'px');set(title,'transform','translateX(-50%)');}
+   const nav=document.getElementById('nwDefaultNavControl'),standaloneButton=document.getElementById('countyStandaloneView');const navRight=innerWidth-rail.getBoundingClientRect().left+14;
+   if(nav){set(nav,'right',navRight+'px');set(nav,'left','auto');set(nav,'top','16px');}
+   if(standaloneButton)set(standaloneButton,'right',navRight+'px');body.style.setProperty('--county-nav-right',navRight+'px');
+  }
+  for(const e of [panel,rail,timeline,document.getElementById('mapTitleBadge')])saveStyle(e);
+  body.dataset.unifiedLayoutPasses=String(layoutPasses);body.dataset.unifiedLayout=compact?'mobile':'desktop';
+  if(document.getElementById('satelliteToggle')?.dataset.uiAdded==='true')syncSatellite3d();
+ }
+ function schedule(){if(!frame)frame=requestAnimationFrame(layout);}
+ document.addEventListener('click',event=>{
+  if(event.target.closest('#mobileControlsToggle')){if(!mobile.matches)return;event.preventDefault();event.stopImmediatePropagation();setDrawer(!body.classList.contains('mobile-controls-open'));}
+  else if(event.target.closest('#mobileControlsClose')){event.preventDefault();event.stopImmediatePropagation();setDrawer(false);}
+  else if(mobile.matches&&event.target.closest('#legendDock')&&!event.target.closest('button')){event.preventDefault();event.stopImmediatePropagation();flag(body,'mobile-legend-open',!body.classList.contains('mobile-legend-open'));schedule();}
+ },true);
+ document.addEventListener('keydown',event=>{
+  if(!mobile.matches)return;
+  if(event.key==='Escape'&&body.classList.contains('mobile-legend-open')){flag(body,'mobile-legend-open',false);document.getElementById('legendDock')?.focus();schedule();return;}
+  const otherModal=[...document.querySelectorAll('[aria-modal="true"],dialog[open]')].some(e=>e!==panel&&visible(e));if(otherModal)return;
+  if(body.classList.contains('mobile-controls-open')){
+   if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();setDrawer(false);}
+   else if(event.key==='Tab'){const items=[...panel.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href],[tabindex="0"]')].filter(visible),first=items[0],last=items.at(-1);if(first&&(!panel.contains(document.activeElement)||(event.shiftKey&&document.activeElement===first)||(!event.shiftKey&&document.activeElement===last))){event.preventDefault();(event.shiftKey?last:first).focus();}}
+  }else if(event.target.closest('#legendDock')&&(event.key==='Enter'||event.key===' ')){event.preventDefault();event.stopImmediatePropagation();flag(body,'mobile-legend-open',!body.classList.contains('mobile-legend-open'));schedule();}
+ },true);
+ document.addEventListener('nww:reveal-control',event=>{if(mobile.matches&&typeof event.detail==='string'){const element=document.querySelector(event.detail);if(element)selectSection(element.closest('[data-nww-group]')?.dataset.nwwGroup||'forecast');schedule();}});
+ const observer=new MutationObserver(records=>{if(records.some(m=>m.type!=='attributes'||m.attributeName!=='style'||owned.get(m.target)!==m.target.getAttribute('style')))schedule();});
+ for(const e of [panel,rail,timeline])observer.observe(e,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','hidden','aria-current','data-nww-section']});
+ const geometryObserver=new MutationObserver(records=>{if(records.some(m=>owned.get(m.target)!==m.target.getAttribute('style')))schedule();});
+ for(const e of [panel,rail,timeline,document.getElementById('mapTitleBadge')])if(e)geometryObserver.observe(e,{attributes:true,attributeFilter:['style']});
+ observer.observe(body,{attributes:true,attributeFilter:['class']});
+ for(const modal of document.querySelectorAll('[role="dialog"],dialog,.download-modal,.datum-modal'))if(modal!==panel)observer.observe(modal,{attributes:true,attributeFilter:['class','hidden','open','aria-modal','style']});
+ new ResizeObserver(schedule).observe(timeline);mobile.addEventListener('change',schedule);addEventListener('resize',schedule,{passive:true});window.visualViewport?.addEventListener('resize',schedule,{passive:true});window.visualViewport?.addEventListener('scroll',schedule,{passive:true});
+ addEventListener('load',schedule,{once:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});
+ layout();
 })();
-
-if(!document.body.hasAttribute("data-fleet-viewport-existing")){
-/* One viewport owner on GitHub and Cup A Joe. Fit complete cards above the timeline. */
-(() => {
-  document.body.dataset.countyViewport='20261015';
-  const left=document.getElementById('leftPanel'),right=document.getElementById('rightRail'),timeline=document.getElementById('timelineDock');
-  if(!left||!right||!timeline)return;
-  let frame,mobileApplied=false;const expectedStyles=new WeakMap();
-  const probe=document.createElement('div');probe.id='countySafeAreaProbe';probe.setAttribute('aria-hidden','true');document.body.append(probe);
-  function viewportGeometry(width,height,viewport,safe){
-    const vv=viewport&&Math.abs((viewport.scale||1)-1)<.01?viewport:{width,height,offsetTop:0,offsetLeft:0};
-    const top=Math.max(0,vv.offsetTop||0),left=Math.max(0,vv.offsetLeft||0);
-    const visibleWidth=Math.min(width,Math.max(1,vv.width||width)),visibleHeight=Math.min(height,Math.max(1,vv.height||height));
-    return {top:top+safe.top+8,left:left+safe.left+8,right:Math.max(0,width-left-visibleWidth)+safe.right+8,bottom:Math.max(0,height-top-visibleHeight)+safe.bottom+8,height:Math.max(1,visibleHeight-safe.top-safe.bottom-16)};
-  }
-  function fitMobile(){
-    mobileApplied=true;
-    for(const id of ['mapTitleBadge','nwDefaultNavControl','countyStandaloneView']){const e=document.getElementById(id);if(e)for(const p of ['left','right','top','max-width','transform'])e.style.removeProperty(p);}
-    const computed=getComputedStyle(probe),safe={top:parseFloat(computed.paddingTop)||0,right:parseFloat(computed.paddingRight)||0,bottom:parseFloat(computed.paddingBottom)||0,left:parseFloat(computed.paddingLeft)||0};
-    const g=viewportGeometry(innerWidth,innerHeight,window.visualViewport,safe);
-    for(const [key,value] of Object.entries(g)){const name='--cm-'+key,text=value.toFixed(2)+'px';if(document.body.style.getPropertyValue(name)!==text)document.body.style.setProperty(name,text);}
-    for(const pane of [left,right])pane.style.removeProperty('zoom');
-    for(const [p,v] of Object.entries({top:g.top+'px',bottom:g.bottom+'px',left:g.left+'px',right:g.right+'px',width:'auto','max-width':'none',height:'auto','min-height':'0px','max-height':'none','overflow-x':'hidden','overflow-y':'auto'}))set(left,p,v);
-    for(const [p,v] of Object.entries({left:g.left+'px',right:g.right+'px',bottom:g.bottom+'px'}))set(timeline,p,v);
-    const legend=document.getElementById('legendDock');
-    if(legend&&document.body.classList.contains('mobile-legend-open'))for(const [p,v] of Object.entries({top:(g.top+60)+'px',left:g.left+'px',right:g.right+'px','max-height':Math.max(80,g.height-260)+'px'}))set(legend,p,v);
-    else if(legend)for(const p of ['top','left','right','max-height'])legend.style.removeProperty(p);
-    for(const pane of [left,right,timeline])expectedStyles.set(pane,pane.getAttribute('style'));
-    document.body.dataset.countyViewportFit='mobile-visible-viewport';
-    const focused=document.activeElement;
-    if(document.body.classList.contains('mobile-controls-open')&&focused?.matches('input,textarea,select')&&left.contains(focused)){const r=focused.getBoundingClientRect(),p=left.getBoundingClientRect();if(r.top<p.top+136||r.bottom>p.bottom-20)requestAnimationFrame(()=>focused.scrollIntoView({block:'nearest',inline:'nearest'}));}
-  }
-  const compact=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse)');
-  function set(e,p,v){if(e.style.getPropertyValue(p)!==v||e.style.getPropertyPriority(p)!=='important')e.style.setProperty(p,v,'important');}
-  function update(){
-    frame=null;if(compact.matches){fitMobile();return;}
-    if(mobileApplied){for(const pane of [left,right])for(const p of ['left','right','width','max-width','top','bottom','height','max-height','min-height','overflow-x','overflow-y'])pane.style.removeProperty(p);for(const p of ['left','right','bottom'])timeline.style.removeProperty(p);mobileApplied=false;}
-    const available=Math.max(200,timeline.getBoundingClientRect().top-84);
-    let natural=1;
-    for(const pane of [left,right]){
-      set(pane,'zoom','1');set(pane,'min-width','0px');set(pane,'width',pane===left?'300px':'280px');set(pane,'max-width',pane===left?'300px':'280px');
-      set(pane,'height','auto');set(pane,'min-height','0px');set(pane,'max-height','none');set(pane,'bottom','auto');set(pane,'top','16px');set(pane,'overflow','visible');
-      natural=Math.max(natural,pane.scrollHeight,pane.getBoundingClientRect().height);
-    }
-    const scale=Math.min(1,Math.max(.55,available/natural));
-    for(const pane of [left,right]){
-      set(pane,'zoom',scale.toFixed(4));set(pane,'top',`${16/scale}px`);
-      set(pane,pane===left?'left':'right',`${16/scale}px`);
-      set(pane,'max-height',`${available/scale}px`);set(pane,'overflow-y','auto');set(pane,'overflow-x','hidden');
-      pane.dataset.countyFitScale=scale.toFixed(4);
-    }
-    for(const day of document.querySelectorAll('#timelineDayTabs .timeline-day')){set(day,'flex','1 1 0');set(day,'width','0px');set(day,'max-width','none');}
-    // county-pill-anchor-20261015: reset independent CSS translate as well as transform.
-    const bubble=document.getElementById('timelineBubble');if(bubble){set(bubble,'left','24px');set(bubble,'right','auto');set(bubble,'translate','none');set(bubble,'transform','none');set(bubble,'scale','none');}
-    const l=left.getBoundingClientRect(),r=right.getBoundingClientRect();
-    const title=document.getElementById('mapTitleBadge');if(title){set(title,'visibility',document.body.classList.contains('top-tides-modal-open')?'hidden':'visible');set(title,'background','#171f2e');set(title,'width','max-content');set(title,'height','auto');set(title,'padding','10px 14px');set(title,'top','16px');set(title,'left',`${(l.right+r.left)/2}px`);set(title,'max-width',`${Math.max(140,r.left-l.right-140)}px`);set(title,'transform','translateX(-50%)');}
-    const nav=document.getElementById('nwDefaultNavControl');if(nav)set(nav,'right',`${innerWidth-r.left+16}px`);
-    const standalone=document.getElementById('countyStandaloneView');if(standalone)set(standalone,'right',`${innerWidth-r.left+16}px`);
-    document.body.style.setProperty('--county-nav-right',`${innerWidth-r.left+6}px`);
-    const zoom=document.querySelector('.leaflet-control-zoom');if(zoom){const host=zoom.parentElement;set(host,'position','absolute');set(host,'left','auto');set(host,'right',`${innerWidth-r.left+16}px`);set(host,'top','150px');set(host,'width','auto');set(zoom,'position','relative');set(zoom,'left','auto');set(zoom,'right','0px');set(zoom,'top','0px');set(zoom,'margin','0px');set(zoom,'transform','none');}
-    for(const pane of [left,right,timeline])expectedStyles.set(pane,pane.getAttribute('style'));
-    document.body.dataset.countyViewportFit='complete';
-  }
-  function schedule(){if(!frame)frame=requestAnimationFrame(update);}
-  new ResizeObserver(schedule).observe(timeline);
-  for(const pane of [left,right])new MutationObserver(schedule).observe(pane,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
-  for(const pane of [left,right,timeline])new MutationObserver(()=>{if(pane.getAttribute('style')!==expectedStyles.get(pane))schedule();}).observe(pane,{attributes:true,attributeFilter:['style']});
-  new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});
-  window.visualViewport?.addEventListener('resize',schedule,{passive:true});window.visualViewport?.addEventListener('scroll',schedule,{passive:true});
-  addEventListener('orientationchange',schedule,{passive:true});addEventListener('pageshow',schedule);document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
-  addEventListener('resize',schedule,{passive:true});compact.addEventListener('change',schedule);addEventListener('load',schedule);schedule();
-})();
-
-}</script>
+</script>
 </body>
 </html>

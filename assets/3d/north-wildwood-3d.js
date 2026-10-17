@@ -251,17 +251,23 @@
     });
   }
 
+  var imageLayerVersions = new WeakMap();
   function updateImageLayer(options) {
     if (!glMap || !glStyleReady || !options.url || !options.coordinates) return;
     var source = glMap.getSource(options.sourceId);
+    var signature = JSON.stringify([options.url, options.coordinates]);
     if (source && typeof source.updateImage === "function") {
-      source.updateImage({ url: options.url, coordinates: options.coordinates });
+      if (imageLayerVersions.get(source) !== signature) {
+        source.updateImage({ url: options.url, coordinates: options.coordinates });
+        imageLayerVersions.set(source, signature);
+      }
     } else {
       glMap.addSource(options.sourceId, {
         type: "image",
         url: options.url,
         coordinates: options.coordinates
       });
+      imageLayerVersions.set(glMap.getSource(options.sourceId), signature);
       addLayerBelowMask({
         id: options.layerId,
         type: "raster",
@@ -320,6 +326,10 @@
       useDepthTest: initial.useDepthTest !== false,
       textureLoadPromise: Promise.resolve(false),
       imageToken: 0,
+      committedUrl: "",
+      cancelTextureLoad: null,
+      retiredTextures: [],
+      pendingFrame: { coordinates: initial.coordinates || null, altitudeMeters: Number(initial.altitudeMeters) || 0 },
       url: initial.url || "",
       coordinates: initial.coordinates || null,
       altitudeMeters: Number(initial.altitudeMeters) || 0,
@@ -424,6 +434,7 @@
 
       loadTexture: function (url) {
         if (!this.gl || !url) return Promise.resolve(false);
+        if (this.cancelTextureLoad) this.cancelTextureLoad();
         var self = this;
         var token = ++this.imageToken;
         var image = new Image();
@@ -431,65 +442,103 @@
         image.decoding = "async";
         document.body.dataset.map3dFloodTexture = self.textureReady ? "updating" : "loading";
         this.textureLoadPromise = new Promise(function (resolve) {
-          image.onload = function () {
-            if (token !== self.imageToken || !self.gl || !self.texture) {
-              resolve(false);
-              return;
-            }
-            var gl = self.gl;
-            // Image decoding completes outside the custom render callback.
-            // Preserve MapLibre's live bindings and pixel-store flags around
-            // this upload; leaking them desynchronizes its cached GL state and
-            // is visible as whole-frame flashing on the next camera movement.
-            var priorActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE);
-            var priorFlipY = gl.getParameter(gl.UNPACK_FLIP_Y_WEBGL);
-            var priorPremultiplyAlpha = gl.getParameter(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL);
-            gl.activeTexture(gl.TEXTURE0);
-            var priorTexture0 = gl.getParameter(gl.TEXTURE_BINDING_2D);
+          var settled = false;
+          var timer = null;
+          function finish(ready) {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            image.onload = image.onerror = null;
+            if (self.cancelTextureLoad === cancel) self.cancelTextureLoad = null;
+            resolve(ready);
+          }
+          function cancel() { finish(false); }
+          function failed() {
+            if (token === self.imageToken) document.body.dataset.map3dFloodTexture = self.textureReady ? "stale" : "unavailable";
+            finish(false);
+          }
+          self.cancelTextureLoad = cancel;
+          timer = window.setTimeout(failed, 20000);
+          image.onload = async function () {
+            var replacement = null;
             try {
-              gl.bindTexture(gl.TEXTURE_2D, self.texture);
-              gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-              gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-              // Trilinear minification removes block stair-stepping without
-              // replacing the texture while the camera is moving.
-              gl.generateMipmap(gl.TEXTURE_2D);
-              gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-            } finally {
-              gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, priorFlipY);
-              gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, priorPremultiplyAlpha);
-              gl.bindTexture(gl.TEXTURE_2D, priorTexture0);
-              gl.activeTexture(priorActiveTexture);
+              if (typeof image.decode === "function") await image.decode();
+              if (settled || token !== self.imageToken || !self.gl || !self.texture) return finish(false);
+              var gl = self.gl;
+              var priorActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE);
+              var priorFlipY = gl.getParameter(gl.UNPACK_FLIP_Y_WEBGL);
+              var priorPremultiplyAlpha = gl.getParameter(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL);
+              gl.activeTexture(gl.TEXTURE0);
+              var priorTexture0 = gl.getParameter(gl.TEXTURE_BINDING_2D);
+              try {
+                // Upload into a candidate texture. A decode/GPU failure cannot
+                // damage the last complete image that is still on screen.
+                replacement = gl.createTexture();
+                if (!replacement) throw new Error("The next flood texture could not be allocated.");
+                gl.bindTexture(gl.TEXTURE_2D, replacement);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+                gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+                gl.generateMipmap(gl.TEXTURE_2D);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+              } finally {
+                gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, priorFlipY);
+                gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, priorPremultiplyAlpha);
+                gl.bindTexture(gl.TEXTURE_2D, priorTexture0);
+                gl.activeTexture(priorActiveTexture);
+              }
+              var frame = self.pendingFrame || {};
+              var previous = self.texture;
+              self.texture = replacement;
+              replacement = null;
+              self.coordinates = frame.coordinates || self.coordinates;
+              self.altitudeMeters = Number(frame.altitudeMeters) || 0;
+              self.updateGeometry();
+              self.committedUrl = url;
+              self.textureReady = true;
+              if (previous) {
+                // Deleting a texture that MapLibre still has bound would alter
+                // its state after restoration. Retire that handle in our next
+                // guarded draw, once the replacement has been bound instead.
+                if (previous === priorTexture0) self.retiredTextures.push(previous);
+                else gl.deleteTexture(previous);
+              }
+              document.body.dataset.map3dFloodTexture = "ready";
+              document.body.dataset.map3dFloodPhysicalAltitudeMeters = self.altitudeMeters.toFixed(3);
+              document.body.dataset.map3dFloodAltitudeMeters = self.altitudeMeters.toFixed(3);
+              if (self.map) self.map.triggerRepaint();
+              finish(true);
+            } catch (_) {
+              if (replacement && self.gl) self.gl.deleteTexture(replacement);
+              failed();
             }
-            self.textureReady = true;
-            document.body.dataset.map3dFloodTexture = "ready";
-            if (self.map) self.map.triggerRepaint();
-            resolve(true);
           };
-          image.onerror = function () {
-            if (token === self.imageToken) {
-              // Keep the last fully uploaded frame visible. A failed replacement
-              // must not flash a transparent map or destroy a valid flood frame.
-              document.body.dataset.map3dFloodTexture = self.textureReady ? "stale" : "unavailable";
-            }
-            resolve(false);
-          };
+          image.onerror = failed;
+          image.src = url;
         });
-        image.src = url;
         return this.textureLoadPromise;
       },
 
       update: function (next) {
         var priorUrl = this.url;
         this.url = next.url || "";
-        this.coordinates = next.coordinates || null;
-        this.altitudeMeters = Number(next.altitudeMeters) || 0;
+        this.pendingFrame = { coordinates: next.coordinates || null, altitudeMeters: Number(next.altitudeMeters) || 0 };
         this.opacity = Math.max(0, Math.min(1, Number(next.opacity)));
         this.useDepthTest = next.useDepthTest !== false;
-        this.updateGeometry();
-        if (this.url && this.url !== priorUrl) {
-          // The old texture remains on the GPU until the replacement is decoded
-          // and uploaded, preventing flashes during timeline and camera movement.
+        if (this.textureReady && this.committedUrl === this.url) {
+          if (this.cancelTextureLoad) { this.imageToken += 1; this.cancelTextureLoad(); }
+          this.coordinates = this.pendingFrame.coordinates;
+          this.altitudeMeters = this.pendingFrame.altitudeMeters;
+          this.updateGeometry();
+          this.textureLoadPromise = Promise.resolve(true);
+          document.body.dataset.map3dFloodTexture = "ready";
+          document.body.dataset.map3dFloodPhysicalAltitudeMeters = this.altitudeMeters.toFixed(3);
+        } else if (this.url && (this.url !== priorUrl || !this.cancelTextureLoad)) {
+          // Geometry and the new texture commit together after decoding. The
+          // previous image stays at its own water height while a load is pending.
           this.loadTexture(this.url);
         }
         if (this.map) this.map.triggerRepaint();
@@ -544,6 +593,7 @@
         gl.bindVertexArray(this.vertexArray);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        while (this.retiredTextures.length) gl.deleteTexture(this.retiredTextures.pop());
         gl.uniform1i(this.imageLocation, 0);
         // MapLibre brackets custom render callbacks with context.setDirty().
         // Set every state this draw needs, then let that guard restore its
@@ -581,7 +631,9 @@
 
       onRemove: function (_, gl) {
         this.imageToken += 1;
+        if (this.cancelTextureLoad) this.cancelTextureLoad();
         if (this.texture) gl.deleteTexture(this.texture);
+        while (this.retiredTextures.length) gl.deleteTexture(this.retiredTextures.pop());
         if (this.vertexArray) gl.deleteVertexArray(this.vertexArray);
         if (this.buffer) gl.deleteBuffer(this.buffer);
         if (this.program) gl.deleteProgram(this.program);
@@ -719,7 +771,7 @@
   function placeFloodForScaleDepthPass() {
     if (!glMap || !glMap.getLayer("nw-flood-overlay")) return;
     // Only the verified municipal GeoJSON is ever extruded. Basemap buildings
-    // outside Ventnor City remain flat map context when Buildings is on.
+    // outside Highlands remain flat map context when Buildings is on.
     var buildingLayerIds = ["nw-3d-buildings"];
     var styleLayers = glMap.getStyle().layers || [];
     var firstBuildingIndex = -1;
@@ -735,7 +787,8 @@
     }
     if (!usesDetailedFloodDepth()) {
       var firstBuildingLayer = styleLayers[firstBuildingIndex];
-      if (firstBuildingLayer && firstBuildingLayer.id !== "nw-flood-overlay") {
+      var floodIndex = styleLayers.findIndex(function (layer) { return layer.id === "nw-flood-overlay"; });
+      if (firstBuildingLayer && floodIndex !== firstBuildingIndex - 1) {
         glMap.moveLayer("nw-flood-overlay", firstBuildingLayer.id);
       }
       document.body.dataset.map3dFloodBuildingOcclusion = "overview-buildings-after-water";
