@@ -83,7 +83,7 @@ jobs:
 
           HEADER_ALIASES = {
               "time": ["time", "valid", "validtime", "valid_time", "datetime", "date_time", "forecast_time", "src_time", "srctime"],
-              "twl": ["twl", "twl_ft", "twl_mllw", "twl_mllw_ft", "stormtide", "storm_tide", "total_water_level", "water_level"],
+              "twl": ["twl"],
               "twl10": ["twl10p", "twl_10p", "twl10", "twl_p10", "p10_twl", "twl_e10", "e10_twl"],
               "twl90": ["twl90p", "twl_90p", "twl90", "twl_p90", "p90_twl", "twl_e90", "e90_twl"],
               "tide": ["tide", "tide_ft", "tide_mllw", "tide_mllw_ft"],
@@ -389,6 +389,9 @@ jobs:
 
       - name: Generate non-operational PETSS research comparison
         run: python tools/experimental_petss_guidance.py --input forecast.json --output data/experimental_petss_guidance.json
+
+      - name: Select issued PETSS ensemble mean for operational forecasts
+        run: python3 tools/select_petss_mean.py forecast.json
 
       - name: Commit updated forecast
         shell: bash
