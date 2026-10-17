@@ -27628,6 +27628,7 @@ function populateCalendarSelectors() {
     }
 
     async function loadObservedDay(dateStr, preferredHourIndex = null, preferredEntry = null, options = {}) {
+      const floodSelectionToken = cancelPendingFloodFrame();
       const generation = ++selectionGeneration;
       await ensureObservedArchiveForDate(dateStr);
       if (floodSelectionToken !== lastRenderToken) return false;
@@ -27637,7 +27638,6 @@ function populateCalendarSelectors() {
 
       const preservePlayback = Boolean(options && options.preservePlayback);
       if (!preservePlayback) stopPlayback();
-      const floodSelectionToken = cancelPendingFloodFrame();
       currentDataMode = "observed";
       updateDataModeButtons();
 
