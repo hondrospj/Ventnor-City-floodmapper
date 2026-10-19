@@ -16624,6 +16624,15 @@ html body.mobile-optimized #mobileRailMount > .layers-card:has(.shorelysafe-came
   height:auto !important; min-height:0 !important; max-height:none !important; flex-shrink:0 !important;
 }
 </style>
+<style id="shorely-timeline-frame-alignment-20261019">
+/* Desktop day bands share the native slider's frame positions. Mobile keeps
+   its existing selected-day layout; the variable switches on resize. */
+@media (min-width:901px) {
+  html body #timelineDayTabs .timeline-day {
+    --shorely-timeline-day-flex:var(--shorely-timeline-frame-weight,1);
+  }
+}
+</style>
 </head>
 <body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-county-viewport="20261017" data-floodmapper-unified="20261017.3"><div id="roadImpactsKey" hidden><span>Roads: modeled depth &gt; 0.5 ft</span><span id="roadImpactsStatus" role="status"></span></div>
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
@@ -20115,15 +20124,20 @@ function setDatumHelpOpen(isOpen) {
       return getDepthTimelineColor(rawStage);
     }
 
-    function buildTimelineGroupGradient(startIndex, endIndex) {
+    function buildTimelineGroupGradient(startIndex, endIndex, sampleCenters = false) {
       const entries = currentSeriesHours.slice(startIndex, endIndex + 1);
       if (!entries.length) return "";
-      const count = entries.length;
+      // Whole-series day bands meet halfway between adjacent frame centers.
+      // A selected-day mobile slider instead spans its first and last centers.
+      const firstEdge = sampleCenters ? startIndex : Math.max(0, startIndex - 0.5);
+      const lastEdge = sampleCenters ? endIndex : Math.min(currentSeriesHours.length - 1, endIndex + 0.5);
+      const span = lastEdge - firstEdge;
+      if (span <= 0) return `linear-gradient(90deg, ${getTimelineHourColor(entries[0])}, ${getTimelineHourColor(entries[0])})`;
       const stops = [];
       entries.forEach((entry, idx) => {
         const color = getTimelineHourColor(entry);
-        const startPct = (idx / count) * 100;
-        const endPct = ((idx + 1) / count) * 100;
+        const startPct = 100 * (Math.max(firstEdge, startIndex + idx - 0.5) - firstEdge) / span;
+        const endPct = 100 * (Math.min(lastEdge, startIndex + idx + 0.5) - firstEdge) / span;
         stops.push(`${color} ${startPct.toFixed(3)}%`, `${color} ${endPct.toFixed(3)}%`);
       });
       return `linear-gradient(90deg, ${stops.join(", ")})`;
@@ -25904,7 +25918,14 @@ function getEntryESTDate(entry) {
           btn.setAttribute("aria-label", `Gauge inoperable for more than ${GAUGE_OUTAGE_THRESHOLD_HOURS} hours`);
           btn.title = `${outageHours.toFixed(0)} consecutive hours without a usable Ventnor City or Inside Thorofare at Atlantic City gauge level`;
         }
-        btn.style.flex = `${Math.max(1, group.hours)} 1 0`;
+        // The first and last frames occupy half a slider interval.
+        const timelineFrameWeight = currentSeriesHours.length <= 1 ? 1
+          : Math.min(currentSeriesHours.length - 1, group.end + 0.5) - Math.max(0, group.start - 0.5);
+        btn.dataset.start = String(group.start);
+        btn.dataset.end = String(group.end);
+        btn.style.setProperty("--shorely-timeline-frame-weight", String(timelineFrameWeight));
+        // Inline priority survives the town/reference styles' equal-flex rules.
+        btn.style.setProperty("flex", "var(--shorely-timeline-day-flex, 1) 1 0", "important");
         const tideGradient = gaugeInoperable ? null : buildTimelineGroupGradient(group.start, group.end);
         if (tideGradient) {
           btn.style.backgroundImage = `linear-gradient(180deg, rgba(10,18,32,.18), rgba(10,18,32,.18)), ${tideGradient}`;
@@ -39595,7 +39616,7 @@ html body #mapTitleBadge #mapTitleLogo{
       if (width > 0 && width < 38) label = tiny;
       else if (width > 0 && width < 58) label = short;
       if (label && day.textContent !== label) day.textContent = label;
-      setImportant(day, "flex", hours + " 1 0");
+      setImportant(day, "flex", "var(--shorely-timeline-day-flex, " + hours + ") 1 0");
       setImportant(day, "min-width", "0");
       setImportant(day, "max-width", "none");
       setImportant(day, "white-space", "nowrap");
