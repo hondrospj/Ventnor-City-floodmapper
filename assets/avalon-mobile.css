@@ -7,7 +7,7 @@
   #nativeRoadNamesHint { display:none !important; }
   .basemap-includes-labels #roadNamesControl { display:none !important; }
   .basemap-includes-labels #nativeRoadNamesHint { display:block !important; margin:4px 0 0 !important; color:#b6c5d8 !important; font:13px/1.4 system-ui !important; }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html, body { width:100% !important; height:100% !important; min-width:0 !important; overflow:hidden !important; }
     #app, #mapWrap { position:fixed !important; inset:0 !important; width:100% !important; height:100dvh !important; min-width:0 !important; min-height:0 !important; margin:0 !important; transform:none !important; }
     #map { position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; }
@@ -148,7 +148,7 @@
 /* The borough mappers share Avalon's shell but also include the 3D view and
    older inline mobile layout patches. Keep the same touch layout for both. */
 @layer avalon-mobile {
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     #mapWrap #map3d { position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; min-width:0 !important; min-height:0 !important; }
     #mapTitleBadge #mapTitleText { font-size:clamp(12px, 3.4vw, 17px) !important; line-height:1.12 !important; white-space:normal !important; overflow-wrap:normal !important; text-overflow:clip !important; max-width:100% !important; }
     #mapTitleBadge #mapTitleLogo { display:none !important; }

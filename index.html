@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en" data-nww-avalon-timeline data-nww-mobile-layout>
+<html lang="en" data-nww-avalon-timeline data-nww-mobile-layout data-ss-ui-ready="app">
 <head>
 <style id="shorely-depth-pill-20261016">
 /* Shared click-depth card. Keep the existing heading, depth, units and query states. */
@@ -172,7 +172,7 @@
   }
 }
 </style>
-<style id="floodmapper-unified-ui-20261017" data-ui-sha256="1876a86c2a869e56d39518238f2143d02d00ddb025bb2ec54025be95868de605">@layer floodmapper-unified-polish,floodmapper-unified-base-polish,floodmapper-unified-base;
+<style id="floodmapper-unified-ui-20261017" data-ui-sha256="6066e10bf08b0a1bb7267d99d4cf0d920acb47cd19ce9b79a3987b37690b941a">@layer floodmapper-unified-polish,floodmapper-unified-base-polish,floodmapper-unified-base;
 @layer floodmapper-unified-base-polish,floodmapper-unified-base;
 
 @layer floodmapper-unified-base {
@@ -291,7 +291,7 @@
   body[data-shorelysafe-ui] :is(#downloadModal,#infoModal,#datumModal) .modal-card {
     border-radius:18px !important;background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
   }
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     /* Keep the first slider thumb outside the play button's column. */
     body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow {
       box-sizing:border-box !important;min-width:0 !important;padding:0 !important;
@@ -310,11 +310,11 @@
       bottom:156px !important;max-height:calc(100dvh - 172px) !important;overflow-y:auto !important;
     }
   }
-  @media (min-width:901px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) {
+  @media (min-width:901px) and (max-width:1199px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (pointer:none) {
     body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {width:286px !important;max-width:286px !important;}
     body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {width:224px !important;}
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     body[data-shorelysafe-ui].mobile-optimized #leftPanel {
       gap:8px !important;overflow-y:auto !important;overflow-x:hidden !important;
     }
@@ -425,7 +425,7 @@
   html[data-nww-avalon-timeline] body #timelineDock #timelineEnd,
   html[data-nww-avalon-timeline] body #timelineDock #pjBlueSliderExactTrackLine { display:none !important; }
   html[data-nww-avalon-timeline] body #timelineDock #timelineTimeBounds { display:none !important; }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html[data-nww-avalon-timeline] body #timelineDock {
       left:8px !important; right:8px !important; bottom:calc(8px + env(safe-area-inset-bottom)) !important;
       height:188px !important; min-height:188px !important; max-height:188px !important;
@@ -516,7 +516,7 @@
    mobile geometry without fighting the older global styles or desktop fitter. */
 @layer floodmapper-unified-base {
   #nwwMobileControlHeader { display:none !important; }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html[data-nww-mobile-layout] body { --nww-key-extra:0px; --nww-mobile-timeline:calc(168px + var(--nww-key-extra)); }
     html[data-nww-mobile-layout] body #mapTitleBadge {
       position:fixed !important; top:calc(8px + env(safe-area-inset-top)) !important;
@@ -671,7 +671,7 @@
     html[data-nww-mobile-layout] body #timelineDock #timelineFloodKey { gap:7px !important; }
     html[data-nww-mobile-layout] body #leftPanel .button-grid-3 button { font-size:14px !important; padding:4px !important; }
   }
-  @media (max-width:900px) and (max-height:560px) and (orientation:landscape) {
+  @media (max-width:900px) and (max-height:560px) and (orientation:landscape), (max-width:1366px) and (any-pointer:coarse) and (max-height:560px) and (orientation:landscape) {
     html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(120px + var(--nww-key-extra)); }
     html[data-nww-mobile-layout] body #timelineDock #timelineBubble { width:calc(43% - 76px) !important; right:auto !important; }
     html[data-nww-mobile-layout] body #timelineDock #timelinePreviousDay { top:6px !important; left:43% !important; }
@@ -694,7 +694,7 @@
   html[data-nww-mobile-layout] body #timelineDock .timeline-step { display:none !important; }
   html[data-nww-mobile-layout] body #timelineDock .timeline-sr-date { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; clip-path:inset(50%) !important; white-space:nowrap !important; }
   html[data-nww-mobile-layout] body #timelineDock #hourSlider:focus-visible { outline:2px solid var(--nw-ui-blue) !important; outline-offset:3px !important; border-radius:8px !important; }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(180px + var(--nww-key-extra)); }
     html[data-nww-mobile-layout] body:has(#timelineDock[data-single-timeline-time="true"]) { --nww-mobile-timeline:calc(126px + var(--nww-key-extra)); }
     html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] {
@@ -779,7 +779,7 @@
   @media (max-width:360px) {
     html[data-nww-mobile-layout] body #timelineDock #timelineBubble .timeline-bubble-current { font-size:16px !important; }
   }
-  @media (max-width:900px) and (max-height:560px) and (orientation:landscape) {
+  @media (max-width:900px) and (max-height:560px) and (orientation:landscape), (max-width:1366px) and (any-pointer:coarse) and (max-height:560px) and (orientation:landscape) {
     html[data-nww-mobile-layout] body { --nww-mobile-timeline:calc(126px + var(--nww-key-extra)); }
     html[data-nww-mobile-layout] body:has(#timelineDock[data-single-timeline-time="true"]),
     html[data-nww-mobile-layout] body #timelineDock[data-single-timeline-time="true"] { --nww-mobile-timeline:calc(80px + var(--nww-key-extra)); }
@@ -884,13 +884,13 @@
     outline:2px solid #bfdbfe !important;
     outline-offset:3px !important;
   }
-  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:760px) {
     html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card { padding:9px !important; }
     html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-item { min-height:26px !important; padding:1px 6px !important; }
     html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .layer-name { font-size:11px !important; }
     html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount,#leftPanel) section.nww-layers-card.layers-card .toggle::before { inset:-2px -6px; }
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card { padding:12px !important; }
     html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .layer-item { min-height:48px !important; padding:8px 6px !important; }
     html[data-nww-mobile-layout] body[data-shorelysafe-ui] #leftPanel section.nww-layers-card.layers-card .layer-name { font-size:15px !important; }
@@ -1047,7 +1047,7 @@
     background:#12213a !important;
     border-color:var(--fleet-accent) !important;
   }
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     html {
       --nww-left-width:356px;
       --nww-right-width:288px;
@@ -1295,13 +1295,13 @@
       letter-spacing:.04em !important;
     }
   }
-  @media (min-width:901px) and (max-width:1320px) and (min-height:561px), (min-width:901px) and (max-width:1320px) and (pointer:fine), (min-width:901px) and (max-width:1320px) and (pointer:none) {
+  @media (min-width:901px) and (max-width:1320px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (min-height:561px), (min-width:901px) and (max-width:1320px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (pointer:fine), (min-width:901px) and (max-width:1320px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (pointer:none) {
     html { --nww-left-width:340px; --nww-right-width:272px; }
   }
-  @media (min-width:901px) and (max-width:1120px) and (min-height:561px), (min-width:901px) and (max-width:1120px) and (pointer:fine), (min-width:901px) and (max-width:1120px) and (pointer:none) {
+  @media (min-width:901px) and (max-width:1120px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (min-height:561px), (min-width:901px) and (max-width:1120px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (pointer:fine), (min-width:901px) and (max-width:1120px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (pointer:none) {
     html { --nww-left-width:320px; --nww-right-width:256px; }
   }
-  @media (min-width:901px) and (min-height:561px) and (max-height:800px), (min-width:901px) and (pointer:fine) and (max-height:800px), (min-width:901px) and (pointer:none) and (max-height:800px) {
+  @media (min-width:901px) and (min-height:561px) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:800px), (min-width:901px) and (pointer:fine) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:800px), (min-width:901px) and (pointer:none) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:800px) {
     html body[data-shorelysafe-ui] #leftPanel {
       --nww-control-padding:6px;
       --nww-control-gap:4px;
@@ -1461,7 +1461,7 @@
     font-size:var(--nww-pane-detail) !important;
     white-space:nowrap !important;
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body[data-shorelysafe-ui] #leftPanel #calendarCard.calendar-card { order:2 !important; }
     html body[data-shorelysafe-ui] #leftPanel #calendarCard .day-nav {
       grid-template-columns:44px minmax(0,1fr) 44px !important;
@@ -1493,7 +1493,7 @@ html {
 @media (min-width:1800px) {
   html { --nww-pane-font:16px; --nww-pane-heading:17px; --nww-pane-detail:15px; }
 }
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
 }
 
@@ -1570,7 +1570,7 @@ html {
     font-size:var(--nww-pane-font) !important;
     line-height:1.25 !important;
   }
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-list { gap:0 !important; }
     html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-item {
       min-height:34px !important;
@@ -1600,7 +1600,7 @@ html {
       line-height:1.25 !important;
     }
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body[data-shorelysafe-ui] #leftPanel#leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
       height:auto !important;
       min-height:48px !important;
@@ -1647,7 +1647,7 @@ html body[data-floodmapper-reference] :is(button,input,select,[role="switch"]):f
 html body[data-floodmapper-reference] #nwDefaultNavControl {filter:drop-shadow(0 8px 12px rgba(2,6,23,.2))!important;}
 html body[data-floodmapper-reference] #nwDefaultNavControl .nw-direction-wheel {background:#142238!important;border-color:#60a5fa!important;}
 html body[data-floodmapper-reference] #nwDefaultNavControl :is(.nw-simple-view,.nw-simple-zoom) {background:#142238!important;border-color:#60a5fa!important;color:#60a5fa!important;}
-@media(min-width:901px){
+@media(min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
  html body[data-floodmapper-reference] :is(#leftPanel,#rightRail){position:absolute!important;display:flex!important;flex-direction:column!important;gap:6px!important;padding:0!important;margin:0!important;border:0!important;}
  html body[data-floodmapper-reference] #leftPanel {width:300px!important;left:16px;top:16px;}
  html body[data-floodmapper-reference] #rightRail {width:280px!important;right:16px;top:16px;}
@@ -1662,8 +1662,8 @@ html body[data-floodmapper-reference] #nwDefaultNavControl :is(.nw-simple-view,.
  html body[data-floodmapper-reference] #mobileControlsClose {display:none!important;}
  html body[data-floodmapper-reference] #townAddressCard {height:auto!important;min-height:0!important;max-height:none!important;}
 }
-@media(max-width:1100px) and (min-width:901px){html body[data-floodmapper-reference] #mapTitleBadge #mapTitlePartnerLogo {width:64px!important;min-width:64px!important;height:28px!important;}html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo[src]:not([src=""]){width:30px!important;min-width:30px!important;height:30px!important;}}
-@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+@media(max-width:1100px) and (min-width:901px) and (not (any-pointer:coarse)), (max-width:1100px) and (min-width:1367px) {html body[data-floodmapper-reference] #mapTitleBadge #mapTitlePartnerLogo {width:64px!important;min-width:64px!important;height:28px!important;}html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo[src]:not([src=""]){width:30px!important;min-width:30px!important;height:30px!important;}}
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
  html body[data-floodmapper-reference] #mapTitleBadge {z-index:6100!important;gap:5px!important;}
  html body[data-floodmapper-reference] #mapTitleBadge #mapTitleText {font:750 14px/1.15 system-ui!important;letter-spacing:0!important;text-align:left!important;}
  html body[data-floodmapper-reference] #mapTitleBadge #mapTitleLogo {display:none!important;}
@@ -1682,7 +1682,7 @@ html body[data-floodmapper-reference] #mapTitleLogo[hidden] {display:none!import
 html body[data-floodmapper-reference] #rightRail .top-tide-item {height:auto!important;min-height:34px!important;max-height:none!important;padding:7px 8px!important;}
 html body[data-floodmapper-reference] #rightRail .top-tide-list {min-height:0!important;gap:5px!important;}
 html body[data-floodmapper-reference] #rightRail .top-tide-more-btn {height:auto!important;min-height:34px!important;padding:6px!important;}
-@media(min-width:901px){
+@media(min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
 html body[data-floodmapper-reference] #leftPanel>.data-source-card{order:1!important;}
 html body[data-floodmapper-reference] #leftPanel>#forecastScenarioCard{order:2!important;}
 html body[data-floodmapper-reference] #leftPanel>#calendarCard{order:3!important;}
@@ -1696,7 +1696,7 @@ html body[data-floodmapper-reference] #timelineDock .timeline-day{background-ima
 html body[data-floodmapper-reference] .leaflet-control-zoom {overflow:hidden!important;border:1px solid #60a5fa!important;border-radius:10px!important;box-shadow:0 8px 18px #0003!important;}
 html body[data-floodmapper-reference] .leaflet-control-zoom a {width:38px!important;height:38px!important;line-height:38px!important;background:#142238!important;color:#60a5fa!important;border-color:#60a5fa!important;}
 }
-@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
  html body[data-floodmapper-reference].mobile-controls-open #leftPanel {background:#0b1220!important;border:1px solid #7594ad!important;border-radius:18px!important;box-shadow:0 18px 60px #0008!important;}
  html body[data-floodmapper-reference] #leftPanel #nwwMobileControlHeader {background:#0b1220!important;}
  html body[data-floodmapper-reference] #leftPanel .snapshot-card {display:none!important;}
@@ -1706,21 +1706,21 @@ html body[data-floodmapper-reference] .leaflet-control-zoom a {width:38px!import
 }
 html body[data-floodmapper-reference] :is(#leftPanel,#rightRail,#mobileRailMount) button.active:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn) {color:#60a5fa!important;}
 html body[data-floodmapper-reference] #rightRail #downloadCard #openDownloadModalBtn {color:#60a5fa!important;}
-@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
  html body[data-floodmapper-reference]:not(.observed-mode):not(.return-interval-mode) #leftPanel[data-nww-section="forecast"] #forecastScenarioCard:not([hidden]) {display:flex!important;}
 }
 html body[data-floodmapper-reference] #timelineDock .timeline-trackRow {width:auto!important;}
 html body[data-floodmapper-reference] #timelineDock #hourSlider {width:100%!important;box-sizing:border-box!important;}
 html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start,.timeline-bubble-end,.timeline-bubble-first,.timeline-bubble-last) {display:none!important;}
-@media(min-width:901px){html body[data-floodmapper-reference] #timelineDock :is(#timelinePreviousDay,#timelineNextDay){display:none!important;}}
-@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+@media(min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {html body[data-floodmapper-reference] #timelineDock :is(#timelinePreviousDay,#timelineNextDay){display:none!important;}}
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
  html body[data-floodmapper-reference] #timelineDock #timelineDayTabs .timeline-day:not(.active){display:none!important;}
  html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock {position:fixed!important;top:calc(12px + env(safe-area-inset-top))!important;right:calc(112px + env(safe-area-inset-right))!important;left:auto!important;bottom:auto!important;width:62px!important;min-width:62px!important;max-width:62px!important;height:44px!important;min-height:44px!important;max-height:44px!important;padding:0!important;margin:0!important;border-radius:10px!important;z-index:6200!important;overflow:hidden!important;cursor:pointer!important;}
  html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock>* {display:none!important;}
  html body[data-floodmapper-reference]:not(.mobile-legend-open) #legendDock::after {content:'Key'!important;position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;font:700 14px/1 system-ui!important;color:#eaf0ff!important;}
  html body[data-floodmapper-reference].mobile-controls-open #legendDock {visibility:hidden!important;}
 }
-@media(max-width:900px),(max-height:560px) and (pointer:coarse){
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
  html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #timelineBubble {left:12px!important;right:66px!important;}
  html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock #playBtn {left:auto!important;right:8px!important;top:8px!important;}
  html body[data-floodmapper-reference][data-fleet-legacy-phone] #timelineDock :is(#timelinePreviousDay,#timelineNextDay) {position:absolute!important;top:60px!important;display:flex!important;align-items:center!important;justify-content:center!important;width:64px!important;min-width:64px!important;max-width:64px!important;height:44px!important;margin:0!important;padding:4px!important;background:#172336!important;color:#eaf0ff!important;border:1px solid #64748b!important;border-radius:10px!important;z-index:4!important;font:600 12px system-ui!important;}
@@ -1732,7 +1732,7 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
  html body[data-floodmapper-reference][data-fleet-legacy-phone] #mobileControlsToggle {font-size:0!important;}
  html body[data-floodmapper-reference][data-fleet-legacy-phone] #mobileControlsToggle::after {content:'Controls'!important;font:650 14px/44px system-ui!important;}
 }
-@media(min-width:901px){
+@media(min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
  html body[data-floodmapper-reference] #timelineDock .timeline-trackRow {position:absolute!important;left:84px!important;right:20px!important;top:70px!important;bottom:auto!important;width:auto!important;height:24px!important;padding:0!important;margin:0!important;}
  html body[data-floodmapper-reference] #timelineDock #hourSlider {position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;padding:0!important;margin:0!important;transform:none!important;height:24px!important;background:var(--nww-stage-gradient,linear-gradient(#94a3b8,#94a3b8)) center / calc(100% - 26px) 5px no-repeat!important;}
  html body[data-floodmapper-reference] #timelineDock #hourSlider::-webkit-slider-runnable-track {height:5px!important;background:transparent!important;box-shadow:none!important;border:0!important;}
@@ -1776,7 +1776,7 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
  html body[data-floodmapper-unified] :is(#map,#map3d,#countyStandalone3d) .leaflet-image-layer {animation:none!important;transition:none!important;}
  html body[data-floodmapper-unified] #mapTitleBadge #mapTitleText {min-width:0!important;overflow-wrap:normal!important;}
  html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-control-zoom {position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;float:none!important;margin:0!important;display:block!important;}
- @media(min-width:901px){
+ @media(min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-top.leaflet-right {position:absolute!important;left:auto!important;right:var(--county-nav-right,310px)!important;top:16px!important;margin:0!important;}
   html body[data-floodmapper-unified]:has(#countyStandaloneView) .leaflet-top.leaflet-right {top:140px!important;}
 
@@ -1787,13 +1787,13 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
   html body[data-floodmapper-unified] #timelineBubble {left:24px!important;right:auto!important;top:auto!important;bottom:120px!important;width:max-content!important;max-width:calc(100vw - 48px)!important;}
   html body[data-floodmapper-unified] #timelineDock :is(#timelinePreviousDay,#timelineNextDay) {display:none!important;}
  }
- @media(min-width:901px) and (max-width:1200px){
+ @media(min-width:901px) and (max-width:1200px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1200px) {
   html body[data-floodmapper-unified] #mapTitleBadge #mapTitleText {font-size:22px!important;line-height:1.15!important;letter-spacing:-.5px!important;}
   html body[data-floodmapper-unified] #mapTitleBadge {gap:6px!important;padding:8px!important;}
   html body[data-floodmapper-unified] #mapTitleBadge #mapTitleLogo {width:28px!important;min-width:28px!important;height:28px!important;}
   html body[data-floodmapper-unified] #mapTitleBadge #mapTitlePartnerLogo {width:58px!important;min-width:58px!important;height:28px!important;}
  }
- @media(max-width:900px),(max-height:560px) and (pointer:coarse){
+ @media(max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body[data-floodmapper-unified]:not(:has(#nwDefaultNavControl)) .leaflet-top.leaflet-right {position:absolute!important;left:auto!important;right:var(--cm-right,8px)!important;top:calc(var(--cm-top,8px) + 60px)!important;}
   html body[data-floodmapper-unified]:has(#countyStandaloneView) .leaflet-top.leaflet-right {top:calc(var(--cm-top,8px) + 112px)!important;}
   html body[data-floodmapper-unified] #mobileControlsToggle {position:fixed!important;top:var(--cm-top,8px)!important;right:var(--cm-right,8px)!important;left:auto!important;bottom:auto!important;width:96px!important;height:44px!important;min-height:44px!important;padding:0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;z-index:8000!important;font:650 14px system-ui!important;background:#142238!important;color:#eaf0ff!important;border:1px solid #60a5fa!important;border-radius:10px!important;}
@@ -1857,7 +1857,7 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
 /* Persistent product identity inside the existing, measured title lane. */
 html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility:visible!important;opacity:1!important;width:104px!important;min-width:104px!important;max-width:104px!important;height:42px!important;max-height:42px!important;object-fit:contain!important;flex:0 0 104px!important;background:#fff!important;border-radius:6px!important;padding:3px 5px!important;margin:0!important}
 @media(max-width:1100px){html body #mapTitleBadge #mapTitlePartnerLogo{width:76px!important;min-width:76px!important;max-width:76px!important;height:32px!important;max-height:32px!important;flex-basis:76px!important}}
-@media(max-width:900px){html body #mapTitleBadge{gap:6px!important}html body #mapTitleBadge #mapTitlePartnerLogo{width:58px!important;min-width:58px!important;max-width:58px!important;height:25px!important;max-height:25px!important;flex-basis:58px!important;padding:2px!important}html body #mapTitleText{min-width:0!important;flex:1 1 auto!important}}
+@media(max-width:900px), (max-width:1366px) and (any-pointer:coarse) {html body #mapTitleBadge{gap:6px!important}html body #mapTitleBadge #mapTitlePartnerLogo{width:58px!important;min-width:58px!important;max-width:58px!important;height:25px!important;max-height:25px!important;flex-basis:58px!important;padding:2px!important}html body #mapTitleText{min-width:0!important;flex:1 1 auto!important}}
 }
 </style>
 <style id="shorelysafe-fleet-layer">@layer shorelysafe-unified, shorelysafe-pane-fit, shorely-fleet-ui, avalon-mobile;</style>
@@ -1925,7 +1925,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 </style>
 
 <style>@layer avalon-mobile;</style>
-<link rel="stylesheet" href="assets/avalon-mobile.css?v=20260923-2">
+<link rel="stylesheet" href="assets/avalon-mobile.css?v=20261021-tablet1">
 <script>document.documentElement.classList.add("avalon-mobile-ui");</script>
 
 <meta charset="utf-8" />
@@ -1942,14 +1942,14 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
     // Shared responsive breakpoint used by startup cache sizing and controls.
     function isCompactFloodmapperLayout() {
-      return window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches;
+      return window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
     }
   </script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
 
-    @media (min-width:901px){
+    @media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       :root{
         --pj-equal-left-width:356px;
         --pj-equal-right-width:260px;
@@ -1992,14 +1992,14 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (min-width:901px) and (max-width:1320px){
+    @media (min-width:901px) and (max-width:1320px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) {
       :root{
         --pj-equal-left-width:340px;
         --pj-equal-right-width:244px;
       }
     }
 
-    @media (min-width:901px) and (max-width:1120px){
+    @media (min-width:901px) and (max-width:1120px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) {
       :root{
         --pj-equal-left-width:320px;
         --pj-equal-right-width:228px;
@@ -2008,7 +2008,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (min-width:901px) and (max-height:940px){
+    @media (min-width:901px) and (max-height:940px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:940px) {
       :root{
         --pj-equal-bottom-reserve:128px;
         --pj-equal-card-h:82px;
@@ -2976,7 +2976,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
     html body #map .leaflet-control-zoom{ display:none !important; }
 
-    @media (min-width:901px) and (max-width:1450px) and (min-height:561px){
+    @media (min-width:901px) and (max-width:1450px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1450px) and (min-height:561px) {
       html body #nwDefaultNavControl{
         top:96px;
       }
@@ -3488,7 +3488,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
     #map3d .maplibregl-popup-tip{ border-top-color:#0b1220; }
 
-    @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
       html body #nw3dLauncher{
         top:max(176px, calc(env(safe-area-inset-top) + 168px));
         right:max(7px, env(safe-area-inset-right));
@@ -5131,7 +5131,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
 
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       .download-range-grid{
         grid-template-columns:1fr;
       }
@@ -5871,7 +5871,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #topBanner{
         min-width:min(420px, calc(100vw - 16px));
         max-width:min(560px, calc(100vw - 16px));
@@ -6547,7 +6547,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       html, body, #app, #mapWrap, #map{
         width:100vw;
         height:100dvh;
@@ -6762,7 +6762,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       #mobileControlsToggle{
         top:calc(10px + env(safe-area-inset-top));
         bottom:auto;
@@ -6869,7 +6869,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         display:block !important;
         position:fixed !important;
@@ -7060,7 +7060,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(6px + env(safe-area-inset-top)) !important;
         left:calc(8px + env(safe-area-inset-left)) !important;
@@ -7137,7 +7137,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(8px + env(safe-area-inset-top)) !important;
         left:calc(8px + env(safe-area-inset-left)) !important;
@@ -7345,7 +7345,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(6px + env(safe-area-inset-top)) !important;
         left:calc(8px + env(safe-area-inset-left)) !important;
@@ -7427,7 +7427,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(7px + env(safe-area-inset-top)) !important;
         left:calc(8px + env(safe-area-inset-left)) !important;
@@ -7713,7 +7713,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         min-width:116px !important;
         height:34px !important;
@@ -7793,7 +7793,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         height:44px !important;
         max-height:44px !important;
@@ -7896,7 +7896,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         height:38px !important;
         max-height:38px !important;
@@ -7924,7 +7924,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock::before{
         background:linear-gradient(90deg,
           var(--depth-0) 0 14%,
@@ -7964,7 +7964,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock[data-legend-mode="dynamic"]::before{
         background:linear-gradient(90deg,
           var(--minor) 0 34%,
@@ -7991,7 +7991,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       #mobileControlsToggle{
         top:calc(42px + env(safe-area-inset-top)) !important;
         bottom:auto !important;
@@ -8006,7 +8006,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px) and (orientation: portrait), (max-width: 430px) and (orientation: portrait){
+    @media (max-width: 900px) and (orientation: portrait), (max-width:1366px) and (any-pointer:coarse) and (orientation: portrait), (max-width: 430px) and (orientation: portrait) {
       #mobileControlsToggle,
       body.mobile-controls-open #mobileControlsToggle,
       body.mobile-legend-open #mobileControlsToggle{
@@ -8026,7 +8026,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(8px + env(safe-area-inset-top)) !important;
         left:calc(9px + env(safe-area-inset-left)) !important;
@@ -8186,7 +8186,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         top:calc(7px + env(safe-area-inset-top)) !important;
         left:calc(8px + env(safe-area-inset-left)) !important;
@@ -8219,7 +8219,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       padding-left:0 !important;
     }
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       #playBtn.is-playing{
         font-size:18px !important;
       }
@@ -8478,7 +8478,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
 
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       #timelineDock{
         left:352px !important;
         right:16px !important;
@@ -8491,7 +8491,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
 
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #timelineDock,
       body.observed-mode #timelineDock{
         left:16px !important;
@@ -8642,7 +8642,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
     }
 
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #rightRail #legendDock.legend-card{
         position:relative !important;
         width:100% !important;
@@ -8654,7 +8654,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       :root{
         --shore-left-pane-width:320px;
         --shore-left-pane-left:16px;
@@ -9313,7 +9313,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #mapTitleBadge{
         display:none !important;
       }
@@ -10148,7 +10148,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       html.os-windows,
       html.win-compact-ui{
         --win-left-width:320px;
@@ -10549,7 +10549,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       }
     }
 
-    @media (min-width: 901px) and (max-height: 760px){
+    @media (min-width: 901px) and (max-height: 760px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height: 760px) {
       html.os-windows,
       html.win-compact-ui{
         --win-ui-zoom:.78;
@@ -10652,7 +10652,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       padding-bottom:10px !important;
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #legendDock.legend-card,
       #legendDock.map-floating.legend-card,
       body.observed-mode #legendDock.legend-card,
@@ -10743,7 +10743,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
 
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       html.os-windows #legendDock.legend-card,
       html.win-compact-ui #legendDock.legend-card,
       html.os-windows #legendDock.map-floating.legend-card,
@@ -10847,7 +10847,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       margin-top:6px !important;
     }
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       #legendDock.legend-card,
       #legendDock.map-floating.legend-card,
       body.observed-mode #legendDock.legend-card,
@@ -10931,7 +10931,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       align-self:center !important;
     }
 
-    @media (min-width: 901px){
+    @media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
       html.os-windows #legendDock.legend-card,
       html.win-compact-ui #legendDock.legend-card,
       html.os-windows #legendDock.map-floating.legend-card,
@@ -11013,7 +11013,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
       padding-bottom:1px !important;
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
       #legendDock .legend-body{
         overflow-y:auto !important;
         overflow-x:hidden !important;
@@ -12142,7 +12142,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
       }
     }
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       :root{
         --mobile-safe-top:env(safe-area-inset-top, 0px);
         --mobile-safe-right:env(safe-area-inset-right, 0px);
@@ -12382,7 +12382,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
       }
     }
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       .download-modal.open{
         align-items:stretch !important;
         justify-content:center !important;
@@ -12664,7 +12664,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       :root{
         --pjm-safe-top:env(safe-area-inset-top, 0px);
         --pjm-safe-right:env(safe-area-inset-right, 0px);
@@ -13304,7 +13304,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #legendDock{
         display:grid !important;
         grid-template-columns:minmax(0, 1fr) 46px !important;
@@ -13570,7 +13570,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #timelineDock{
         position:fixed !important;
         overflow:hidden !important;
@@ -13773,7 +13773,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #mobileDrawerBackdrop,
       body.mobile-optimized.mobile-controls-open #mobileDrawerBackdrop{
         position:fixed !important;
@@ -13848,7 +13848,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
       }
     }
 
-    @media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #leftPanel{
         transform:translate3d(calc(-100% - 18px), 0, 0) !important;
       }
@@ -13860,7 +13860,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #mobileControlsToggle,
       body.mobile-optimized.mobile-controls-open #mobileControlsToggle,
       body.mobile-optimized.mobile-legend-open #mobileControlsToggle{
@@ -13999,7 +13999,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #mobileControlsToggle,
       body.mobile-optimized.mobile-controls-open #mobileControlsToggle,
       body.mobile-optimized.mobile-legend-open #mobileControlsToggle{
@@ -14074,7 +14074,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #timelineDock{
     overflow:visible !important;
   }
@@ -14144,7 +14144,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px) and (orientation: landscape), (max-width:1366px) and (any-pointer:coarse) and (orientation: landscape), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #timelineBubble{
     top:-26px !important;
     min-height:22px !important;
@@ -14176,7 +14176,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized #mobileControlsClose{
         display:none !important;
       }
@@ -15305,7 +15305,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-    @media (min-width: 901px) and (min-height: 561px){
+    @media (min-width: 901px) and (min-height: 561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height: 561px) {
       #leftPanel{
         top:16px !important;
         padding-top:0 !important;
@@ -15338,7 +15338,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
     }
 
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized.mobile-controls-open #leftPanel > #mobileControlsClose{
         display:grid !important;
         visibility:visible !important;
@@ -15365,7 +15365,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
       display:none;
     }
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       body.mobile-optimized.mobile-controls-open #mobileControlsToggle,
       body.mobile-optimized.mobile-controls-open.mobile-legend-open #mobileControlsToggle{
         opacity:0 !important;
@@ -15565,7 +15565,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
       display:none !important;
     }
 
-    @media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+    @media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
       #mapTitleBadge.shorely-title-badge{
         gap:7px !important;
         max-width:calc(100vw - 16px) !important;
@@ -15622,7 +15622,7 @@ html.win-compact-ui #timelineDock .timeline-key-swatch{
 
 
 
-@media (min-width: 901px){
+@media (min-width: 901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   #leftPanel,
   body.observed-mode #leftPanel,
   body.calendar-picker-open #leftPanel,
@@ -15974,7 +15974,7 @@ body .timeline-trackRow{
 }
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #timelineDock #legendDock,
   body.mobile-optimized #timelineDock .legend-card{
     display:none !important;
@@ -16106,7 +16106,7 @@ body .timeline-trackRow{
 }
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #leftPanel > .data-source-card{ order:1 !important; }
   body.mobile-optimized #leftPanel > #forecastScenarioCard{ order:2 !important; }
   body.mobile-optimized #leftPanel > .overlay-card{ order:10 !important; }
@@ -16340,7 +16340,7 @@ body .timeline-trackRow{
 
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #timelineBubble,
   body.mobile-optimized #timelineBubble.timeline-bubble-stage-none,
   body.mobile-optimized #timelineBubble.timeline-bubble-stage-minor,
@@ -16494,7 +16494,7 @@ body .timeline-trackRow{
 }
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   body.mobile-optimized #timelineDock #hourSlider{
     width:calc(100% - var(--pj-slider-thumb-size)) !important;
     max-width:calc(100% - var(--pj-slider-thumb-size)) !important;
@@ -16606,7 +16606,7 @@ html body:not(.mobile-optimized) #rightRail > .layers-card:has(.shorelysafe-came
 #webcamOtherSources { margin-top:8px; font-size:10px; }
 #webcamOtherSources div { display:flex; gap:6px; flex-wrap:wrap; margin-top:5px; }
 #webcamPanel[data-player-state="unavailable"] #webcamStatus { color:#ffcb85; }
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   #webcamPanel { top:85px; width:min(400px,calc(100% - 16px)); max-height:calc(100dvh - 205px); padding:10px; }
   #webcamPanel #webcamClose { width:44px; height:44px; min-height:44px !important; flex-basis:44px; }
   #webcamPanel #webcamLocate, #webcamPanel #webcamRetry { min-height:36px !important; }
@@ -16627,7 +16627,7 @@ html body.mobile-optimized #mobileRailMount > .layers-card:has(.shorelysafe-came
 <style id="shorely-timeline-frame-alignment-20261019">
 /* Desktop day bands share the native slider's frame positions. Mobile keeps
    its existing selected-day layout; the variable switches on resize. */
-@media (min-width:901px) {
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html body #timelineDayTabs .timeline-day {
     --shorely-timeline-day-flex:var(--shorely-timeline-frame-weight,1);
   }
@@ -16664,7 +16664,7 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
 
 <style id="mapper-size-only-20261021">
 @layer floodmapper-unified-polish {
-  @media (min-width:901px) and (max-height:960px) {
+  @media (min-width:901px) and (max-height:960px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:960px) {
     html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {gap:5px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) > :is(.panel-card,.rail-card) {padding:8px 10px!important;gap:6px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) :is(h2,h3,.section-title) {font-size:13px!important;line-height:1.15!important;}
@@ -16675,7 +16675,7 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .top-tide-item > * {font-size:13px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressInput {height:34px!important;min-height:34px!important;font-size:14px!important;}
   }
-  @media (min-width:901px) and (max-height:800px) {
+  @media (min-width:901px) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:800px) {
     html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {gap:3px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) > :is(.panel-card,.rail-card) {padding:5px 8px!important;gap:4px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail {gap:2px!important;}
@@ -16699,7 +16699,7 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressForm label {font-size:10px!important;line-height:1.1!important;margin-bottom:3px!important;}
     html body[data-floodmapper-unified]:not(.mobile-optimized) #legendDock :is(.legend-labels,.depth-legend-labels) {font-size:11px!important;}
   }
-  @media (min-width:901px) and (max-width:1200px) {
+  @media (min-width:901px) and (max-width:1200px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1200px) {
     html body[data-floodmapper-unified]:not(.mobile-optimized) #mapTitleBadge #mapTitleText {font-size:20px!important;}
   }
 }
@@ -16712,10 +16712,46 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     max-width:100% !important;
     overflow-wrap:anywhere !important;
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body[data-floodmapper-unified].mobile-optimized #leftPanel[data-nww-section]:not([data-nww-section="forecast"]) #calendarCard.calendar-card.active {
       display:none !important;
     }
+  }
+}
+</style>
+<style id="floodmapper-touch-readability-20261021">
+@layer floodmapper-unified-polish {
+
+  @media (min-width:1367px) and (any-pointer:coarse) {
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) :is(h2,h3,.section-title) {font-size:16px!important;line-height:1.2!important;}
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) button:not(.help-btn):not(.calendar-day):not(.calendar-nav-btn) {font-size:16px!important;line-height:1.15!important;min-height:44px!important;padding:6px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-list {display:flex!important;flex-direction:column!important;grid-template-columns:minmax(0,1fr)!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-item {min-height:44px!important;padding:6px 0!important;grid-template-columns:minmax(0,1fr) 40px!important;gap:10px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-name {font-size:14px!important;line-height:1.2!important;overflow-wrap:normal!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle {width:40px!important;min-width:40px!important;height:24px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle::after {width:18px!important;height:18px!important;top:3px!important;left:3px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle.on::after {left:19px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .top-tide-item {min-height:40px!important;padding:7px 8px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .top-tide-item > * {font-size:14px!important;line-height:1.2!important;}
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) input {font-size:16px!important;min-height:44px!important;height:44px!important;}
+    html body[data-floodmapper-unified] #townAddressForm label {font-size:14px!important;line-height:1.2!important;}
+  }
+}
+@layer shorelysafe-unified {
+
+  @media (min-width:1367px) and (any-pointer:coarse) {
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) :is(h2,h3,.section-title) {font-size:16px!important;line-height:1.2!important;}
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) button:not(.help-btn):not(.calendar-day):not(.calendar-nav-btn) {font-size:16px!important;line-height:1.15!important;min-height:44px!important;padding:6px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-list {display:flex!important;flex-direction:column!important;grid-template-columns:minmax(0,1fr)!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-item {min-height:44px!important;padding:6px 0!important;grid-template-columns:minmax(0,1fr) 40px!important;gap:10px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .layer-name {font-size:14px!important;line-height:1.2!important;overflow-wrap:normal!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle {width:40px!important;min-width:40px!important;height:24px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle::after {width:18px!important;height:18px!important;top:3px!important;left:3px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .toggle.on::after {left:19px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .top-tide-item {min-height:40px!important;padding:7px 8px!important;}
+    html body[data-floodmapper-unified] #rightRail#rightRail .top-tide-item > * {font-size:14px!important;line-height:1.2!important;}
+    html body[data-floodmapper-unified] :is(#leftPanel#leftPanel,#rightRail#rightRail) input {font-size:16px!important;min-height:44px!important;height:44px!important;}
+    html body[data-floodmapper-unified] #townAddressForm label {font-size:14px!important;line-height:1.2!important;}
   }
 }
 </style>
@@ -17409,7 +17445,7 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     .flood-year-control{display:grid;grid-template-columns:minmax(0,1fr) 145px;gap:11px;align-items:center;margin-top:5px}.flood-year-control input{width:100%;accent-color:var(--scenario-color,#7df9ff)}
     .flood-year-readout{display:grid;grid-template-columns:auto 1fr;column-gap:6px;align-items:baseline;padding:7px 9px;border:1px solid rgba(125,249,255,.16);border-radius:10px;background:rgba(2,6,23,.34);text-align:right}.flood-year-readout span{color:#7df9ff;font-size:9px;font-weight:900}.flood-year-readout strong{color:#fff;font-size:14px}.flood-year-readout small{grid-column:1/-1;color:#91a5bd;font-size:8px}
     .flood-history-error{padding:16px;border:1px solid rgba(251,113,133,.3);border-radius:14px;background:rgba(159,18,57,.12);color:#fecdd3;font-size:11px;line-height:1.5}
-    @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
       .map-click-mode-control{top:max(58px,calc(env(safe-area-inset-top) + 54px));width:max-content;max-width:calc(100vw - 20px);padding:4px;border-radius:13px}
       .map-click-mode-label{display:none}.map-click-mode-control button{min-height:34px;padding:0 13px;font-size:10px}
       .timeline-interval-toggle{width:168px !important;min-width:168px !important}
@@ -17650,14 +17686,14 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     let mapTitleFitRaf = 0;
 
     function fitMapTitleBadgeToViewport() {
-      if (document.documentElement.classList.contains("avalon-mobile-ui") && window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches) return;
+      if (document.documentElement.classList.contains("avalon-mobile-ui") && window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)").matches) return;
       mapTitleFitRaf = 0;
       const badge = document.getElementById("mapTitleBadge");
       const text = document.getElementById("mapTitleText");
       if (!badge || !text) return;
 
       const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      const compact = window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches;
+      const compact = window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
       let leftLimit = 12;
       let rightLimit = viewportWidth - 12;
 
@@ -19914,7 +19950,7 @@ function setDatumHelpOpen(isOpen) {
         requestAnimationFrame(() => {
           const modalCard = modal.querySelector(".download-modal-card");
           if (modalCard) modalCard.scrollTop = 0;
-          const compactTouchLayout = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse)").matches;
+          const compactTouchLayout = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
           const focusTarget = compactTouchLayout
             ? document.getElementById("downloadModalCloseBtn")
             : currentDataMode === "return-interval"
@@ -29843,7 +29879,7 @@ function startPlayback() {
     }
 
     function syncMobileControlsLayout() {
-      const isMobile = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse)").matches;
+      const isMobile = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
       const leftPanel = document.getElementById("leftPanel");
       const rightRail = document.getElementById("rightRail");
       const legendDock = document.getElementById("legendDock");
@@ -31322,7 +31358,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 <script>
 (function(){
   function isMobileOptimized(){
-    return window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse)').matches;
+    return window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse), (max-width:1366px) and (any-pointer:coarse)').matches;
   }
 
   function moveLegendOutOfTimelineOnMobile(){
@@ -31452,7 +31488,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
   box-sizing:border-box !important;
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse) {
   :root{ --pj-all-slider-row-inset:22px; }
 }
 
@@ -31517,7 +31553,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   #leftPanel{
     width:var(--pj-ui-left-width) !important;
     max-width:calc(100vw - 32px) !important;
@@ -31776,7 +31812,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html.os-windows,
   html.win-compact-ui{
     --win-left-width:340px !important;
@@ -32220,7 +32256,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   #rightRail,
   body.observed-mode #rightRail,
   body.calendar-picker-open #rightRail,
@@ -32238,7 +32274,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html.os-windows .leaflet-top.leaflet-right .leaflet-control-zoom,
   html.win-compact-ui .leaflet-top.leaflet-right .leaflet-control-zoom{
     margin-top:104px !important;
@@ -32270,7 +32306,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   body.mobile-optimized #mobileRailMount > #downloadCard,
   body.mobile-optimized #mobileRailMount > .download-launch-card,
   body.mobile-optimized #mobileRailMount > .download-card{
@@ -32366,7 +32402,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
   --pj-final-zoom-gap-from-rail:20px;
 }
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   #leftPanel,
   body.observed-mode #leftPanel,
   body.calendar-picker-open #leftPanel,
@@ -32550,7 +32586,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   .leaflet-top.leaflet-right .leaflet-control-zoom,
   html.os-mac .leaflet-top.leaflet-right .leaflet-control-zoom,
   html.os-windows .leaflet-top.leaflet-right .leaflet-control-zoom,
@@ -32572,7 +32608,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html.os-windows,
   html.win-compact-ui{
     --win-left-width:var(--pj-final-left-width) !important;
@@ -32622,7 +32658,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   body.mobile-optimized #leftPanel,
   body.mobile-optimized #mobileRailMount{
     overflow-x:hidden !important;
@@ -32967,7 +33003,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
 }
 
 
-@media (max-height:850px) and (min-width:901px){
+@media (max-height:850px) and (min-width:901px) and (not (any-pointer:coarse)), (max-height:850px) and (min-width:1367px) {
   #rightRail{
     gap:8px !important;
     bottom:104px !important;
@@ -33049,7 +33085,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   #rightRail{
     overflow-y:auto !important;
     overflow-x:hidden !important;
@@ -33074,7 +33110,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
 
 <style>
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   :root{
     --pj-logo-rail-width-final:260px;
     --pj-logo-rail-right-final:16px;
@@ -33119,14 +33155,14 @@ html.win-compact-ui .leaflet-top.leaflet-right{
   }
 }
 
-@media (min-width:901px) and (max-width:1320px){
+@media (min-width:901px) and (max-width:1320px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) {
   :root{
     --pj-logo-rail-width-final:246px;
     --pj-zoom-logo-gap-final:12px;
   }
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   body.mobile-optimized .leaflet-top.leaflet-right{
     top:0 !important;
     right:0 !important;
@@ -33157,7 +33193,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
   --pj-equal-left-pane-width:var(--pj-final-left-width, 340px);
 }
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   #leftPanel,
   body.observed-mode #leftPanel,
   body:not(.observed-mode) #leftPanel,
@@ -33241,7 +33277,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
 <style>
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   :root{
     --pj-stable-left-width:356px;
     --pj-stable-right-width:260px;
@@ -33766,7 +33802,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #leftPanel #legendDock .legend-title{
     font-size:15px !important;
   }
@@ -33831,7 +33867,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
       border-top-width:9px !important;
     }
 
-    @media (max-width:900px), (max-height:560px) and (pointer:coarse){
+    @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
       html body #timelineDock,
       html body.observed-mode #timelineDock{
         padding-top:38px !important;
@@ -33875,7 +33911,7 @@ html.win-compact-ui .leaflet-top.leaflet-right{
   function stableLayoutFix(){
       if(document.body.hasAttribute("data-floodmapper-unified")) return;
       if(document.body.hasAttribute("data-floodmapper-reference")) return;
-    if (window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse)').matches) return;
+    if (window.matchMedia('(max-width: 900px), (max-height: 560px) and (pointer: coarse), (max-width:1366px) and (any-pointer:coarse)').matches) return;
     var left = document.getElementById('leftPanel');
     var legend = document.getElementById('legendDock');
     var datum = left ? left.querySelector('.datum-card') : null;
@@ -34120,7 +34156,7 @@ body.observed-mode #playBtn.is-playing{
   letter-spacing:.08em !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   #timelineDock .timeline-controls{ min-height:54px !important; }
   #timelineDock .playFab,
   #playBtn,
@@ -34325,7 +34361,7 @@ html body #playBtn .pauseIcon::after{
 html body #playBtn .pauseIcon::before{ left:1px !important; }
 html body #playBtn .pauseIcon::after{ right:1px !important; }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #timelineDock .timeline-controls{
     min-height:44px !important;
     gap:7px !important;
@@ -34691,7 +34727,7 @@ html body #leftPanel #legendDock .legend-row.legend-row-boundary{
   display:none !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #mapTitleBadge.shorely-title-badge{
     gap:7px !important;
     min-height:36px !important;
@@ -34836,7 +34872,7 @@ html body #mapTitleBadge .shorely-title-logo-shorelysafe{
   margin:0 !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #rightRail .right-logo-card{
     min-height:76px !important;
     height:76px !important;
@@ -34856,7 +34892,7 @@ html body #mapTitleBadge .shorely-title-logo-shorelysafe{
 
 <style>
 
-@media (min-width: 901px) and (min-height: 561px){
+@media (min-width: 901px) and (min-height: 561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height: 561px) {
   html body #mapTitleBadge.shorely-title-badge,
   html body.forecast-mode #mapTitleBadge.shorely-title-badge,
   html body.observed-mode #mapTitleBadge.shorely-title-badge{
@@ -34906,7 +34942,7 @@ html body #mapTitleBadge .shorely-title-logo-shorelysafe{
 }
 
 
-@media (max-width: 900px), (max-height: 560px) and (pointer: coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height: 560px) and (pointer: coarse) {
   html body #mapTitleBadge.shorely-title-badge{
     min-height:unset !important;
   }
@@ -34928,7 +34964,7 @@ html body.observed-mode #mapTitleBadge.shorely-title-badge{
   -webkit-backdrop-filter:blur(16px) !important;
 }
 
-@media (min-width:901px) and (min-height:561px){
+@media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) {
   html body #mapTitleBadge,
   html body #mapTitleBadge.shorely-title-badge,
   html body.forecast-mode #mapTitleBadge.shorely-title-badge,
@@ -35011,7 +35047,7 @@ html body #topBannerCloseBtn:active{
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #topBanner,
   html body #topBanner.alert,
   html.os-mac body #topBanner.alert,
@@ -35055,7 +35091,7 @@ html body #topBannerCloseBtn:active{
 
 <style>
 
-@media (min-width:901px) and (min-height:561px){
+@media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) {
   html body #mapTitleBadge,
   html body #mapTitleBadge.shorely-title-badge,
   html body.forecast-mode #mapTitleBadge.shorely-title-badge,
@@ -35153,7 +35189,7 @@ html body #topBannerCloseBtn:active{
 }
 
 
-@media (min-width:901px) and (max-width:1280px) and (min-height:561px){
+@media (min-width:901px) and (max-width:1280px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1280px) and (min-height:561px) {
   html body #mapTitleBadge,
   html body #mapTitleBadge.shorely-title-badge,
   html body.forecast-mode #mapTitleBadge.shorely-title-badge,
@@ -35191,7 +35227,7 @@ html body #topBannerCloseBtn:active{
 }
 
 
-@media (min-width:901px) and (max-width:1080px) and (min-height:561px){
+@media (min-width:901px) and (max-width:1080px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1080px) and (min-height:561px) {
   html body #mapTitleBadge,
   html body #mapTitleBadge.shorely-title-badge,
   html body.forecast-mode #mapTitleBadge.shorely-title-badge,
@@ -35215,7 +35251,7 @@ html body #topBannerCloseBtn:active{
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #mapTitleBadge,
   html body #mapTitleBadge.shorely-title-badge{
     height:auto !important;
@@ -35341,7 +35377,7 @@ html.win-compact-ui body #timelineBubble::after{
 }
 
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #timelineDock,
   html body.observed-mode #timelineDock{
     padding-top:48px !important;
@@ -35542,7 +35578,7 @@ html.win-compact-ui body #timelineDock{
   overflow:visible !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #timelineDock,
   html body.observed-mode #timelineDock{
     padding-top:40px !important;
@@ -35640,7 +35676,7 @@ html.win-compact-ui body #timelineDock{
   overflow:visible !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #timelineBubble,
   html body.observed-mode #timelineBubble,
   html.os-mac body #timelineBubble,
@@ -35700,7 +35736,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   padding-right:8px !important;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body #timelineBubble,
   html body.observed-mode #timelineBubble,
   html.os-mac body #timelineBubble,
@@ -35734,7 +35770,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
 
 <style>
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   :root{
     --pj-fixed-left-width:356px;
     --pj-fixed-right-width:260px;
@@ -36214,21 +36250,21 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 }
 
-@media (min-width:901px) and (max-width:1320px){
+@media (min-width:901px) and (max-width:1320px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) {
   :root{
     --pj-fixed-left-width:340px;
     --pj-fixed-right-width:244px;
   }
 }
 
-@media (min-width:901px) and (max-width:1120px){
+@media (min-width:901px) and (max-width:1120px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) {
   :root{
     --pj-fixed-left-width:320px;
     --pj-fixed-right-width:228px;
   }
 }
 
-@media (min-width:901px) and (max-height:760px){
+@media (min-width:901px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:760px) {
   :root{
     --pj-fixed-bottom-reserve:166px;
     --pj-fixed-panel-gap:8px;
@@ -36247,7 +36283,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 }
 
-@media (max-width:900px){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse) {
   html body #timelineDock .timeline-trackRow,
   html body #timelineDock #hourSlider{
     position:relative !important;
@@ -36553,7 +36589,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
 
 <style>
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   :root{
     --pj-request-play-lane:64px;
     --pj-request-timeline-height:112px;
@@ -36919,7 +36955,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 }
 
-@media (min-width:901px) and (max-height:760px){
+@media (min-width:901px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:760px) {
   :root{
     --pj-request-timeline-height:108px;
     --pj-fixed-bottom-reserve:184px;
@@ -36952,7 +36988,7 @@ html.win-compact-ui body #timelineBubble .timeline-bubble-stage{
   }
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   :root{
     --pj-request-play-lane:50px;
     --pj-request-timeline-height:108px;
@@ -37822,7 +37858,7 @@ html body #timelineDock #hourSlider{
 
 <style>
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   :root{
     --pj-equal-left-width:356px;
     --pj-equal-right-width:260px;
@@ -38115,14 +38151,14 @@ html body #timelineDock #hourSlider{
   }
 }
 
-@media (min-width:901px) and (max-width:1320px){
+@media (min-width:901px) and (max-width:1320px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) {
   :root{
     --pj-equal-left-width:340px;
     --pj-equal-right-width:244px;
   }
 }
 
-@media (min-width:901px) and (max-width:1120px){
+@media (min-width:901px) and (max-width:1120px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) {
   :root{
     --pj-equal-left-width:320px;
     --pj-equal-right-width:228px;
@@ -38131,7 +38167,7 @@ html body #timelineDock #hourSlider{
   }
 }
 
-@media (min-width:901px) and (max-height:940px){
+@media (min-width:901px) and (max-height:940px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-height:940px) {
   :root{
     --pj-equal-bottom-reserve:128px;
     --pj-equal-card-h:82px;
@@ -38185,7 +38221,7 @@ html body #timelineDock #hourSlider{
   }
 }
 
-@media (max-width:900px){
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse) {
   html body .pill,
   html body #leftPanel .pill,
   html body .section-kicker,
@@ -38342,7 +38378,7 @@ html body #timelineDock #hourSlider{
     });
 
     var legend = document.getElementById("legendDock");
-    var compactLegendViewport = window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches;
+    var compactLegendViewport = window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
     if (legend && left && !compactLegendViewport && legend.parentElement !== left) left.appendChild(legend);
     if (legend && !compactLegendViewport) {
       var depthLegendHasNote = legend.dataset.legendMode === "depth" &&
@@ -38740,7 +38776,7 @@ html.platform-mac-template body{
 }
 
 
-@media (min-width:901px){
+@media (min-width:901px) and (not (any-pointer:coarse)), (min-width:1367px) {
   html.platform-mac-template #leftPanel,
   html.platform-mac-template #rightRail,
   html.platform-mac-template #legendDock,
@@ -38799,7 +38835,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
 }
 
 
-@media (max-width: 900px), (max-height:560px) and (pointer:coarse){
+@media (max-width: 900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
 
   html.platform-mac-template body.mobile-optimized #legendDock{
     width:auto !important;
@@ -38931,7 +38967,7 @@ html.platform-mac-template .export-simple-datetime-field input[type="datetime-lo
     var toggle = document.getElementById("mobileControlsToggle");
     if (!body || !legend || !toggle) return;
 
-    var isMobile = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse)").matches;
+    var isMobile = window.matchMedia("(max-width: 900px), (max-height: 560px) and (pointer: coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
     if (!isMobile || !body.classList.contains("mobile-optimized")) {
       toggle.style.removeProperty("top");
       return;
@@ -39209,7 +39245,7 @@ const northWildwoodMainPromise = main().catch(err => {
 preloadNorthWildwoodExperience(northWildwoodMainPromise);
 </script>
 <style id="shorely-mobile-slider-polish">
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   :root{
     --shorely-mobile-timeline-height:94px !important;
     --pj-request-timeline-height:94px !important;
@@ -39369,7 +39405,7 @@ preloadNorthWildwoodExperience(northWildwoodMainPromise);
 }
 </style>
 <style id="shorely-mobile-slider-key-correction">
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #shorelyMobileSliderKey{
     position:absolute !important;
     top:13px !important;
@@ -39484,7 +39520,7 @@ html body #mapTitleBadge #mapTitleLogo{
   display:none;
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #mapTitleBadge #mapTitleLogo{
     width:34px !important;
     height:34px !important;
@@ -39618,7 +39654,7 @@ html body #mapTitleBadge #mapTitleLogo{
 }
 </style>
 <style id="stone-harbor-final-qa-layout-fixes">
-@media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+@media (min-width:901px) and (min-height:561px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:760px) {
   html body:not(.mobile-optimized) #leftPanel{
     overflow-x:hidden !important;
     overflow-y:auto !important;
@@ -39637,7 +39673,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #timelineDock .timeline-top,
   html body.mobile-optimized #timelineDock .timeline-controls{
     overflow:visible !important;
@@ -40156,7 +40192,7 @@ html body #mapTitleBadge #mapTitleLogo{
 
   .mapper-tutorial-card{width:min(390px,calc(100vw - 28px)) !important;max-height:min(520px,calc(100vh - 28px)) !important}
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel .timeline-resolution-card{display:flex !important;width:100% !important;min-height:62px !important;height:auto !important;padding:7px 12px !important;overflow:visible !important;box-sizing:border-box !important}
     html body.mobile-optimized #leftPanel .timeline-resolution-card .timeline-interval-toggle{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;width:100% !important;min-width:0 !important;max-width:none !important;height:32px !important}
     html body.mobile-optimized #leftPanel .timeline-resolution-card .timeline-interval-toggle button{width:100% !important;min-width:0 !important;height:26px !important;min-height:26px !important;padding:0 3px !important;font-size:9.5px !important}
@@ -40185,7 +40221,7 @@ html body #mapTitleBadge #mapTitleLogo{
     html body.mobile-optimized.observed-mode #leftPanel > .mobile-top-tides-card{display:grid !important}
     .mapper-tutorial-card{width:calc(100vw - 28px) !important;max-height:min(46vh,420px) !important}
   }
-  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:760px) {
     #rightRail{bottom:128px !important;gap:4px !important}
     #rightRail .rail-card{padding:7px !important;border-radius:14px !important}
     #rightRail .rail-head{margin-bottom:3px !important}
@@ -40311,7 +40347,7 @@ html body #mapTitleBadge #mapTitleLogo{
     color:#ffffff !important;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel #timelineIntervalCard,
     html body.mobile-optimized.observed-mode #leftPanel #timelineIntervalCard,
     html body.mobile-optimized.forecast-mode #leftPanel #timelineIntervalCard{
@@ -40470,7 +40506,7 @@ html body #mapTitleBadge #mapTitleLogo{
     font-size:11px !important;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #timelineDock #timelineFloodKey{
       display:none !important;
     }
@@ -40621,7 +40657,7 @@ html body #mapTitleBadge #mapTitleLogo{
    * - map-tap mode and Controls share the second row when Buildings/Parcels are on;
    * - the timeline key never runs underneath its help button.
    */
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #mobileControlsToggle{
       top:max(64px, calc(env(safe-area-inset-top, 0px) + 64px)) !important;
     }
@@ -40903,7 +40939,7 @@ html body #mapTitleBadge #mapTitleLogo{
     grid-column:2;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel .data-source-options button{
       min-height:34px !important;
       height:34px !important;
@@ -41054,7 +41090,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
   .export-depth-key-note strong{color:#83e58d;font-weight:950}
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #legendDock[data-legend-mode="depth"]{
       height:94px !important;
       min-height:94px !important;
@@ -41146,7 +41182,7 @@ html body #mapTitleBadge #mapTitleLogo{
   var queued = false;
 
   function isCompactViewport(){
-    return window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse)").matches;
+    return window.matchMedia("(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)").matches;
   }
 
   function placeMobileLegend(){
@@ -41253,7 +41289,7 @@ html body #mapTitleBadge #mapTitleLogo{
     line-height:1.45 !important;
   }
 
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     html body:not(.mobile-optimized) #rightRail{
       padding-bottom:46px !important;
     }
@@ -41269,7 +41305,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:760px) {
     html body:not(.mobile-optimized) #rightRail > .rail-card{
       padding:7px !important;
     }
@@ -41347,7 +41383,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized.observed-mode #leftPanel,
     html body.mobile-optimized.observed-mode.mobile-controls-open #leftPanel{
       overflow-y:auto !important;
@@ -41515,7 +41551,7 @@ html body #mapTitleBadge #mapTitleLogo{
 </style>
 <style id="north-wildwood-sidebar-pane-qa-20260802">
   /* Keep both control rails readable as one consistent, ordered system. */
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     html body:not(.mobile-optimized) #leftPanel{
       gap:7px !important;
       padding:0 4px 8px 0 !important;
@@ -41564,7 +41600,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel{
       gap:8px !important;
       overflow-y:auto !important;
@@ -41685,7 +41721,7 @@ html body #mapTitleBadge #mapTitleLogo{
     --centered-close-x-color:#d8f9ff;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     :is(.centered-close-control,.leaflet-popup-close-button){
       --centered-close-x-size:18px;
     }
@@ -41715,7 +41751,7 @@ html body #mapTitleBadge #mapTitleLogo{
     padding:0 28px !important;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized .shorely-flood-popup .leaflet-popup-close-button{
       --centered-close-x-size:14px;
       top:7px !important;
@@ -41881,7 +41917,7 @@ html body #mapTitleBadge #mapTitleLogo{
     font-size:13px !important;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #legendDock[data-legend-mode="dynamic"],
     html body.mobile-optimized #timelineDock #legendDock[data-legend-mode="dynamic"],
     html body.mobile-optimized #mapWrap #legendDock[data-legend-mode="dynamic"]{
@@ -42026,7 +42062,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <style id="north-wildwood-right-rail-polish-v2">
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     html body:not(.mobile-optimized) #rightRail#rightRail{
       gap:8px !important;
       row-gap:8px !important;
@@ -42202,7 +42238,7 @@ html body #mapTitleBadge #mapTitleLogo{
   html body #leftPanel #legendDock[data-legend-mode="depth"] .depth-legend-gradient{
     height:12px !important;
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized:not(.physics-forecast-active) #legendDock[data-legend-mode="depth"]{
       height:74px !important;
       min-height:74px !important;
@@ -42501,7 +42537,7 @@ html body #mapTitleBadge #mapTitleLogo{
     line-height:1.05 !important;
   }
 
-  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:760px) {
     :root{
       --pj-equal-card-h:72px;
       --pj-equal-opacity-h:52px;
@@ -42700,7 +42736,7 @@ html body #mapTitleBadge #mapTitleLogo{
 </style>
 
 
-<script src="assets/avalon-mobile.js?v=20260923-2"></script>
+<script src="assets/avalon-mobile.js?v=20261021-tablet1"></script>
 <!-- Presentation superseded by the shared reference viewport. -->
 <style id="floodmapper-mobile-export-20260930">
   /* Map-view exports can be narrower than the fixed social-size canvases. */
@@ -43174,7 +43210,7 @@ html body #mapTitleBadge #mapTitleLogo{
   body[data-shorelysafe-ui] :is(#downloadModal,#infoModal,#datumModal) .modal-card {
     border-radius:18px !important;background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
   }
-  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
     /* Keep the first slider thumb outside the play button's column. */
     body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow {
       box-sizing:border-box !important;min-width:0 !important;padding:0 !important;
@@ -43193,11 +43229,11 @@ html body #mapTitleBadge #mapTitleLogo{
       bottom:156px !important;max-height:calc(100dvh - 172px) !important;overflow-y:auto !important;
     }
   }
-  @media (min-width:901px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) {
+  @media (min-width:901px) and (max-width:1199px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1199px) and (pointer:none) {
     body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {width:286px !important;max-width:286px !important;}
     body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {width:224px !important;}
   }
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
     body[data-shorelysafe-ui].mobile-optimized #leftPanel {
       gap:8px !important;overflow-y:auto !important;overflow-x:hidden !important;
     }
@@ -43220,14 +43256,14 @@ html body #mapTitleBadge #mapTitleLogo{
 (()=>{const src="data:image/webp;base64,UklGRtARAABXRUJQVlA4IMQRAACQTQCdASrwAF8APjEWiUMiISET6L5oIAMEoA1PxkUsfIec1aX8j/QuLLLd64+8H7/+5e3r9bvab+ffYD/YDzjvVZ+3n4gfAD9gP2U90L/J/sN7n/7N6gH8q/zfpK+xp+3PsC/yn/Qf//15v21+EX91P3U9pz/55xn/XO0j+ufjh+8HmR+kfrn5D/uB0Kumf9N6GfxT67/Yf7H+0P9r/7v+/+SP9P+MHoX8Yf4z1Avxf+Rf3n8nfzZ5FSyPoF+wfzj/R/2v+/f8L/C+j5+3flh7o/kn92/0fuAfyL+gf4b8u/79///eA/0fkBcjvtA+wL+O/1n/Y/4b8kfpi/lf+H/i/8J+4nuJ/Lv7j/xf8h+8/0Gfyn+i/6n+3fvP/o///4v/Rb/axCoku7TkdkddhKHx2frwp2hK16+z2g1bDCqXygYPQWQvYLjorf16j56yVn4r+1OmArhHVL/0+UVn76M7QCR2w+igAr+7VuEqNBvG1feqdYPR7bynNW45Xn1EjKCyvkNZhWaXeAclxHCp5YYtT/XCbLLgBwUoTrU1YFXSgEYpCGMR6b1ZAouV3453Ynh2qsSl8tPmgdO3zgy4jx1+eHzT0otXtlJJH5l/pZcAXSG31+HJHKUqa2GpKHSY+CZHP4SfF62l7UbAguLLLLD9noSw/H2JNalsVZ9Gm6/nma2OzP9AfdIHFDDifBDdTidM5ZQ9f//d8I+cJJGAULVs74svRl/CDJxguzinL3s3AQc7mzOnxMJKdjlmnmH7RGT+I58AS2mDnp3FB3TVQ5ieeJngjeBSmto0sX+dtpobEK4FTmfn9DRiaYgZTmPPP6QzKC6VAAD+/t14/vbIGcdFhOzd0Avm3tf2YY374UTJpaMStGmy+Bbu4jJ72Zu6bcnvJxi1OxgzvxA/j7e0/1G32J2mKQF5ZR+wGDdxajLYtKD5xrQlnbNumEgrA5/Qp/vDbXF+q6egS8VOfCAuVrEQPf8/ovyh0QBx5RRBqxx9mtuu475DHPnfIbt3uuvXjjj1ILEkksYzhV8kJhF1Psx08Sr2Z3gGJupPVkKBC6cGHGMIOrN09nj5UAabUNmsL4v+jETrLUPWH7BlHy+hpjuvzky6864cEsFmVSLfYHeRGdW7rfA/U7XITOBFNuAdW7BSYWsfyEzgmiWCkNidaBCERwRhG9TbxQ+KW3bdCZYWGG98/j9zGTOTC0Rr52u57MLvODFPo9XizqKbTS7Lbwocs2NQMir9gif/yIipljXyWAiE5d4rmvO1AU9oKQxWA+E9/AvlyPBNio5R1Ncp35mZ5jbMg+TScsZQM6dwP/hfvGIWVYMlxcucnYLNM72IKBxaTEg/VrLsQ0cqBVktD0r3CItUt87iUAF9X/7DzB2h9dXkP/iy1sdEe5dTWX+f1b97plkoPB2bsRt01mcDH3LSaPy1tqWRfh+l5raqweBrVhBjWPPYBum0na6GG+KG+tS9MkqGl36X+POwSI7o7xcPfR22KzmD6G8wHxvEG5yhuX3d5V9cEGfiu3uPgT9e/jiQY55qc6yNIipnhS8VhBi+q948fItJC1LIrw39+sWOoTcSa+t1h5x+uWboS8qkjUK4XWhd20v//QNqhY3lauQc5bKJqjjFJYe25WxT2taIuEFuibhdWsxS+5sh+2/xQgpgPSDgWnNQh0adr0Fmm9O5ISERK7pIdUGgVweBt5pdrunVxSoFmHalNPiA1C8wpMgyy6fmbxJzeRAg6XsGHzp7oJtx4mubijJnwCLcs7djsDBrUNgucnegBf6zPc2DRTxXbirgcWM+9XaLNHaRilsmi+5LvExYEM55XE98Q7hPw0BC1N9C4llsPXTlGdsSanYY3fNYIY+nJ0DVo9MIeTN1YGq4pVeeXRZGhKDxZT1upH3g8IL4BGHNunlnvrtrEKr4NCCktmPoqNWCDHi913KEcoOEbgB9FvkhWERQ2EqVuIFb6BR4ocOAnikwMcCvUoF/TuxYhZGSS2SWeG6HeHTZxJqHJLWqC9GM9c4KvOT9X3+b389lGhHooTAcGNbK4CkMpAvkDEmwPkScAO+Tsg1lCmIT/aQo5B20A859iA6ELlq4WTzPi6Lb2FGf8MmAsBgTCS7ouaJxbYbagybo3+xxyei4UKVGBtp/3s6oOF98d17Xc+zLGtNfdJoB5+FkbF0QImHhtPkMIvMqJ00IQGzD8x2Jfbx1ZKnhSSZ7WY3J4NHcYKguWYrtBX+8KTCJ8WMbmKfWBxwDSgCz+SK8SuVq5KZVZZ4S4z0LTq1yG74/emd1prxR6QvqxdojOWSmrjYXsii+K2lxtndoFR5iN306A9bmj9GKfxf6Yn0D0YdNi8P8rWHfGGT0fE6z+gM3hGzygn0z8oz69XPJB0Z3u0qIg9pWMhOoaftHb8cq+LaCN7cEOM9Bdj1BNizygOeayXV8+6WnGm7i/1h5+sYdh3eDeayF9tOGaRJkmIGWsfxPmW5Hl9/ZVn9JjVi8Tq1JdmRhobX31IF8DOw2n+M7Bs5FlJHxtCYey/hfmbq/gJgHYn/QK2zgnrvhLGkgzzinGjTOsVic4zH+ZiDbHI5pge6yvhb2l4HkNnIxu5ic4bmD+wIwDJySYUaBHGuz6OwTGBN1VwuSi2qnRdYRWuOtPvFznKYA8hcUhVb+TJgQ5vjc+ivowYpZO8IxypQl8lYati0uodWthA8oEDAXQFAtIyt4E+4LF0a6zyrBKrikV3/Icr44kEJPhKFKg0wfB2T1oGum6ZCYOyo8jrIVnf0aAOnbxs/wVTyaMhHs7yk8fwhpgQe0QeXwrsAvYCXMx4rgDh20AhaAWxlhU+Gskt89LfsfxeSgL/JhgDSpgxaFPpAuwF1W8X84V3kzwrGJhrflF+XLvoSBcwTP+tEPm4iAjZ42koVEZQXvOUiFGKdzpOoG1cz2CqkH3EeIkG9kEtE+Zwye+YcjymVNg4EOUL+/5scKtPb6zvDNLWCQvXtDu6qH2975NpKSEzBkRtYrV5De8mqKj3Z8xC2pLYXFo1Sk4/HJriNXhNYyfqEQM4cF8qxAHGFGnDym2/+WKNB43Sv43nNnd6e+UG2wosE7G7vNZgkxrhHh/QTm1sDVx3dUehTMw/ZXvv3pEzJSMT2cTePBzgVdw+61bJDiSeDbr+QfeiOq6oeglq1W6AuEIYE4AgmRyWJUDKNTujjeWT26o5+OBvx6Xq9IWACKWjSRty9I3ReLBn8uaXB68zYf6fl2V1sisXUzqdJ6aXNzlkQ3wpuVf6cHpNbk/VfPAOXoqLerX7ZqweTaVxjUD6wmiZ6K7h5yv01fEd9mQLssM7oEW38SAmRYvlfK7lPyvqmdlPBiR7hMWJGWH9GyQ6D5UD2ExL1+FEtsXNq2zGF9BU5q6XtJvGmwBvV5IDkyQVkYU8maFf/JNa09Den21RfYu5agEb61XoWLs3f3p54R+r5QOaB2rNsvfp3MLF5oTSj4yYOCMObHKMeEjEUt9bFDEf/5Uv+cUsqvMYNvkln9pF217zdZAvD8lGx2t4Fm1SHFEJ4DNVhlV8jwz+oo9ATkhNKUZ4zESTX7t1DR9h7b1BQHqTenNrl7qqpcyI161PRVTlmZASjH+T5g3A93uOl2vHIbNEywGhFT/hAfINglOuzzIgX+gWg1q74V8rV5hLjwNbJsTSzMQFF3uK68malW+sMNMDCYtvP5C4iIFKxCunUN5SOACCp2JFeloF6yELAABH/E5N2DLffNJpXJFyEmuj6eH5DfvjB63sgzB+RcWZqdGZeC6cmRJ2ngeWCu8e6Dn7ijhHCcQAvJx1yZcQ3UnJN94f6dt7FjROnUnKN3ptdHg6LY1/tosRvToplaskGzZYvs9f5Qx07DD0E7aaE6RzNAs8bu49drgsvpBCi69a3T9y97s6LECu8LkFFYOiPna3cJP/fL36GvGkjnZWLyuMwTR1wQLSHhAZUzsx03E3BP/1WgHftJQ8Sq+cdevpf6fZf5CFHOQW6HROIuYAMJkQfD2/HsPIjg0rn449OuXEqOGmxI1jOtYOftjv6+7AGIz/wyvswPG2Z0piqjz9mcU0xk8VayLsaaq0wggXae/BhHE7FENuzc7W2lMV4QAWHPQufF5IrZPLUYleuUe//0hLIO7JbvDcyU0erldXOqNdVmHmjubQTOakz/id6s74WCgS7dZ7ISrz1LBE+qVFenRtWNRJjuiiy+K7iNfnEmN0SeB4k3eDRYsUjBYOIMoBKUcFAZVvRT7MJwOil3ZWGeDEJVDudC6TF05oE9wT4NDIJmtOfFuMzVlV3rnZuyxy67SBzxaP2MzqG9MhIukCo7pjdtvE2XAij6PSL2FRaHGH/zhkeHheHv/r5yVRJ2Hg/lKZHgfAR+6tykTh4FLLolvJCrAKrVngV5GLIeM63xvly0QQ2x8z6QcA5ctMQUS3Rwf/yG1YnbBSndPLlCd7zCS8/S8Oa4d/J0SOv7qkEncdHHr/PWz1e6bGfrhvpmAmy8sMpjXE+zCp8LpTItGj3+vrGXt5j4XfT02iqDIgF70honDd5reV7rVI267pmpXTxzMXTV6i9V/La4FXT3m0w2VSMvAszHOQcH+oIA8RLj+Ktu5uTyTZlLtgqJC1K6ePdCYXm3eh9ryi7HK3klulR1o5910KUJmEA8AME6xQknfWuq3G3zdKYfGFqI/H4pjMot7qIDppFBtnh0aC2urai0RZI5EIolmdCGTXx5ObcoEuylEdDwAC69G/rnyPuWCrF7uACooB2vbcna/pjX1dftUHN73re0h+TZbz/s4FCgW+wsydxWqwHlVLvFBMxrs7QJ0Bcp05pV+QQN1XN/eYiHnOWbfZ9W9PJ8siJPeIDQJ3B/rSuna5TVCoHdngwqql+pdo5BOPvVCHlJ2S6vSAuKOvgOtAx6uupIUcvU6wzrIwONRiq/LcJgtHT5n/R9GuVgIWmYQZ5dUOD0Cwd6afz5KJBIm3bkjW4vxEEH7CNdeDWOsTzq1ax8H96qfFv1udssSVOYjz+o8CdrOjElY3el9hNXrZjevjKjsMsF6km/QSCVE9CRiLhohtgfNyPkwxklKZLEaWrWzUUE/Qamm7DLKlrtjRmcelJ6Fz04kb2xJtbZcwtKjx1684k3u7wp8B5LraSRMCu/1A/8h/RuE7CkUMlbpduWBedsPM9z7bAl69mWT9u6h8dK5E8o36jz2feKJuwIXd0Uu0Uw0zv7PTm1ZAahFnp/XRRKvhw3op+hgkAlf7U49V8OO16z089gcdVBFL9PVtQpJ+AVebe8Z2F9RAHTtpUKrAya8iTwD4045zb5UHsaf1qa9brbbF2G/hTbwqjLlGW5h+AIFnJz+1CBENdXiPnhmdR64ClA0gQbb5ERPwYiImC+n0+frBDh/nN+p+2dEtWcwbfYnzMKQHH4ndnw0aOlrhgwG0EtP5Gx1FQzAkRivxSjM8hZgktyB3PPdicqxNx9gAAHIUOiBhg31wz0fi5+7ROpcioDpFVRQJJFgR4LNkWt3azGg2bgdFDpvYAvJKH+OyaXsUHG5natW3Jmrw/KpVnNru3zHrOz1Ap7OEHshA6ap8ZsRDyvClaxqKgEpsY49kDBq2yl6lOinGRSNjKvv3TMLpDkswoF5o+A0IEZbBkT4eq1N7JNGRfE7TL/Pfc89/KD2RQHGDoIZsPl2zDeyrfWgsJtU5eSTMHDwsGIsmUO3/lmw9kbUnItwf3W4LkZC2MhZrJ6ThxkisUw0MgjmzfWNwtkSkS87DPfi7iDwEYcSqIERBCtF5vv2enfpfg/+RrXKo3PTluKIiT+vnoX91sNqzEzywrhka62dx685QnuovA/Zqweyg2rzb4BbS5TGjfN8PcMbv8zd+pbeBE0DxOHqp7U616H1MBq/ZlYolqk0SvNnvdZn3UMkgUFNp86ADFDm7B3eti4gxNvzwbCSMITN3dtWSooqOYRCAigj/bo4BEBBvzYzMPngnUgc83PpAD1psUXUmweNvKcvBeZmvied6JK1PGYfGngfx0goKaUO/GdHwUc8S41eA335yNITibz1zhyrhGF0eJFKLQtIAAAAAA=";function keep(){const host=document.getElementById('mapTitleBadge');if(!host)return;let image=document.getElementById('mapTitlePartnerLogo');if(!image){image=document.createElement('img');image.id='mapTitlePartnerLogo';image.className='shorely-title-logo shorely-title-logo-shorelysafe';host.append(image);}image.alt='ShorelySafe';if(image.getAttribute('src')!==src)image.src=src;image.onload=()=>{if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();};if(!image.dataset.persistentBrand){image.dataset.persistentBrand='true';new MutationObserver(keep).observe(image,{attributes:true,attributeFilter:['src']});}if(typeof scheduleMapTitleFit==='function')scheduleMapTitleFit();}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',keep,{once:true});else keep();})();
 </script>
 
-<script id="town-road-impacts-key">document.getElementById("legendDock")?.append(document.getElementById("roadImpactsKey"));</script><script src="assets/town-road-impacts.js?v=20261017.3"></script><script src="assets/town-native-feature-data.js?v=20261017.5"></script><script id="floodmapper-unified-controller-20261017" data-ui-sha256="f8de02c388997e4dc49b6ce79070453e47e7461c774d3b681cf2b4ed37e5959f">/* Shared FloodMapper presentation. Each town retains its own model and data handlers. */
+<script id="town-road-impacts-key">document.getElementById("legendDock")?.append(document.getElementById("roadImpactsKey"));</script><script src="assets/town-road-impacts.js?v=20261017.3"></script><script src="assets/town-native-feature-data.js?v=20261017.5"></script><script id="floodmapper-unified-controller-20261017" data-ui-sha256="3668b4912f612ae595cb1ee4e11fdf9aa7a80ccfbdbfff78d243e7714470baf7">/* Shared FloodMapper presentation. Each town retains its own model and data handlers. */
 (() => {
  'use strict';
- const VERSION='20261017.3',body=document.body,root=document.documentElement;
+ const VERSION='20261021.1',body=document.body,root=document.documentElement;
  const panel=document.getElementById('leftPanel'),rail=document.getElementById('rightRail'),timeline=document.getElementById('timelineDock'),app=document.getElementById('app');
  if(!panel||!rail||!timeline||body.dataset.unifiedUiReady===VERSION)return;
  body.dataset.unifiedUiReady=VERSION;body.dataset.floodmapperUnified=VERSION;body.dataset.countyViewport=VERSION;
- const mobile=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse)');
+ const mobile=matchMedia('(max-width:900px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)');
  const owned=new WeakMap(),bound=new WeakSet();
  const layerOrder=[['satelliteToggle','Satellite'],['roadImpactsToggle','Road Impacts'],['buildingsToggle','Buildings'],['parcelsToggle','Parcels'],['nsiStructuresToggle','Structural Impacts'],['roadsToggle','Road names'],['webcamsToggle','Cameras']];
  const groups={forecast:'.data-source-card,#forecastScenarioCard,#returnIntervalCard,#timelineIntervalCard,#calendarCard,.mobile-top-tides-card,.top-tides-card',map:'.overlay-card,.datum-card,.opacity-card,.layers-card',tools:'#townAddressCard,#downloadCard,#mapperTutorialBtn,#avalonTourBtn'};
