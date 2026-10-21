@@ -7,7 +7,7 @@
   "datum": "NAVD88",
   "timeZone": "America/New_York",
   "method": "USGS six-minute observations aggregated to hourly maxima; companion observed15min.json uses exact quarter-hour anchors",
-  "lastProcessedISO": "2026-10-21T04:48:23Z",
+  "lastProcessedISO": "2026-10-21T05:45:41Z",
   "archiveStartDate": "2007-10-01",
   "archiveEndDate": "2026-10-21",
   "navd88OffsetFromMllwFt": -2.39,
@@ -1700796,8 +1700796,8 @@
     {
       "date": "2026-10-21",
       "classification": "none",
-      "peakNAVD88": 0.88,
-      "peakMLLW": 3.27,
+      "peakNAVD88": 1.43,
+      "peakMLLW": 3.82,
       "hours": [
         {
           "hourIndex": 0,
@@ -1700805,14 +1700805,24 @@
           "timeLocal": "2026-10-21T00:00",
           "timeEST": "2026-10-21T00:00",
           "displayTimeEST": "2026-10-21T00:00",
-          "navd88StageFt": 0.88,
-          "mllwStageFt": 3.27,
-          "hydraulicPhase": "slack"
+          "navd88StageFt": 1.06,
+          "mllwStageFt": 3.45,
+          "hydraulicPhase": "filling"
+        },
+        {
+          "hourIndex": 1,
+          "timeUtc": "2026-10-21T05:00:00Z",
+          "timeLocal": "2026-10-21T01:00",
+          "timeEST": "2026-10-21T01:00",
+          "displayTimeEST": "2026-10-21T01:00",
+          "navd88StageFt": 1.43,
+          "mllwStageFt": 3.82,
+          "hydraulicPhase": "filling"
         }
       ]
     }
   ],
   "fullArchiveBuiltISO": "2026-08-10T02:18:35Z",
   "sourceUrlTemplate": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01410560&parameterCd=72279&startDT=2026-08-09T04%3A00%3A00Z&endDT=2026-08-10T02%3A00%3A00Z&siteStatus=all",
-  "lastIncrementalUpdateISO": "2026-10-21T04:48:23Z"
+  "lastIncrementalUpdateISO": "2026-10-21T05:45:41Z"
 }
