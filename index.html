@@ -16662,6 +16662,46 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
 </style>
 
 
+<style id="mapper-size-only-20261021">
+@layer floodmapper-unified-polish {
+  @media (min-width:901px) and (max-height:960px) {
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {gap:5px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) > :is(.panel-card,.rail-card) {padding:8px 10px!important;gap:6px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) :is(h2,h3,.section-title) {font-size:13px!important;line-height:1.15!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) button:not(.help-btn):not(.calendar-day):not(.calendar-nav-btn) {font-size:14px!important;min-height:36px!important;padding:4px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .layer-item {min-height:30px!important;padding:4px 0!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .layer-name {font-size:13px!important;line-height:1.1!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .top-tide-item {min-height:30px!important;padding:5px 6px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .top-tide-item > * {font-size:13px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressInput {height:34px!important;min-height:34px!important;font-size:14px!important;}
+  }
+  @media (min-width:901px) and (max-height:800px) {
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {gap:3px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) > :is(.panel-card,.rail-card) {padding:5px 8px!important;gap:4px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #leftPanel#leftPanel > .compact-card {height:auto!important;min-height:0!important;max-height:none!important;flex-basis:auto!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) :is(h2,h3,.section-title) {font-size:12px!important;line-height:1.1!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) .section-title {margin-bottom:4px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #leftPanel#leftPanel .section-title {height:auto!important;min-height:0!important;max-height:none!important;margin-bottom:0!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail#rightRail .rail-head {height:auto!important;min-height:0!important;max-height:none!important;margin-bottom:3px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) button:not(.help-btn):not(.calendar-day):not(.calendar-nav-btn) {font-size:12px!important;min-height:30px!important;padding:3px!important;line-height:1.1!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #leftPanel#leftPanel button:not(.help-btn):not(.calendar-day):not(.calendar-nav-btn) {height:auto!important;min-height:30px!important;padding:2px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) :is(#leftPanel,#rightRail) .help-btn {width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;font-size:13px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .layer-item {min-height:24px!important;padding:0!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .layer-name {font-size:12px!important;line-height:1.1!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail#rightRail .top-tide-item {height:auto!important;min-height:26px!important;padding:3px 5px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail .top-tide-item > * {font-size:12px!important;line-height:1.1!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressInput {height:30px!important;min-height:30px!important;font-size:12px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail#rightRail #downloadCard {height:auto!important;min-height:0!important;max-height:none!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #rightRail#rightRail #openDownloadModalBtn {height:auto!important;min-height:30px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressForm {gap:4px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #townAddressForm label {font-size:10px!important;line-height:1.1!important;margin-bottom:3px!important;}
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #legendDock :is(.legend-labels,.depth-legend-labels) {font-size:11px!important;}
+  }
+  @media (min-width:901px) and (max-width:1200px) {
+    html body[data-floodmapper-unified]:not(.mobile-optimized) #mapTitleBadge #mapTitleText {font-size:20px!important;}
+  }
+}
+</style>
 </head>
 <body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-county-viewport="20261017" data-floodmapper-unified="20261017.3"><div id="roadImpactsKey" hidden><span>Roads: modeled depth &gt; 0.5 ft</span><span id="roadImpactsStatus" role="status"></span></div>
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
