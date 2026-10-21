@@ -1860,7 +1860,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 @media(max-width:900px){html body #mapTitleBadge{gap:6px!important}html body #mapTitleBadge #mapTitlePartnerLogo{width:58px!important;min-width:58px!important;max-width:58px!important;height:25px!important;max-height:25px!important;flex-basis:58px!important;padding:2px!important}html body #mapTitleText{min-width:0!important;flex:1 1 auto!important}}
 }
 </style>
-<style id="shorelysafe-fleet-layer">@layer shorely-fleet-ui;</style>
+<style id="shorelysafe-fleet-layer">@layer shorelysafe-unified, shorelysafe-pane-fit, shorely-fleet-ui, avalon-mobile;</style>
 <!-- Shorely Safe browser-tab branding -->
 <link rel="icon" type="image/png" href="./assets/shorelysafe-favicon-20261008.png" />
 
@@ -3488,7 +3488,7 @@ html body #mapTitleBadge #mapTitlePartnerLogo{display:block!important;visibility
 
     #map3d .maplibregl-popup-tip{ border-top-color:#0b1220; }
 
-    @media (max-width:900px),(max-height:560px){
+    @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
       html body #nw3dLauncher{
         top:max(176px, calc(env(safe-area-inset-top) + 168px));
         right:max(7px, env(safe-area-inset-right));
@@ -16704,6 +16704,21 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
   }
 }
 </style>
+<style id="northwild-title-containment-20261021">
+@layer floodmapper-unified-polish {
+  html body[data-floodmapper-unified] #mapTitleBadge#mapTitleBadge #mapTitleText {
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    overflow-wrap:anywhere !important;
+  }
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
+    html body[data-floodmapper-unified].mobile-optimized #leftPanel[data-nww-section]:not([data-nww-section="forecast"]) #calendarCard.calendar-card.active {
+      display:none !important;
+    }
+  }
+}
+</style>
 </head>
 <body data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" class="nw-app-loading" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-county-viewport="20261017" data-floodmapper-unified="20261017.3"><div id="roadImpactsKey" hidden><span>Roads: modeled depth &gt; 0.5 ft</span><span id="roadImpactsStatus" role="status"></span></div>
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
@@ -17394,7 +17409,7 @@ html body.observed-mode[data-floodmapper-unified] #leftPanel > #calendarCard .se
     .flood-year-control{display:grid;grid-template-columns:minmax(0,1fr) 145px;gap:11px;align-items:center;margin-top:5px}.flood-year-control input{width:100%;accent-color:var(--scenario-color,#7df9ff)}
     .flood-year-readout{display:grid;grid-template-columns:auto 1fr;column-gap:6px;align-items:baseline;padding:7px 9px;border:1px solid rgba(125,249,255,.16);border-radius:10px;background:rgba(2,6,23,.34);text-align:right}.flood-year-readout span{color:#7df9ff;font-size:9px;font-weight:900}.flood-year-readout strong{color:#fff;font-size:14px}.flood-year-readout small{grid-column:1/-1;color:#91a5bd;font-size:8px}
     .flood-history-error{padding:16px;border:1px solid rgba(251,113,133,.3);border-radius:14px;background:rgba(159,18,57,.12);color:#fecdd3;font-size:11px;line-height:1.5}
-    @media (max-width:900px),(max-height:560px){
+    @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
       .map-click-mode-control{top:max(58px,calc(env(safe-area-inset-top) + 54px));width:max-content;max-width:calc(100vw - 20px);padding:4px;border-radius:13px}
       .map-click-mode-label{display:none}.map-click-mode-control button{min-height:34px;padding:0 13px;font-size:10px}
       .timeline-interval-toggle{width:168px !important;min-width:168px !important}
@@ -19998,7 +20013,7 @@ function setDatumHelpOpen(isOpen) {
         legendDock.dataset.previewText = currentOverlayMode === "depth"
           ? "Flood Depth Key"
           : "Flood Stages Key";
-        if (window.innerWidth > 900) {
+        if (window.innerWidth > 900 && !document.body.hasAttribute("data-floodmapper-unified")) {
           const compactLegendHeight = currentOverlayMode === "depth"
             ? (depthLegendHasNote ? "94px" : "74px")
             : "68px";
@@ -39194,7 +39209,7 @@ const northWildwoodMainPromise = main().catch(err => {
 preloadNorthWildwoodExperience(northWildwoodMainPromise);
 </script>
 <style id="shorely-mobile-slider-polish">
-@media (max-width:900px), (max-height:560px){
+@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
   :root{
     --shorely-mobile-timeline-height:94px !important;
     --pj-request-timeline-height:94px !important;
@@ -39354,7 +39369,7 @@ preloadNorthWildwoodExperience(northWildwoodMainPromise);
 }
 </style>
 <style id="shorely-mobile-slider-key-correction">
-@media (max-width:900px), (max-height:560px){
+@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #shorelyMobileSliderKey{
     position:absolute !important;
     top:13px !important;
@@ -39469,7 +39484,7 @@ html body #mapTitleBadge #mapTitleLogo{
   display:none;
 }
 
-@media (max-width:900px), (max-height:560px){
+@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #mapTitleBadge #mapTitleLogo{
     width:34px !important;
     height:34px !important;
@@ -39603,7 +39618,7 @@ html body #mapTitleBadge #mapTitleLogo{
 }
 </style>
 <style id="stone-harbor-final-qa-layout-fixes">
-@media (min-width:901px) and (max-height:760px){
+@media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
   html body:not(.mobile-optimized) #leftPanel{
     overflow-x:hidden !important;
     overflow-y:auto !important;
@@ -39622,7 +39637,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 }
 
-@media (max-width:900px), (max-height:560px) and (pointer:coarse){
+@media (max-width:900px), (max-height:560px) and (pointer:coarse) {
   html body.mobile-optimized #timelineDock .timeline-top,
   html body.mobile-optimized #timelineDock .timeline-controls{
     overflow:visible !important;
@@ -40141,7 +40156,7 @@ html body #mapTitleBadge #mapTitleLogo{
 
   .mapper-tutorial-card{width:min(390px,calc(100vw - 28px)) !important;max-height:min(520px,calc(100vh - 28px)) !important}
 
-  @media (max-width:900px),(max-height:560px){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel .timeline-resolution-card{display:flex !important;width:100% !important;min-height:62px !important;height:auto !important;padding:7px 12px !important;overflow:visible !important;box-sizing:border-box !important}
     html body.mobile-optimized #leftPanel .timeline-resolution-card .timeline-interval-toggle{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;width:100% !important;min-width:0 !important;max-width:none !important;height:32px !important}
     html body.mobile-optimized #leftPanel .timeline-resolution-card .timeline-interval-toggle button{width:100% !important;min-width:0 !important;height:26px !important;min-height:26px !important;padding:0 3px !important;font-size:9.5px !important}
@@ -40170,7 +40185,7 @@ html body #mapTitleBadge #mapTitleLogo{
     html body.mobile-optimized.observed-mode #leftPanel > .mobile-top-tides-card{display:grid !important}
     .mapper-tutorial-card{width:calc(100vw - 28px) !important;max-height:min(46vh,420px) !important}
   }
-  @media (min-width:901px) and (max-height:760px){
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
     #rightRail{bottom:128px !important;gap:4px !important}
     #rightRail .rail-card{padding:7px !important;border-radius:14px !important}
     #rightRail .rail-head{margin-bottom:3px !important}
@@ -40296,7 +40311,7 @@ html body #mapTitleBadge #mapTitleLogo{
     color:#ffffff !important;
   }
 
-  @media (max-width:900px),(max-height:560px){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel #timelineIntervalCard,
     html body.mobile-optimized.observed-mode #leftPanel #timelineIntervalCard,
     html body.mobile-optimized.forecast-mode #leftPanel #timelineIntervalCard{
@@ -40324,7 +40339,7 @@ html body #mapTitleBadge #mapTitleLogo{
       letter-spacing:0 !important;
     }
   }
-  @media (min-width:600px) and (max-height:560px){
+  @media (min-width:600px) and (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #timelineDock .timeline-trackRow{position:relative !important;top:-11px !important}
   }
 </style>
@@ -40455,7 +40470,7 @@ html body #mapTitleBadge #mapTitleLogo{
     font-size:11px !important;
   }
 
-  @media (max-width:900px),(max-height:560px){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #timelineDock #timelineFloodKey{
       display:none !important;
     }
@@ -40606,7 +40621,7 @@ html body #mapTitleBadge #mapTitleLogo{
    * - map-tap mode and Controls share the second row when Buildings/Parcels are on;
    * - the timeline key never runs underneath its help button.
    */
-  @media (max-width:900px), (max-height:560px){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #mobileControlsToggle{
       top:max(64px, calc(env(safe-area-inset-top, 0px) + 64px)) !important;
     }
@@ -40773,7 +40788,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (min-width:600px) and (max-height:560px) and (orientation:landscape){
+  @media (min-width:600px) and (max-height:560px) and (orientation:landscape) and (pointer:coarse) {
     html body.mobile-optimized .shorely-flood-popup .leaflet-popup-content{
       margin:10px 12px 11px !important;
     }
@@ -40888,7 +40903,7 @@ html body #mapTitleBadge #mapTitleLogo{
     grid-column:2;
   }
 
-  @media (max-width:900px), (max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel .data-source-options button{
       min-height:34px !important;
       height:34px !important;
@@ -41025,8 +41040,9 @@ html body #mapTitleBadge #mapTitleLogo{
     background:linear-gradient(90deg,#63d471 0%,#63d471 18%,#18c8ff 18%,#00a6f2 34%,#1479df 50%,#1852bd 67%,#132f7d 83%,#041536 100%) !important;
   }
   .export-depth-key-ends{
-    display:grid !important;
-    grid-template-columns:22% minmax(0,1fr) auto !important;
+    display:flex !important;
+    justify-content:space-between !important;
+    gap:12px !important;
   }
   .export-depth-key-ends span:nth-child(2){justify-self:start}
   .export-depth-key-ends span:last-child{justify-self:end}
@@ -41038,7 +41054,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
   .export-depth-key-note strong{color:#83e58d;font-weight:950}
 
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #legendDock[data-legend-mode="depth"]{
       height:94px !important;
       min-height:94px !important;
@@ -41113,7 +41129,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (min-width:600px) and (max-height:560px) and (orientation:landscape){
+  @media (min-width:600px) and (max-height:560px) and (orientation:landscape) and (pointer:coarse) {
     html body.mobile-optimized #mapWrap > #legendDock[data-legend-mode="depth"]{
       top:62px !important;
       width:250px !important;
@@ -41237,7 +41253,7 @@ html body #mapTitleBadge #mapTitleLogo{
     line-height:1.45 !important;
   }
 
-  @media (min-width:901px){
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
     html body:not(.mobile-optimized) #rightRail{
       padding-bottom:46px !important;
     }
@@ -41253,7 +41269,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (min-width:901px) and (max-height:760px){
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
     html body:not(.mobile-optimized) #rightRail > .rail-card{
       padding:7px !important;
     }
@@ -41331,7 +41347,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized.observed-mode #leftPanel,
     html body.mobile-optimized.observed-mode.mobile-controls-open #leftPanel{
       overflow-y:auto !important;
@@ -41499,7 +41515,7 @@ html body #mapTitleBadge #mapTitleLogo{
 </style>
 <style id="north-wildwood-sidebar-pane-qa-20260802">
   /* Keep both control rails readable as one consistent, ordered system. */
-  @media (min-width:901px){
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
     html body:not(.mobile-optimized) #leftPanel{
       gap:7px !important;
       padding:0 4px 8px 0 !important;
@@ -41548,7 +41564,7 @@ html body #mapTitleBadge #mapTitleLogo{
     }
   }
 
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #leftPanel{
       gap:8px !important;
       overflow-y:auto !important;
@@ -41669,7 +41685,7 @@ html body #mapTitleBadge #mapTitleLogo{
     --centered-close-x-color:#d8f9ff;
   }
 
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     :is(.centered-close-control,.leaflet-popup-close-button){
       --centered-close-x-size:18px;
     }
@@ -41699,7 +41715,7 @@ html body #mapTitleBadge #mapTitleLogo{
     padding:0 28px !important;
   }
 
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized .shorely-flood-popup .leaflet-popup-close-button{
       --centered-close-x-size:14px;
       top:7px !important;
@@ -41865,7 +41881,7 @@ html body #mapTitleBadge #mapTitleLogo{
     font-size:13px !important;
   }
 
-  @media (max-width: 900px), (max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized #legendDock[data-legend-mode="dynamic"],
     html body.mobile-optimized #timelineDock #legendDock[data-legend-mode="dynamic"],
     html body.mobile-optimized #mapWrap #legendDock[data-legend-mode="dynamic"]{
@@ -41937,7 +41953,7 @@ html body #mapTitleBadge #mapTitleLogo{
 </style>
 <style id="north-wildwood-compact-export-panel">
   /* Use the desktop dialog's width instead of stacking every short control. */
-  @media (min-width:721px) and (min-height:561px){
+  @media (min-width:721px) and (min-height:561px), (min-width:721px) and (pointer:fine), (min-width:721px) and (pointer:none) {
     #downloadModal.download-modal.open{
       align-items:center !important;
     }
@@ -41995,7 +42011,7 @@ html body #mapTitleBadge #mapTitleLogo{
   /* Preserve the roomy, one-column touch layout on phones. */
   @media (max-width:720px){
     #downloadModal .download-grid{
-      grid-template-columns:1fr !important;
+      grid-template-columns:minmax(0,1fr) !important;
     }
     #downloadModal .export-filetype-field,
     #downloadModal .export-interval-field,
@@ -42010,7 +42026,7 @@ html body #mapTitleBadge #mapTitleLogo{
   }
 </style>
 <style id="north-wildwood-right-rail-polish-v2">
-  @media (min-width:901px) and (min-height:561px){
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
     html body:not(.mobile-optimized) #rightRail#rightRail{
       gap:8px !important;
       row-gap:8px !important;
@@ -42186,7 +42202,7 @@ html body #mapTitleBadge #mapTitleLogo{
   html body #leftPanel #legendDock[data-legend-mode="depth"] .depth-legend-gradient{
     height:12px !important;
   }
-  @media (max-width:900px),(max-height:560px) and (pointer:coarse){
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     html body.mobile-optimized:not(.physics-forecast-active) #legendDock[data-legend-mode="depth"]{
       height:74px !important;
       min-height:74px !important;
@@ -42485,7 +42501,7 @@ html body #mapTitleBadge #mapTitleLogo{
     line-height:1.05 !important;
   }
 
-  @media (min-width:901px) and (max-height:760px){
+  @media (min-width:901px) and (min-height:561px) and (max-height:760px), (min-width:901px) and (pointer:fine) and (max-height:760px), (min-width:901px) and (pointer:none) and (max-height:760px) {
     :root{
       --pj-equal-card-h:72px;
       --pj-equal-opacity-h:52px;
@@ -43051,7 +43067,6 @@ html body #mapTitleBadge #mapTitleLogo{
     color:var(--fleet-text) !important;
     font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
   }
-  body[data-shorelysafe-ui] #forecastScenarioCard,
   body[data-shorelysafe-ui] .brick-nav {display:none !important;}
   body[data-shorelysafe-ui] :is(#leftPanel,#rightRail,#mobileRailMount) {
     gap:8px !important;overflow-x:hidden !important;scrollbar-width:thin !important;
@@ -43159,7 +43174,7 @@ html body #mapTitleBadge #mapTitleLogo{
   body[data-shorelysafe-ui] :is(#downloadModal,#infoModal,#datumModal) .modal-card {
     border-radius:18px !important;background:var(--fleet-panel) !important;color:var(--fleet-text) !important;
   }
-  @media (min-width:901px) and (min-height:561px) {
+  @media (min-width:901px) and (min-height:561px), (min-width:901px) and (pointer:fine), (min-width:901px) and (pointer:none) {
     /* Keep the first slider thumb outside the play button's column. */
     body[data-shorelysafe-ui]:not(.mobile-optimized) #timelineDock .timeline-trackRow {
       box-sizing:border-box !important;min-width:0 !important;padding:0 !important;
@@ -43178,11 +43193,11 @@ html body #mapTitleBadge #mapTitleLogo{
       bottom:156px !important;max-height:calc(100dvh - 172px) !important;overflow-y:auto !important;
     }
   }
-  @media (min-width:901px) and (max-width:1199px) and (min-height:561px) {
+  @media (min-width:901px) and (max-width:1199px) and (min-height:561px), (min-width:901px) and (max-width:1199px) and (pointer:fine), (min-width:901px) and (max-width:1199px) and (pointer:none) {
     body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {width:286px !important;max-width:286px !important;}
     body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {width:224px !important;}
   }
-  @media (max-width:900px),(max-height:560px) {
+  @media (max-width:900px), (max-height:560px) and (pointer:coarse) {
     body[data-shorelysafe-ui].mobile-optimized #leftPanel {
       gap:8px !important;overflow-y:auto !important;overflow-x:hidden !important;
     }
