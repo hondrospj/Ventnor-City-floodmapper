@@ -4,10 +4,10 @@
   "stationName": "INSIDE THOROFARE AT ATLANTIC CITY, NJ",
   "noaaGaugeId": "8534720",
   "usgsGaugeId": "01410560",
-  "issuedUtc": "2026-10-25T21:00:00Z",
+  "issuedUtc": "2026-10-25T22:00:00Z",
   "petssCycleUtc": "2026-10-25T12:00:00Z",
-  "forecastStartUtc": "2026-10-25T21:00:00Z",
-  "forecastEndUtc": "2026-10-29T09:00:00Z",
+  "forecastStartUtc": "2026-10-25T22:00:00Z",
+  "forecastEndUtc": "2026-10-29T10:00:00Z",
   "sourceUrl": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.20261025/petss.t12z.csv.tar.gz",
   "sourceMember": "petss.20261025/t12z.csv/8534836.csv",
   "sourceType": "NOMADS_PETSS_FORECAST_ONLY_station_csv_TWL_TWL10p_TWL90p",
@@ -72,25 +72,6 @@
       "product": "mean",
       "hours": [
         {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "mean",
-          "product": "mean",
-          "percentile": "Mean",
-          "rawPetssValue": 2.031,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.36,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.36,
-          "mllwStageFt": 2.03,
-          "twlMllwFt": 2.03,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.4",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL"
-        },
-        {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "mean",
           "product": "mean",
@@ -106,7 +87,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL"
         },
         {
@@ -125,7 +106,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL"
         },
         {
@@ -144,7 +125,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL"
         },
         {
@@ -163,7 +144,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL"
         },
         {
@@ -182,7 +163,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL"
         },
         {
@@ -201,7 +182,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL"
         },
         {
@@ -220,7 +201,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL"
         },
         {
@@ -239,7 +220,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL"
         },
         {
@@ -258,7 +239,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL"
         },
         {
@@ -277,7 +258,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL"
         },
         {
@@ -296,7 +277,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL"
         },
         {
@@ -315,7 +296,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL"
         },
         {
@@ -334,7 +315,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL"
         },
         {
@@ -353,7 +334,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL"
         },
         {
@@ -372,7 +353,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL"
         },
         {
@@ -391,7 +372,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL"
         },
         {
@@ -410,7 +391,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL"
         },
         {
@@ -429,7 +410,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL"
         },
         {
@@ -448,7 +429,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL"
         },
         {
@@ -467,7 +448,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL"
         },
         {
@@ -486,7 +467,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL"
         },
         {
@@ -505,7 +486,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL"
         },
         {
@@ -524,7 +505,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL"
         },
         {
@@ -543,7 +524,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL"
         },
         {
@@ -562,7 +543,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL"
         },
         {
@@ -581,7 +562,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL"
         },
         {
@@ -600,7 +581,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL"
         },
         {
@@ -619,7 +600,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL"
         },
         {
@@ -638,7 +619,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL"
         },
         {
@@ -657,7 +638,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL"
         },
         {
@@ -676,7 +657,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL"
         },
         {
@@ -695,7 +676,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL"
         },
         {
@@ -714,7 +695,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL"
         },
         {
@@ -733,7 +714,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL"
         },
         {
@@ -752,7 +733,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL"
         },
         {
@@ -771,7 +752,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL"
         },
         {
@@ -790,7 +771,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL"
         },
         {
@@ -809,7 +790,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL"
         },
         {
@@ -828,7 +809,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL"
         },
         {
@@ -847,7 +828,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL"
         },
         {
@@ -866,7 +847,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL"
         },
         {
@@ -885,7 +866,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL"
         },
         {
@@ -904,7 +885,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL"
         },
         {
@@ -923,7 +904,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL"
         },
         {
@@ -942,7 +923,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL"
         },
         {
@@ -961,7 +942,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL"
         },
         {
@@ -980,7 +961,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL"
         },
         {
@@ -999,7 +980,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL"
         },
         {
@@ -1018,7 +999,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL"
         },
         {
@@ -1037,7 +1018,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL"
         },
         {
@@ -1056,7 +1037,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL"
         },
         {
@@ -1075,7 +1056,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL"
         },
         {
@@ -1094,7 +1075,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL"
         },
         {
@@ -1113,7 +1094,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL"
         },
         {
@@ -1132,7 +1113,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL"
         },
         {
@@ -1151,7 +1132,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL"
         },
         {
@@ -1170,7 +1151,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL"
         },
         {
@@ -1189,7 +1170,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL"
         },
         {
@@ -1208,7 +1189,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL"
         },
         {
@@ -1227,7 +1208,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL"
         },
         {
@@ -1246,7 +1227,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL"
         },
         {
@@ -1265,7 +1246,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL"
         },
         {
@@ -1284,7 +1265,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL"
         },
         {
@@ -1303,7 +1284,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL"
         },
         {
@@ -1322,7 +1303,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL"
         },
         {
@@ -1341,7 +1322,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL"
         },
         {
@@ -1360,7 +1341,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL"
         },
         {
@@ -1379,7 +1360,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL"
         },
         {
@@ -1398,7 +1379,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL"
         },
         {
@@ -1417,7 +1398,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL"
         },
         {
@@ -1436,7 +1417,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL"
         },
         {
@@ -1455,7 +1436,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL"
         },
         {
@@ -1474,7 +1455,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL"
         },
         {
@@ -1493,7 +1474,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL"
         },
         {
@@ -1512,7 +1493,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL"
         },
         {
@@ -1531,7 +1512,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL"
         },
         {
@@ -1550,7 +1531,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL"
         },
         {
@@ -1569,7 +1550,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL"
         },
         {
@@ -1588,7 +1569,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL"
         },
         {
@@ -1607,7 +1588,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL"
         },
         {
@@ -1626,7 +1607,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL"
         },
         {
@@ -1645,7 +1626,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL"
         },
         {
@@ -1664,7 +1645,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL"
         },
         {
@@ -1683,6 +1664,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "mean",
+          "product": "mean",
+          "percentile": "Mean",
+          "rawPetssValue": 0.818,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.57,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.57,
+          "mllwStageFt": 0.82,
+          "twlMllwFt": 0.82,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.6",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL"
         }
@@ -1693,25 +1693,6 @@
       "percentile": "90p / e90",
       "product": "e90",
       "hours": [
-        {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "lowEnd",
-          "product": "e90",
-          "percentile": "90p / e90",
-          "rawPetssValue": 2.031,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.36,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.36,
-          "mllwStageFt": 2.03,
-          "twlMllwFt": 2.03,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.4",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL90p"
-        },
         {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "lowEnd",
@@ -1728,7 +1709,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1747,7 +1728,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1766,7 +1747,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1785,7 +1766,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1804,7 +1785,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1823,7 +1804,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1842,7 +1823,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1861,7 +1842,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1880,7 +1861,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1899,7 +1880,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1918,7 +1899,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1937,7 +1918,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1956,7 +1937,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1975,7 +1956,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL90p"
         },
         {
@@ -1994,7 +1975,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2013,7 +1994,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2032,7 +2013,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2051,7 +2032,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2070,7 +2051,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2089,7 +2070,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2108,7 +2089,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2127,7 +2108,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2146,7 +2127,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2165,7 +2146,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2184,7 +2165,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2203,7 +2184,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2222,7 +2203,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2241,7 +2222,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2260,7 +2241,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2279,7 +2260,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2298,7 +2279,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2317,7 +2298,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2336,7 +2317,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2355,7 +2336,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2374,7 +2355,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2393,7 +2374,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2412,7 +2393,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2431,7 +2412,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2450,7 +2431,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2469,7 +2450,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2488,7 +2469,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2507,7 +2488,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2526,7 +2507,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2545,7 +2526,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2564,7 +2545,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2583,7 +2564,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2602,7 +2583,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2621,7 +2602,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2640,7 +2621,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2659,7 +2640,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2678,7 +2659,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2697,7 +2678,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2716,7 +2697,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2735,7 +2716,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2754,7 +2735,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2773,7 +2754,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2792,7 +2773,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2811,7 +2792,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2830,7 +2811,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2849,7 +2830,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2868,7 +2849,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2887,7 +2868,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2906,7 +2887,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2925,7 +2906,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2944,7 +2925,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2963,7 +2944,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL90p"
         },
         {
@@ -2982,7 +2963,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3001,7 +2982,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3020,7 +3001,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3039,7 +3020,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3058,7 +3039,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3077,7 +3058,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3096,7 +3077,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3115,7 +3096,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3134,7 +3115,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3153,7 +3134,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3172,7 +3153,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3191,7 +3172,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3210,7 +3191,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3229,7 +3210,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3248,7 +3229,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3267,7 +3248,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3286,7 +3267,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL90p"
         },
         {
@@ -3305,6 +3286,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL90p"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "lowEnd",
+          "product": "e90",
+          "percentile": "90p / e90",
+          "rawPetssValue": 0.718,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.67,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.67,
+          "mllwStageFt": 0.72,
+          "twlMllwFt": 0.72,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.7",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL90p"
         }
@@ -3315,25 +3315,6 @@
       "percentile": "10p / e10",
       "product": "e10",
       "hours": [
-        {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "highEnd",
-          "product": "e10",
-          "percentile": "10p / e10",
-          "rawPetssValue": 2.131,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.26,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.26,
-          "mllwStageFt": 2.13,
-          "twlMllwFt": 2.13,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.3",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL10p"
-        },
         {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "highEnd",
@@ -3350,7 +3331,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3369,7 +3350,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3388,7 +3369,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3407,7 +3388,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3426,7 +3407,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3445,7 +3426,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3464,7 +3445,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3483,7 +3464,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3502,7 +3483,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3521,7 +3502,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3540,7 +3521,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3559,7 +3540,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3578,7 +3559,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3597,7 +3578,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3616,7 +3597,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3635,7 +3616,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3654,7 +3635,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3673,7 +3654,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3692,7 +3673,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3711,7 +3692,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3730,7 +3711,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3749,7 +3730,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3768,7 +3749,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3787,7 +3768,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3806,7 +3787,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3825,7 +3806,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3844,7 +3825,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3863,7 +3844,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3882,7 +3863,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3901,7 +3882,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3920,7 +3901,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3939,7 +3920,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3958,7 +3939,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3977,7 +3958,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL10p"
         },
         {
@@ -3996,7 +3977,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4015,7 +3996,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4034,7 +4015,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4053,7 +4034,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4072,7 +4053,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4091,7 +4072,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4110,7 +4091,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4129,7 +4110,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4148,7 +4129,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4167,7 +4148,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4186,7 +4167,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4205,7 +4186,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4224,7 +4205,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4243,7 +4224,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4262,7 +4243,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4281,7 +4262,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4300,7 +4281,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4319,7 +4300,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4338,7 +4319,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4357,7 +4338,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4376,7 +4357,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4395,7 +4376,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4414,7 +4395,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4433,7 +4414,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4452,7 +4433,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4471,7 +4452,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4490,7 +4471,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4509,7 +4490,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4528,7 +4509,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4547,7 +4528,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4566,7 +4547,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4585,7 +4566,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4604,7 +4585,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4623,7 +4604,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4642,7 +4623,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4661,7 +4642,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4680,7 +4661,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4699,7 +4680,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4718,7 +4699,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4737,7 +4718,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4756,7 +4737,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4775,7 +4756,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4794,7 +4775,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4813,7 +4794,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4832,7 +4813,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4851,7 +4832,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4870,7 +4851,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4889,7 +4870,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4908,7 +4889,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL10p"
         },
         {
@@ -4927,6 +4908,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL10p"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "highEnd",
+          "product": "e10",
+          "percentile": "10p / e10",
+          "rawPetssValue": 0.818,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.57,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.57,
+          "mllwStageFt": 0.82,
+          "twlMllwFt": 0.82,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.6",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL10p"
         }
@@ -4982,25 +4982,6 @@
       "product": "mean",
       "hours": [
         {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "mean",
-          "product": "mean",
-          "percentile": "Mean",
-          "rawPetssValue": 2.031,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.36,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.36,
-          "mllwStageFt": 2.03,
-          "twlMllwFt": 2.03,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.4",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL"
-        },
-        {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "mean",
           "product": "mean",
@@ -5016,7 +4997,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL"
         },
         {
@@ -5035,7 +5016,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL"
         },
         {
@@ -5054,7 +5035,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL"
         },
         {
@@ -5073,7 +5054,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL"
         },
         {
@@ -5092,7 +5073,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL"
         },
         {
@@ -5111,7 +5092,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL"
         },
         {
@@ -5130,7 +5111,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL"
         },
         {
@@ -5149,7 +5130,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL"
         },
         {
@@ -5168,7 +5149,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL"
         },
         {
@@ -5187,7 +5168,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL"
         },
         {
@@ -5206,7 +5187,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL"
         },
         {
@@ -5225,7 +5206,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL"
         },
         {
@@ -5244,7 +5225,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL"
         },
         {
@@ -5263,7 +5244,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL"
         },
         {
@@ -5282,7 +5263,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL"
         },
         {
@@ -5301,7 +5282,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL"
         },
         {
@@ -5320,7 +5301,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL"
         },
         {
@@ -5339,7 +5320,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL"
         },
         {
@@ -5358,7 +5339,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL"
         },
         {
@@ -5377,7 +5358,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL"
         },
         {
@@ -5396,7 +5377,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL"
         },
         {
@@ -5415,7 +5396,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL"
         },
         {
@@ -5434,7 +5415,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL"
         },
         {
@@ -5453,7 +5434,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL"
         },
         {
@@ -5472,7 +5453,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL"
         },
         {
@@ -5491,7 +5472,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL"
         },
         {
@@ -5510,7 +5491,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL"
         },
         {
@@ -5529,7 +5510,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL"
         },
         {
@@ -5548,7 +5529,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL"
         },
         {
@@ -5567,7 +5548,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL"
         },
         {
@@ -5586,7 +5567,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL"
         },
         {
@@ -5605,7 +5586,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL"
         },
         {
@@ -5624,7 +5605,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL"
         },
         {
@@ -5643,7 +5624,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL"
         },
         {
@@ -5662,7 +5643,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL"
         },
         {
@@ -5681,7 +5662,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL"
         },
         {
@@ -5700,7 +5681,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL"
         },
         {
@@ -5719,7 +5700,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL"
         },
         {
@@ -5738,7 +5719,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL"
         },
         {
@@ -5757,7 +5738,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL"
         },
         {
@@ -5776,7 +5757,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL"
         },
         {
@@ -5795,7 +5776,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL"
         },
         {
@@ -5814,7 +5795,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL"
         },
         {
@@ -5833,7 +5814,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL"
         },
         {
@@ -5852,7 +5833,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL"
         },
         {
@@ -5871,7 +5852,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL"
         },
         {
@@ -5890,7 +5871,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL"
         },
         {
@@ -5909,7 +5890,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL"
         },
         {
@@ -5928,7 +5909,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL"
         },
         {
@@ -5947,7 +5928,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL"
         },
         {
@@ -5966,7 +5947,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL"
         },
         {
@@ -5985,7 +5966,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.2",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL"
         },
         {
@@ -6004,7 +5985,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL"
         },
         {
@@ -6023,7 +6004,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL"
         },
         {
@@ -6042,7 +6023,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.9",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL"
         },
         {
@@ -6061,7 +6042,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL"
         },
         {
@@ -6080,7 +6061,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL"
         },
         {
@@ -6099,7 +6080,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL"
         },
         {
@@ -6118,7 +6099,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL"
         },
         {
@@ -6137,7 +6118,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL"
         },
         {
@@ -6156,7 +6137,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL"
         },
         {
@@ -6175,7 +6156,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL"
         },
         {
@@ -6194,7 +6175,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL"
         },
         {
@@ -6213,7 +6194,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.9",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL"
         },
         {
@@ -6232,7 +6213,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL"
         },
         {
@@ -6251,7 +6232,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.2",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL"
         },
         {
@@ -6270,7 +6251,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL"
         },
         {
@@ -6289,7 +6270,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL"
         },
         {
@@ -6308,7 +6289,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL"
         },
         {
@@ -6327,7 +6308,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL"
         },
         {
@@ -6346,7 +6327,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL"
         },
         {
@@ -6365,7 +6346,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL"
         },
         {
@@ -6384,7 +6365,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL"
         },
         {
@@ -6403,7 +6384,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL"
         },
         {
@@ -6422,7 +6403,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL"
         },
         {
@@ -6441,7 +6422,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL"
         },
         {
@@ -6460,7 +6441,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL"
         },
         {
@@ -6479,7 +6460,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL"
         },
         {
@@ -6498,7 +6479,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL"
         },
         {
@@ -6517,7 +6498,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL"
         },
         {
@@ -6536,7 +6517,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL"
         },
         {
@@ -6555,7 +6536,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL"
         },
         {
@@ -6574,7 +6555,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL"
         },
         {
@@ -6593,6 +6574,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "mean",
+          "product": "mean",
+          "percentile": "Mean",
+          "rawPetssValue": 0.818,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.57,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.57,
+          "mllwStageFt": 0.82,
+          "twlMllwFt": 0.82,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.6",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL"
         }
@@ -6603,25 +6603,6 @@
       "percentile": "90p / e90",
       "product": "e90",
       "hours": [
-        {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "lowEnd",
-          "product": "e90",
-          "percentile": "90p / e90",
-          "rawPetssValue": 2.031,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.36,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.36,
-          "mllwStageFt": 2.03,
-          "twlMllwFt": 2.03,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.4",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL90p"
-        },
         {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "lowEnd",
@@ -6638,7 +6619,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6657,7 +6638,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6676,7 +6657,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6695,7 +6676,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6714,7 +6695,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6733,7 +6714,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.3",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6752,7 +6733,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6771,7 +6752,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6790,7 +6771,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6809,7 +6790,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6828,7 +6809,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6847,7 +6828,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.4",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6866,7 +6847,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6885,7 +6866,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6904,7 +6885,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6923,7 +6904,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6942,7 +6923,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6961,7 +6942,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6980,7 +6961,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL90p"
         },
         {
@@ -6999,7 +6980,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7018,7 +6999,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7037,7 +7018,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7056,7 +7037,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7075,7 +7056,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7094,7 +7075,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7113,7 +7094,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7132,7 +7113,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7151,7 +7132,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7170,7 +7151,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7189,7 +7170,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.6",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7208,7 +7189,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7227,7 +7208,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7246,7 +7227,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7265,7 +7246,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7284,7 +7265,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7303,7 +7284,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7322,7 +7303,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7341,7 +7322,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7360,7 +7341,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7379,7 +7360,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7398,7 +7379,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7417,7 +7398,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7436,7 +7417,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7455,7 +7436,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.1",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7474,7 +7455,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7493,7 +7474,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7512,7 +7493,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7531,7 +7512,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7550,7 +7531,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7569,7 +7550,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7588,7 +7569,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7607,7 +7588,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7626,7 +7607,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.1",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7645,7 +7626,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7664,7 +7645,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7683,7 +7664,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.1",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7702,7 +7683,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.1",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7721,7 +7702,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7740,7 +7721,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7759,7 +7740,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7778,7 +7759,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7797,7 +7778,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7816,7 +7797,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7835,7 +7816,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7854,7 +7835,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7873,7 +7854,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.1",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7892,7 +7873,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.3",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7911,7 +7892,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.0",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7930,7 +7911,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7949,7 +7930,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7968,7 +7949,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL90p"
         },
         {
@@ -7987,7 +7968,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8006,7 +7987,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8025,7 +8006,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8044,7 +8025,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8063,7 +8044,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8082,7 +8063,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8101,7 +8082,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8120,7 +8101,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8139,7 +8120,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8158,7 +8139,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.8",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8177,7 +8158,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8196,7 +8177,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL90p"
         },
         {
@@ -8215,6 +8196,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL90p"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "lowEnd",
+          "product": "e90",
+          "percentile": "90p / e90",
+          "rawPetssValue": 0.718,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.67,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.67,
+          "mllwStageFt": 0.72,
+          "twlMllwFt": 0.72,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.7",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL90p"
         }
@@ -8225,25 +8225,6 @@
       "percentile": "10p / e10",
       "product": "e10",
       "hours": [
-        {
-          "timeUtc": "2026-10-25T21:00:00Z",
-          "scenario": "highEnd",
-          "product": "e10",
-          "percentile": "10p / e10",
-          "rawPetssValue": 2.131,
-          "rawPetssScale": 1.0,
-          "sourceStageFt": -0.26,
-          "sourceDatum": "NAVD88",
-          "navd88StageFt": -0.26,
-          "mllwStageFt": 2.13,
-          "twlMllwFt": 2.13,
-          "tideMllwFt": 2.077,
-          "surgeFt": 0.3,
-          "matchedStageKey": "-0.3",
-          "wasClamped": false,
-          "hourIndex": 0,
-          "sourceColumn": "TWL10p"
-        },
         {
           "timeUtc": "2026-10-25T22:00:00Z",
           "scenario": "highEnd",
@@ -8260,7 +8241,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 1,
+          "hourIndex": 0,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8279,7 +8260,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.5",
           "wasClamped": false,
-          "hourIndex": 2,
+          "hourIndex": 1,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8298,7 +8279,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 3,
+          "hourIndex": 2,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8317,7 +8298,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 4,
+          "hourIndex": 3,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8336,7 +8317,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 5,
+          "hourIndex": 4,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8355,7 +8336,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 6,
+          "hourIndex": 5,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8374,7 +8355,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 7,
+          "hourIndex": 6,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8393,7 +8374,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 8,
+          "hourIndex": 7,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8412,7 +8393,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 9,
+          "hourIndex": 8,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8431,7 +8412,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 10,
+          "hourIndex": 9,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8450,7 +8431,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 11,
+          "hourIndex": 10,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8469,7 +8450,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 12,
+          "hourIndex": 11,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8488,7 +8469,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 13,
+          "hourIndex": 12,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8507,7 +8488,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 14,
+          "hourIndex": 13,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8526,7 +8507,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.6",
           "wasClamped": false,
-          "hourIndex": 15,
+          "hourIndex": 14,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8545,7 +8526,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.8",
           "wasClamped": false,
-          "hourIndex": 16,
+          "hourIndex": 15,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8564,7 +8545,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 17,
+          "hourIndex": 16,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8583,7 +8564,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.4",
           "wasClamped": false,
-          "hourIndex": 18,
+          "hourIndex": 17,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8602,7 +8583,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 19,
+          "hourIndex": 18,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8621,7 +8602,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 20,
+          "hourIndex": 19,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8640,7 +8621,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 21,
+          "hourIndex": 20,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8659,7 +8640,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 22,
+          "hourIndex": 21,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8678,7 +8659,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.9",
           "wasClamped": false,
-          "hourIndex": 23,
+          "hourIndex": 22,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8697,7 +8678,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 24,
+          "hourIndex": 23,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8716,7 +8697,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 25,
+          "hourIndex": 24,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8735,7 +8716,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 26,
+          "hourIndex": 25,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8754,7 +8735,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 27,
+          "hourIndex": 26,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8773,7 +8754,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 28,
+          "hourIndex": 27,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8792,7 +8773,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 29,
+          "hourIndex": 28,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8811,7 +8792,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 30,
+          "hourIndex": 29,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8830,7 +8811,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-0.2",
           "wasClamped": false,
-          "hourIndex": 31,
+          "hourIndex": 30,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8849,7 +8830,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 32,
+          "hourIndex": 31,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8868,7 +8849,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 33,
+          "hourIndex": 32,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8887,7 +8868,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 34,
+          "hourIndex": 33,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8906,7 +8887,7 @@
           "surgeFt": 0.1,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 35,
+          "hourIndex": 34,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8925,7 +8906,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 36,
+          "hourIndex": 35,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8944,7 +8925,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 37,
+          "hourIndex": 36,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8963,7 +8944,7 @@
           "surgeFt": 0.2,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 38,
+          "hourIndex": 37,
           "sourceColumn": "TWL10p"
         },
         {
@@ -8982,7 +8963,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 39,
+          "hourIndex": 38,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9001,7 +8982,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 40,
+          "hourIndex": 39,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9020,7 +9001,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "3.4",
           "wasClamped": false,
-          "hourIndex": 41,
+          "hourIndex": 40,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9039,7 +9020,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.7",
           "wasClamped": false,
-          "hourIndex": 42,
+          "hourIndex": 41,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9058,7 +9039,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "1.6",
           "wasClamped": false,
-          "hourIndex": 43,
+          "hourIndex": 42,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9077,7 +9058,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 44,
+          "hourIndex": 43,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9096,7 +9077,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.7",
           "wasClamped": false,
-          "hourIndex": 45,
+          "hourIndex": 44,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9115,7 +9096,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.3",
           "wasClamped": false,
-          "hourIndex": 46,
+          "hourIndex": 45,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9134,7 +9115,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 47,
+          "hourIndex": 46,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9153,7 +9134,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-1.2",
           "wasClamped": false,
-          "hourIndex": 48,
+          "hourIndex": 47,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9172,7 +9153,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "-0.3",
           "wasClamped": false,
-          "hourIndex": 49,
+          "hourIndex": 48,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9191,7 +9172,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "0.7",
           "wasClamped": false,
-          "hourIndex": 50,
+          "hourIndex": 49,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9210,7 +9191,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 51,
+          "hourIndex": 50,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9229,7 +9210,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 52,
+          "hourIndex": 51,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9248,7 +9229,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "2.5",
           "wasClamped": false,
-          "hourIndex": 53,
+          "hourIndex": 52,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9267,7 +9248,7 @@
           "surgeFt": 0.7,
           "matchedStageKey": "1.9",
           "wasClamped": false,
-          "hourIndex": 54,
+          "hourIndex": 53,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9286,7 +9267,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "1.1",
           "wasClamped": false,
-          "hourIndex": 55,
+          "hourIndex": 54,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9305,7 +9286,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "0.2",
           "wasClamped": false,
-          "hourIndex": 56,
+          "hourIndex": 55,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9324,7 +9305,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-0.9",
           "wasClamped": false,
-          "hourIndex": 57,
+          "hourIndex": 56,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9343,7 +9324,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 58,
+          "hourIndex": 57,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9362,7 +9343,7 @@
           "surgeFt": 0.6,
           "matchedStageKey": "-1.8",
           "wasClamped": false,
-          "hourIndex": 59,
+          "hourIndex": 58,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9381,7 +9362,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 60,
+          "hourIndex": 59,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9400,7 +9381,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 61,
+          "hourIndex": 60,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9419,7 +9400,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "0.8",
           "wasClamped": false,
-          "hourIndex": 62,
+          "hourIndex": 61,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9438,7 +9419,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "2.0",
           "wasClamped": false,
-          "hourIndex": 63,
+          "hourIndex": 62,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9457,7 +9438,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.0",
           "wasClamped": false,
-          "hourIndex": 64,
+          "hourIndex": 63,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9476,7 +9457,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.5",
           "wasClamped": false,
-          "hourIndex": 65,
+          "hourIndex": 64,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9495,7 +9476,7 @@
           "surgeFt": 0.5,
           "matchedStageKey": "3.3",
           "wasClamped": false,
-          "hourIndex": 66,
+          "hourIndex": 65,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9514,7 +9495,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "2.4",
           "wasClamped": false,
-          "hourIndex": 67,
+          "hourIndex": 66,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9533,7 +9514,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.2",
           "wasClamped": false,
-          "hourIndex": 68,
+          "hourIndex": 67,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9552,7 +9533,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.0",
           "wasClamped": false,
-          "hourIndex": 69,
+          "hourIndex": 68,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9571,7 +9552,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.0",
           "wasClamped": false,
-          "hourIndex": 70,
+          "hourIndex": 69,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9590,7 +9571,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.6",
           "wasClamped": false,
-          "hourIndex": 71,
+          "hourIndex": 70,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9609,7 +9590,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.7",
           "wasClamped": false,
-          "hourIndex": 72,
+          "hourIndex": 71,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9628,7 +9609,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-1.4",
           "wasClamped": false,
-          "hourIndex": 73,
+          "hourIndex": 72,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9647,7 +9628,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "-0.5",
           "wasClamped": false,
-          "hourIndex": 74,
+          "hourIndex": 73,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9666,7 +9647,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "0.5",
           "wasClamped": false,
-          "hourIndex": 75,
+          "hourIndex": 74,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9685,7 +9666,7 @@
           "surgeFt": 0.4,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 76,
+          "hourIndex": 75,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9704,7 +9685,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.8",
           "wasClamped": false,
-          "hourIndex": 77,
+          "hourIndex": 76,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9723,7 +9704,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.7",
           "wasClamped": false,
-          "hourIndex": 78,
+          "hourIndex": 77,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9742,7 +9723,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "1.3",
           "wasClamped": false,
-          "hourIndex": 79,
+          "hourIndex": 78,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9761,7 +9742,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "0.4",
           "wasClamped": false,
-          "hourIndex": 80,
+          "hourIndex": 79,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9780,7 +9761,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-0.6",
           "wasClamped": false,
-          "hourIndex": 81,
+          "hourIndex": 80,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9799,7 +9780,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-1.5",
           "wasClamped": false,
-          "hourIndex": 82,
+          "hourIndex": 81,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9818,7 +9799,7 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
-          "hourIndex": 83,
+          "hourIndex": 82,
           "sourceColumn": "TWL10p"
         },
         {
@@ -9837,6 +9818,25 @@
           "surgeFt": 0.3,
           "matchedStageKey": "-2.0",
           "wasClamped": true,
+          "hourIndex": 83,
+          "sourceColumn": "TWL10p"
+        },
+        {
+          "timeUtc": "2026-10-29T10:00:00Z",
+          "scenario": "highEnd",
+          "product": "e10",
+          "percentile": "10p / e10",
+          "rawPetssValue": 0.818,
+          "rawPetssScale": 1.0,
+          "sourceStageFt": -1.57,
+          "sourceDatum": "NAVD88",
+          "navd88StageFt": -1.57,
+          "mllwStageFt": 0.82,
+          "twlMllwFt": 0.82,
+          "tideMllwFt": 0.804,
+          "surgeFt": 0.3,
+          "matchedStageKey": "-1.6",
+          "wasClamped": false,
           "hourIndex": 84,
           "sourceColumn": "TWL10p"
         }
@@ -9844,25 +9844,6 @@
     }
   },
   "hours": [
-    {
-      "timeUtc": "2026-10-25T21:00:00Z",
-      "scenario": "mean",
-      "product": "mean",
-      "percentile": "Mean",
-      "rawPetssValue": 2.031,
-      "rawPetssScale": 1.0,
-      "sourceStageFt": -0.36,
-      "sourceDatum": "NAVD88",
-      "navd88StageFt": -0.36,
-      "mllwStageFt": 2.03,
-      "twlMllwFt": 2.03,
-      "tideMllwFt": 2.077,
-      "surgeFt": 0.3,
-      "matchedStageKey": "-0.4",
-      "wasClamped": false,
-      "hourIndex": 0,
-      "sourceColumn": "TWL"
-    },
     {
       "timeUtc": "2026-10-25T22:00:00Z",
       "scenario": "mean",
@@ -9879,7 +9860,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 1,
+      "hourIndex": 0,
       "sourceColumn": "TWL"
     },
     {
@@ -9898,7 +9879,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 2,
+      "hourIndex": 1,
       "sourceColumn": "TWL"
     },
     {
@@ -9917,7 +9898,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 3,
+      "hourIndex": 2,
       "sourceColumn": "TWL"
     },
     {
@@ -9936,7 +9917,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 4,
+      "hourIndex": 3,
       "sourceColumn": "TWL"
     },
     {
@@ -9955,7 +9936,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.3",
       "wasClamped": false,
-      "hourIndex": 5,
+      "hourIndex": 4,
       "sourceColumn": "TWL"
     },
     {
@@ -9974,7 +9955,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "0.4",
       "wasClamped": false,
-      "hourIndex": 6,
+      "hourIndex": 5,
       "sourceColumn": "TWL"
     },
     {
@@ -9993,7 +9974,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "-0.5",
       "wasClamped": false,
-      "hourIndex": 7,
+      "hourIndex": 6,
       "sourceColumn": "TWL"
     },
     {
@@ -10012,7 +9993,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-1.4",
       "wasClamped": false,
-      "hourIndex": 8,
+      "hourIndex": 7,
       "sourceColumn": "TWL"
     },
     {
@@ -10031,7 +10012,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-2.0",
       "wasClamped": false,
-      "hourIndex": 9,
+      "hourIndex": 8,
       "sourceColumn": "TWL"
     },
     {
@@ -10050,7 +10031,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
-      "hourIndex": 10,
+      "hourIndex": 9,
       "sourceColumn": "TWL"
     },
     {
@@ -10069,7 +10050,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-1.5",
       "wasClamped": false,
-      "hourIndex": 11,
+      "hourIndex": 10,
       "sourceColumn": "TWL"
     },
     {
@@ -10088,7 +10069,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-0.4",
       "wasClamped": false,
-      "hourIndex": 12,
+      "hourIndex": 11,
       "sourceColumn": "TWL"
     },
     {
@@ -10107,7 +10088,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 13,
+      "hourIndex": 12,
       "sourceColumn": "TWL"
     },
     {
@@ -10126,7 +10107,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 14,
+      "hourIndex": 13,
       "sourceColumn": "TWL"
     },
     {
@@ -10145,7 +10126,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 15,
+      "hourIndex": 14,
       "sourceColumn": "TWL"
     },
     {
@@ -10164,7 +10145,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "2.8",
       "wasClamped": false,
-      "hourIndex": 16,
+      "hourIndex": 15,
       "sourceColumn": "TWL"
     },
     {
@@ -10183,7 +10164,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 17,
+      "hourIndex": 16,
       "sourceColumn": "TWL"
     },
     {
@@ -10202,7 +10183,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 18,
+      "hourIndex": 17,
       "sourceColumn": "TWL"
     },
     {
@@ -10221,7 +10202,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "0.2",
       "wasClamped": false,
-      "hourIndex": 19,
+      "hourIndex": 18,
       "sourceColumn": "TWL"
     },
     {
@@ -10240,7 +10221,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-1.0",
       "wasClamped": false,
-      "hourIndex": 20,
+      "hourIndex": 19,
       "sourceColumn": "TWL"
     },
     {
@@ -10259,7 +10240,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-1.8",
       "wasClamped": false,
-      "hourIndex": 21,
+      "hourIndex": 20,
       "sourceColumn": "TWL"
     },
     {
@@ -10278,7 +10259,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
-      "hourIndex": 22,
+      "hourIndex": 21,
       "sourceColumn": "TWL"
     },
     {
@@ -10297,7 +10278,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-1.9",
       "wasClamped": false,
-      "hourIndex": 23,
+      "hourIndex": 22,
       "sourceColumn": "TWL"
     },
     {
@@ -10316,7 +10297,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-1.2",
       "wasClamped": false,
-      "hourIndex": 24,
+      "hourIndex": 23,
       "sourceColumn": "TWL"
     },
     {
@@ -10335,7 +10316,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-0.2",
       "wasClamped": false,
-      "hourIndex": 25,
+      "hourIndex": 24,
       "sourceColumn": "TWL"
     },
     {
@@ -10354,7 +10335,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "0.7",
       "wasClamped": false,
-      "hourIndex": 26,
+      "hourIndex": 25,
       "sourceColumn": "TWL"
     },
     {
@@ -10373,7 +10354,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 27,
+      "hourIndex": 26,
       "sourceColumn": "TWL"
     },
     {
@@ -10392,7 +10373,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 28,
+      "hourIndex": 27,
       "sourceColumn": "TWL"
     },
     {
@@ -10411,7 +10392,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "1.5",
       "wasClamped": false,
-      "hourIndex": 29,
+      "hourIndex": 28,
       "sourceColumn": "TWL"
     },
     {
@@ -10430,7 +10411,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "0.8",
       "wasClamped": false,
-      "hourIndex": 30,
+      "hourIndex": 29,
       "sourceColumn": "TWL"
     },
     {
@@ -10449,7 +10430,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-0.2",
       "wasClamped": false,
-      "hourIndex": 31,
+      "hourIndex": 30,
       "sourceColumn": "TWL"
     },
     {
@@ -10468,7 +10449,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 32,
+      "hourIndex": 31,
       "sourceColumn": "TWL"
     },
     {
@@ -10487,7 +10468,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-1.9",
       "wasClamped": false,
-      "hourIndex": 33,
+      "hourIndex": 32,
       "sourceColumn": "TWL"
     },
     {
@@ -10506,7 +10487,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
-      "hourIndex": 34,
+      "hourIndex": 33,
       "sourceColumn": "TWL"
     },
     {
@@ -10525,7 +10506,7 @@
       "surgeFt": 0.1,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
-      "hourIndex": 35,
+      "hourIndex": 34,
       "sourceColumn": "TWL"
     },
     {
@@ -10544,7 +10525,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-1.3",
       "wasClamped": false,
-      "hourIndex": 36,
+      "hourIndex": 35,
       "sourceColumn": "TWL"
     },
     {
@@ -10563,7 +10544,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "-0.1",
       "wasClamped": false,
-      "hourIndex": 37,
+      "hourIndex": 36,
       "sourceColumn": "TWL"
     },
     {
@@ -10582,7 +10563,7 @@
       "surgeFt": 0.2,
       "matchedStageKey": "1.2",
       "wasClamped": false,
-      "hourIndex": 38,
+      "hourIndex": 37,
       "sourceColumn": "TWL"
     },
     {
@@ -10601,7 +10582,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "2.4",
       "wasClamped": false,
-      "hourIndex": 39,
+      "hourIndex": 38,
       "sourceColumn": "TWL"
     },
     {
@@ -10620,7 +10601,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "3.2",
       "wasClamped": false,
-      "hourIndex": 40,
+      "hourIndex": 39,
       "sourceColumn": "TWL"
     },
     {
@@ -10639,7 +10620,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "3.1",
       "wasClamped": false,
-      "hourIndex": 41,
+      "hourIndex": 40,
       "sourceColumn": "TWL"
     },
     {
@@ -10658,7 +10639,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.6",
       "wasClamped": false,
-      "hourIndex": 42,
+      "hourIndex": 41,
       "sourceColumn": "TWL"
     },
     {
@@ -10677,7 +10658,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "1.4",
       "wasClamped": false,
-      "hourIndex": 43,
+      "hourIndex": 42,
       "sourceColumn": "TWL"
     },
     {
@@ -10696,7 +10677,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.3",
       "wasClamped": false,
-      "hourIndex": 44,
+      "hourIndex": 43,
       "sourceColumn": "TWL"
     },
     {
@@ -10715,7 +10696,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-0.8",
       "wasClamped": false,
-      "hourIndex": 45,
+      "hourIndex": 44,
       "sourceColumn": "TWL"
     },
     {
@@ -10734,7 +10715,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.4",
       "wasClamped": false,
-      "hourIndex": 46,
+      "hourIndex": 45,
       "sourceColumn": "TWL"
     },
     {
@@ -10753,7 +10734,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.6",
       "wasClamped": false,
-      "hourIndex": 47,
+      "hourIndex": 46,
       "sourceColumn": "TWL"
     },
     {
@@ -10772,7 +10753,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-1.3",
       "wasClamped": false,
-      "hourIndex": 48,
+      "hourIndex": 47,
       "sourceColumn": "TWL"
     },
     {
@@ -10791,7 +10772,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "-0.5",
       "wasClamped": false,
-      "hourIndex": 49,
+      "hourIndex": 48,
       "sourceColumn": "TWL"
     },
     {
@@ -10810,7 +10791,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "0.5",
       "wasClamped": false,
-      "hourIndex": 50,
+      "hourIndex": 49,
       "sourceColumn": "TWL"
     },
     {
@@ -10829,7 +10810,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.5",
       "wasClamped": false,
-      "hourIndex": 51,
+      "hourIndex": 50,
       "sourceColumn": "TWL"
     },
     {
@@ -10848,7 +10829,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "2.2",
       "wasClamped": false,
-      "hourIndex": 52,
+      "hourIndex": 51,
       "sourceColumn": "TWL"
     },
     {
@@ -10867,7 +10848,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "2.3",
       "wasClamped": false,
-      "hourIndex": 53,
+      "hourIndex": 52,
       "sourceColumn": "TWL"
     },
     {
@@ -10886,7 +10867,7 @@
       "surgeFt": 0.7,
       "matchedStageKey": "1.8",
       "wasClamped": false,
-      "hourIndex": 54,
+      "hourIndex": 53,
       "sourceColumn": "TWL"
     },
     {
@@ -10905,7 +10886,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.9",
       "wasClamped": false,
-      "hourIndex": 55,
+      "hourIndex": 54,
       "sourceColumn": "TWL"
     },
     {
@@ -10924,7 +10905,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "0.0",
       "wasClamped": false,
-      "hourIndex": 56,
+      "hourIndex": 55,
       "sourceColumn": "TWL"
     },
     {
@@ -10943,7 +10924,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.0",
       "wasClamped": false,
-      "hourIndex": 57,
+      "hourIndex": 56,
       "sourceColumn": "TWL"
     },
     {
@@ -10962,7 +10943,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-1.7",
       "wasClamped": false,
-      "hourIndex": 58,
+      "hourIndex": 57,
       "sourceColumn": "TWL"
     },
     {
@@ -10981,7 +10962,7 @@
       "surgeFt": 0.6,
       "matchedStageKey": "-2.0",
       "wasClamped": false,
-      "hourIndex": 59,
+      "hourIndex": 58,
       "sourceColumn": "TWL"
     },
     {
@@ -11000,7 +10981,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-1.6",
       "wasClamped": false,
-      "hourIndex": 60,
+      "hourIndex": 59,
       "sourceColumn": "TWL"
     },
     {
@@ -11019,7 +11000,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "-0.7",
       "wasClamped": false,
-      "hourIndex": 61,
+      "hourIndex": 60,
       "sourceColumn": "TWL"
     },
     {
@@ -11038,7 +11019,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "0.6",
       "wasClamped": false,
-      "hourIndex": 62,
+      "hourIndex": 61,
       "sourceColumn": "TWL"
     },
     {
@@ -11057,7 +11038,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "1.9",
       "wasClamped": false,
-      "hourIndex": 63,
+      "hourIndex": 62,
       "sourceColumn": "TWL"
     },
     {
@@ -11076,7 +11057,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "2.9",
       "wasClamped": false,
-      "hourIndex": 64,
+      "hourIndex": 63,
       "sourceColumn": "TWL"
     },
     {
@@ -11095,7 +11076,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "3.4",
       "wasClamped": false,
-      "hourIndex": 65,
+      "hourIndex": 64,
       "sourceColumn": "TWL"
     },
     {
@@ -11114,7 +11095,7 @@
       "surgeFt": 0.5,
       "matchedStageKey": "3.2",
       "wasClamped": false,
-      "hourIndex": 66,
+      "hourIndex": 65,
       "sourceColumn": "TWL"
     },
     {
@@ -11133,7 +11114,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "2.3",
       "wasClamped": false,
-      "hourIndex": 67,
+      "hourIndex": 66,
       "sourceColumn": "TWL"
     },
     {
@@ -11152,7 +11133,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "1.1",
       "wasClamped": false,
-      "hourIndex": 68,
+      "hourIndex": 67,
       "sourceColumn": "TWL"
     },
     {
@@ -11171,7 +11152,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-0.1",
       "wasClamped": false,
-      "hourIndex": 69,
+      "hourIndex": 68,
       "sourceColumn": "TWL"
     },
     {
@@ -11190,7 +11171,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.1",
       "wasClamped": false,
-      "hourIndex": 70,
+      "hourIndex": 69,
       "sourceColumn": "TWL"
     },
     {
@@ -11209,7 +11190,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.7",
       "wasClamped": false,
-      "hourIndex": 71,
+      "hourIndex": 70,
       "sourceColumn": "TWL"
     },
     {
@@ -11228,7 +11209,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.8",
       "wasClamped": false,
-      "hourIndex": 72,
+      "hourIndex": 71,
       "sourceColumn": "TWL"
     },
     {
@@ -11247,7 +11228,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-1.5",
       "wasClamped": false,
-      "hourIndex": 73,
+      "hourIndex": 72,
       "sourceColumn": "TWL"
     },
     {
@@ -11266,7 +11247,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "-0.6",
       "wasClamped": false,
-      "hourIndex": 74,
+      "hourIndex": 73,
       "sourceColumn": "TWL"
     },
     {
@@ -11285,7 +11266,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "0.5",
       "wasClamped": false,
-      "hourIndex": 75,
+      "hourIndex": 74,
       "sourceColumn": "TWL"
     },
     {
@@ -11304,7 +11285,7 @@
       "surgeFt": 0.4,
       "matchedStageKey": "1.3",
       "wasClamped": false,
-      "hourIndex": 76,
+      "hourIndex": 75,
       "sourceColumn": "TWL"
     },
     {
@@ -11323,7 +11304,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 77,
+      "hourIndex": 76,
       "sourceColumn": "TWL"
     },
     {
@@ -11342,7 +11323,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.6",
       "wasClamped": false,
-      "hourIndex": 78,
+      "hourIndex": 77,
       "sourceColumn": "TWL"
     },
     {
@@ -11361,7 +11342,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "1.2",
       "wasClamped": false,
-      "hourIndex": 79,
+      "hourIndex": 78,
       "sourceColumn": "TWL"
     },
     {
@@ -11380,7 +11361,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "0.3",
       "wasClamped": false,
-      "hourIndex": 80,
+      "hourIndex": 79,
       "sourceColumn": "TWL"
     },
     {
@@ -11399,7 +11380,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "-0.7",
       "wasClamped": false,
-      "hourIndex": 81,
+      "hourIndex": 80,
       "sourceColumn": "TWL"
     },
     {
@@ -11418,7 +11399,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "-1.6",
       "wasClamped": false,
-      "hourIndex": 82,
+      "hourIndex": 81,
       "sourceColumn": "TWL"
     },
     {
@@ -11437,7 +11418,7 @@
       "surgeFt": 0.3,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
-      "hourIndex": 83,
+      "hourIndex": 82,
       "sourceColumn": "TWL"
     },
     {
@@ -11456,6 +11437,25 @@
       "surgeFt": 0.3,
       "matchedStageKey": "-2.0",
       "wasClamped": true,
+      "hourIndex": 83,
+      "sourceColumn": "TWL"
+    },
+    {
+      "timeUtc": "2026-10-29T10:00:00Z",
+      "scenario": "mean",
+      "product": "mean",
+      "percentile": "Mean",
+      "rawPetssValue": 0.818,
+      "rawPetssScale": 1.0,
+      "sourceStageFt": -1.57,
+      "sourceDatum": "NAVD88",
+      "navd88StageFt": -1.57,
+      "mllwStageFt": 0.82,
+      "twlMllwFt": 0.82,
+      "tideMllwFt": 0.804,
+      "surgeFt": 0.3,
+      "matchedStageKey": "-1.6",
+      "wasClamped": false,
       "hourIndex": 84,
       "sourceColumn": "TWL"
     }
