@@ -1,6 +1,6 @@
 {
   "schema": "experimental-petss-guidance-v1",
-  "generatedUtc": "2026-10-30T04:25:01.774334Z",
+  "generatedUtc": "2026-10-30T05:22:44.068680Z",
   "model": {
     "version": "research-pooled-v2-90-exceedance-20260923",
     "official": false,
@@ -79,15 +79,9 @@
       "stationId": "8534836",
       "petssCycleUtc": "2026-10-29T18:00:00Z",
       "sourceUrl": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/petss/prod/petss.20261029/petss.t18z.csv.tar.gz",
-      "cycleAgeHours": 10.42,
+      "cycleAgeHours": 11.38,
       "status": "experimental",
       "hours": [
-        {
-          "validUtc": "2026-10-30T04:00:00Z",
-          "modelLeadHours": 10.0,
-          "availability": "unavailable",
-          "reason": "unsupported lead or missing mean/tide"
-        },
         {
           "validUtc": "2026-10-30T05:00:00Z",
           "modelLeadHours": 11.0,
@@ -1016,6 +1010,12 @@
         {
           "validUtc": "2026-11-02T16:00:00Z",
           "modelLeadHours": 94.0,
+          "availability": "unavailable",
+          "reason": "unsupported lead or missing mean/tide"
+        },
+        {
+          "validUtc": "2026-11-02T17:00:00Z",
+          "modelLeadHours": 95.0,
           "availability": "unavailable",
           "reason": "unsupported lead or missing mean/tide"
         }
