@@ -2048,6 +2048,7 @@ function cloneStyleObject(value) {
           && (currentSeriesHours.length || loadForecast.pendingSelectionGeneration === selectionGeneration)
           && loadTopTideEvent.pendingSelectionGeneration !== selectionGeneration) return;
       stopPlayback();
+      const preferredEntry = currentDataMode === "forecast" ? currentSeriesHours[currentHourIndex] : null;
       const floodSelectionToken = cancelPendingFloodFrame();
       toast("");
       currentForecastScenario = scenario;
@@ -2055,7 +2056,7 @@ function cloneStyleObject(value) {
       updateForecastScenarioButtons();
       updateDataModeButtons();
       cancelPendingFloodFrame(false);
-      await loadForecast();
+      await loadForecast(preferredEntry, { preserveForecastDay: true });
       if (floodSelectionToken !== lastRenderToken) return false;
       renderTopTides();
       await renderHour(currentHourIndex);
@@ -5939,7 +5940,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       });
     }
 
-    function updateRoadLayerAppearance() {
+    function updateRoadLayerAppearance({ retry3dRoads: retryRoadLabels = false } = {}) {
       if (!map || !roadsLayer) return;
 
       const toggle = document.getElementById("roadsToggle");
@@ -5951,6 +5952,11 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
 
       const pane = map.getPane("roadsPane");
       if (pane) pane.classList.toggle("roads-dark", showLabels);
+
+      // Only an explicit enable from the Road Names switch retries a failed renderer.
+      if (retryRoadLabels && roadsEnabled && map.hasLayer(roadsLayer)) {
+        roadsLayer.whenReady({ retry: true }).catch(() => {});
+      }
     }
 
     function setDownloadStatus(message = "", isError = false) {
@@ -6121,13 +6127,14 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       if (!range || currentDataMode === "return-interval") return false;
       const startMs = Number.isFinite(range.startMs) ? range.startMs : range.startDate?.getTime();
       const endMs = Number.isFinite(range.endMs) ? range.endMs : range.endDate?.getTime();
+      if (!Number.isFinite(startMs) || !Number.isFinite(endMs)) return true;
+      // Past exports need to check for observations even within forecast coverage.
+      if (currentDataMode === "observed" && startMs <= Date.now()) return true;
       const times = getForecastExportEntries()
         .filter(entry => Number.isFinite(getStageValue(entry)))
         .map(entryTimeMs)
         .filter(Number.isFinite);
-      if (!times.length || !Number.isFinite(startMs) || !Number.isFinite(endMs)) return true;
-      // Forecast entries take precedence over overlapping observations in the
-      // exported series. A range wholly covered by them needs no history I/O.
+      if (!times.length) return true;
       return startMs < Math.min(...times) || endMs > Math.max(...times);
     }
 
@@ -6229,18 +6236,24 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
 
         if (!combined.length) return [];
 
-        const byHour = new Map();
+        const preferObserved = currentDataMode === "observed";
+        if (preferObserved && options.keepOverlappingForecast) {
+          // Keep forecast endpoints for quarter-hour interpolation across
+          // forecast frames. The quarter-hour selection resolves the overlap.
+          return combined.sort((a, b) => entryTimeMs(a) - entryTimeMs(b));
+        }
+
+        const byInstant = new Map();
         combined.forEach(entry => {
           // A repeated fall-back wall time represents two different readings.
-          // Forecast preference applies only to the exact same instant.
-          const key = String(entryTimeMs(entry));
-          const existing = byHour.get(key);
-          if (!existing || entry.exportSourceMode === "forecast") {
-            byHour.set(key, entry);
+          // Valid observations are inserted before forecasts.
+          const time = entryTimeMs(entry);
+          if (!byInstant.has(time) || (!preferObserved && entry.exportSourceMode === "forecast")) {
+            byInstant.set(time, entry);
           }
         });
 
-        return Array.from(byHour.values()).sort((a, b) => entryTimeMs(a) - entryTimeMs(b));
+        return Array.from(byInstant.values()).sort((a, b) => entryTimeMs(a) - entryTimeMs(b));
       }
 
       return currentSeriesHours.map(entry => ({
@@ -7121,7 +7134,10 @@ function getDownloadArchiveBounds() {
 
       const interval = getDownloadIntervalValue();
       const snapshot = range.startMs === range.endMs && getDownloadFormatValue() === "png";
-      const entries = getDownloadSourceEntries(true, range.startDate, range.endDate, { includeNativeLive: interval === "daily" || snapshot })
+      const entries = getDownloadSourceEntries(true, range.startDate, range.endDate, {
+        includeNativeLive: interval === "daily" || snapshot,
+        keepOverlappingForecast: interval === "15min"
+      })
         .filter(entry => entryTimeMs(entry) != null)
         .sort((a, b) => entryTimeMs(a) - entryTimeMs(b));
       if (snapshot) {
@@ -8876,8 +8892,11 @@ function findClosestExportEntryForSlot(entries, slotMs, usedKeys = new Set(), to
           fillMissingSlots: false,
           maxGapMinutes: 75
         });
-        // Projected frames retain their existing priority at the same instant.
-        series.forEach(entry => byTime.set(entryTimeMs(entry), entry));
+        const preferObserved = currentDataMode === "observed";
+        series.forEach(entry => {
+          const time = entryTimeMs(entry);
+          if (!preferObserved || !byTime.has(time)) byTime.set(time, entry);
+        });
       }
       return Array.from(byTime.values()).sort((a, b) => entryTimeMs(a) - entryTimeMs(b))
         .filter(entry => Number.isFinite(getStageValue(entry)));
@@ -11287,6 +11306,11 @@ function formatSelectedObservedDate(dateStr) {
       const currentTimeEntry = options.selectCurrent ? { timeUtc: new Date().toISOString() } : null;
       const selectionEntry = options.retryStale && !keptCachedReplay ? currentTimeEntry : preferredEntry || currentTimeEntry;
       currentHourIndex = selectionEntry ? findClosestEntryIndex(currentSeriesHours, selectionEntry) : getPeakHourIndex(currentSeriesHours);
+      if (options.preserveForecastDay && selectionEntry?.dailyMaximumKind === "forecast") {
+        const sameDay = currentSeriesHours.findIndex(entry => entry.dailyMaximumKind === "forecast" &&
+          entry.observedDate === selectionEntry.observedDate);
+        if (sameDay >= 0) currentHourIndex = sameDay;
+      }
       document.getElementById("hourSlider").value = String(currentHourIndex);
       } catch (error) {
         if (floodSelectionToken !== lastRenderToken) return false;
@@ -16227,7 +16251,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 <script data-nww-script="script-006" src="./assets/mapper-ui/app/alert-interaction.js?v=b02a3674db55dfda"></script>
 
 
-<script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=20261009-conflicts-1&roads=20261002-soft-gray&county=20261015&stability=20261027-lines1&roadlabels=20261030-v1&deep=5981109965ae919a"></script>
+<script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=c95d1a65310523b2"></script>
 
 <script defer src="./assets/mapper-ui/export-road-labels.js?v=e3c235c3c3c05435"></script>
 
@@ -16448,7 +16472,7 @@ preloadNorthWildwoodExperience(window.floodmapperMapDependenciesReady ? main() :
 <script defer src="./assets/mapper-ui/north-wildwood-mobile.js?v=20261026-holistic1"></script>
 
 <script src="./assets/mapper-ui/export-area.js?v=ee1e14cc57fb8b8e" id="floodmapper-export-area"></script>
-<script defer src="./assets/mapper-ui/export-preview.js?v=b86f3dab1a927cad" id="floodmapper-export-preview"></script>
+<script defer src="./assets/mapper-ui/export-preview.js?v=f79e49b9837b59d2" id="floodmapper-export-preview"></script>
 <script defer src="./assets/mapper-ui/export-date-time-picker.js?v=098491bc170e7926" id="floodmapper-export-date-time-picker"></script>
 
 
