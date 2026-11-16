@@ -5935,7 +5935,7 @@ function normalizeBoundaryRingsFromArcGIS(rings, sourceWkid = 3857) {
       return window.ShorelyRoadLabels.createLayer({
         ...options,
         exportMode: Number(options?.minZoom) === 0,
-        includeNames: Number(options?.minZoom) !== 0
+        includeNames: Number(options?.minZoom) !== 0 || !window.NORTH_WILDWOOD_EXPORT_ROADS?.hasLocalNames?.()
       });
     }
 
@@ -8360,6 +8360,13 @@ function updateExportSegmentedUI() {
       const roadsEnabled = document.getElementById("roadsToggle")?.classList.contains("on");
       const zoom = exportMap.getZoom() || 0;
       const showLabels = roadsEnabled && zoom >= ROAD_LABEL_ZOOM;
+      const attribution = document.getElementById("exportMapAttribution");
+      if (attribution) {
+        const localSource = showLabels && window.NORTH_WILDWOOD_EXPORT_ROADS?.getAttribution?.();
+        const baseAttribution = "Map: Esri, HERE, Garmin, USGS, © OpenStreetMap contributors";
+        attribution.textContent = localSource && localSource !== "OpenStreetMap contributors"
+          ? `${baseAttribution} · Local road names: ${localSource}` : baseAttribution;
+      }
       // A hidden road pane needs no WebGL context. Keep an initialized layer
       // for later frames and retries once the selected extent can show it.
       if (showLabels && !exportRoadsLayer) mountExportRoadLayer();
@@ -16222,7 +16229,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 
 <script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=20261009-conflicts-1&roads=20261002-soft-gray&county=20261015&stability=20261027-lines1&roadlabels=20261030-v1&deep=5981109965ae919a"></script>
 
-<script defer src="./assets/mapper-ui/export-road-labels.js?v=b3e11134ba8bcb33"></script>
+<script defer src="./assets/mapper-ui/export-road-labels.js?v=e3c235c3c3c05435"></script>
 
 <script defer src="./assets/mapper-ui/modal-focus.js?v=77c8d9e9efcb920b"></script>
 <script data-nww-script="script-007">
