@@ -1,0 +1,132 @@
+/* One text scale in the same canonical layer on every host. */
+html {
+  --nww-pane-font:14px;
+  --nww-pane-heading:15px;
+  --nww-pane-detail:13px;
+}
+@media (min-width:1400px) {
+  html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
+}
+@media (min-width:1800px) {
+  html { --nww-pane-font:16px; --nww-pane-heading:17px; --nww-pane-detail:15px; }
+}
+@media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
+  html { --nww-pane-font:15px; --nww-pane-heading:16px; --nww-pane-detail:14px; }
+}
+
+@layer shorelysafe-unified {
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(.section-title h2,.legend-header-text,.legend-title,.rail-head h3) {
+    font-size:var(--nww-pane-heading) !important;
+    line-height:1.25 !important;
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(button:not(.help-btn):not(.centered-close-control):not(.calendar-day):not(.calendar-nav-btn),.pill,.layer-name,.top-tide-main,.top-tide-sub,.top-tide-rank,.town-address-input,.town-address-label,select,.observed-date-input) {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+    letter-spacing:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) :is(.nww-layer-detail,.right-rail-note,.town-address-status,.depth-legend-labels,.legend-row,.legend-label) {
+    font-size:var(--nww-pane-detail) !important;
+    line-height:1.25 !important;
+    letter-spacing:0 !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) section.nww-layers-card.layers-card .layer-name {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-item {
+    grid-template-columns:2.2ch minmax(0,1fr) auto !important;
+    gap:4px !important;
+  }
+  /* Keep the disclosure as compact as the flood rows above it. */
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-more-btn {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:6px !important;
+    box-sizing:border-box !important;
+    height:auto !important;
+    min-height:34px !important;
+    padding:4px 10px !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:10px !important;
+    background:rgba(255,255,255,.055) !important;
+    color:var(--fleet-text) !important;
+    font-weight:600 !important;
+    box-shadow:none !important;
+    transform:none !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-more-btn:hover:not(:disabled) {
+    border-color:var(--fleet-accent) !important;
+    background:rgba(96,165,250,.12) !important;
+  }
+  html body[data-shorelysafe-ui] .top-tide-more-icon {
+    display:block !important;
+    width:14px !important;
+    height:14px !important;
+    flex:0 0 14px !important;
+    color:var(--fleet-accent) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .top-tide-main {
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .town-address-actions > * {
+    height:auto !important;
+    min-height:36px !important;
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+  }
+  html body[data-shorelysafe-ui] :is(#leftPanel#leftPanel,#rightRail#rightRail,#mobileRailMount#mobileRailMount) .town-address-input {
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
+    html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-list { gap:0 !important; }
+    html body[data-shorelysafe-ui] #rightRail#rightRail section.nww-layers-card.layers-card .layer-item {
+      min-height:34px !important;
+      padding:4px 6px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel { --nww-control-button:44px; }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      font-size:var(--nww-pane-font) !important;
+      white-space:normal !important;
+      overflow-wrap:normal !important;
+      word-break:normal !important;
+    }
+    @media (max-height:800px) {
+      /* Short desktop windows keep the same text size with less empty padding. */
+      html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
+        --nww-control-padding:3px;
+        --nww-control-gap:2px;
+        --nww-control-button:36px;
+        gap:4px !important;
+      }
+    }
+    html body[data-shorelysafe-ui] #leftPanel .section-title > .pill {
+      font-size:var(--nww-pane-font) !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel .depth-legend-labels {
+      font-size:var(--nww-pane-detail) !important;
+      line-height:1.25 !important;
+    }
+  }
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      height:auto !important;
+      min-height:48px !important;
+      padding:4px !important;
+      white-space:normal !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel .top-tide-more-btn { min-height:44px !important; }
+    html body[data-shorelysafe-ui] #leftPanel#leftPanel .town-address-input {
+      font-size:16px !important;
+    }
+  }
+}

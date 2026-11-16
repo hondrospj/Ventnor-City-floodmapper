@@ -38,7 +38,7 @@ ctx.currentRawSeriesHours = canonical;
 for (const display of [canonical, [canonical[3]]]) {
   ctx.currentSeriesHours = display;
   const raw = {...forecast[4], exportSourceMode: 'forecast', exportInterval: 'hourly'};
-  const item = ctx.getDownloadFrameItemFromEntry(raw, 0);
+  const item = ctx.getDownloadFrameItemFromEntry(raw);
   assert.equal(ctx.getHydraulicPhaseForEntry(item.entry, item.index, item.series || display), 'draining-release-15', 'Export phase must not depend on the visible timeline interval');
   assert.equal(item.entry.hydraulicCrestTimeUtc, forecast[3].timeUtc, 'Preserve the crest before the exported range');
   assert.equal(ctx.getDrainageRetentionMilestones(item.entry, item.series).length, 1, 'Preserve water admitted at the crest');
@@ -51,7 +51,7 @@ for (const display of [canonical, [canonical[3]]]) {
 }
 
 // Archive exports must use the selected archive day, even while forecast is open.
-const archived = ctx.getDownloadFrameItemFromEntry({...observed[4], exportSourceMode:'observed'}, 0);
+const archived = ctx.getDownloadFrameItemFromEntry({...observed[4], exportSourceMode:'observed'});
 assert.equal(archived.entry.hydraulicCrestStageFt, 5);
 assert.equal(archived.series[0].timeUtc, observed[0].timeUtc);
 assert.equal(archived.mode, 'observed');

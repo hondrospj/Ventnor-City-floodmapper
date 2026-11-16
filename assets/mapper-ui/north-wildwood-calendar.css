@@ -1,0 +1,169 @@
+/* Keep the selected date in the rail; the month grid has its own bounded dialog. */
+@layer shorelysafe-unified {
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard:not(.active),
+  html body[data-shorelysafe-ui] #observedCalendarModal[hidden] {
+    display:none !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard .day-nav {
+    display:grid !important;
+    grid-template-columns:36px minmax(0,1fr) 36px !important;
+    gap:6px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard :is(.calendar-nav-btn,.day-nav-center,.observed-date-input) {
+    position:static !important;
+    box-sizing:border-box !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:var(--nww-control-button,44px) !important;
+    min-height:0 !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    border-radius:10px !important;
+    transform:none !important;
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard .observed-date-input {
+    padding:0 4px !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedCalendarOpenBtn {
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:6px !important;
+    min-width:0 !important;
+    height:28px !important;
+    min-height:28px !important;
+    padding:2px 10px !important;
+    border:1px solid var(--fleet-accent) !important;
+    border-radius:8px !important;
+    background:var(--accent-soft) !important;
+    color:var(--fleet-text) !important;
+    font-weight:600 !important;
+    white-space:nowrap !important;
+    cursor:pointer !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarOpenBtn .nww-calendar-icon {
+    width:16px;
+    height:16px;
+    flex:0 0 16px;
+    fill:none;
+    stroke:var(--fleet-accent);
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal {
+    position:fixed !important;
+    inset:0 !important;
+    z-index:11000 !important;
+    display:grid !important;
+    place-items:center !important;
+    box-sizing:border-box !important;
+    padding:16px !important;
+    background:rgba(3,9,18,.55) !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-dialog {
+    box-sizing:border-box !important;
+    width:min(420px,100%) !important;
+    min-width:0 !important;
+    max-height:calc(100dvh - 32px) !important;
+    overflow:auto !important;
+    overscroll-behavior:contain !important;
+    display:grid !important;
+    gap:12px !important;
+    padding:16px !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:18px !important;
+    background:#0b1220 !important;
+    color:var(--fleet-text) !important;
+    box-shadow:0 16px 60px rgba(0,0,0,.35) !important;
+    font:var(--nww-pane-font)/1.25 Inter,system-ui,sans-serif !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-heading {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal h2 {
+    margin:0 !important;
+    font-size:18px !important;
+    line-height:1.25 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal button {
+    box-sizing:border-box !important;
+    min-width:0 !important;
+    min-height:44px !important;
+    padding:4px !important;
+    border-radius:10px !important;
+    font-size:var(--nww-pane-font) !important;
+    line-height:1.25 !important;
+    transform:none !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarCloseBtn {
+    flex:0 0 44px !important;
+    width:44px !important;
+    font-size:24px !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-toolbar {
+    display:grid !important;
+    grid-template-columns:44px minmax(0,1fr) 44px !important;
+    gap:6px !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal :is(.calendar-head,.calendar-grid) {
+    position:static !important;
+    display:grid !important;
+    grid-template-columns:repeat(7,minmax(0,1fr)) !important;
+    gap:6px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-head div {
+    font-size:var(--nww-pane-detail) !important;
+    text-align:center !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-day {
+    height:44px !important;
+    min-height:44px !important;
+    max-height:none !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-key {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #observedCalendarModal .calendar-key-item {
+    min-width:0 !important;
+    gap:5px !important;
+    padding:6px 2px !important;
+    font-size:var(--nww-pane-detail) !important;
+    white-space:nowrap !important;
+  }
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard.calendar-card { order:2 !important; }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard .day-nav {
+      grid-template-columns:44px minmax(0,1fr) 44px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedCalendarOpenBtn {
+      height:44px !important;
+      min-height:44px !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #calendarCard #observedDateInput {
+      font-size:16px !important;
+    }
+    html body[data-shorelysafe-ui] #observedCalendarModal { padding:8px !important; }
+    html body[data-shorelysafe-ui] #observedCalendarModal .nww-calendar-dialog {
+      padding:12px !important;
+      max-height:calc(100dvh - 16px) !important;
+    }
+  }
+}

@@ -1,0 +1,411 @@
+/* Desktop control cards share one spacing system. Mobile drawer visibility and
+   geometry remain in north-wildwood-mobile.css. The unified layer owns app UI
+   on both standalone and hosted pages. */
+@layer shorelysafe-unified {
+  /* Forecast scenarios belong only to Forecast mode, including in the drawer. */
+  html body[data-shorelysafe-ui] #leftPanel #forecastScenarioCard[hidden] {
+    display:none !important;
+  }
+  /* Active buttons communicate the selection without duplicate header badges. */
+  html body[data-shorelysafe-ui] #leftPanel .nww-status-value[hidden] {
+    display:none !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel .opacity-card .control-row.opacity-control {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    grid-template-rows:20px auto !important;
+    justify-items:center !important;
+    align-items:center !important;
+    gap:2px !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] #leftPanel .opacity-control #opacityText {
+    display:block !important;
+    position:static !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    background:none !important;
+    color:var(--fleet-text) !important;
+    font-size:var(--nww-pane-font) !important;
+    font-weight:600 !important;
+    line-height:1.25 !important;
+    text-align:center !important;
+    font-variant-numeric:tabular-nums !important;
+  }
+  /* An uncertainty swatch is separate from the three discrete severity bands. */
+  html body[data-shorelysafe-ui]:not(.mobile-optimized) #legendDock[data-legend-mode="dynamic"] :is(#legendBody,#legendList),
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] :is(#legendBody,#legendList),
+  html body[data-shorelysafe-ui] #exportLegendDock[data-export-legend-mode="dynamic"] .legend-list {
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-scale {
+    display:flex !important;
+    align-items:end !important;
+    gap:10px !important;
+    width:100% !important;
+    font-size:var(--nww-pane-detail) !important;
+    line-height:1.25 !important;
+    font-weight:600 !important;
+    letter-spacing:0 !important;
+    text-transform:none !important;
+    color:var(--fleet-text) !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-uncertainty {
+    flex:0 0 25% !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-levels {
+    flex:1 1 auto !important;
+    min-width:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-labels {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    text-align:center !important;
+    gap:0 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) :is(.stage-legend-green,.stage-legend-gradient) {
+    box-sizing:border-box !important;
+    height:12px !important;
+    margin-top:4px !important;
+    border:1px solid rgba(255,255,255,.48) !important;
+    border-radius:999px !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-green {
+    background:#63d471 !important;
+  }
+  html body[data-shorelysafe-ui] :is(#legendDock,#exportLegendDock) .stage-legend-gradient {
+    background:linear-gradient(90deg,#f4a742 0%,#f4a742 33.333333%,#e74c3c 33.333333%,#e74c3c 66.666667%,#7d3c98 66.666667%,#7d3c98 100%) !important;
+  }
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] #legendHeader {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:8px !important;
+    height:auto !important;
+    min-height:28px !important;
+    margin:0 0 8px !important;
+  }
+  html body[data-shorelysafe-ui].mobile-legend-open #legendDock[data-legend-mode="dynamic"] :is(.legend-header-text,.legend-header-actions,#legendTitle) {
+    position:static !important;
+    flex:0 1 auto !important;
+    width:auto !important;
+    margin:0 !important;
+  }
+  /* A scrollable rail must not clip its last button into a second pill shape.
+     Card shadows otherwise accumulate in the gaps as a gray rectangular strip. */
+  html body[data-shorelysafe-ui] #rightRail {
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    filter:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  html body[data-shorelysafe-ui] :is(#rightRail,#mobileRailMount) > .rail-card {
+    box-shadow:none !important;
+    filter:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch {
+    box-sizing:border-box !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex:0 0 auto !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:44px !important;
+    max-height:none !important;
+    padding:10px 14px !important;
+    margin:0 !important;
+    border:1px solid var(--fleet-line) !important;
+    border-radius:12px !important;
+    background:var(--fleet-panel) !important;
+    box-shadow:none !important;
+    font-size:13px !important;
+    font-weight:600 !important;
+    line-height:1.3 !important;
+    letter-spacing:0 !important;
+    text-align:center !important;
+    text-transform:none !important;
+    white-space:normal !important;
+  }
+  html body[data-shorelysafe-ui] #mapperTutorialBtn#mapperTutorialBtn.mapper-tutorial-launch:hover {
+    background:#12213a !important;
+    border-color:var(--fleet-accent) !important;
+  }
+  @media (min-width:901px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px), (min-width:901px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine), (min-width:901px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) {
+    html {
+      --nww-left-width:356px;
+      --nww-right-width:288px;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #nwDefaultNavControl {
+      right:calc(var(--nww-right-width) + 28px) !important;
+    }
+    @media (max-width:1120px) and (max-height:560px) {
+      html body[data-shorelysafe-ui]:not(.mobile-optimized) #nwDefaultNavControl {
+        top:clamp(82px, calc(100dvh - 348px), 96px) !important;
+      }
+    }
+    /* Reveal the title once its available lane, including the compass, is known. */
+    html body[data-shorelysafe-ui] #mapTitleBadge:not([data-viewport-contained]) {
+      visibility:hidden !important;
+    }
+    /* CSS owns pane geometry from the first paint. Only the timeline-aware
+       fitter may adjust available height when the viewport changes. */
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) :is(#leftPanel,#rightRail) {
+      position:fixed !important;
+      top:16px !important;
+      display:flex !important;
+      flex-direction:column !important;
+      box-sizing:border-box !important;
+      min-height:0 !important;
+      height:auto !important;
+      margin:0 !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+      zoom:1 !important;
+      transition:none !important;
+      animation:none !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel {
+      left:16px !important;
+      right:auto !important;
+      bottom:188px !important;
+      width:var(--nww-left-width) !important;
+      min-width:var(--nww-left-width) !important;
+      max-width:var(--nww-left-width) !important;
+      max-height:calc(100dvh - 204px) !important;
+      gap:6px !important;
+      padding:0 4px 0 0 !important;
+      scrollbar-gutter:auto !important;
+      overflow-anchor:none !important;
+      overscroll-behavior:contain !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel > .data-source-card {
+      position:sticky !important;
+      top:0 !important;
+      z-index:3 !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail {
+      left:auto !important;
+      right:16px !important;
+      bottom:auto !important;
+      width:var(--nww-right-width) !important;
+      min-width:var(--nww-right-width) !important;
+      max-width:var(--nww-right-width) !important;
+      max-height:calc(100dvh - 156px) !important;
+      gap:8px !important;
+      padding:0 !important;
+      scrollbar-gutter:auto !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail > .right-logo-card {
+      display:none !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #rightRail > .top-tides-card {
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+    }
+    /* Reserve the two flood rows and Show More button while archive data loads. */
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #topTideList {
+      min-height:116px !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel #legendDock {
+      position:static !important;
+      inset:auto !important;
+      width:100% !important;
+      max-width:100% !important;
+      transform:none !important;
+      margin:0 !important;
+    }
+    html body[data-shorelysafe-ui]:not(.mobile-optimized) #leftPanel :is(.day-nav-center,.observed-date-input) {
+      min-width:0 !important;
+      width:100% !important;
+      max-width:100% !important;
+      overflow:hidden !important;
+      text-overflow:ellipsis !important;
+      white-space:nowrap !important;
+      box-sizing:border-box !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel {
+      --nww-control-padding:12px;
+      --nww-control-gap:10px;
+      --nww-control-header:24px;
+      --nww-control-button:40px;
+      --nww-control-slider:20px;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,.opacity-card,#timelineIntervalCard,#calendarCard,#legendDock):not([hidden]) {
+      box-sizing:border-box !important;
+      display:flex !important;
+      flex-direction:column !important;
+      flex:0 0 auto !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      padding:var(--nww-control-padding) 12px !important;
+      gap:var(--nww-control-gap) !important;
+      overflow:visible !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,.opacity-card,#timelineIntervalCard,#calendarCard) > .section-title,
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader {
+      display:flex !important;
+      align-items:center !important;
+      justify-content:space-between !important;
+      flex:0 0 auto !important;
+      height:var(--nww-control-header) !important;
+      min-height:var(--nww-control-header) !important;
+      max-height:none !important;
+      padding:0 !important;
+      margin:0 !important;
+      gap:8px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel :is(.section-title,.legend-header) :is(h2,.legend-header-text) {
+      margin:0 !important;
+      padding:0 !important;
+      font-size:14px !important;
+      font-weight:700 !important;
+      line-height:20px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .title-with-help {
+      display:flex !important;
+      align-items:center !important;
+      gap:8px !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .help-btn {
+      box-sizing:border-box !important;
+      flex:0 0 24px !important;
+      width:24px !important;
+      min-width:24px !important;
+      height:24px !important;
+      min-height:24px !important;
+      padding:0 !important;
+      margin:0 !important;
+      font-size:14px !important;
+      line-height:1 !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .section-title > .pill {
+      box-sizing:border-box !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      flex:0 0 auto !important;
+      height:24px !important;
+      min-height:24px !important;
+      padding:0 9px !important;
+      margin:0 !important;
+      font-size:12px !important;
+      font-weight:600 !important;
+      line-height:1 !important;
+      white-space:nowrap !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) {
+      display:grid !important;
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      align-items:stretch !important;
+      flex:0 0 auto !important;
+      width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      gap:6px !important;
+      padding:0 !important;
+      margin:0 !important;
+      border:0 !important;
+      border-radius:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      overflow:visible !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,#timelineIntervalCard) > :is(.data-source-options,.button-grid-3,#timelineIntervalToggle) {
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button {
+      box-sizing:border-box !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      width:100% !important;
+      min-width:0 !important;
+      height:var(--nww-control-button) !important;
+      min-height:var(--nww-control-button) !important;
+      max-height:none !important;
+      margin:0 !important;
+      padding:4px !important;
+      border:1px solid var(--fleet-line) !important;
+      border-radius:10px !important;
+      font-size:12px !important;
+      font-weight:650 !important;
+      line-height:1.2 !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,.overlay-card,.datum-card,#timelineIntervalCard) > :is(.button-grid-2,.button-grid-3,.segmented-control,#timelineIntervalToggle) > button.active {
+      border-color:var(--fleet-accent) !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel > :is(.data-source-card,.forecast-scenario-card,#timelineIntervalCard) > :is(.data-source-options,.button-grid-3,#timelineIntervalToggle) > button {
+      font-size:11.5px !important;
+      white-space:nowrap !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel .opacity-card .control-row {
+      flex:0 0 auto !important;
+      height:var(--nww-control-slider) !important;
+      min-height:0 !important;
+      padding:0 !important;
+      margin:0 !important;
+      display:flex !important;
+      align-items:center !important;
+    }
+    html body[data-shorelysafe-ui] #leftPanel #opacitySlider {
+      width:100% !important;
+      margin:0 !important;
+    }
+
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader { justify-content:flex-start !important; }
+    html body[data-shorelysafe-ui] #leftPanel #legendHeader .legend-header-actions { margin:0 !important; }
+    html body[data-shorelysafe-ui] #leftPanel #legendBody,
+    html body[data-shorelysafe-ui] #leftPanel #legendList { margin:0 !important; padding:0 !important; }
+    html body[data-shorelysafe-ui] #leftPanel .depth-legend-labels {
+      font-size:10px !important;
+      font-weight:600 !important;
+      line-height:14px !important;
+      letter-spacing:.04em !important;
+    }
+  }
+  @media (min-width:901px) and (max-width:1320px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (min-height:561px), (min-width:901px) and (max-width:1320px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (pointer:fine), (min-width:901px) and (max-width:1320px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1320px) and (pointer:none) {
+    html { --nww-left-width:340px; --nww-right-width:272px; }
+  }
+  @media (min-width:901px) and (max-width:1120px) and (min-height:561px) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (min-height:561px), (min-width:901px) and (max-width:1120px) and (pointer:fine) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (pointer:fine), (min-width:901px) and (max-width:1120px) and (pointer:none) and (not (any-pointer:coarse)), (min-width:1367px) and (max-width:1120px) and (pointer:none) {
+    html { --nww-left-width:320px; --nww-right-width:256px; }
+  }
+  @media (min-width:901px) and (min-height:561px) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (min-height:561px) and (max-height:800px), (min-width:901px) and (pointer:fine) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:fine) and (max-height:800px), (min-width:901px) and (pointer:none) and (max-height:800px) and (not (any-pointer:coarse)), (min-width:1367px) and (pointer:none) and (max-height:800px) {
+    html body[data-shorelysafe-ui] #leftPanel {
+      --nww-control-padding:6px;
+      --nww-control-gap:4px;
+      --nww-control-button:36px;
+      --nww-control-slider:16px;
+    }
+  }
+}

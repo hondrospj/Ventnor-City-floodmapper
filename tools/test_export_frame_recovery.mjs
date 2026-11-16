@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
-const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const html=fs.readFileSync(new URL('../index.html',import.meta.url), 'utf8');
 const extract=name=>html.match(new RegExp('^    (?:async )?function '+name+'\\([\\s\\S]+?\\n    }','m'))?.[0];
 const native=html.includes('displayedFloodFrame = { entry, series, stage: rawStage');
 const physics=Boolean(extract('setPhysicsFloodLayer'));
@@ -32,8 +32,8 @@ function fixture({initial=true,usePhysics=false}={}){
  const series=[{stage:0},{stage:1},{stage:2},{stage:null}];
  const ctx=vm.createContext({console:{warn(){},error:console.error,log:console.log},Image:FakeImage,setTimeout:timer,clearTimeout,setInterval,clearInterval,requestAnimationFrame:cb=>timer(()=>cb(performance.now()),1),performance,
   window:{setTimeout:timer,clearTimeout,setInterval,clearInterval},document:{body:{dataset:{initialFloodFrame:'ready'},classList:{contains:n=>classes.has(n),toggle(n,on){if(on)classes.add(n);else classes.delete(n);}}},getElementById(id){if(!nodes.has(id))nodes.set(id,{value:'0',textContent:'',style:{},setAttribute(){},classList:{contains:()=>false,toggle(){}}});return nodes.get(id);}},
-  currentSeriesHours:series,currentRawSeriesHours:series,currentHourIndex:0,lastRenderToken:0,currentFloodLayer:initial?old:null,pendingFloodLayer:null,renderedFloodPixelCache:null,preloadPromiseCache:new Map(),exportCancelRequested:false,exportInProgress:false,
-  displayedFloodFrame:initial?{entry:series[0],series,stage:0}:null,floodRenderBusy:false,map,mapHasFit:true,floodLatLngBounds:[[0,0],[1,1]],floodOverlayGeometryMode:'axis-aligned',overlayOpacity:.75,floodFrameState:'ready',currentDataMode:'forecast',currentOverlayMode:'depth',
+  currentSeriesHours:series,currentRawSeriesHours:series,currentHourIndex:0,lastRenderToken:0,currentFloodLayer:initial?old:null,pendingFloodLayer:null,persistentDepthQueryContext:null,renderedFloodPixelCache:null,preloadPromiseCache:new Map(),exportCancelRequested:false,exportInProgress:false,
+  displayedFloodFrame:initial?{entry:series[0],series,stage:0}:null,floodRenderBusy:false,map,mapHasFit:true,floodLatLngBounds:[[0,0],[1,1]],floodOverlayGeometryMode:'axis-aligned',overlayOpacity:.75,floodFrameState:'ready',currentDataMode:'forecast',forecastData:null,currentOverlayMode:'depth',
   L:{imageOverlay:(url,bounds,options)=>new Layer(url,options),latLngBounds:(...b)=>b},createHydraulicImageOverlay:(url,options)=>new Layer(url,options),getStageValue:e=>e.stage,getOverlayStage:s=>s,getHydraulicPhaseForEntry:()=> 'rising',getPhysicsAssetForEntry:e=>usePhysics&&e.stage!=null?{url:'frame-'+e.stage}:null,getPhysicsDisplayRecord:a=>a,getActivePhysicsManifest:()=>({boundsWgs84:[[0,0],[1,1]]}),
   getOverlayRecord:async(mode,stage)=>({url:'frame-'+stage,filename:'frame-'+stage}),getHydraulicOverlayRecord:async(mode,stage)=>({url:'frame-'+stage,filename:'frame-'+stage}),
   disposeFloodLayer(layer){if(!layer)return;if(map.hasLayer(layer))map.removeLayer(layer);layer.getElement().src='';},retainRasterObjectUrl(){leases++;return ()=>leases--;},scheduleRasterObjectUrlCleanup(){},cancelTimelineSelection(){},toast(){},ensureMap(){},ensureOverlayBounds:async()=>{},markInitialFloodFrameReady(){},markInitialFloodFrameFailed(){failed++;},setFloodFrameStatus(){},updatePersistentDepthQueryPopup(){},getBoundaryDrivenOverlayBounds:()=>null,fitConfiguredInitialMapView(){},

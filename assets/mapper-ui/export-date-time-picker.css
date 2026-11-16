@@ -1,0 +1,38 @@
+#downloadModal .nww-export-picker{position:fixed;z-index:10020;box-sizing:border-box;padding:14px;border:1px solid var(--line,#40516b);border-radius:18px;background:var(--bg,#0b1220);color:var(--text,#eaf0ff);box-shadow:0 22px 64px rgba(0,0,0,.45);overflow:auto;letter-spacing:normal;text-transform:none;font-size:14px;line-height:1.3}
+#downloadModal .nww-picker-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+#downloadModal .nww-picker-head strong{font-size:16px;font-weight:700}
+#downloadModal .nww-picker-head button{width:36px;min-width:36px;height:36px;min-height:36px;padding:0;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);font-size:24px;line-height:1}
+#downloadModal .nww-picker-navigation{display:grid;grid-template-columns:32px minmax(0,1fr) 74px 32px;gap:5px;margin-bottom:12px}
+#downloadModal .nww-picker-navigation button,#downloadModal .nww-picker-navigation select{width:100%;min-width:0;height:38px;min-height:38px;padding:0 5px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.055);color:var(--text);font-size:13px;text-transform:none;letter-spacing:normal}
+#downloadModal .nww-picker-navigation button{font-size:22px}
+#downloadModal .nww-picker-weekdays,#downloadModal .nww-picker-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+#downloadModal .nww-picker-weekdays{text-align:center;margin-bottom:6px;color:var(--muted);font-size:10px;font-weight:700}
+#downloadModal .nww-picker-days .calendar-day{width:100%;height:38px;min-height:38px;min-width:0;padding:0;border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:14px;background:rgba(255,255,255,.055);box-shadow:none}
+#downloadModal .nww-picker-days .calendar-day:disabled{opacity:.35;cursor:default}
+#downloadModal .nww-picker-days .calendar-day.empty{visibility:hidden}
+#downloadModal .nww-export-picker .day-none,#downloadModal .nww-export-picker .day-unknown{background:rgba(255,255,255,.04)!important;border-color:rgba(191,219,254,.16)!important}
+#downloadModal .nww-export-picker .day-minor{background:rgba(213,138,0,.16)!important;border-color:rgba(213,138,0,.42)!important}
+#downloadModal .nww-export-picker .day-moderate{background:rgba(216,75,103,.16)!important;border-color:rgba(216,75,103,.42)!important}
+#downloadModal .nww-export-picker .day-major{background:rgba(124,92,224,.18)!important;border-color:rgba(124,92,224,.44)!important}
+#downloadModal .nww-picker-days .calendar-day.selected,#downloadModal .nww-time-option[aria-selected="true"]{border-color:rgba(255,255,255,.98)!important;box-shadow:0 0 0 2px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.08)}
+#downloadModal .nww-export-picker button:focus-visible,#downloadModal .nww-export-picker select:focus-visible,#downloadModal .nww-time-trigger:focus-visible{outline:3px solid #93c5fd!important;outline-offset:2px}
+#downloadModal .nww-picker-key{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+#downloadModal .nww-picker-key .calendar-key-item{display:inline-flex;align-items:center;gap:5px;border:0;padding:0;background:transparent}
+#downloadModal .nww-picker-key .calendar-key-swatch{width:10px;height:10px;border-radius:3px;display:inline-block}
+#downloadModal .nww-picker-key .minor .calendar-key-swatch{background:#d58a00}
+#downloadModal .nww-picker-key .moderate .calendar-key-swatch{background:#d84b67}
+#downloadModal .nww-picker-key .major .calendar-key-swatch{background:#7c5ce0}
+#downloadModal .nww-picker-note,#downloadModal .nww-picker-message{font-size:11px;color:var(--muted);margin:8px 0 0}
+#downloadModal .nww-export-time-control{position:relative;min-width:0}
+#downloadModal .nww-canonical-time-select{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:0!important;pointer-events:none!important}
+#downloadModal .nww-time-trigger{height:100%;text-align:left;white-space:normal;padding:10px 12px!important;letter-spacing:normal!important}
+#downloadModal .nww-time-trigger span,#downloadModal .nww-time-trigger small{display:block}
+#downloadModal .nww-time-trigger small{margin-top:3px;font-size:9px;line-height:1.3;color:var(--muted)}
+#downloadModal .nww-time-trigger.day-minor{background:rgba(213,138,0,.16)!important;border-color:rgba(213,138,0,.42)!important}
+#downloadModal .nww-time-trigger.day-moderate{background:rgba(216,75,103,.16)!important;border-color:rgba(216,75,103,.42)!important}
+#downloadModal .nww-time-trigger.day-major{background:rgba(124,92,224,.18)!important;border-color:rgba(124,92,224,.44)!important}
+#downloadModal .nww-picker-times{display:grid;gap:5px;max-height:min(340px,55dvh);overflow:auto;padding:3px}
+#downloadModal .nww-time-option{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;width:100%;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:13px;letter-spacing:normal;text-transform:none}
+#downloadModal .nww-time-option span{font-weight:650;flex-shrink:0}
+#downloadModal .nww-time-option small{font-size:10px;text-align:right;font-weight:500}
+@media(max-width:420px){#downloadModal .nww-export-picker{padding:12px}#downloadModal .nww-picker-navigation{grid-template-columns:30px minmax(0,1fr) 68px 30px}#downloadModal .nww-picker-days .calendar-day{height:36px;min-height:36px}}
