@@ -12971,7 +12971,7 @@ function startPlayback() {
       const address = escapeTownAddressHtml(p.address || `Selected ${TOWN_CONFIG.site.name} parcel`);
       const focusRestoreKey = p.parcelId == null ? "" : ` data-focus-restore-key="${escapeTownAddressHtml("parcel-profile:" + p.parcelId)}"`;
       const waterStatus = !Number.isFinite(firstFloor)
-        ? "An occupied-floor estimate is unavailable for this parcel."
+        ? ""
         : difference == null
         ? "Choose a water level to compare."
         : Math.abs(difference) <= 0.1
@@ -12986,7 +12986,7 @@ function startPlayback() {
           '<div><span>Crawlspace / garage depth</span><strong>' +
             (Number.isFinite(crawlspaceDepth) ? formatWaterDepth(crawlspaceDepth, 1) : 'Not available') +
           '</strong></div>' +
-          '<p>' + escapeTownAddressHtml(waterStatus) + '</p>' +
+          (waterStatus ? '<p>' + escapeTownAddressHtml(waterStatus) + '</p>' : '') +
         '</div>' +
         '<button class="house-alert-cta" type="button"' + focusRestoreKey + '>See Flood History &amp; Projections</button>' +
         '</div>';
@@ -13307,7 +13307,7 @@ function startPlayback() {
         ? "Any Flooding means water covers more than 0% of the parcel. Projections include water already inside the parcel and require a threshold within the model’s range."
         : Number.isFinite(getNsiFirstOccupiedFloorNavd88(properties))
           ? "Past tides show how often water rose above the estimated floor. Future estimates show how that could change as sea level rises."
-          : "This parcel has no occupied-floor estimate. Past tides and future estimates use parcel ground elevation.";
+          : "Past tides and future estimates use parcel ground elevation.";
       body.innerHTML = '<div class="flood-history-loading" role="status"><span class="flood-history-spinner" aria-hidden="true"></span><strong>Loading flood projections…</strong></div>';
       backdrop.hidden = false;
       backdrop.setAttribute("aria-hidden", "false");
@@ -16251,7 +16251,7 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 <script data-nww-script="script-006" src="./assets/mapper-ui/app/alert-interaction.js?v=b02a3674db55dfda"></script>
 
 
-<script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=c95d1a65310523b2"></script>
+<script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=c560471da32f87c1"></script>
 
 <script defer src="./assets/mapper-ui/export-road-labels.js?v=e3c235c3c3c05435"></script>
 
