@@ -1698,7 +1698,7 @@
     var stage = finiteBuildingNumber(getSelectedStageNavd88());
     var difference = Number.isFinite(stage) && Number.isFinite(firstFloor) ? stage - firstFloor : NaN;
     var status = !Number.isFinite(firstFloor)
-      ? "Estimated occupied-floor elevation is unavailable."
+      ? ""
       : !Number.isFinite(difference)
         ? "Choose a water level to compare."
         : Math.abs(difference) <= 0.1
@@ -1711,7 +1711,7 @@
       '<h3>' + address + '</h3>' +
       '<div class="building-info-facts">' +
         '<div><span>Crawlspace / garage depth</span><strong>' + (Number.isFinite(crawlspaceDepth) ? formatWaterDepth(crawlspaceDepth, 1) : '—') + '</strong></div>' +
-        '<p>' + escapeTownAddressHtml(status) + '</p>' +
+        (status ? '<p>' + escapeTownAddressHtml(status) + '</p>' : '') +
       '</div>' +
       '</div>';
   }
