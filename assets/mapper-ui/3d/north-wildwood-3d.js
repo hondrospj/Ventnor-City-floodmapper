@@ -1982,6 +1982,25 @@
     glMap.on("click", async function (event) {
       // Popup controls must not also select the building beneath them.
       if (event.originalEvent?.target?.closest?.(".maplibregl-popup")) return;
+      if (mapClickMode === "building" && layerVisible("nsiStructuresToggle", false) && glMap.getLayer("nw-nsi-points")) {
+        var structureHits = glMap.queryRenderedFeatures(event.point, { layers: ["nw-nsi-points"] });
+        if (structureHits.length) {
+          beginMapQuery();
+          // The ground coordinate below a 3D marker can be closer to another structure.
+          var footprintIds = new Set(structureHits.map(hit => hit.properties?.footprintId));
+          var [structureFootprintId] = footprintIds;
+          var structure = footprintIds.size === 1 && structureFootprintId
+            ? nsiStructureFeatures.find(feature => feature.properties?.footprintId === structureFootprintId)
+            : null;
+          if (structure) {
+            var [lon, lat] = structure.geometry.coordinates;
+            openNsiStructurePopup(structure, L.latLng(lat, lon));
+          } else {
+            toast("Tap a single highlighted structure to see its estimate.");
+          }
+          return;
+        }
+      }
       var buildingsEnabled = layerVisible("buildingsToggle", false);
       var buildingLayerId = glMap.getPitch() > 10 ? "nw-3d-buildings" : "nw-2d-buildings";
       if (buildingsEnabled && mapClickMode === "building" && glMap.getLayer(buildingLayerId)) {

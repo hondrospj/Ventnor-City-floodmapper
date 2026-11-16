@@ -26,6 +26,7 @@
   let nextSourceId = 0;
 
   const node = id => document.getElementById(id);
+  const townName = typeof TOWN_CONFIG === "undefined" ? "" : TOWN_CONFIG.site.name;
   const available = () => isDownloadModalOpen() && !exportRequested && !exportInProgress;
   const fresh = token => token === generation && available();
   const release = canvas => { if (canvas) canvas.width = canvas.height = 1; };
@@ -389,7 +390,7 @@
     await waitForPreviewGesture();
     if (!fresh(token)) { release(canvas); return; }
     canvas.setAttribute("role", "img");
-    canvas.setAttribute("aria-label", "Preview of the selected North Wildwood export area");
+    canvas.setAttribute("aria-label", townName ? `Preview of the selected ${townName} export area` : "Preview of the selected export area");
     publishPreview(canvas, request?.key || null, config);
     rememberPreview(request?.key, canvas);
   }
@@ -626,7 +627,7 @@
     Object.entries(compactLabels).forEach(([id, text]) => {
       const element = node(id);
       if (!element) return;
-      element.setAttribute("aria-label", id === "exportExtentTownBtn" ? "Whole town (North Wildwood)" : element.textContent.trim());
+      element.setAttribute("aria-label", id === "exportExtentTownBtn" && townName ? `Whole town (${townName})` : element.textContent.trim());
       element.textContent = text;
     });
     [[".export-filetype-field", ""], [".export-interval-field", "Interval"],
