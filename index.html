@@ -391,10 +391,10 @@
               </div>
             </div>
             <div class="layer-item">
-              <div id="roadImpactsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show road impacts" title="Highlight roads with more than 0.5 ft of modeled water at the selected time"></div>
+              <div id="roadImpactsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show roads with 6+ inches of water" title="Highlight roads with more than 0.5 ft of modeled water at the selected time"></div>
               <div class="layer-meta title-with-help">
-                <div class="layer-name">Road Impacts</div>
-                <button class="help-btn" type="button" data-layer-help="roadImpacts" aria-label="About Road Impacts" aria-haspopup="dialog" aria-controls="infoModal">?</button>
+                <div class="layer-name">Roads with 6+ Inches of Water</div>
+                <button class="help-btn" type="button" data-layer-help="roadImpacts" aria-label="About Roads with 6+ Inches of Water" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
             <div class="layer-item">
@@ -483,10 +483,10 @@
           <span class="timeline-key-item"><span class="timeline-key-swatch minor-flood" aria-hidden="true"></span><span class="timeline-key-label">Minor</span></span>
           <span class="timeline-key-item"><span class="timeline-key-swatch moderate-flood" aria-hidden="true"></span><span class="timeline-key-label">Moderate</span></span>
           <span class="timeline-key-item"><span class="timeline-key-swatch major-flood" aria-hidden="true"></span><span class="timeline-key-label">Major</span></span>
-          <div id="roadImpactsKey" hidden aria-label="Road Impacts: modeled water depth greater than 0.5 feet">
+          <div id="roadImpactsKey" hidden aria-label="Roads with 6+ Inches of Water">
             <span class="road-impacts-swatch" aria-hidden="true"></span>
-            <span class="road-impacts-label">Road Impacts: water &gt; 0.5 ft</span>
-            <span class="road-impacts-label-mobile">Roads &gt; 0.5 ft</span>
+            <span class="road-impacts-label">Roads with 6+ Inches of Water</span>
+            <span class="road-impacts-label-mobile">Roads with 6+ Inches of Water</span>
             <span id="roadImpactsStatus" class="road-impacts-status" role="status">Modeled road water depth &gt; 0.5 ft</span>
           </div>
         </div>
@@ -3355,7 +3355,7 @@ function setDatumHelpOpen(isOpen) {
         body: `
           <p><strong>Flood Depth</strong> shows the estimated water depth above the ground, in inches below 1 foot and feet at 1 foot or more.</p>
           <p><strong>Flood Stages</strong> groups flooding as minor, moderate, or major.</p>
-          <p><strong>Road Impacts</strong> highlights road centerlines where modeled water depth above ground exceeds 0.5 ft. At bridges, the estimate uses the modeled surface below the deck.</p>
+          <p><strong>Roads with 6+ Inches of Water</strong> highlights road centerlines where modeled water depth above ground exceeds 0.5 ft. At bridges, the estimate uses the modeled surface below the deck.</p>
         `
       },
       satellite: {
@@ -3375,7 +3375,7 @@ function setDatumHelpOpen(isOpen) {
         body: "<p>Shows where floodwater could reach a garage, crawlspace, or first floor.</p>"
       },
       roadImpacts: {
-        title: "Road Impacts",
+        title: "Roads with 6+ Inches of Water",
         body: "<p>Highlights road sections with more than 6 inches of estimated water. At bridges, the estimate is for the surface below the deck.</p>"
       },
       roadNames: {
@@ -16484,6 +16484,6 @@ preloadNorthWildwoodExperience(window.floodmapperMapDependenciesReady ? main() :
 
 <script id="shorelysafe-visible-brand-controller-20261015" data-nww-script="script-010" src="./assets/mapper-ui/app/branding.js?v=5218502b14ba05c5"></script>
 
-<script id="floodmapper-unified-controller-20261017" data-ui-sha256="3668b4912f612ae595cb1ee4e11fdf9aa7a80ccfbdbfff78d243e7714470baf7" data-nww-script="script-011" src="./assets/mapper-ui/app/unified-controller.js?v=c4251aa297a1730c"></script>
+<script id="floodmapper-unified-controller-20261017" data-ui-sha256="e967d7ca203af59fcc13ee17b04e18dc6794c038df5a673edb9825c73926fc5d" data-nww-script="script-011" src="./assets/mapper-ui/app/unified-controller.js?v=e967d7ca203af59f"></script>
 </body>
 </html>
