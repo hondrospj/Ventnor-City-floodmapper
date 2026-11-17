@@ -8,7 +8,7 @@
  const sourceCard=panel.querySelector('.data-source-card');
  const mobile=matchMedia('(max-width:900px), (max-height:560px), (max-height:560px) and (pointer:coarse), (max-width:1366px) and (any-pointer:coarse)');
  const owned=new WeakMap(),bound=new WeakSet();
- const layerOrder=[['satelliteToggle','Satellite'],['buildingsToggle','Buildings'],['parcelsToggle','Parcels'],['nsiStructuresToggle','Structural Impacts'],['roadImpactsToggle','Road Impacts'],['roadsToggle','Road Names'],['webcamsToggle','Cameras']];
+ const layerOrder=[['satelliteToggle','Satellite'],['buildingsToggle','Buildings'],['parcelsToggle','Parcels'],['nsiStructuresToggle','Structural Impacts'],['roadImpactsToggle','Roads with 6+ Inches of Water'],['roadsToggle','Road Names'],['webcamsToggle','Cameras']];
  const groups={forecast:'.data-source-card,#forecastScenarioCard,#returnIntervalCard,#timelineIntervalCard,#calendarCard,.mobile-top-tides-card',map:'.overlay-card,.datum-card,.opacity-card,.layers-card,.top-tides-card',tools:'#mapperTutorialBtn,#avalonTourBtn'};
  const safeProbe=document.createElement('div');safeProbe.id='unifiedSafeAreaProbe';safeProbe.setAttribute('aria-hidden','true');safeProbe.style.cssText='position:fixed;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';body.append(safeProbe);
  let chosenSection=panel.dataset.nwwSection||'forecast';
