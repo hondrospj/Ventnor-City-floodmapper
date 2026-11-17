@@ -2022,6 +2022,7 @@ html body[data-floodmapper-reference] #timelineBubble :is(.timeline-bubble-start
  }
  html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail .layer-item {grid-column:auto!important;}
  html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail .layer-item:has(#nsiStructuresToggle) {grid-column:auto!important;}
+ html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail .layer-item:has(#roadImpactsToggle) {grid-column:1 / -1!important;}
  html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail #topTideList:not(:has(.top-tide-item)) {min-height:78px!important;}
  html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail #topTideList :is(.top-tide-item,.top-tide-more-btn) {min-height:24px!important;padding:2px 4px!important;}
  html body[data-floodmapper-unified][data-sidebar-density="tight"]:not(.mobile-optimized) #rightRail#rightRail .town-address-label {
