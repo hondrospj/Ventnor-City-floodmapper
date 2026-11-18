@@ -1,0 +1,32 @@
+name: Publish current forecast data only
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Update Ventnor City forecast"]
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths: ["forecast.json"]
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: published-forecast-data
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          sparse-checkout: tools/publish_forecast_data.py
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Validate and publish the existing forecast data path
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/publish_forecast_data.py
