@@ -136,7 +136,8 @@
 <style id="floodmapper-quiet-loading-20261119">
 /* Keep request/readiness state and failure recovery; omit loading presentation. */
 body:not([data-site-loader$="error"]):not([data-site-loader$="failed"]) #nwSiteLoader{display:none!important}
-html body.nw-app-loading :is(#app,#topBanner){opacity:1!important;filter:none!important;animation:none!important}
+html body.nw-app-loading #app[inert]{opacity:1!important;filter:none!important;animation:none!important}
+html body.nw-app-loading :is(#app,#mobileControlsToggle,#legendDock):not([inert]),html body.nw-app-loading #topBanner{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 #nwSiteLoader::before,#nwSiteLoader::after,.nw-loader-spinner,.nw-loader-progress,.flood-history-spinner,.download-btn-spinner{display:none!important;animation:none!important}
 .flood-history-loading{display:none!important}
 #stageSubText:empty,#floodFrameStatus:empty{display:none!important}
