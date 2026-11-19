@@ -179,7 +179,7 @@
     const focusedDay = focusKey || previousFocus?.dataset.date || "";
     const focusedControl = previousFocus?.getAttribute("aria-label");
     panel.querySelectorAll(":scope > :not(.nww-picker-head)").forEach(element => element.remove());
-    if (!bounds || !days.size) { panel.append(node("p", "nww-picker-message", "Loading available dates…")); position(); return; }
+    if (!bounds || !days.size) { panel.append(node("p", "nww-picker-message", "")); position(); return; }
     const selected = getRangeInputDate(prefix === "end" ? "downloadEndInput" : "downloadStartInput");
     const parts = getNyParts(state.cursor || selected || bounds.firstDate);
     const first = getNyParts(bounds.firstDate), last = getNyParts(bounds.lastDate);
@@ -333,7 +333,7 @@
     }
     if (list.children.length) state.panel.append(list, key());
     else {
-      const status = node("p", "nww-picker-message", loading ? "Loading available times…" : "No export times for this date.");
+      const status = node("p", "nww-picker-message", loading ? "" : "No export times for this date.");
       status.setAttribute("role", "status");
       state.panel.append(status);
     }
