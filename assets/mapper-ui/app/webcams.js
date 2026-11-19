@@ -205,6 +205,12 @@
     }
   }
 
+  function refreshGlMarkerPositions() {
+    // DEM tiles can finish without a camera move or another terrain event.
+    // Reproject once the map is idle so markers follow the settled terrain.
+    glMarkers.forEach(marker => marker.setLngLat(marker.getLngLat()));
+  }
+
   function syncMarkers() {
     syncCameraRow();
     const currentMap = typeof map !== "undefined" ? map : null;
@@ -234,7 +240,10 @@
       }
       if (!currentMap.hasLayer(leafletLayer)) leafletLayer.addTo(currentMap);
     } else if (leafletLayer && leafletMap?.hasLayer(leafletLayer)) leafletLayer.remove();
-    if (glMap !== currentGl || !enabled || !useGl) { glMarkers.forEach(m => m.remove()); glMarkers = []; glMap = currentGl; }
+    if (glMap !== currentGl || !enabled || !useGl) {
+      glMap?.off("idle", refreshGlMarkerPositions);
+      glMarkers.forEach(m => m.remove()); glMarkers = []; glMap = currentGl;
+    }
     if (enabled && useGl && !glMarkers.length && window.maplibregl) {
       glMarkers = located.map(camera => {
         const element = document.createElement("button");
@@ -249,6 +258,7 @@
         element.addEventListener("dblclick", event => event.stopPropagation());
         return new maplibregl.Marker({ element, anchor: "center", pitchAlignment: "viewport", rotationAlignment: "viewport", opacityWhenCovered: 1 }).setLngLat([camera.lng, camera.lat]).addTo(currentGl);
       });
+      currentGl.on("idle", refreshGlMarkerPositions);
     }
     if (enabled) mountPanel();
   }
