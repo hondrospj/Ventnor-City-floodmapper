@@ -100,7 +100,11 @@
       }
     }
     function checkReady() {
-      if (document.body.classList.contains('nw-app-ready')) finish('complete');
+      // Core data can finish while the parser still waits for the UI controller.
+      // Keep its controls isolated until the first measured layout is complete.
+      const layoutReady = !document.body.dataset.floodmapperUnified ||
+        Number(document.body.dataset.unifiedLayoutPasses) > 0;
+      if (document.body.classList.contains('nw-app-ready') && layoutReady) finish('complete');
       else if (!finished) {
         isolateControls();
         if (document.body.dataset.initialFloodFrame === 'ready') {
@@ -109,7 +113,7 @@
       }
     }
     isolateControls();
-    observer.observe(document.body, {attributes:true, attributeFilter:['class', 'data-initial-flood-frame']});
+    observer.observe(document.body, {attributes:true, attributeFilter:['class', 'data-initial-flood-frame', 'data-unified-layout-passes']});
     // Release the interface even if an external library or request never finishes.
     deadline = setTimeout(() => finish('timeout'), 20000);
     checkReady();
