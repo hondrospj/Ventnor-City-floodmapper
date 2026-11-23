@@ -1,0 +1,181 @@
+/* Avalon timeline layout, scoped to North Wildwood. Share the WordPress layer
+   so old inline stylesheets cannot split the day strip from the native range. */
+@layer shorelysafe-unified {
+  html[data-nww-avalon-timeline] body #timelineDock {
+    display:block !important; position:fixed !important; left:16px !important; right:16px !important; bottom:16px !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+    height:112px !important; min-height:112px !important; max-height:112px !important;
+    padding:0 !important; margin:0 !important; transform:none !important;
+    border-radius:16px !important; background:rgba(11,18,32,.97) !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-top,
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-controls { display:contents !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn {
+    position:absolute !important; top:34px !important; bottom:auto !important; left:20px !important; right:auto !important;
+    display:grid !important; place-items:center !important; width:42px !important; height:42px !important;
+    min-width:42px !important; max-width:42px !important; min-height:42px !important; max-height:42px !important;
+    padding:0 !important; margin:0 !important; border:1px solid #e2e8f0 !important; border-radius:12px !important;
+    background:linear-gradient(#fff,#edf2f7) !important; color:#ef4444 !important;
+    transform:none !important; touch-action:manipulation !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .playTriangle { border-left-color:#ef4444 !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .pauseIcon::before,
+  html[data-nww-avalon-timeline] body #timelineDock #playBtn .pauseIcon::after { background:#ef4444 !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey {
+    display:flex !important; visibility:visible !important; opacity:1 !important;
+    flex-direction:row !important; flex-wrap:nowrap !important; align-items:center !important; justify-content:center !important;
+    gap:12px !important; pointer-events:none !important;
+    position:absolute !important; left:84px !important; right:20px !important; top:12px !important; bottom:auto !important;
+    width:auto !important; max-width:none !important; height:20px !important; min-height:20px !important; max-height:20px !important;
+    padding:0 !important; margin:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-item {
+    display:flex !important; flex:0 0 auto !important; align-items:center !important; gap:4px !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-label {
+    display:inline !important; visibility:visible !important; color:#f1f5f9 !important;
+    font-size:11px !important; line-height:16px !important; white-space:nowrap !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-swatch {
+    display:block !important; width:9px !important; height:9px !important; flex:0 0 9px !important; border-radius:50% !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-item::after { content:none !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs {
+    position:absolute !important; left:97px !important; right:33px !important; top:42px !important; bottom:auto !important;
+    display:flex !important; width:auto !important; min-width:0 !important; max-width:none !important;
+    height:20px !important; min-height:20px !important; max-height:20px !important;
+    padding:0 !important; margin:0 !important; border:0 !important; gap:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-day {
+    min-width:0 !important; padding:0 !important; margin:0 !important; border:0 !important;
+    height:20px !important; min-height:20px !important; max-height:20px !important; font-size:12px !important; line-height:20px !important;
+    box-sizing:border-box !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs .timeline-day {
+    background-image:var(--timeline-day-gradient,none) !important;
+    background-size:100% 100% !important;
+    text-shadow:0 1px 3px #000,0 0 6px #000 !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock .timeline-trackRow {
+    position:absolute !important; left:84px !important; right:20px !important; top:70px !important; bottom:auto !important;
+    display:block !important; grid-area:auto !important; align-self:stretch !important; justify-self:stretch !important; grid-template-columns:minmax(0,1fr) !important;
+    width:auto !important; min-width:0 !important; max-width:none !important;
+    height:24px !important; min-height:24px !important; max-height:24px !important;
+    padding:0 !important; margin:0 !important; gap:0 !important; transform:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider {
+    --nww-thumb-size:26px;
+    position:relative !important; inset:auto !important; display:block !important;
+    width:100% !important; min-width:0 !important; max-width:100% !important;
+    height:24px !important; min-height:24px !important; max-height:24px !important;
+    padding:0 !important; margin:0 !important; border:0 !important; transform:none !important;
+    background:var(--nww-stage-gradient,linear-gradient(#94a3b8,#94a3b8)) center / calc(100% - 26px) 5px no-repeat !important;
+    touch-action:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-webkit-slider-runnable-track {
+    height:5px !important; border:0 !important; background:transparent !important; box-shadow:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-track,
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-progress {
+    height:5px !important; border:0 !important; background:transparent !important; box-shadow:none !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-webkit-slider-thumb {
+    box-sizing:border-box !important; width:26px !important; height:26px !important;
+    margin-top:-10.5px !important; border:2px solid white !important; background:#2563eb !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #hourSlider::-moz-range-thumb {
+    box-sizing:border-box !important; width:26px !important; height:26px !important;
+    border:2px solid white !important; background:#2563eb !important;
+  }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineStart,
+  html[data-nww-avalon-timeline] body #timelineDock #timelineEnd,
+  html[data-nww-avalon-timeline] body #timelineDock #pjBlueSliderExactTrackLine { display:none !important; }
+  html[data-nww-avalon-timeline] body #timelineDock #timelineTimeBounds { display:none !important; }
+  @media (max-width:900px), (max-width:1366px) and (any-pointer:coarse), (max-height:560px) and (pointer:coarse) {
+    html[data-nww-avalon-timeline] body #timelineDock {
+      left:8px !important; right:8px !important; bottom:calc(8px + env(safe-area-inset-bottom)) !important;
+      height:188px !important; min-height:188px !important; max-height:188px !important;
+      background:#152132 !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #playBtn {
+      top:8px !important; left:8px !important; width:44px !important; height:44px !important;
+      min-width:44px !important; max-width:44px !important; min-height:44px !important; max-height:44px !important;
+      border-radius:50% !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble {
+      position:absolute !important; left:62px !important; right:8px !important; top:8px !important; bottom:auto !important;
+      width:auto !important; min-width:0 !important; max-width:none !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+      padding:0 !important; margin:0 !important; border:0 !important; border-radius:0 !important;
+      background:transparent !important; box-shadow:none !important; transform:none !important;
+      display:flex !important; align-items:center !important; justify-content:space-between !important; gap:8px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-current { font-size:15px !important; white-space:nowrap !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-stage {
+      font-size:15px !important; white-space:nowrap !important; color:white !important;
+      padding:1px 6px !important; background:#0b1220 !important; border:1px solid #526277 !important; border-radius:999px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineDayTabs {
+      top:58px !important; left:86px !important; right:86px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-day { height:44px !important; min-height:44px !important; max-height:44px !important; font-size:15px !important; line-height:44px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-day-arrow {
+      position:absolute !important; top:58px !important; bottom:auto !important; width:72px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+      padding:4px !important; margin:0 !important; transform:none !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelinePreviousDay { top:58px !important; left:8px !important; right:auto !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineNextDay { top:58px !important; left:auto !important; right:8px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey {
+      top:108px !important; left:8px !important; right:8px !important;
+      height:14px !important; min-height:14px !important; max-height:14px !important; gap:8px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-label { font-size:9px !important; line-height:12px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineFloodKey .timeline-key-swatch { width:7px !important; height:7px !important; flex-basis:7px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock .timeline-trackRow {
+      top:122px !important; left:8px !important; right:8px !important;
+      height:44px !important; min-height:44px !important; max-height:44px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock #hourSlider { height:44px !important; min-height:44px !important; max-height:44px !important; }
+    html[data-nww-avalon-timeline] body #timelineDock #timelineTimeBounds {
+      position:absolute !important; top:166px !important; left:21px !important; right:21px !important;
+      display:flex !important; justify-content:space-between !important; height:14px !important;
+      color:#cbd5e1 !important; font-size:10px !important; line-height:14px !important;
+      pointer-events:none !important;
+    }
+    /* A daily peak has no hours to scrub; the day arrows remain available. */
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] {
+      height:132px !important; min-height:132px !important; max-height:132px !important;
+    }
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] .timeline-trackRow,
+    html[data-nww-avalon-timeline] body #timelineDock[data-single-timeline-time="true"] #timelineTimeBounds { display:none !important; }
+  }
+  @media (max-width:360px) {
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-current,
+    html[data-nww-avalon-timeline] body #timelineDock #timelineBubble .timeline-bubble-stage { font-size:13px !important; }
+  }
+  @media (max-width:600px) {
+    html[data-nww-avalon-timeline] body:not(.mobile-legend-open) #legendDock {
+      top:60px !important; left:8px !important; right:auto !important;
+      width:88px !important; min-width:88px !important; max-width:88px !important;
+    }
+  }
+  html[data-nww-avalon-timeline] body #mapTitlePartnerLogo,
+  html[data-nww-avalon-timeline] body #rightRailLogo,
+  html[data-nww-avalon-timeline] body #exportPartnerLogo,
+  html[data-nww-avalon-timeline] body #topBanner { display:none !important; }
+  html[data-nww-avalon-timeline] body #toastCloseBtn {
+    --centered-close-x-color:#78350f !important;
+    --centered-close-x-size:18px !important;
+    width:44px !important; min-width:44px !important; max-width:44px !important;
+    height:44px !important; min-height:44px !important; max-height:44px !important;
+    border:1px solid #92400e !important; background:#fef3c7 !important;
+    flex:0 0 44px !important; touch-action:manipulation !important;
+  }
+  html[data-nww-avalon-timeline] body #toastCloseBtn:focus-visible {
+    outline:3px solid #78350f !important; outline-offset:2px !important;
+  }
+
+}

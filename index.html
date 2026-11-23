@@ -1,12 +1,180 @@
 
 <!doctype html>
 <!-- The app owns timeline metadata and legend placement; skip the hosting legacy controller. -->
-<html lang="en" data-nww-avalon-timeline data-nww-mobile-layout data-ss-ui-ready="app">
+<html lang="en" data-floodmapper-display-name="Ventnor" data-nww-avalon-timeline data-nww-mobile-layout data-nww-phone data-ss-ui-ready="app">
 <head>
-<meta name="floodmapper-ui-source" content="5c9c405e4a6bb1f39342ccbd1460137f4ee25cba">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-font.css?v=44bc78225f5bedbc">
+<meta charset="utf-8">
+<template id="floodmapperTownData">{
+  "pageTitle": "Ventnor City Flood Mapper",
+  "mapTitle": "Ventnor City Flood Mapper",
+  "brandTitleLine1": "Ventnor City",
+  "brandTitleLine2": "Flood Mapper",
+  "data": {
+    "forecastPath": "./forecast.json",
+    "observedPath": "./observed.json",
+    "topTidesPath": "./toptides.json",
+    "observed15MinPath": "./observed15min.json",
+    "observedArchiveIndexPath": "./observed_archive_index.json",
+    "surrogateArchiveIndexPath": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_archive_index.json",
+    "surrogateHourlyPath": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_hourly.json",
+    "canonicalDailyPath": "./canonical_daily_v2.json",
+    "returnIntervalsPath": "./return_intervals.json",
+    "returnLevelsPath": "./return_interval_levels_v2.json"
+  },
+  "bunny": {
+    "storageZoneId": "5907481",
+    "cdnBaseUrl": "https://floodmapperv1.b-cdn.net"
+  },
+  "assets": {
+    "titleLogoPath": null,
+    "titleLogoAlt": "",
+    "partnerLogoPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "partnerLogoFallbackPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "partnerLogoAlt": "ShorelySafe",
+    "rightRailLogoPath": "https://floodmapperv1.b-cdn.net/Logos/ShorelySafe.jpg",
+    "rightRailLogoAlt": "ShorelySafe"
+  },
+  "links": {
+    "partnerUrl": "https://cupajoe.live",
+    "partnerAriaLabel": "Visit cupajoe.live"
+  },
+  "site": {
+    "name": "Ventnor City",
+    "municipalityName": "Ventnor City",
+    "county": "ATLANTIC",
+    "usgsGaugeId": "01410560",
+    "noaaGaugeId": "8534720",
+    "petssGaugeId": "8534836",
+    "gaugeName": "Inside Thorofare at Atlantic City"
+  },
+  "datums": {
+    "helpText": "Changing the reference changes the number shown, not the mapped flood area.",
+    "navd88OffsetFromMllwFt": -2.39,
+    "offsets": {
+      "navd88": 0,
+      "mllw": 2.39
+    }
+  },
+  "thresholds": {
+    "navd88": {
+      "minor": 3.21,
+      "moderate": 4.21,
+      "major": 5.21
+    },
+    "mllw": {
+      "minor": 5.6,
+      "moderate": 6.6,
+      "major": 7.6
+    }
+  },
+  "overlays": {
+    "depthPngPrefix": "VentnorCityDepth",
+    "stagePngPrefix": "VentnorCityStage",
+    "depthQueryPngPath": "./assets/connected-v2/COGs/Ventnor%20City/VentnorCityHydraulicQuery5ft.png",
+    "boundsWgs84": {
+      "west": -74.50644465669045,
+      "south": 39.33050548209528,
+      "east": -74.46401833973245,
+      "north": 39.35862555243322
+    },
+    "depthRoots": [
+      "./assets/connected-v2/DepthPNGs/Ventnor%20City/",
+      "https://floodmapperv1.b-cdn.net/DepthPNGs/Ventnor%20City/"
+    ],
+    "dynamicRoots": [
+      "./assets/connected-v2/StagePNGs/Ventnor%20City/",
+      "https://floodmapperv1.b-cdn.net/StagePNGs/Ventnor%20City/"
+    ],
+    "stageCodeScale": 10,
+    "stageCodeWidth": 3
+  },
+  "addressLookup": {
+    "title": "Find a Ventnor City Address",
+    "displayName": "Ventnor City",
+    "city": "Ventnor City",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "countryCode": "us",
+    "sourceCountry": "USA",
+    "postalCode": "",
+    "placeholder": "Example: 123 Main St",
+    "buttonText": "Search Ventnor City",
+    "bbox": {
+      "west": -74.506433,
+      "south": 39.3305106,
+      "east": -74.4640293,
+      "north": 39.358618
+    },
+    "geocodeCenter": {
+      "lat": 39.3445643,
+      "lon": -74.4852312
+    },
+    "searchDistanceMeters": 9000
+  },
+  "alerts": {
+    "zoneCodes": []
+  },
+  "exportSlug": "Ventnor-City-floodmapper",
+  "boundary": {
+    "boundaryUrl": "Boundaries/Ventnor City.geojson",
+    "bunnyBoundaryPath": "Boundaries/Ventnor City.geojson",
+    "queryUrl": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/NJ_Municipalities_3857/FeatureServer/0/query",
+    "outFields": "NAME,COUNTY,MUN,MUN_LABEL,MUN_TYPE,GNIS_NAME",
+    "queryCandidates": [
+      "MUN_LABEL = 'Ventnor City'",
+      "NAME = 'Ventnor City'"
+    ]
+  },
+  "map": {
+    "center": {
+      "lat": 39.3445643,
+      "lon": -74.4852312
+    }
+  },
+  "nwsPoint": {
+    "lat": 39.3445643,
+    "lon": -74.4852312
+  },
+  "observed": {
+    "usgsGaugeId": "01410560",
+    "usgsParameterCd": "72279",
+    "primaryArchiveStartDate": "2007-10-01",
+    "sourcePrecedence": [
+      "primary-usgs-continuous",
+      "bias-corrected-noaa-historical-fill",
+      "official-usgs-storm-tide-crest-override"
+    ],
+    "surrogate": {
+      "enabled": true,
+      "key": "atlantic-city",
+      "stationId": "8534720",
+      "stationName": "Atlantic City, New Jersey",
+      "stationShort": "Atlantic City",
+      "hostRepo": "Ocean-City-floodmapper",
+      "indexPath": "atlantic_city_archive_index.json",
+      "hourlyPath": "atlantic_city_hourly.json",
+      "shardPath": "observed_archive/atlantic-city/{year}.json",
+      "indexUrl": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_archive_index.json",
+      "hourlyUrl": "https://hondrospj.github.io/Ocean-City-floodmapper/atlantic_city_hourly.json",
+      "shardPathTemplate": "https://hondrospj.github.io/Ocean-City-floodmapper/observed_archive/atlantic-city/{year}.json",
+      "biasCorrectionFt": 0.136,
+      "calibrationPairKey": "01410560:atlantic-city"
+    },
+    "crestStationId": "01410560"
+  },
+  "structures": {},
+  "release": {
+    "reference": "North Wildwood Floodmapper V2",
+    "version": "20260920-nj-universal-v2",
+    "policy": "Primary USGS continuous record; bias-corrected regional NOAA record fills missing history; the nearest official USGS storm-tide crest overwrites the same date as absolute truth."
+  }
+}</template>
+
+
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-phone.css?v=efee85676f89fe14">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-font.css?v=5366c4cea7e194e2">
 <link rel="preconnect" href="https://hondrospj.github.io" crossorigin>
-<link rel="stylesheet" data-nww-style-bundle="app-01" href="./assets/mapper-ui/styles/app-01.css?v=be79111ab98987bc">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-01.css?v=763fb8da3b870f07">
 <!-- nww:style:style-002 -->
 
 
@@ -17,8 +185,7 @@
 <!-- Keep the same layer order on GitHub Pages and CupaJoe. -->
 <!-- nww:style:style-006 -->
 <!-- Shorely Safe browser-tab branding -->
-<link rel="icon" type="image/png" href="./assets/mapper-ui/shorelysafe-favicon-20261008.png" />
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-loading.css?v=20261027-lines1">
+<link rel="icon" type="image/png" href="./assets/mapper-ui/releases/3a1080ca69c4/shorelysafe-favicon-20261008.png" />
 
 
 <!-- Keep optional work outside the initial flood-map loading path. -->
@@ -26,21 +193,20 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://basemaps.arcgis.com" crossorigin>
 <link rel="preconnect" href="https://floodmapperv1.b-cdn.net" crossorigin>
-<script id="floodmapper-startup-20261002" data-nww-script="script-001" src="./assets/mapper-ui/app/startup.js?v=c5c54a9269b97901"></script>
+<link rel="preload" as="script" href="./assets/mapper-ui/releases/3a1080ca69c4/app/startup.js?v=072a3f119d4ffec8">
 
-<link rel="stylesheet" data-nww-style-bundle="app-02" href="./assets/mapper-ui/styles/app-02.css?v=4b27d8307ccfb3d1">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-02.css?v=4b27d8307ccfb3d1">
 
-<link rel="stylesheet" href="./assets/mapper-ui/avalon-mobile.css?v=20261021-tablet1">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-timeline.css?v=20261021-tablet1">
-<script data-nww-script="script-002" src="./assets/mapper-ui/app/mobile-class.js?v=2674020e1af0ed47"></script>
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/avalon-mobile.css?v=1e81ac5dfc4c8445">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-timeline.css?v=20261021-tablet1">
+<link rel="preload" as="script" href="./assets/mapper-ui/releases/3a1080ca69c4/app/mobile-class.js?v=2674020e1af0ed47">
 
-<meta charset="utf-8" />
-  <title>Ventnor City Flood Mapper</title>
+  <title>Ventnor Flood Mapper</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script data-nww-script="script-003" src="./assets/mapper-ui/app/platform.js?v=be7a7d894330018d"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="preload" as="script" href="./assets/mapper-ui/releases/3a1080ca69c4/app/platform.js?v=be7a7d894330018d">
+  <link rel="preload" as="style" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-  <link rel="stylesheet" data-nww-style-bundle="app-03" href="./assets/mapper-ui/styles/app-03.css?v=a9c19868b18cbebc">
+  <link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-03.css?v=dc8e796a1b301262">
 
   <!-- nww:style:style-009 -->
 
@@ -49,16 +215,16 @@
 
 
   <!-- nww:style:style-011 -->
-  <link rel="stylesheet" href="./assets/mapper-ui/map-status.css?v=691b3e74990d9d20" />
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-mobile.css?v=20261026-holistic1">
-<link rel="stylesheet" data-nww-style-bundle="app-04" href="./assets/mapper-ui/styles/app-04.css?v=509becaedd60dc22">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-layers.css?v=20261021-tablet1">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-controls.css?v=20261021-tablet1">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-calendar.css?v=20261021-tablet1">
-<link rel="stylesheet" href="./assets/mapper-ui/export-date-time-picker.css?v=9a8f640254cba6b4">
-<link rel="stylesheet" href="./assets/mapper-ui/north-wildwood-type.css?v=20261021-tablet1">
+  <link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/map-status.css?v=691b3e74990d9d20">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-mobile.css?v=20261026-holistic1">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-04.css?v=509becaedd60dc22">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-layers.css?v=20261021-tablet1">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-controls.css?v=b48d5b4be2080bab">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-calendar.css?v=20261021-tablet1">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/export-date-time-picker.css?v=9a8f640254cba6b4">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-type.css?v=20261021-tablet1">
 <!-- Load the complete layout before rendering any controls. -->
-<link rel="stylesheet" data-nww-style-bundle="app-05" href="./assets/mapper-ui/styles/app-05.css?v=4a72a06ffafb0e87">
+<link rel="preload" as="style" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-05.css?v=244aa39c8a42ca08">
 <!-- nww:style:style-014 -->
 <!-- nww:style:style-015 -->
 <!-- nww:style:style-016 -->
@@ -133,12 +299,56 @@
 <!-- nww:style:style-079 -->
 <!-- nww:style:style-080 -->
 <!-- nww:style:style-081 -->
-<style id="floodmapper-quiet-loading-20261119">
-/* Keep request/readiness state and failure recovery; omit loading presentation. */
-body:not([data-site-loader$="error"]):not([data-site-loader$="failed"]) #nwSiteLoader{display:none!important}
+<style id="floodmapper-first-paint-priority">@layer floodmapper-first-paint;</style>
+<style id="floodmapper-loading-screen">
+/* Restored from the original loading screen before commit 9726b322. */
+body.nw-app-loading{overflow:hidden}
+    body.nw-app-loading #app,
+    body.nw-app-loading #topBanner{opacity:0;pointer-events:none}
+    body.nw-app-ready:not(.nw-app-loading) #app,
+    body.nw-app-ready:not(.nw-app-loading) #topBanner{animation:nwAppFadeIn .72s cubic-bezier(.2,.75,.25,1) both}
+    #nwSiteLoader{
+      position:fixed;inset:0;z-index:60000;display:grid;place-items:center;padding:24px;
+      overflow:hidden;background:
+        radial-gradient(circle at 50% 38%,rgba(29,145,210,.22),transparent 34%),
+        radial-gradient(circle at 18% 18%,rgba(96,165,250,.14),transparent 30%),
+        linear-gradient(145deg,#07101f 0%,#0b1930 52%,#07111f 100%);
+      color:#eaf0ff;opacity:1;visibility:visible;transition:opacity .62s ease,visibility .62s ease;
+    }
+    #nwSiteLoader::before,#nwSiteLoader::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+    #nwSiteLoader::before{width:min(74vw,760px);aspect-ratio:1;border:1px solid rgba(125,249,255,.09);box-shadow:0 0 90px rgba(29,145,210,.08);animation:nwLoaderOrbit 13s linear infinite}
+    #nwSiteLoader::after{width:min(52vw,520px);aspect-ratio:1;border:1px dashed rgba(96,165,250,.12);animation:nwLoaderOrbit 18s linear infinite reverse}
+    #nwSiteLoader.is-fading{opacity:0;visibility:hidden;pointer-events:none}
+    .nw-loader-card{position:relative;z-index:1;box-sizing:border-box;width:min(430px,100%);display:grid;justify-items:center;padding:34px 32px 29px;border:1px solid rgba(125,249,255,.24);border-radius:28px;background:rgba(8,15,31,.88);box-shadow:0 30px 100px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(20px);text-align:center}
+    .nw-loader-spinner{position:relative;width:76px;height:76px;margin-bottom:21px;border:3px solid rgba(125,249,255,.15);border-top-color:#7df9ff;border-right-color:#60a5fa;border-radius:50%;animation:nwLoaderSpin 1s linear infinite;box-shadow:0 0 34px rgba(125,249,255,.14)}
+    .nw-loader-spinner::before{content:"";position:absolute;inset:10px;border:2px solid rgba(96,165,250,.16);border-bottom-color:#60a5fa;border-radius:50%;animation:nwLoaderSpin .75s linear infinite reverse}
+    .nw-loader-spinner::after{content:"";position:absolute;inset:26px;border-radius:50%;background:#7df9ff;box-shadow:0 0 20px rgba(125,249,255,.72)}
+    .nw-loader-eyebrow{color:#7df9ff;font:900 10px/1 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .nw-loader-card h1{margin:9px 0 7px;color:#fff;font:950 clamp(23px,5vw,32px)/1.05 Inter,system-ui,sans-serif;letter-spacing:-.035em}
+    .nw-loader-status{min-height:19px;margin:0;color:#a9bad3;font:750 12px/1.45 Inter,system-ui,sans-serif}
+    .nw-loader-progress{width:100%;height:5px;margin-top:22px;overflow:hidden;border-radius:99px;background:rgba(148,163,184,.16);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+    #nwLoaderProgress{display:block;width:7%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#168ceb,#7df9ff);box-shadow:0 0 15px rgba(125,249,255,.55);transition:width .32s ease}
+    .nw-loader-foot{margin-top:10px;color:#7187a2;font:700 9px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+    @keyframes nwLoaderSpin{to{transform:rotate(360deg)}}
+    @keyframes nwLoaderOrbit{to{transform:rotate(360deg)}}
+    @keyframes nwAppFadeIn{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:none}}
+    @media (prefers-reduced-motion:reduce){#nwSiteLoader::before,#nwSiteLoader::after,.nw-loader-spinner,.nw-loader-spinner::before{animation-duration:1ms;animation-iteration-count:1}body.nw-app-ready:not(.nw-app-loading) #app,body.nw-app-ready:not(.nw-app-loading) #topBanner{animation:none}}
+#nwSiteLoader[hidden]{display:none}
+#nwLoaderRetry[hidden]{display:none}
+#nwLoaderRetry{margin-top:18px;min-height:44px;padding:10px 18px;border:1px solid #93c5fd;border-radius:10px;background:#1d4ed8;color:#fff;font:inherit;font-size:14px;font-weight:700;line-height:1.3;cursor:pointer}
+#nwLoaderRetry:focus-visible{outline:3px solid #7df9ff;outline-offset:4px}
+#nwLoaderRetry:disabled{cursor:wait;opacity:.75}
+</style>
+<style id="floodmapper-startup-visibility">
+/* Keep the map underlay available while preventing interaction with unready controls. */
 html body.nw-app-loading #app[inert]{filter:none!important;animation:none!important}
-html body.nw-app-loading :is(#app,#mobileControlsToggle,#legendDock):not([inert]),html body.nw-app-loading #topBanner{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-#nwSiteLoader::before,#nwSiteLoader::after,.nw-loader-spinner,.nw-loader-progress,.flood-history-spinner,.download-btn-spinner{display:none!important;animation:none!important}
+html body.nw-app-loading :is(#mobileControlsToggle,#legendDock):not([inert]),html body.nw-app-loading #topBanner{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+html body.nw-app-loading #app{opacity:1!important;visibility:hidden!important}
+html body.nw-app-loading #app :not(#map,#map *){visibility:hidden!important}
+@layer floodmapper-first-paint{html body.nw-app-loading #mapTitleBadge{opacity:0!important;visibility:hidden!important}}
+html body.nw-app-loading #map{visibility:visible!important}
+#startupMapPreview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.flood-history-spinner,.download-btn-spinner{display:none!important;animation:none!important}
 .flood-history-loading{display:none!important}
 #stageSubText:empty,#floodFrameStatus:empty{display:none!important}
 body[data-road-impacts-state="loading"] #roadImpactsStatus{display:none!important}
@@ -147,19 +357,42 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
 .nww-picker-message:empty{display:none!important}
 </style>
 </head>
-<body data-floodmapper-loading-ui="quiet-20261119" data-county-viewport="20261017" data-county-mobile="20261015" data-county-fix="20261015" class="nw-app-loading" data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-fleet-viewport-existing="true" data-floodmapper-unified="20261017.3">
+<body data-floodmapper-loading-ui="branded" data-county-viewport="20261017" data-county-mobile="20261015" data-county-fix="20261015" class="nw-app-loading" data-flood-frame-cache="bounded-composites-20261008" data-flood-frame-swap="decode-before-swap-20261008" data-shorelysafe-ui="20261017" data-flood-frame-resilience="retain-retry-20261013" data-floodmapper-reference="20261017" data-fleet-viewport-existing="true" data-floodmapper-unified="20261017.3">
   <div id="nwSiteLoader" role="status" aria-live="polite" aria-label="Map status">
     <div class="nw-loader-card">
       <div class="nw-loader-spinner" aria-hidden="true"></div>
       <div class="nw-loader-eyebrow">ShorelySafe</div>
-      <h1>Ventnor City Flood Mapper</h1>
-      <p id="nwLoaderStatus" class="nw-loader-status"></p>
+      <h1>Ventnor Flood Mapper</h1>
+      <p id="nwLoaderStatus" class="nw-loader-status">Preparing forecast and map data…</p>
       <div class="nw-loader-progress" aria-hidden="true"><span id="nwLoaderProgress"></span></div>
       <button id="nwLoaderRetry" type="button" hidden>Retry loading map</button>
     </div>
   </div>
+  <!-- Geographic reference from NJOGIS roads, the municipal boundary, and 2024 Census area water. -->
+  
+  <style data-nww-startup-style>@layer north-wildwood-font, north-wildwood-control-layout, north-wildwood-phone;</style>
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-phone.css?v=efee85676f89fe14">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-font.css?v=5366c4cea7e194e2">
+<link data-nww-startup-style rel="stylesheet" data-nww-style-bundle="app-01" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-01.css?v=763fb8da3b870f07">
+<script id="floodmapper-startup-20261002" data-nww-script="script-001" src="./assets/mapper-ui/releases/3a1080ca69c4/app/startup.js?v=072a3f119d4ffec8"></script>
+<link data-nww-startup-style rel="stylesheet" data-nww-style-bundle="app-02" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-02.css?v=4b27d8307ccfb3d1">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/avalon-mobile.css?v=1e81ac5dfc4c8445">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-timeline.css?v=20261021-tablet1">
+<script data-nww-script="script-002" src="./assets/mapper-ui/releases/3a1080ca69c4/app/mobile-class.js?v=2674020e1af0ed47"></script>
+<script data-nww-script="script-003" src="./assets/mapper-ui/releases/3a1080ca69c4/app/platform.js?v=be7a7d894330018d"></script>
+<link data-nww-startup-style rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link data-nww-startup-style rel="stylesheet" data-nww-style-bundle="app-03" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-03.css?v=dc8e796a1b301262">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/map-status.css?v=691b3e74990d9d20" />
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-mobile.css?v=20261026-holistic1">
+<link data-nww-startup-style rel="stylesheet" data-nww-style-bundle="app-04" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-04.css?v=509becaedd60dc22">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-layers.css?v=20261021-tablet1">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-controls.css?v=b48d5b4be2080bab">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-calendar.css?v=20261021-tablet1">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/export-date-time-picker.css?v=9a8f640254cba6b4">
+<link data-nww-startup-style rel="stylesheet" href="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-type.css?v=20261021-tablet1">
+<link data-nww-startup-style rel="stylesheet" data-nww-style-bundle="app-05" href="./assets/mapper-ui/releases/3a1080ca69c4/styles/app-05.css?v=244aa39c8a42ca08">
   <div id="floodFrameStatus" role="status" aria-live="polite" hidden></div>
-  <div id="topBanner">
+  <div id="topBanner" hidden aria-hidden="true">
     <div class="banner-text">
       <div class="banner-eyebrow">Flood alert <span id="bannerCount">0 active</span></div>
       <div id="bannerTitle" class="banner-title">Checking alerts</div>
@@ -170,11 +403,13 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
 
   <div id="app">
     <div id="mapTitleBadge" class="shorely-title-badge" aria-hidden="true">
-      <span id="mapTitleText" class="shorely-title-text">Ventnor City Flood Mapper</span>
+      <span id="mapTitleText" class="shorely-title-text">Ventnor Flood Mapper</span>
+      <span class="nww-mobile-title"><strong>Ventnor</strong><span>Flood Mapper</span></span>
       <img id="mapTitlePartnerLogo" class="shorely-title-logo shorely-title-logo-shorelysafe" src="" alt="" loading="eager" decoding="async" style="display:none;" />
     </div>
     <aside id="leftPanel">
       <button id="mobileControlsClose" class="centered-close-control" type="button" aria-label="Close controls" title="Close controls">&times;</button>
+      <div id="nwwDrawerViewMode"><span>Map view</span></div>
       <section class="panel-card compact-card data-source-card">
         <div class="section-title">
           <div class="title-with-help">
@@ -193,15 +428,15 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
       <section id="forecastScenarioCard" class="panel-card compact-card forecast-scenario-card">
         <div class="section-title">
           <div class="title-with-help">
-            <h2>Forecast range</h2>
+            <h2>Forecast Range</h2>
             <button id="forecastTypeHelpBtn" class="help-btn" type="button" aria-expanded="false" aria-controls="infoModal" title="Explain forecast type">?</button>
           </div>
-          <span id="forecastScenarioPill" class="nww-status-value" hidden>Mean</span>
+          <span id="forecastScenarioPill" class="nww-status-value" hidden>Likely</span>
         </div>
         <div class="button-grid-3">
-          <button id="forecastLowBtn" type="button" data-scenario="lowEnd">Lower End</button>
-          <button id="forecastMeanBtn" class="active" type="button" data-scenario="mean">Mean</button>
-          <button id="forecastHighBtn" type="button" data-scenario="highEnd">Upper End</button>
+          <button id="forecastLowBtn" type="button" data-scenario="lowEnd">Best Case</button>
+          <button id="forecastMeanBtn" class="active" type="button" data-scenario="mean">Likely</button>
+          <button id="forecastHighBtn" type="button" data-scenario="highEnd">Worst Case</button>
         </div>
       </section>
 
@@ -253,7 +488,7 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
           <span id="datumPill" class="nww-status-value" hidden>MLLW</span>
         </div>
         <div class="segmented-control" role="group" aria-label="Vertical datum">
-          <button id="datumMllwBtn" type="button" class="active" data-datum="mllw" aria-pressed="true">MLLW</button>
+          <button id="datumMllwBtn" title="Mean Lower Low Water" type="button" class="active" data-datum="mllw" aria-pressed="true">MLLW</button>
           <button id="datumNavd88Btn" type="button" data-datum="navd88" aria-pressed="false">NAVD88</button>
         </div>
       </section>
@@ -347,10 +582,18 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
         </div>
 
       </section>
+      <details id="mapCredits" class="panel-card compact-card" data-nww-group="tools" data-html2canvas-ignore="true">
+        <summary>Map credits</summary>
+        <div>
+          <div id="mapCreditsSources"></div>
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap licence</a>
+        </div>
+      </details>
     </aside>
 <main id="mapWrap">
       <div id="map"></div>
-      <div id="map3d" role="region" aria-label="Interactive 3D Ventnor City flood map"></div>
+      
+      <div id="map3d" role="region" aria-label="Interactive 3D Ventnor flood map"></div>
       <div id="map3dStatus" role="status">3D terrain ×4</div>
       <output id="map3dDiagnostics" hidden aria-hidden="true"></output>
       <div id="mapClickModeControl" class="map-click-mode-control" role="group" aria-label="Choose what happens when you tap the map" hidden>
@@ -365,34 +608,32 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
           </a>
         </section>
 
-        <button id="mapperTutorialBtn" class="mapper-tutorial-launch mapper-tutorial-launch-rail" type="button">Take the FloodMapper tour</button>
+        <button id="mapperTutorialBtn" class="mapper-tutorial-launch mapper-tutorial-launch-rail" type="button">Take the Flood Mapper Tour</button>
 
         <section class="rail-card layers-card nww-layers-card">
           <div class="rail-head">
             <div>
               <h3>Layers</h3>
             </div>
+            <button id="layersHelpBtn" class="help-btn" type="button" data-layer-help="layers" aria-label="About map layers" aria-haspopup="dialog" aria-controls="infoModal">?</button>
           </div>
           <div class="layer-list">
             <div class="layer-item">
               <div id="satelliteToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show satellite imagery"></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Satellite</div>
-                <button class="help-btn" type="button" data-layer-help="satellite" aria-label="About Satellite" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
-            <div class="layer-item">
-              <div id="buildingsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show buildings above floodwater"></div>
+            <div class="layer-item" title="Show buildings in the current map view.">
+              <div id="buildingsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show buildings" title="Show buildings in the current map view."></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Buildings</div>
-                <button class="help-btn" type="button" data-layer-help="buildings" aria-label="About Buildings" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
             <div class="layer-item">
               <div id="parcelsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show parcels"></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Parcels</div>
-                <button class="help-btn" type="button" data-layer-help="parcels" aria-label="About Parcels" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
 
@@ -400,28 +641,24 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
               <div id="nsiStructuresToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show structural impacts: garage, crawlspace, first floor"></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Structural Impacts</div>
-                <button class="help-btn" type="button" data-layer-help="structuralImpacts" aria-label="About Structural Impacts" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
             <div class="layer-item">
               <div id="roadImpactsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show roads with 6+ inches of water" title="Highlight roads with more than 0.5 ft of modeled water at the selected time"></div>
               <div class="layer-meta title-with-help">
-                <div class="layer-name">Roads with 6+ Inches of Water</div>
-                <button class="help-btn" type="button" data-layer-help="roadImpacts" aria-label="About Roads with 6+ Inches of Water" aria-haspopup="dialog" aria-controls="infoModal">?</button>
+                <div class="layer-name">Roads With 6+ Inches of Water</div>
               </div>
             </div>
             <div class="layer-item">
               <div id="roadsToggle" class="toggle on" role="switch" tabindex="0" aria-checked="true" aria-label="Show road names"></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Road Names</div>
-                <button class="help-btn" type="button" data-layer-help="roadNames" aria-label="About Road Names" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
             <div class="layer-item shorelysafe-camera-item" data-html2canvas-ignore="true">
               <div id="webcamsToggle" class="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Show cameras"></div>
               <div class="layer-meta title-with-help">
                 <div class="layer-name">Cameras</div>
-                <button class="help-btn" type="button" data-layer-help="cameras" aria-label="About Cameras" aria-haspopup="dialog" aria-controls="infoModal">?</button>
               </div>
             </div>
           </div>
@@ -430,14 +667,14 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
         <section id="townAddressCard" class="rail-card town-address-card" aria-label="address lookup">
           <div class="rail-head">
             <div>
-              <h3 id="townAddressTitle">Find a Ventnor City Address</h3>
+              <h3 id="townAddressTitle">Find a Ventnor Address</h3>
             </div>
           </div>
           <form id="townAddressForm" class="town-address-form" autocomplete="off">
             <label class="town-address-label" for="townAddressInput">Address or street</label>
             <input id="townAddressInput" class="town-address-input" type="search" inputmode="search" placeholder="Example: 123 Main St" aria-describedby="townAddressStatus" />
             <div class="town-address-actions">
-              <button id="townAddressSearchBtn" class="right-rail-action town-address-btn" type="submit">Search Ventnor City</button>
+              <button id="townAddressSearchBtn" class="right-rail-action town-address-btn" type="submit">Search Ventnor</button>
               <button id="townAddressClearBtn" class="town-address-clear-btn" type="button" aria-label="Clear address search">Clear</button>
             </div>
           </form>
@@ -488,18 +725,20 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
         <div class="timeline-top">
           <div class="timeline-controls">
             <button id="playBtn" type="button" class="playFab" aria-label="Play"><span class="playIcon playTriangle" aria-hidden="true"></span></button>
+            <button id="timelineSpeedBtn" type="button" aria-label="Double playback speed" aria-pressed="false">2×</button>
           </div>
           <div id="timelineMeta" class="timeline-meta">--</div>
         </div>
-        <div id="timelineFloodKey" class="timeline-flood-key" aria-label="Flood category key">
+        <div id="timelineFloodKey" class="timeline-flood-key" role="group" aria-label="Flood category key">
+          <span class="timeline-key-title" aria-hidden="true">Key</span>
           <span class="timeline-key-item"><span class="timeline-key-swatch no-flood" aria-hidden="true"></span><span class="timeline-key-label">No Flooding</span></span>
           <span class="timeline-key-item"><span class="timeline-key-swatch minor-flood" aria-hidden="true"></span><span class="timeline-key-label">Minor</span></span>
           <span class="timeline-key-item"><span class="timeline-key-swatch moderate-flood" aria-hidden="true"></span><span class="timeline-key-label">Moderate</span></span>
           <span class="timeline-key-item"><span class="timeline-key-swatch major-flood" aria-hidden="true"></span><span class="timeline-key-label">Major</span></span>
-          <div id="roadImpactsKey" hidden aria-label="Roads with 6+ Inches of Water">
+          <div id="roadImpactsKey" hidden aria-label="Roads With 6+ Inches of Water">
             <span class="road-impacts-swatch" aria-hidden="true"></span>
-            <span class="road-impacts-label">Roads with 6+ Inches of Water</span>
-            <span class="road-impacts-label-mobile">Roads with 6+ Inches of Water</span>
+            <span class="road-impacts-label">Roads With 6+ Inches of Water</span>
+            <span class="road-impacts-label-mobile">Roads With 6+ Inches of Water</span>
             <span id="roadImpactsStatus" class="road-impacts-status" role="status">Modeled road water depth &gt; 0.5 ft</span>
           </div>
         </div>
@@ -526,20 +765,31 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
     </main>
   </div>
 
-  <button id="mobileMapperTutorialBtn" class="mapper-tutorial-launch mapper-tutorial-launch-mobile" type="button" aria-haspopup="dialog" data-html2canvas-ignore="true">Take the FloodMapper tour</button>
+  <header id="nwwMobileUtilities" aria-label="Ventnor Flood Mapper" data-html2canvas-ignore="true">
+    <div class="nww-mobile-actions" role="group" aria-label="Map actions">
+      <button id="mobileMapperTutorialBtn" class="mapper-tutorial-launch mapper-tutorial-launch-mobile" type="button" aria-label="Take the Flood Mapper Tour" aria-haspopup="dialog"><span class="nww-mobile-icon nww-mobile-icon--tour" aria-hidden="true"></span><span>Tour</span></button>
+      <button id="mobileControlsToggle" type="button" aria-label="Open map controls" aria-controls="leftPanel" aria-expanded="false"><span class="nww-mobile-icon nww-mobile-icon--controls" aria-hidden="true"><i></i><i></i><i></i></span><span>Controls</span></button>
+      <button id="nwwMobileLegendToggle" type="button" aria-controls="legendDock" aria-expanded="false"><span class="nww-mobile-icon nww-mobile-icon--legend" aria-hidden="true"><i></i><i></i><i></i></span><span>Legend</span></button>
+    </div>
+  </header>
 
   <div id="mapperTutorial" class="mapper-tutorial" hidden aria-hidden="true">
     <div id="mapperTutorialSpotlight" class="mapper-tutorial-spotlight" aria-hidden="true"></div>
     <section id="mapperTutorialCard" class="mapper-tutorial-card" role="dialog" aria-modal="true" aria-labelledby="mapperTutorialTitle" aria-describedby="mapperTutorialBody">
       <span id="mapperTutorialAnnouncement" class="mapper-tutorial-announcement" role="status" aria-atomic="true"></span>
       <div class="mapper-tutorial-head">
-        <span id="mapperTutorialProgress" class="mapper-tutorial-progress">1 of 9</span>
+        <span id="mapperTutorialProgress" class="mapper-tutorial-progress"></span>
+        <progress id="mapperTutorialTrack" class="mapper-tutorial-track" aria-hidden="true"></progress>
         <button id="mapperTutorialClose" class="mapper-tutorial-close centered-close-control" type="button" aria-label="Close tutorial">×</button>
       </div>
       <h2 id="mapperTutorialTitle"></h2>
-      <div id="mapperTutorialBody" class="mapper-tutorial-body"></div>
+      <div class="mapper-tutorial-content">
+        <div id="mapperTutorialBody" class="mapper-tutorial-body"></div>
+        <p id="mapperTutorialFeedback" class="mapper-tutorial-feedback" aria-live="polite"></p>
+      </div>
       <div class="mapper-tutorial-actions">
         <button id="mapperTutorialBack" type="button">Back</button>
+        <button id="mapperTutorialPractice" type="button" hidden></button>
         <button id="mapperTutorialNext" class="active" type="button">Next</button>
       </div>
     </section>
@@ -563,7 +813,7 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
     <section class="nww-calendar-dialog" role="dialog" aria-modal="true" aria-labelledby="observedCalendarTitle">
       <div class="nww-calendar-heading">
         <h2 id="observedCalendarTitle">Choose a past date</h2>
-        <button id="observedCalendarCloseBtn" type="button" aria-label="Close past date calendar">×</button>
+        <button id="observedCalendarCloseBtn" class="centered-close-control" type="button" aria-label="Close past date calendar">×</button>
       </div>
         <div class="calendar-toolbar">
           <button id="prevMonthBtn" type="button" aria-label="Previous month">‹</button>
@@ -653,7 +903,7 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
         <div class="download-field export-framing-field">
           Map framing
           <div id="downloadExtentControl" class="export-segmented" role="group" aria-label="Export map framing">
-            <button id="exportExtentTownBtn" type="button" data-extent="town" aria-pressed="false">Fill Ventnor City</button>
+            <button id="exportExtentTownBtn" type="button" data-extent="town" aria-pressed="false">Fill Ventnor</button>
             <button id="exportExtentCurrentBtn" type="button" data-extent="current" aria-pressed="true" class="active">Current View</button>
           </div>
           <span class="export-extent-help"><span><strong>Current View</strong> keeps the area you are viewing. Map view preserves its shape; other layouts crop from the center.</span><button id="adjustExportViewBtn" class="export-adjust-view-btn" type="button">Adjust map</button></span>
@@ -732,7 +982,7 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
       <header class="flood-history-head">
         <div>
           <h2 id="floodHistoryTitle">Flood History &amp; Projections</h2>
-          <p id="floodHistoryAddress">Selected Ventnor City parcel</p>
+          <p id="floodHistoryAddress">Selected Ventnor parcel</p>
         </div>
         <div class="flood-history-head-actions">
           <details class="property-help">
@@ -779,7 +1029,7 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
       <div id="exportFooter" class="export-stage-footer">
       <div id="exportLogoStrip" class="export-stage-logo-strip" aria-hidden="true">
         <img id="exportTownLogo" class="export-stage-logo export-stage-logo-town" src="" alt="" loading="lazy" decoding="async" style="display:none;" />
-        <img id="exportPartnerLogo" class="export-stage-logo export-stage-logo-shorelysafe" data-export-brand-src="./assets/mapper-ui/shorelysafe-logo-export.jpg" src="" alt="" loading="lazy" decoding="async" style="display:none;" />
+        <img id="exportPartnerLogo" class="export-stage-logo export-stage-logo-shorelysafe" data-export-brand-src="./assets/mapper-ui/releases/3a1080ca69c4/shorelysafe-logo-export.jpg" src="" alt="" loading="lazy" decoding="async" style="display:none;" />
       </div>
       <section id="exportLegendDock" class="export-stage-legend"></section>
       <div id="exportTimestampLabel" class="export-stage-timestamp">--</div>
@@ -790,12 +1040,13 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
 
 
 
-  <script src="./assets/mapper-ui/north-wildwood-loading.js?v=d7288f205d13c615"></script>
+  <script src="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-loading.js?v=32d3957af28d20e8"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/esri-leaflet@3.0.19/dist/esri-leaflet.js"></script>
   <script src="https://unpkg.com/esri-leaflet-vector@4.3.2/dist/esri-leaflet-vector.js"></script>
-  <script src="./assets/mapper-ui/road-labels.js?v=3ad509cbb4274b6c"></script>
+  <script src="./assets/mapper-ui/releases/3a1080ca69c4/road-labels.js?v=3ad509cbb4274b6c"></script>
 
+  
   <script data-nww-script="script-004">
 
     const APP_BASE = new URL(".", window.location.href);
@@ -1200,15 +1451,17 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
       MUNICIPAL_BOUNDARY_QUERY_URL = config.boundary?.queryUrl || "";
       MUNICIPAL_BOUNDARY_OUTFIELDS = config.boundary?.outFields || "";
 
-      document.title = config.pageTitle || `${config.site?.name || "Town"} Flood Map`;
+      const presentationName = document.documentElement.dataset.floodmapperDisplayName;
+      const presentationTitle = presentationName && `${presentationName} Flood Mapper`;
+      document.title = presentationTitle || config.pageTitle || `${config.site?.name || "Town"} Flood Map`;
 
       const siteTitleLine1 = document.getElementById("siteTitleLine1");
       const siteTitleLine2 = document.getElementById("siteTitleLine2");
-      if (siteTitleLine1) siteTitleLine1.textContent = decodeHtmlText(config.brandTitleLine1 || config.site?.name || "Flood");
+      if (siteTitleLine1) siteTitleLine1.textContent = presentationName || decodeHtmlText(config.brandTitleLine1 || config.site?.name || "Flood");
       if (siteTitleLine2) siteTitleLine2.textContent = decodeHtmlText(config.brandTitleLine2 || "Flood Map");
 
       const mapTitleText = document.getElementById("mapTitleText");
-      if (mapTitleText) mapTitleText.textContent = decodeHtmlText(config.mapTitle || config.pageTitle || `${config.site?.name || "Town"} Flood Map`);
+      if (mapTitleText) mapTitleText.textContent = presentationTitle || decodeHtmlText(config.mapTitle || config.pageTitle || `${config.site?.name || "Town"} Flood Map`);
 
       const mapTitleLogo = document.getElementById("mapTitleLogo");
       if (mapTitleLogo) {
@@ -1275,11 +1528,11 @@ body:has(#contoursToggle[aria-busy="true"]) #contoursStatus{display:none!importa
       syncExportBrandLogos(config);
 
       const addressTitle = document.getElementById("townAddressTitle");
-      if (addressTitle) addressTitle.textContent = decodeHtmlText(config.addressLookup?.title || `Find a ${config.site?.name || "Town"} Address`);
+      if (addressTitle) addressTitle.textContent = presentationName ? `Find a ${presentationName} Address` : decodeHtmlText(config.addressLookup?.title || `Find a ${config.site?.name || "Town"} Address`);
       const addressInput = document.getElementById("townAddressInput");
       if (addressInput) addressInput.placeholder = config.addressLookup?.placeholder || "Example: 3100 Main St";
       const addressSearchBtn = document.getElementById("townAddressSearchBtn");
-      if (addressSearchBtn) addressSearchBtn.textContent = config.addressLookup?.buttonText || `Search ${config.site?.name || "Town"}`;
+      if (addressSearchBtn) addressSearchBtn.textContent = presentationName ? `Search ${presentationName}` : config.addressLookup?.buttonText || `Search ${config.site?.name || "Town"}`;
 
       const datumMllwOffsetLabel = document.getElementById("datumMllwOffsetLabel");
       if (datumMllwOffsetLabel) datumMllwOffsetLabel.textContent = `${formatOffsetWithSign(config.datums?.offsets?.mllw || 0, 2)} ft`;
@@ -12510,8 +12763,17 @@ function populateCalendarSelectors() {
     }
 
     let playbackGeneration = 0;
+    let playbackSpeedMultiplier = 1;
+    let reschedulePlaybackFrame = null;
+
+    function togglePlaybackSpeed(event) {
+      playbackSpeedMultiplier = playbackSpeedMultiplier === 1 ? 2 : 1;
+      event.currentTarget.setAttribute("aria-pressed", String(playbackSpeedMultiplier === 2));
+      reschedulePlaybackFrame?.();
+    }
     function clearPlaybackTimer() {
       ++playbackGeneration;
+      reschedulePlaybackFrame = null;
       if (playTimer) {
         clearTimeout(playTimer);
         clearInterval(playTimer);
@@ -12627,6 +12889,7 @@ function startPlayback() {
 
       const loop = async () => {
         if (!playTimer || generation !== playbackGeneration) return;
+        reschedulePlaybackFrame = null;
         const frameStartedAt = performance.now();
         try {
           await stepPlaybackForward();
@@ -12637,12 +12900,17 @@ function startPlayback() {
           return;
         }
         if (!playTimer || generation !== playbackGeneration) return;
-        const renderDurationMs = performance.now() - frameStartedAt;
-        const nextFrameDelayMs = Math.max(
-          PLAYBACK_MINIMUM_FRAME_DELAY_MS,
-          getPlaybackFrameDurationMs() - renderDurationMs
-        );
-        playTimer = setTimeout(loop, nextFrameDelayMs);
+        let scheduledFrameTimer;
+        // Recalculate the current deadline when the speed changes between frames.
+        // A frame already rendering still finishes before the next one starts.
+        reschedulePlaybackFrame = () => {
+          clearTimeout(scheduledFrameTimer);
+          const elapsedMs = performance.now() - frameStartedAt;
+          const frameDurationMs = getPlaybackFrameDurationMs() / playbackSpeedMultiplier;
+          const nextFrameDelayMs = Math.max(PLAYBACK_MINIMUM_FRAME_DELAY_MS, frameDurationMs - elapsedMs);
+          scheduledFrameTimer = playTimer = setTimeout(loop, nextFrameDelayMs);
+        };
+        reschedulePlaybackFrame();
         updatePlayPauseButton();
       };
 
@@ -15652,6 +15920,7 @@ function startPlayback() {
       }
       const stopBtn = document.getElementById("stopBtn");
       if (stopBtn) stopBtn.addEventListener("click", stopPlayback);
+      document.getElementById("timelineSpeedBtn")?.addEventListener("click", togglePlaybackSpeed);
 
       const reloadBtn = document.getElementById("reloadBtn");
       if (reloadBtn) {
@@ -16251,11 +16520,12 @@ document.querySelectorAll("#downloadExtentControl button[data-extent]").forEach(
 
 
 </script>
+  
 
-<script data-nww-script="script-005" src="./assets/mapper-ui/app/calendar-dialog.js?v=4ae0ee377fb0bb52"></script>
+<script data-nww-script="script-005" src="./assets/mapper-ui/releases/3a1080ca69c4/app/calendar-dialog.js?v=4ae0ee377fb0bb52"></script>
 
 
-<script data-nww-script="script-006" src="./assets/mapper-ui/app/alert-interaction.js?v=b02a3674db55dfda"></script>
+<!-- nww:script-disabled:script-006 -->
 
 
 <script src="./assets/mapper-ui/3d/north-wildwood-3d.js?v=c560471da32f87c1"></script>
@@ -16469,28 +16739,40 @@ if (!window.floodmapperMapDependenciesReady) window.dispatchEvent(new Event('nww
 preloadNorthWildwoodExperience(window.floodmapperMapDependenciesReady ? main() : null);
 
 </script>
-
-
+<script id="county-buildings-20261015" data-nww-script="script-009" src="./assets/mapper-ui/app/county-buildings.js?v=e5e8b97fc74cbcc7"></script>
 <script src="assets/town-road-impacts.js?v=20261017.3"></script>
 <script src="assets/town-native-feature-data.js?v=20261017.5"></script>
-<script src="./assets/mapper-ui/avalon-mobile.js?v=20261026-holistic1"></script>
 
 
-<script defer src="./assets/mapper-ui/north-wildwood-mobile.js?v=20261026-holistic1"></script>
+<script src="./assets/mapper-ui/releases/3a1080ca69c4/avalon-mobile.js?v=20261026-holistic1"></script>
 
-<script src="./assets/mapper-ui/export-area.js?v=ee1e14cc57fb8b8e" id="floodmapper-export-area"></script>
-<script defer src="./assets/mapper-ui/export-preview.js?v=f79e49b9837b59d2" id="floodmapper-export-preview"></script>
-<script defer src="./assets/mapper-ui/export-date-time-picker.js?v=33c7d7908c9d305e" id="floodmapper-export-date-time-picker"></script>
+
+<script defer src="./assets/mapper-ui/releases/3a1080ca69c4/north-wildwood-mobile.js?v=20261026-holistic1"></script>
+
+<script src="./assets/mapper-ui/releases/3a1080ca69c4/export-area.js?v=a14676e5f6ddcf2c" id="floodmapper-export-area"></script>
+<script defer src="./assets/mapper-ui/releases/3a1080ca69c4/export-preview.js?v=f79e49b9837b59d2" id="floodmapper-export-preview"></script>
+<script defer src="./assets/mapper-ui/releases/3a1080ca69c4/export-date-time-picker.js?v=0d4e03168fa1d1ea" id="floodmapper-export-date-time-picker"></script>
 
 
 
 <div id="shorelysafeWebcamConfig" hidden>{"town": "Ventnor City", "cameras": [{"id": "ventnor", "name": "Ventnor City Fishing Pier Looking East", "short": "Ventnor City Fishing Pier Looking East", "url": "https://api.igotview.com/images/cams/ventnor555/18.jpg", "sourceUrl": "https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east", "source": "AtTheShore / camera host", "location": "South Cambridge Avenue and Boardwalk \u00b7 Ventnor", "external": false, "description": "View current conditions on the camera provider\u2019s website.", "kind": "image", "lat": 39.3361371, "lng": -74.4775285, "relation": "local"}], "otherSources": [{"name": "Ventnor City Fishing Pier Looking East", "sourceUrl": "https://www.attheshore.com/camera/ventnor-city-fishing-pier-looking-east"}]}</div>
 <script id="shorelysafeWebcamsScript" data-nww-script="script-008" src="./assets/mapper-ui/app/webcams.js?v=fe85ef738394f52d"></script>
 
-<script id="county-buildings-20261015" data-nww-script="script-009" src="./assets/mapper-ui/app/county-buildings.js?v=e5e8b97fc74cbcc7"></script>
+<!-- nww:script-disabled:script-009 -->
 
-<script id="shorelysafe-visible-brand-controller-20261015" data-nww-script="script-010" src="./assets/mapper-ui/app/branding.js?v=5218502b14ba05c5"></script>
+<script id="shorelysafe-visible-brand-controller-20261015" data-nww-script="script-010" src="./assets/mapper-ui/releases/3a1080ca69c4/app/branding.js?v=5218502b14ba05c5"></script>
 
-<script id="floodmapper-unified-controller-20261017" data-ui-sha256="e967d7ca203af59fcc13ee17b04e18dc6794c038df5a673edb9825c73926fc5d" data-nww-script="script-011" src="./assets/mapper-ui/app/unified-controller.js?v=e967d7ca203af59f"></script>
+<script id="floodmapper-unified-controller-20261017" data-ui-sha256="3668b4912f612ae595cb1ee4e11fdf9aa7a80ccfbdbfff78d243e7714470baf7" data-nww-script="script-011" src="./assets/mapper-ui/releases/3a1080ca69c4/app/unified-controller.js?v=5b0256915d8937ea"></script>
+
+
+<template id="elevationContoursTemplate">
+            <div class="layer-item">
+              <div id="contoursToggle" class="toggle" role="switch" tabindex="0" aria-label="Ground Elevation Contours" aria-checked="false" aria-describedby="contoursStatus"></div>
+              <div class="layer-meta">
+                <div class="layer-name">Ground Elevation Contours</div>
+                <span id="contoursStatus" class="highlands-contour-status" role="status" aria-live="polite"></span>
+              </div>
+            </div>
+</template>
 </body>
 </html>
