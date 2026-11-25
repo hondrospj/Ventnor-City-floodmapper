@@ -10113,9 +10113,6 @@ function getEntryESTDate(entry) {
     function buildNotes(rawStage, matchedStage) {
       const notes = [];
       if (!Number.isFinite(rawStage) || !Number.isFinite(matchedStage)) return "";
-      if (Math.abs(rawStage - matchedStage) > 0.0001) {
-        notes.push(`The displayed water level stays exact, but the called raster is rounded down to the nearest published overlay at ${matchedStage.toFixed(1)} ft NAVD88.`);
-      }
       if (rawStage > MAX_STAGE) {
         notes.push(`The adjusted water level was above the published range and the raster call was clamped to ${matchedStage.toFixed(1)} ft NAVD88.`);
       } else if (rawStage < MIN_STAGE) {
